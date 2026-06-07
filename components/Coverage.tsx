@@ -23,7 +23,7 @@ export default function Coverage() {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-      <section ref={containerRef} id="zone" className="w-full bg-white py-20 font-sans">
+      <section ref={containerRef} id="zone" className="w-full bg-white py-16 sm:py-20 font-sans">
         <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
 
           {/* ── HEADER DE SECTION (Minimaliste et centré à la NIO) ── */}
@@ -90,7 +90,7 @@ export default function Coverage() {
 
             {/* BLOC 2 : Carte interactive Google Maps (Colonne droite - Étroite) */}
             <motion.div
-                className="md:col-span-5 relative bg-[#f3f3f3] rounded-[24px] overflow-hidden min-h-[380px]"
+                className="md:col-span-5 relative bg-[#f3f3f3] rounded-[24px] overflow-hidden min-h-[280px] sm:min-h-[380px]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 }}

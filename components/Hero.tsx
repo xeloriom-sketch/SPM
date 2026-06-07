@@ -79,11 +79,11 @@ export default function Hero() {
         style={{ y: textY, opacity: textOpacity }}
       >
         {/* Headline */}
-        <div className="px-8 pb-8 md:px-14">
+        <div className="px-6 pb-6 sm:px-8 sm:pb-8 md:px-14">
           <div className="overflow-hidden">
             <motion.span
               className="block font-sans font-black text-white leading-[0.92] tracking-[-0.03em]"
-              style={{ fontSize: "clamp(2.8rem, 9vw, 8rem)" }}
+              style={{ fontSize: "clamp(2.6rem, 9vw, 8rem)" }}
               initial={{ y: "105%" }}
               animate={{ y: 0 }}
               transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1], delay: LOADER_OUT }}
@@ -94,7 +94,7 @@ export default function Hero() {
           <div className="overflow-hidden">
             <motion.span
               className="block font-sans font-black text-white leading-[0.92] tracking-[-0.03em]"
-              style={{ fontSize: "clamp(2.8rem, 9vw, 8rem)" }}
+              style={{ fontSize: "clamp(2.6rem, 9vw, 8rem)" }}
               initial={{ y: "105%" }}
               animate={{ y: 0 }}
               transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1], delay: LOADER_OUT + 0.14 }}
@@ -106,7 +106,7 @@ export default function Hero() {
 
           {/* Sous-titre */}
           <motion.p
-            className="mt-4 text-sm font-light text-white/45 tracking-wide"
+            className="mt-3 text-xs sm:text-sm font-light text-white/45 tracking-wide leading-relaxed"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: LOADER_OUT + 0.4 }}
@@ -116,7 +116,10 @@ export default function Hero() {
         </div>
 
         {/* Barre specs */}
-        <div className="grid grid-cols-2 gap-y-5 border-t border-white/10 px-8 pb-14 pt-5 text-white md:grid-cols-4 md:px-14">
+        <div
+          className="grid grid-cols-2 gap-y-5 border-t border-white/10 px-6 pt-5 text-white sm:px-8 md:grid-cols-4 md:px-14"
+          style={{ paddingBottom: "max(3.5rem, env(safe-area-inset-bottom, 3.5rem))" }}
+        >
           {specs.map((s, i) => (
             <motion.div
               key={i}
@@ -129,10 +132,10 @@ export default function Hero() {
                 delay: LOADER_OUT + 0.55 + i * 0.09,
               }}
             >
-              <span className="mb-1 text-[10px] font-semibold tracking-[0.22em] uppercase text-white/32">
+              <span className="mb-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] uppercase text-white/32">
                 {s.label}
               </span>
-              <span className="text-base font-semibold tracking-tight text-white md:text-[1.1rem]">
+              <span className="text-sm sm:text-base font-semibold tracking-tight text-white md:text-[1.1rem]">
                 {s.value}
               </span>
             </motion.div>

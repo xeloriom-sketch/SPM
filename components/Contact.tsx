@@ -42,7 +42,7 @@ export default function Contact() {
   const [state, action] = useFormState(submitContact, initialState);
 
   return (
-    <section id="contact" className="w-full bg-white py-20 md:py-28 font-sans">
+    <section id="contact" className="w-full bg-white py-16 sm:py-20 md:py-28 font-sans">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
 
         {/* Header centré */}
@@ -66,7 +66,7 @@ export default function Contact() {
         </div>
 
         {/* Grid 2 colonnes */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.4fr] lg:gap-12 items-start">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-[1fr_1.4fr] lg:gap-12 items-start">
 
           {/* Gauche — infos de contact */}
           <motion.div
@@ -136,7 +136,7 @@ export default function Contact() {
 
           {/* Droite — formulaire */}
           <motion.div
-            className="rounded-[24px] border border-black/[0.06] bg-[#f8f9fa] p-7 sm:p-8"
+            className="rounded-[20px] sm:rounded-[24px] border border-black/[0.06] bg-[#f8f9fa] p-5 sm:p-7 md:p-8"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}

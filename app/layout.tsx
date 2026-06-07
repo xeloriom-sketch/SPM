@@ -62,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="theme-color" content="#0d0d0d" />
         <meta name="color-scheme" content="light dark" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <link rel="preconnect" href="https://res.cloudinary.com" />
       </head>
       <body className="bg-white text-[#080808] overflow-x-hidden noise antialiased">

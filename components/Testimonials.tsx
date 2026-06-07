@@ -52,9 +52,9 @@ export default function Testimonials() {
 
       {/* Marquee row 1 */}
       <div className="relative mb-3">
-        <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-24 bg-gradient-to-r from-white to-transparent" />
-        <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-24 bg-gradient-to-l from-white to-transparent" />
-        <div className="flex gap-3">
+        <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-12 sm:w-24 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-12 sm:w-24 bg-gradient-to-l from-white to-transparent" />
+        <div className="flex gap-3 pl-3">
           <motion.div
             className="flex min-w-max gap-3"
             animate={{ x: ["0%", "-50%"] }}
@@ -63,7 +63,7 @@ export default function Testimonials() {
             {row1.map((t, i) => (
               <div
                 key={i}
-                className="w-[280px] shrink-0 rounded-[18px] border border-black/[0.06] bg-[#f8f9fa] p-5"
+                className="w-[260px] sm:w-[280px] shrink-0 rounded-[18px] border border-black/[0.06] bg-[#f8f9fa] p-4 sm:p-5"
               >
                 <div className="mb-3 flex items-center gap-2.5">
                   <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-black text-[11px] font-bold text-white">
@@ -88,9 +88,9 @@ export default function Testimonials() {
 
       {/* Marquee row 2 */}
       <div className="relative">
-        <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-24 bg-gradient-to-r from-white to-transparent" />
-        <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-24 bg-gradient-to-l from-white to-transparent" />
-        <div className="flex gap-3">
+        <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-12 sm:w-24 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-12 sm:w-24 bg-gradient-to-l from-white to-transparent" />
+        <div className="flex gap-3 pl-3">
           <motion.div
             className="flex min-w-max gap-3"
             animate={{ x: ["-50%", "0%"] }}
@@ -99,7 +99,7 @@ export default function Testimonials() {
             {row2.map((t, i) => (
               <div
                 key={i}
-                className="w-[280px] shrink-0 rounded-[18px] border border-black/[0.04] bg-[#f8f9fa] p-5"
+                className="w-[260px] sm:w-[280px] shrink-0 rounded-[18px] border border-black/[0.04] bg-[#f8f9fa] p-4 sm:p-5"
               >
                 <div className="mb-3 flex items-center gap-2.5">
                   <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-black/10 text-[11px] font-bold text-black/50">

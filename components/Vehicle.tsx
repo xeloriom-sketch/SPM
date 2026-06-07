@@ -50,10 +50,10 @@ export default function Vehicle() {
   const handleMouseLeave = () => { mouseX.set(0); mouseY.set(0); };
 
   return (
-    <section id="vehicule" ref={sectionRef} className="w-full bg-white py-24 md:py-36 font-sans">
+    <section id="vehicule" ref={sectionRef} className="w-full bg-white py-20 md:py-36 font-sans">
 
       {/* ── En-tête tripartite ── */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-4 items-start mb-16">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-4 items-start mb-10 md:mb-16">
 
         <div className="md:col-span-5">
           <motion.h2
@@ -139,8 +139,8 @@ export default function Vehicle() {
 
           {/* Voiture avec parallaxe scroll */}
           <motion.div
-            className="relative w-full max-w-[1000px] z-10 will-change-transform"
-            style={{ y: carY, aspectRatio: "21/9" }}
+            className="relative w-full max-w-[1000px] z-10 will-change-transform aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]"
+            style={{ y: carY }}
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
@@ -162,7 +162,7 @@ export default function Vehicle() {
           </motion.div>
 
           {/* Barre specs */}
-          <div className="w-full max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-7 mt-12 z-10">
+          <div className="w-full max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6 mt-10 sm:mt-12 z-10">
             {specs.map((s, i) => (
               <motion.div
                 key={i}
@@ -176,7 +176,7 @@ export default function Vehicle() {
                   <span className="text-[10px] tracking-[0.2em] text-black/38 mb-1.5 font-semibold uppercase">
                     {s.label}
                   </span>
-                  <span className="text-2xl font-bold tracking-tight text-black">
+                  <span className="text-xl sm:text-2xl font-bold tracking-tight text-black">
                     {s.value}
                   </span>
                 </div>
@@ -187,16 +187,16 @@ export default function Vehicle() {
       </div>
 
       {/* ── Équipements ── */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 mt-14">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 mt-10 md:mt-14">
         <motion.p
-          className="text-[10px] font-bold tracking-[0.28em] uppercase text-black/28 mb-7"
+          className="text-[10px] font-bold tracking-[0.28em] uppercase text-black/28 mb-6 md:mb-7"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.85 }}
         >
           Équipements à bord
         </motion.p>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-3.5 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           {features.map((f, i) => (
             <motion.div
               key={f}

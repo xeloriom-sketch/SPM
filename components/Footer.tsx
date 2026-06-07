@@ -19,7 +19,7 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-      <footer className="w-full bg-black text-white pt-20 pb-6 overflow-hidden font-sans relative">
+      <footer className="w-full bg-black text-white pt-14 sm:pt-20 pb-6 overflow-hidden font-sans relative">
         <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
 
           {/* ── LIGNE SUPÉRIEURE : MARQUE & ACTIONS DISCRÈTES ── */}
@@ -54,11 +54,11 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ── BLOC CENTRAL : NAVIGATION SYMÉTRIQUE (Inspiré du centre de l'image_49bac8.png) ── */}
-          <div className="flex flex-col items-center justify-center pt-16 pb-20 text-center">
+          {/* ── BLOC CENTRAL : NAVIGATION SYMÉTRIQUE ── */}
+          <div className="flex flex-col items-center justify-center pt-10 sm:pt-16 pb-14 sm:pb-20 text-center">
 
             {/* Liens Principaux Horizontaux */}
-            <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 mb-6">
+            <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 sm:gap-x-8 sm:gap-y-4 mb-6">
               {navLinks.map((link) => (
                   <li key={link.href}>
                     <a

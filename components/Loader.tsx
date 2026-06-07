@@ -64,7 +64,7 @@ export default function Loader() {
 
           {/* Mentions coins */}
           <motion.span
-            className="absolute bottom-6 left-8 text-[9px] tracking-[0.3em] uppercase text-white/15"
+            className="absolute bottom-6 left-5 sm:left-8 text-[9px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-white/15"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
@@ -72,7 +72,7 @@ export default function Loader() {
             Conventionné CPAM
           </motion.span>
           <motion.span
-            className="absolute bottom-6 right-8 text-[9px] tracking-[0.3em] uppercase text-white/15"
+            className="absolute bottom-6 right-5 sm:right-8 text-[9px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-white/15"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}

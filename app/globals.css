@@ -12,21 +12,28 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   background: #ffffff;
   scroll-behavior: smooth;
-  scroll-padding-top: 72px; /* hauteur navbar fixe */
+  scroll-padding-top: 72px;
+  overscroll-behavior-y: none;
 }
 
 body {
   background: #ffffff;
   color: #080808;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--font-sf);
+}
+
+button, a {
+  touch-action: manipulation;
 }
 
 ::selection {

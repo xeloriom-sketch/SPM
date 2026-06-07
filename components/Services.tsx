@@ -53,12 +53,12 @@ export default function Services() {
     <section
       ref={containerRef}
       id="services"
-      className="w-full overflow-hidden bg-[#f8f9fa] py-24 md:py-36 font-sans"
+      className="w-full overflow-hidden bg-[#f8f9fa] py-20 md:py-36 font-sans"
     >
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
 
         {/* ── TOP : Intro + voiture ── */}
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-6 items-center mb-24 lg:mb-32">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-6 items-center mb-16 lg:mb-32">
 
           {/* Gauche — texte */}
           <div className="lg:col-span-5 flex flex-col justify-center z-10">
@@ -86,7 +86,7 @@ export default function Services() {
             </motion.p>
 
             {/* Stats */}
-            <div className="flex items-center flex-wrap gap-8 sm:gap-12 mb-14">
+            <div className="grid grid-cols-3 gap-2 sm:flex sm:items-center sm:flex-wrap sm:gap-12 mb-10 sm:mb-14">
               {stats.map((stat, i) => (
                 <motion.div
                   key={i}
@@ -95,12 +95,12 @@ export default function Services() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.65, delay: 0.32 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  {i !== 0 && <div className="h-12 w-px bg-black/12 mr-8 sm:mr-12" />}
+                  {i !== 0 && <div className="hidden sm:block h-12 w-px bg-black/12 mr-8 sm:mr-12" />}
                   <div className="flex flex-col">
-                    <span className="text-[10px] tracking-widest text-[#888] mb-1.5 font-semibold uppercase">
+                    <span className="text-[9px] sm:text-[10px] tracking-widest text-[#888] mb-1 sm:mb-1.5 font-semibold uppercase">
                       {stat.label}
                     </span>
-                    <span className="text-3xl sm:text-4xl font-bold tracking-tight text-black">
+                    <span className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-black">
                       {stat.value}
                     </span>
                   </div>
@@ -130,7 +130,7 @@ export default function Services() {
           <div
             ref={imageRef}
             className="lg:col-span-7 relative w-full overflow-hidden lg:-mr-20 xl:-mr-32"
-            style={{ height: "clamp(260px, 42vw, 520px)" }}
+            style={{ height: "clamp(280px, 48vw, 520px)" }}
           >
             {/* Halo doux sous la voiture */}
             <div

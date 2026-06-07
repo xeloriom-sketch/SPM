@@ -111,17 +111,17 @@ export default function Navbar() {
           </div>
 
           {/* ── MOBILE : phone + burger ── */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2.5 md:hidden">
             <a
               href="tel:0600000000"
-              className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 ${
+              className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-300 ${
                 isLight ? "border-black/18 text-black" : "border-white/15 text-white"
               }`}
             >
               <Phone className="h-3.5 w-3.5" />
             </a>
             <button
-              className={`grid h-8 w-8 place-items-center rounded-full border transition-colors duration-300 ${
+              className={`grid h-9 w-9 place-items-center rounded-full border transition-colors duration-300 ${
                 isLight ? "border-black/15 text-black" : "border-white/15 text-white"
               }`}
               onClick={() => setMenuOpen(!menuOpen)}
@@ -147,41 +147,51 @@ export default function Navbar() {
           {menuOpen && (
             <motion.div
               className={`border-b md:hidden backdrop-blur-xl overflow-hidden ${
-                isLight ? "border-black/5 bg-white/96" : "border-white/5 bg-[#1a1c1e]/96"
+                isLight ? "border-black/5 bg-white/97" : "border-white/5 bg-[#0f1011]/97"
               }`}
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="flex flex-col gap-0.5 px-5 py-5">
+              <div className="flex flex-col gap-1 px-4 py-4">
                 {[...leftLinks, ...rightLinks].map((l, i) => (
                   <motion.a
                     key={l.href}
                     href={l.href}
-                    className={`rounded-xl px-4 py-3.5 text-sm font-medium tracking-wide transition-colors ${
+                    className={`flex items-center justify-between rounded-2xl px-5 py-4 text-[13px] font-medium tracking-wide transition-colors ${
                       isLight
-                        ? "text-black/65 hover:bg-black/4 hover:text-black"
-                        : "text-white/65 hover:bg-white/5 hover:text-white"
+                        ? "text-black/70 hover:bg-black/[0.04] hover:text-black active:bg-black/8"
+                        : "text-white/70 hover:bg-white/[0.05] hover:text-white active:bg-white/10"
                     }`}
                     onClick={() => setMenuOpen(false)}
-                    initial={{ opacity: 0, x: -10 }}
+                    initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.06, duration: 0.28 }}
+                    transition={{ delay: i * 0.06, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    {l.label}
+                    <span>{l.label}</span>
+                    <span className={`text-[10px] font-bold tracking-[0.25em] uppercase ${isLight ? "text-black/20" : "text-white/20"}`}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                   </motion.a>
                 ))}
-                <motion.a
-                  href="tel:0600000000"
-                  className="mt-2 flex items-center gap-2.5 rounded-xl bg-black px-5 py-4 text-sm font-semibold text-white"
-                  onClick={() => setMenuOpen(false)}
-                  initial={{ opacity: 0, y: 8 }}
+                <motion.div
+                  className="mt-2 pt-2 border-t border-black/5"
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.24, duration: 0.28 }}
+                  transition={{ delay: 0.28, duration: 0.3 }}
                 >
-                  <Phone className="h-4 w-4" /> Appeler maintenant
-                </motion.a>
+                  <a
+                    href="tel:0600000000"
+                    className="flex items-center gap-3 rounded-2xl bg-black px-5 py-4 text-[13px] font-semibold text-white active:bg-black/80"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <div className="grid h-7 w-7 place-items-center rounded-full bg-white/10">
+                      <Phone className="h-3.5 w-3.5" />
+                    </div>
+                    <span>Appeler maintenant</span>
+                  </a>
+                </motion.div>
               </div>
             </motion.div>
           )}

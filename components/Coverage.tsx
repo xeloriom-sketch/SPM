@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import SplitText from "@/components/ui/SplitText";
 
 const zones = [
   { region: "Ain (01)", cities: ["Tignieu", "Ambérieu", "Bourg", "Belley"] },
@@ -26,21 +27,16 @@ export default function Coverage() {
       <section ref={containerRef} id="zone" className="w-full bg-white py-16 sm:py-20 font-sans">
         <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
 
-          {/* ── HEADER DE SECTION (Minimaliste et centré à la NIO) ── */}
+          {/* Header */}
           <div className="text-center max-w-2xl mx-auto mb-20">
-            <motion.h2
-                className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4"
-                initial={{ opacity: 0, y: 15 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8 }}
-            >
-              Zone de Couverture
-            </motion.h2>
+            <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4">
+              <SplitText text="Zone de Couverture" mode="word" />
+            </h2>
             <motion.p
                 className="text-xs sm:text-sm text-[#555555] leading-relaxed font-normal"
                 initial={{ opacity: 0, y: 15 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.15 }}
+                transition={{ duration: 0.8, delay: 0.25 }}
             >
               Basé à Tignieu-Jameyzieu, notre service se déploie à l'échelle régionale
               et nationale pour garantir un confort optimal à chaque trajet.

@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import SplitText from "@/components/ui/SplitText";
 
 const faqs = [
   { q: "Qu'est-ce qu'un taxi conventionné ?", a: "Un taxi conventionné est agréé par la CPAM pour les transports médicaux. Les trajets peuvent être pris en charge partiellement ou totalement par l'Assurance Maladie sur prescription médicale." },
@@ -24,19 +25,14 @@ export default function FAQ() {
 
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4"
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            Questions fréquentes
-          </motion.h2>
+          <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4">
+            <SplitText text="Questions fréquentes" mode="word" />
+          </h2>
           <motion.p
             className="text-xs sm:text-sm text-[#555555] leading-relaxed font-normal"
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.15 }}
+            transition={{ duration: 0.8, delay: 0.25 }}
           >
             Vous avez une autre question ? Contactez-moi directement, je réponds sous 2h.
           </motion.p>

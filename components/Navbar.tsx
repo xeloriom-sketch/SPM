@@ -4,21 +4,20 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Menu, X } from "lucide-react";
 
-const leftLinks = [
+const leftLinks  = [
   { label: "Services", href: "#services" },
   { label: "Véhicule", href: "#vehicule" },
 ];
-
 const rightLinks = [
-  { label: "Zone", href: "#zone" },
+  { label: "Zone",    href: "#zone" },
   { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [onHero,    setOnHero]    = useState(true);
-  const [scrolled,  setScrolled]  = useState(false);
-  const [progress,  setProgress]  = useState(0);
-  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [onHero,   setOnHero]   = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -35,15 +34,15 @@ export default function Navbar() {
 
   const isLight = !onHero;
 
-  const linkClass = `relative text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors duration-300
+  const linkClass = `relative text-[11px] font-semibold tracking-[0.22em] uppercase transition-colors duration-300
     after:absolute after:-bottom-px after:left-0 after:h-px after:w-0 after:bg-current
     after:transition-[width] after:duration-300 hover:after:w-full ${
-    isLight ? "text-black/45 hover:text-black" : "text-white/45 hover:text-white"
+    isLight ? "text-black/50 hover:text-black" : "text-white/55 hover:text-white"
   }`;
 
   return (
     <>
-      {/* Barre de progression */}
+      {/* Scroll progress */}
       <div
         className="fixed left-0 top-0 z-[70] h-[2px] transition-[width] duration-75"
         style={{ width: `${progress}%`, background: isLight ? "#111" : "#e8ff3d" }}
@@ -56,16 +55,16 @@ export default function Navbar() {
         transition={{ duration: 0.85, delay: 2.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <nav
-          className={`flex items-center px-6 py-4 transition-all duration-500 md:px-10 ${
+          className={`flex items-center px-6 py-4 transition-all duration-500 md:px-12 ${
             scrolled
               ? isLight
-                ? "border-b border-black/5 bg-white/93 shadow-[0_1px_0_0_rgba(0,0,0,0.03)] backdrop-blur-xl"
-                : "border-b border-white/6 bg-[#1a1c1e]/85 backdrop-blur-xl"
+                ? "border-b border-black/5 bg-white/94 shadow-[0_1px_0_0_rgba(0,0,0,0.03)] backdrop-blur-xl"
+                : "border-b border-white/6 bg-black/75 backdrop-blur-xl"
               : "bg-transparent"
           }`}
         >
-          {/* ── GAUCHE : liens serrés près du logo ── */}
-          <div className="hidden items-center justify-end gap-6 md:flex md:flex-1 md:pr-8">
+          {/* Left links */}
+          <div className="hidden items-center justify-end gap-10 md:flex md:flex-1 md:pr-10">
             {leftLinks.map((l) => (
               <a key={l.href} href={l.href} className={linkClass}>
                 {l.label}
@@ -73,26 +72,26 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* ── CENTRE : logo (dans le flux, pas absolu) ── */}
+          {/* Center logo */}
           <a
             href="#accueil"
             className="flex shrink-0 flex-col items-center gap-[3px] mx-auto md:mx-0"
           >
             <div className={`h-[11px] w-[22px] rounded-t-full border-t-[2px] border-x-[2px] transition-colors duration-300 ${
-              isLight ? "border-black/70" : "border-white/75"
+              isLight ? "border-black/70" : "border-white/80"
             }`} />
             <div className={`h-[11px] w-[22px] rounded-b-full border-b-[2px] border-x-[2px] transition-colors duration-300 ${
-              isLight ? "border-black/70" : "border-white/75"
+              isLight ? "border-black/70" : "border-white/80"
             }`} />
             <span className={`text-[7px] font-black tracking-[0.35em] uppercase transition-colors duration-300 ${
-              isLight ? "text-black/55" : "text-white/55"
+              isLight ? "text-black/55" : "text-white/60"
             }`}>
               SPM
             </span>
           </a>
 
-          {/* ── DROITE : liens + CTA serrés près du logo ── */}
-          <div className="hidden items-center justify-start gap-6 md:flex md:flex-1 md:pl-8">
+          {/* Right links */}
+          <div className="hidden items-center justify-start gap-10 md:flex md:flex-1 md:pl-10">
             {rightLinks.map((l) => (
               <a key={l.href} href={l.href} className={linkClass}>
                 {l.label}
@@ -100,29 +99,29 @@ export default function Navbar() {
             ))}
             <a
               href="tel:0600000000"
-              className={`ml-3 flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] font-semibold tracking-[0.18em] uppercase transition-all duration-300 ${
+              className={`ml-4 flex items-center gap-2 rounded-full border px-5 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase transition-all duration-300 ${
                 isLight
                   ? "border-black/22 text-black hover:bg-black hover:text-white"
-                  : "border-white/15 text-white hover:bg-white hover:text-black"
+                  : "border-white/20 text-white hover:bg-white hover:text-black"
               }`}
             >
               <Phone className="h-3 w-3" /> Appeler
             </a>
           </div>
 
-          {/* ── MOBILE : phone + burger ── */}
+          {/* Mobile */}
           <div className="flex items-center gap-2.5 md:hidden">
             <a
               href="tel:0600000000"
               className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-300 ${
-                isLight ? "border-black/18 text-black" : "border-white/15 text-white"
+                isLight ? "border-black/18 text-black" : "border-white/20 text-white"
               }`}
             >
               <Phone className="h-3.5 w-3.5" />
             </a>
             <button
               className={`grid h-9 w-9 place-items-center rounded-full border transition-colors duration-300 ${
-                isLight ? "border-black/15 text-black" : "border-white/15 text-white"
+                isLight ? "border-black/15 text-black" : "border-white/20 text-white"
               }`}
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Menu"
@@ -142,7 +141,7 @@ export default function Navbar() {
           </div>
         </nav>
 
-        {/* ── MENU MOBILE ── */}
+        {/* Mobile menu */}
         <AnimatePresence>
           {menuOpen && (
             <motion.div
@@ -161,8 +160,8 @@ export default function Navbar() {
                     href={l.href}
                     className={`flex items-center justify-between rounded-2xl px-5 py-4 text-[13px] font-medium tracking-wide transition-colors ${
                       isLight
-                        ? "text-black/70 hover:bg-black/[0.04] hover:text-black active:bg-black/8"
-                        : "text-white/70 hover:bg-white/[0.05] hover:text-white active:bg-white/10"
+                        ? "text-black/70 hover:bg-black/[0.04] hover:text-black"
+                        : "text-white/70 hover:bg-white/[0.05] hover:text-white"
                     }`}
                     onClick={() => setMenuOpen(false)}
                     initial={{ opacity: 0, x: -12 }}
@@ -176,7 +175,7 @@ export default function Navbar() {
                   </motion.a>
                 ))}
                 <motion.div
-                  className="mt-2 pt-2 border-t border-black/5"
+                  className="mt-2 pt-2 border-t border-black/[0.06]"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.28, duration: 0.3 }}

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#0a0a0a]">
+<html lang="fr" class="bg-[#0a0a0a]">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LuxeDrive — Exclusive Taxis, Premier Service</title>
-    <meta name="description" content="Luxury taxi booking with trained chauffeurs and premium cars. Book now and enjoy a special trip." />
+    <title>Taxi TJ - Tignieu Jameyzieu | Taxi Conventionné & SUV 7 Places</title>
+    <meta name="description" content="Taxi conventionné à Tignieu Jameyzieu. SUV Tiguan 7 places, transport médical, colis urgents, transferts gare/aéroport. Service premium sur Lyon, Ain, Isère et toute la France." />
     <meta name="theme-color" content="#0a0a0a" />
 
     <!-- Fonts -->
@@ -25,7 +25,7 @@
                         borderc: '#262626',
                         foreground: '#f5f5f5',
                         mutedc: '#8a8a8a',
-                        lime: '#b6f000',
+                        lime: '#b6f000', /* Accent color */
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -38,6 +38,9 @@
 
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 
     <!-- ===== Inline styles ===== -->
     <style>
@@ -141,15 +144,11 @@
 <!-- ===== Loader ===== -->
 <div id="loader">
     <div class="loader-logo">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="#b6f000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="7" cy="16" r="1" fill="#b6f000"/>
-            <circle cx="17" cy="16" r="1" fill="#b6f000"/>
-        </svg>
-        <span>LuxeDrive</span>
+        <i class="fas fa-taxi text-lime text-3xl"></i>
+        <span>Taxi TJ</span>
     </div>
     <div class="loader-bar"><div class="loader-bar-fill"></div></div>
-    <div class="loader-pct">Preparing your premium ride…</div>
+    <div class="loader-pct">Préparation de votre trajet premium…</div>
 </div>
 
 <!-- ===== Page wrapper ===== -->
@@ -159,40 +158,37 @@
     <header class="sticky top-4 z-50 mt-4">
         <nav class="nav-blur flex items-center justify-between rounded-2xl border border-borderc/70 bg-surface/70 px-4 py-3 sm:px-6">
             <a href="#" class="flex items-center gap-2">
-                <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="#b6f000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="7" cy="16" r="1" fill="#b6f000"/><circle cx="17" cy="16" r="1" fill="#b6f000"/>
-                </svg>
-                <span class="font-display text-lg font-bold tracking-tight">LuxeDrive</span>
+                <i class="fas fa-taxi text-lime text-xl"></i>
+                <span class="font-display text-lg font-bold tracking-tight">Taxi TJ</span>
             </a>
 
             <div class="hidden items-center gap-7 rounded-full border border-borderc/70 bg-background/60 px-7 py-2.5 text-sm text-mutedc md:flex">
-                <a href="#" class="nav-link active text-foreground">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#customers" class="nav-link">Customers</a>
-                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#" class="nav-link active text-foreground">Accueil</a>
+                <a href="#about" class="nav-link">À Propos</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#fleet" class="nav-link">Notre Flotte</a>
+                <a href="#faq" class="nav-link">FAQ</a>
             </div>
 
-            <button class="btn-lime flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold sm:px-5">
-                Download App
-                <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
-            </button>
+            <a href="#contact" class="btn-lime flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold sm:px-5">
+                Réserver un Taxi
+                <i class="fas fa-arrow-right h-4 w-4"></i>
+            </a>
         </nav>
     </header>
 
     <!-- ===== Hero ===== -->
     <section class="mt-6">
         <div class="img-zoom relative overflow-hidden rounded-3xl">
-            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80" alt="Luxury sedan driving on a road" class="h-[440px] w-full object-cover sm:h-[520px]" />
+            <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1600&q=80" alt="SUV Tiguan 7 places" class="h-[440px] w-full object-cover sm:h-[520px]" />
             <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-transparent"></div>
 
             <div class="absolute inset-0 flex flex-col justify-center px-6 sm:px-12">
                 <h1 class="font-display text-4xl font-bold leading-[1.05] text-balance sm:text-6xl" data-aos="fade-up">
-                    Exclusive Taxis,<br />Premier Service
+                    Votre Taxi <br class="hidden sm:block"/>Conventionné <span class="text-lime">Premium</span>
                 </h1>
                 <p class="mt-5 max-w-md text-sm leading-relaxed text-white/80 sm:text-base" data-aos="fade-up" data-aos-delay="120">
-                    Exclusive Taxi, Excellent Service. Offering luxury taxis with trained drivers to ensure your trip goes smoothly. Book now and enjoy a special trip.
+                    Basé à Tignieu Jameyzieu, nous assurons vos trajets sur Lyon, l'Ain et l'Isère. Confort, fiabilité et service haut de gamme avec notre SUV 7 places.
                 </p>
             </div>
 
@@ -200,75 +196,168 @@
             <div class="absolute bottom-5 left-1/2 w-[92%] max-w-[760px] -translate-x-1/2" data-aos="fade-up" data-aos-delay="240">
                 <div class="nav-blur flex flex-col items-stretch gap-3 rounded-2xl border border-borderc/70 bg-surface/85 p-3 sm:flex-row sm:items-center">
                     <div class="flex-1 rounded-xl px-4 py-2">
-                        <p class="text-[11px] uppercase tracking-wide text-mutedc">Pick Up</p>
-                        <p class="text-sm font-medium">Dubai Airport</p>
+                        <p class="text-[11px] uppercase tracking-wide text-mutedc">Lieu de Départ</p>
+                        <p class="text-sm font-medium">Tignieu Jameyzieu</p>
                     </div>
                     <div class="hidden h-9 w-px bg-borderc sm:block"></div>
                     <div class="flex-1 rounded-xl px-4 py-2">
-                        <p class="text-[11px] uppercase tracking-wide text-mutedc">Enter destination</p>
-                        <p class="text-sm font-medium">Dubai Silicon Oasis</p>
+                        <p class="text-[11px] uppercase tracking-wide text-mutedc">Destination</p>
+                        <p class="text-sm font-medium">Lyon Part-Dieu</p>
                     </div>
                     <div class="hidden h-9 w-px bg-borderc sm:block"></div>
                     <div class="flex-1 rounded-xl px-4 py-2">
-                        <p class="text-[11px] uppercase tracking-wide text-mutedc">Pick up date</p>
-                        <p class="text-sm font-medium">11/04/2024 · 10:00 AM</p>
+                        <p class="text-[11px] uppercase tracking-wide text-mutedc">Date & Heure</p>
+                        <p class="text-sm font-medium">JJ/MM/AAAA · HH:MM</p>
                     </div>
                     <button class="btn-lime grid h-12 w-12 shrink-0 place-items-center self-center rounded-full">
-                        <i data-lucide="search" class="h-5 w-5"></i>
+                        <i class="fas fa-search h-5 w-5"></i>
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== Car Lineup ===== -->
-    <section id="features" class="mt-20">
+    <!-- ===== Services / Key Features ===== -->
+    <section id="services" class="mt-20">
         <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between" data-aos="fade-up">
-            <h2 class="font-display text-3xl font-bold sm:text-4xl">Line Up Luxury Car</h2>
+            <h2 class="font-display text-3xl font-bold sm:text-4xl">Nos Services Exclusifs</h2>
             <div class="flex flex-wrap items-center gap-6 text-sm text-mutedc" id="cat-tabs">
-                <button class="cat-tab active" data-cat="Sedan">Sedan</button>
-                <button class="cat-tab" data-cat="Bev">Bev</button>
-                <button class="cat-tab" data-cat="Mpv">Mpv</button>
-                <button class="cat-tab" data-cat="Suv">Suv</button>
-                <button class="cat-tab" data-cat="Sport">Sport</button>
+                <button class="cat-tab active" data-cat="all">Tous</button>
+                <button class="cat-tab" data-cat="medical">Médical</button>
+                <button class="cat-tab" data-cat="airport">Aéroports</button>
+                <button class="cat-tab" data-cat="cargo">Colis</button>
+                <button class="cat-tab" data-cat="special">Spécial</button>
             </div>
         </div>
 
-        <div id="car-grid" class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+        <div id="car-grid" class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <!-- Service Card 1: Taxi Conventionné -->
+            <article class="car-card bg-[#2e6bff] text-white rounded-3xl p-4" data-aos="fade-up" data-aos-delay="0">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="grid h-8 w-8 place-items-center rounded-full bg-black/15 text-xs font-bold"><i class="fas fa-hand-holding-medical"></i></div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-wide opacity-70">Santé</p>
+                            <p class="text-sm font-semibold leading-tight">Taxi Conventionné</p>
+                        </div>
+                    </div>
+                    <span class="flex items-center gap-1 rounded-full bg-black/15 px-2 py-1 text-[11px] font-medium"><i class="fas fa-check-circle"></i> Agréé CPAM</span>
+                </div>
+                <div class="my-3 flex items-center gap-3 text-[11px] font-medium">
+                    <span class="inline-flex items-center gap-0.5 text-lime">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </span>
+                    <span class="opacity-80">5.0</span>
+                    <span class="opacity-70">Transport Médical</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=700&q=80" alt="Taxi Conventionné" class="car-img mx-auto my-2 h-28 w-full rounded-xl object-cover" />
+                <div class="mt-3 flex items-end justify-between">
+                    <div>
+                        <p class="text-[11px] opacity-70">Prise en charge</p>
+                        <p class="font-display text-2xl font-bold">CPAM</p>
+                    </div>
+                    <button class="go-btn grid h-10 w-10 place-items-center rounded-full bg-lime text-black">
+                        <i class="fas fa-arrow-right h-5 w-5"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Service Card 2: SUV 7 Places -->
+            <article class="car-card bg-[#ffb20a] text-black rounded-3xl p-4" data-aos="fade-up" data-aos-delay="60">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="grid h-8 w-8 place-items-center rounded-full bg-black/15 text-xs font-bold"><i class="fas fa-car-side"></i></div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-wide opacity-70">Confort</p>
+                            <p class="text-sm font-semibold leading-tight">Tiguan 7 Places</p>
+                        </div>
+                    </div>
+                    <span class="flex items-center gap-1 rounded-full bg-black/15 px-2 py-1 text-[11px] font-medium"><i class="fas fa-users"></i> 6 Passagers</span>
+                </div>
+                <div class="my-3 flex items-center gap-3 text-[11px] font-medium">
+                    <span class="inline-flex items-center gap-0.5 text-lime">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </span>
+                    <span class="opacity-80">4.9</span>
+                    <span class="opacity-70">Espace & Luxe</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=700&q=80" alt="SUV Tiguan 7 places" class="car-img mx-auto my-2 h-28 w-full rounded-xl object-cover" />
+                <div class="mt-3 flex items-end justify-between">
+                    <div>
+                        <p class="text-[11px] opacity-70">Capacité</p>
+                        <p class="font-display text-2xl font-bold">7 Places</p>
+                    </div>
+                    <button class="go-btn grid h-10 w-10 place-items-center rounded-full bg-lime text-black">
+                        <i class="fas fa-arrow-right h-5 w-5"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Service Card 3: Transport Colis Urgent -->
+            <article class="car-card bg-[#b04cff] text-white rounded-3xl p-4" data-aos="fade-up" data-aos-delay="120">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="grid h-8 w-8 place-items-center rounded-full bg-black/15 text-xs font-bold"><i class="fas fa-box-open"></i></div>
+                        <div>
+                            <p class="text-[10px] uppercase tracking-wide opacity-70">Logistique</p>
+                            <p class="text-sm font-semibold leading-tight">Colis & Lettres Urgents</p>
+                        </div>
+                    </div>
+                    <span class="flex items-center gap-1 rounded-full bg-black/15 px-2 py-1 text-[11px] font-medium"><i class="fas fa-truck-fast"></i> Express</span>
+                </div>
+                <div class="my-3 flex items-center gap-3 text-[11px] font-medium">
+                    <span class="inline-flex items-center gap-0.5 text-lime">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </span>
+                    <span class="opacity-80">4.8</span>
+                    <span class="opacity-70">France Entière</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=700&q=80" alt="Transport Colis Urgent" class="car-img mx-auto my-2 h-28 w-full rounded-xl object-cover" />
+                <div class="mt-3 flex items-end justify-between">
+                    <div>
+                        <p class="text-[11px] opacity-70">Livraison</p>
+                        <p class="font-display text-2xl font-bold">Rapide</p>
+                    </div>
+                    <button class="go-btn grid h-10 w-10 place-items-center rounded-full bg-lime text-black">
+                        <i class="fas fa-arrow-right h-5 w-5"></i>
+                    </button>
+                </div>
+            </article>
+        </div>
     </section>
 
     <!-- ===== Experience / Savings ===== -->
     <section id="about" class="mt-24">
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-end">
             <h2 class="font-display text-3xl font-bold leading-tight text-balance sm:text-4xl" data-aos="fade-up">
-                Experience luxury on wheels with exclusive savings
+                Votre partenaire mobilité sur <span class="text-lime">Lyon, Ain & Isère</span>
             </h2>
             <p class="text-sm leading-relaxed text-mutedc" data-aos="fade-up" data-aos-delay="120">
-                Unlock the pinnacle of luxury travel with our fleet of premium vehicles, and elevate every journey with comfort and style. Plus, take advantage of our exclusive savings to make your luxurious experience even more rewarding.
+                Basé à Tignieu Jameyzieu, Taxi TJ vous offre un service de transport premium et personnalisé. Que ce soit pour un rendez-vous médical, un transfert aéroport ou un transport de colis urgent, nous sommes à votre disposition 24h/24, 7j/7.
             </p>
         </div>
 
         <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
-            <!-- promo 1 -->
+            <!-- promo 1: Attache Remorque -->
             <div class="img-zoom relative overflow-hidden rounded-3xl" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=900&q=80" alt="Car on a scenic mountain road" class="h-64 w-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=900&q=80" alt="SUV avec remorque" class="h-64 w-full object-cover" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
-                <span class="absolute right-4 top-4 rounded-full bg-lime px-3 py-1 text-xs font-semibold text-black">Valid only on 10 Feb – 29 Feb 2024</span>
+                <span class="absolute right-4 top-4 rounded-full bg-lime px-3 py-1 text-xs font-semibold text-black">Équipement Spécial</span>
                 <div class="absolute bottom-5 left-5">
-                    <p class="max-w-[220px] text-sm font-medium">Experience the Holidays with Our Festive Promotions</p>
-                    <p class="mt-1 font-display text-5xl font-bold text-lime">40%</p>
-                    <p class="text-[11px] text-white/60">*With Terms and condition</p>
+                    <p class="max-w-[220px] text-sm font-medium">Transport de matériel ou bagages volumineux</p>
+                    <p class="mt-1 font-display text-5xl font-bold text-lime">Remorque</p>
+                    <p class="text-[11px] text-white/60">*Sur demande, devis personnalisé</p>
                 </div>
             </div>
-            <!-- promo 2 -->
+            <!-- promo 2: Transferts Gares & Aéroports -->
             <div class="img-zoom relative overflow-hidden rounded-3xl" data-aos="fade-up" data-aos-delay="120">
-                <img src="https://images.unsplash.com/photo-1452378174528-3090a4bba7b2?auto=format&fit=crop&w=900&q=80" alt="Luxury sedan in the desert" class="h-64 w-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=80" alt="Aéroport de Lyon Saint-Exupéry" class="h-64 w-full object-cover" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
-                <span class="absolute right-4 top-4 rounded-full bg-lime px-3 py-1 text-xs font-semibold text-black">Valid only on 10 Feb – 29 Feb 2024</span>
+                <span class="absolute right-4 top-4 rounded-full bg-lime px-3 py-1 text-xs font-semibold text-black">Voyage Serein</span>
                 <div class="absolute bottom-5 left-5">
-                    <p class="max-w-[220px] text-sm font-medium">Experience the Holidays with Our Festive Promotions</p>
-                    <p class="mt-1 font-display text-5xl font-bold text-lime">45%</p>
-                    <p class="text-[11px] text-white/60">*With Terms and condition</p>
+                    <p class="max-w-[220px] text-sm font-medium">Transferts vers toutes les gares et aéroports</p>
+                    <p class="mt-1 font-display text-5xl font-bold text-lime">Aéroports</p>
+                    <p class="text-[11px] text-white/60">*Lyon, Genève, Grenoble...</p>
                 </div>
             </div>
         </div>
@@ -278,28 +367,28 @@
     <section class="mt-20 grid grid-cols-1 gap-5 lg:grid-cols-[1.4fr_1fr]">
         <!-- left feature -->
         <div class="img-zoom relative overflow-hidden rounded-3xl" data-aos="fade-up">
-            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1100&q=80" alt="Luxury car with glowing tail lights" class="h-full min-h-[320px] w-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1100&q=80" alt="Intérieur de voiture de luxe" class="h-full min-h-[320px] w-full object-cover" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
             <div class="absolute inset-0 flex flex-col justify-center px-7">
-                <h3 class="max-w-sm font-display text-2xl font-bold leading-tight sm:text-3xl">Reserve Your Luxurious Journey Today!</h3>
-                <p class="mt-3 max-w-xs text-sm text-white/75">Embark on a Stylish and Comfortable Ride with Our Exclusive Fleet</p>
-                <button class="btn-lime mt-5 flex w-fit items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold">
-                    Booking Now <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
-                </button>
+                <h3 class="max-w-sm font-display text-2xl font-bold leading-tight sm:text-3xl">Réservez votre trajet premium dès aujourd'hui !</h3>
+                <p class="mt-3 max-w-xs text-sm text-white/75">Voyagez avec style et confort grâce à notre flotte exclusive et nos chauffeurs expérimentés.</p>
+                <a href="#contact" class="btn-lime mt-5 flex w-fit items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold">
+                    Demander un Devis <i class="fas fa-arrow-right h-4 w-4"></i>
+                </a>
             </div>
         </div>
 
         <!-- right stacked -->
         <div class="grid grid-cols-1 gap-5">
             <div class="img-zoom relative overflow-hidden rounded-3xl" data-aos="fade-up" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80" alt="Curated luxury car" class="h-44 w-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80" alt="Chauffeur professionnel" class="h-44 w-full object-cover" />
                 <div class="absolute inset-0 bg-black/45"></div>
-                <p class="absolute inset-0 flex items-center justify-center px-6 text-center font-display text-lg font-semibold">Curated Luxury Car Options</p>
+                <p class="absolute inset-0 flex items-center justify-center px-6 text-center font-display text-lg font-semibold">Chauffeurs expérimentés pour un trajet sans souci</p>
             </div>
             <div class="img-zoom relative overflow-hidden rounded-3xl" data-aos="fade-up" data-aos-delay="200">
-                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=900&q=80" alt="Experienced chauffeur" class="h-44 w-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=900&q=80" alt="SUV Tiguan 7 places" class="h-44 w-full object-cover" />
                 <div class="absolute inset-0 bg-black/45"></div>
-                <p class="absolute inset-0 flex items-center justify-center px-6 text-center font-display text-lg font-semibold">Experienced Chauffeurs for a Seamless Ride</p>
+                <p class="absolute inset-0 flex items-center justify-center px-6 text-center font-display text-lg font-semibold">SUV Tiguan 7 places pour un confort optimal</p>
             </div>
         </div>
     </section>
@@ -308,10 +397,10 @@
     <section id="customers" class="mt-24">
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-end">
             <h2 class="font-display text-3xl font-bold leading-tight text-balance sm:text-4xl" data-aos="fade-up">
-                What our enchanted customers say
+                Ce que disent nos clients enchantés
             </h2>
             <p class="text-sm leading-relaxed text-mutedc" data-aos="fade-up" data-aos-delay="120">
-                Join the chorus of satisfied customers who have experienced the LuxeDrive. Here's what they have to say about our enchanting Taxi Booking service.
+                Découvrez les avis de nos clients satisfaits qui ont choisi Taxi TJ pour leurs déplacements. Votre satisfaction est notre priorité.
             </p>
         </div>
 
@@ -319,21 +408,21 @@
 
         <div class="mt-6 flex justify-center">
             <button id="show-more" class="btn-lime flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold">
-                Show More <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                Voir Plus <i class="fas fa-chevron-down h-4 w-4"></i>
             </button>
         </div>
     </section>
 
     <!-- ===== FAQ ===== -->
-    <section id="pricing" class="mt-24">
+    <section id="faq" class="mt-24">
         <div class="grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr]">
             <div data-aos="fade-up">
-                <h2 class="font-display text-3xl font-bold leading-tight text-balance sm:text-4xl">Frequently Asked Questions (FAQ)</h2>
-                <p class="mt-4 text-sm leading-relaxed text-mutedc">Welcome to our FAQ section, where we address common queries about LuxeDrive to help you make informed decisions.</p>
+                <h2 class="font-display text-3xl font-bold leading-tight text-balance sm:text-4xl">Questions Fréquemment Posées (FAQ)</h2>
+                <p class="mt-4 text-sm leading-relaxed text-mutedc">Retrouvez ici les réponses aux questions les plus courantes concernant nos services Taxi TJ.</p>
                 <form class="mt-6 flex max-w-md items-center gap-2" onsubmit="return false">
-                    <input type="email" placeholder="Enter your email" class="flex-1 rounded-full border border-borderc bg-surface px-4 py-2.5 text-sm outline-none transition focus:border-lime" />
+                    <input type="email" placeholder="Votre email" class="flex-1 rounded-full border border-borderc bg-surface px-4 py-2.5 text-sm outline-none transition focus:border-lime" />
                     <button class="btn-lime flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold">
-                        Submit <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                        Envoyer <i class="fas fa-arrow-right h-4 w-4"></i>
                     </button>
                 </form>
             </div>
@@ -342,97 +431,119 @@
         </div>
     </section>
 
+    <!-- ===== Contact Form (Booking) ===== -->
+    <section id="contact" class="mt-24">
+        <div class="bg-surface2 rounded-3xl p-8 md:p-12">
+            <h2 class="font-display text-3xl font-bold text-center sm:text-4xl mb-10" data-aos="fade-up">
+                Demandez un Devis ou Réservez votre Trajet
+            </h2>
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                <input type="text" placeholder="Nom Complet" class="rounded-lg border border-borderc bg-background px-4 py-3 text-sm outline-none focus:border-lime" data-aos="fade-up" data-aos-delay="0"/>
+                <input type="tel" placeholder="Téléphone" class="rounded-lg border border-borderc bg-background px-4 py-3 text-sm outline-none focus:border-lime" data-aos="fade-up" data-aos-delay="50"/>
+                <input type="text" placeholder="Lieu de Départ" class="rounded-lg border border-borderc bg-background px-4 py-3 text-sm outline-none focus:border-lime" data-aos="fade-up" data-aos-delay="100"/>
+                <input type="text" placeholder="Destination" class="rounded-lg border border-borderc bg-background px-4 py-3 text-sm outline-none focus:border-lime" data-aos="fade-up" data-aos-delay="150"/>
+                <input type="date" placeholder="Date du trajet" class="rounded-lg border border-borderc bg-background px-4 py-3 text-sm outline-none focus:border-lime text-mutedc" data-aos="fade-up" data-aos-delay="200"/>
+                <input type="time" placeholder="Heure du trajet" class="rounded-lg border border-borderc bg-background px-4 py-3 text-sm outline-none focus:border-lime text-mutedc" data-aos="fade-up" data-aos-delay="250"/>
+                <select class="rounded-lg border border-borderc bg-background px-4 py-3 text-sm outline-none focus:border-lime text-mutedc" data-aos="fade-up" data-aos-delay="300">
+                    <option value="">Type de Prestation</option>
+                    <option value="conventionne">Taxi Conventionné (CPAM)</option>
+                    <option value="aeroport">Transfert Aéroport/Gare</option>
+                    <option value="colis">Transport Colis Urgent</option>
+                    <option value="remorque">Avec Remorque</option>
+                    <option value="classique">Taxi Classique</option>
+                </select>
+                <textarea placeholder="Détails supplémentaires (nombre de personnes, bagages, etc.)" rows="3" class="rounded-lg border border-borderc bg-background px-4 py-3 text-sm outline-none focus:border-lime md:col-span-2" data-aos="fade-up" data-aos-delay="350"></textarea>
+                <button class="btn-lime flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold md:col-span-2" data-aos="fade-up" data-aos-delay="400">
+                    Envoyer ma demande <i class="fas fa-paper-plane h-4 w-4"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+
     <!-- ===== Footer ===== -->
     <footer class="mt-24 border-t border-borderc py-12">
         <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
             <div>
                 <a href="#" class="flex items-center gap-2">
-                    <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="#b6f000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="7" cy="16" r="1" fill="#b6f000"/><circle cx="17" cy="16" r="1" fill="#b6f000"/>
-                    </svg>
-                    <span class="font-display text-lg font-bold tracking-tight">LuxeDrive</span>
+                    <i class="fas fa-taxi text-lime text-xl"></i>
+                    <span class="font-display text-lg font-bold tracking-tight">Taxi TJ</span>
                 </a>
-                <p class="mt-4 max-w-xs text-sm leading-relaxed text-mutedc">LuxeDrive offers unmatched luxury travel. With premium cars and expert chauffeurs, we ensure an unforgettable experience. Opt for LuxeDrive for the epitome of style and comfort.</p>
+                <p class="mt-4 max-w-xs text-sm leading-relaxed text-mutedc">Taxi TJ offre un service de transport premium et personnalisé à Tignieu Jameyzieu, Lyon, Ain et Isère. Confort, ponctualité et professionnalisme pour tous vos déplacements.</p>
             </div>
 
             <div>
-                <h4 class="text-sm font-semibold">Company</h4>
+                <h4 class="text-sm font-semibold">Services</h4>
                 <ul class="mt-4 flex flex-col gap-3 text-sm text-mutedc">
-                    <li><a href="#" class="transition hover:text-lime">User Login</a></li>
-                    <li><a href="#" class="transition hover:text-lime">Testimonial</a></li>
-                    <li><a href="#" class="transition hover:text-lime">Line Up Car</a></li>
-                    <li><a href="#" class="transition hover:text-lime">Feature</a></li>
+                    <li><a href="#services" class="transition hover:text-lime">Taxi Conventionné</a></li>
+                    <li><a href="#services" class="transition hover:text-lime">Transport Colis Urgent</a></li>
+                    <li><a href="#services" class="transition hover:text-lime">Transferts Gares/Aéroports</a></li>
+                    <li><a href="#fleet" class="transition hover:text-lime">SUV 7 Places</a></li>
                 </ul>
             </div>
 
             <div>
-                <h4 class="text-sm font-semibold">Legal</h4>
+                <h4 class="text-sm font-semibold">Légal</h4>
                 <ul class="mt-4 flex flex-col gap-3 text-sm text-mutedc">
-                    <li><a href="#" class="transition hover:text-lime">Terms and Conditions</a></li>
-                    <li><a href="#" class="transition hover:text-lime">Privacy Policy</a></li>
-                    <li><a href="#" class="transition hover:text-lime">System Status</a></li>
-                    <li><a href="#" class="transition hover:text-lime">Get User Account</a></li>
+                    <li><a href="#" class="transition hover:text-lime">Mentions Légales</a></li>
+                    <li><a href="#" class="transition hover:text-lime">Politique de Confidentialité</a></li>
+                    <li><a href="#" class="transition hover:text-lime">Conditions Générales</a></li>
                 </ul>
             </div>
 
             <div>
                 <h4 class="text-sm font-semibold">Contact</h4>
                 <ul class="mt-4 flex flex-col gap-3 text-sm text-mutedc">
-                    <li class="flex items-center gap-2"><i data-lucide="phone" class="h-4 w-4 text-lime"></i> 01 2828 8391</li>
-                    <li class="flex items-center gap-2"><i data-lucide="mail" class="h-4 w-4 text-lime"></i> hello@luxdrive.com</li>
-                    <li class="flex items-start gap-2"><i data-lucide="map-pin" class="mt-0.5 h-4 w-4 text-lime"></i> 6391 Elgin St. Celina, Delaware 10299</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-phone-alt h-4 w-4 text-lime"></i> 06 00 00 00 00</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-envelope h-4 w-4 text-lime"></i> contact@taxitj.fr</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-map-marker-alt mt-0.5 h-4 w-4 text-lime"></i> Tignieu Jameyzieu, France</li>
                 </ul>
             </div>
         </div>
-        <p class="mt-10 text-center text-xs text-mutedc">© 2026 LuxeDrive. All rights reserved.</p>
+        <p class="mt-10 text-center text-xs text-mutedc">© 2024 Taxi TJ. Tous droits réservés.</p>
     </footer>
 </div>
 
 <!-- Scripts -->
-<script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <!-- ===== Inline JS ===== -->
 <script>
     /* ---------- Data ---------- */
     const cars = [
-        { name:'Sedan Supra - B234XID', cat:'Sport', color:'bg-[#ff5a2c]', text:'text-black', price:'$45', dist:'40mins', rating:'4.7', img:'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=700&q=80' },
-        { name:'Nissan GTR - B457XID', cat:'Sport', color:'bg-[#2e6bff]', text:'text-white', price:'$40', dist:'50mins', rating:'4.7', img:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=700&q=80' },
-        { name:'BMW Sedan GTR - B437XID', cat:'Sedan', color:'bg-[#ffb20a]', text:'text-black', price:'$40', dist:'50mins', rating:'4.7', img:'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=700&q=80' },
-        { name:'Sedan Supra - B234XID', cat:'Sedan', color:'bg-[#b04cff]', text:'text-white', price:'$45', dist:'40mins', rating:'4.7', img:'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=700&q=80' },
-        { name:'Nissan GTR 2018 - B457XID', cat:'Bev', color:'bg-[#3b3bff]', text:'text-white', price:'$42', dist:'85mins', rating:'4.7', img:'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=700&q=80' },
-        { name:'Nissan GTR 2017 - B437XID', cat:'Suv', color:'bg-[#1f1f1f]', text:'text-white', price:'$44', dist:'50mins', rating:'4.7', img:'https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=700&q=80' },
+        { name:'Taxi Conventionné', cat:'medical', color:'bg-[#2e6bff]', text:'text-white', price:'CPAM', dist:'Agréé', rating:'5.0', img:'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=700&q=80' },
+        { name:'Tiguan 7 Places', cat:'suv', color:'bg-[#ffb20a]', text:'text-black', price:'Premium', dist:'6 Passagers', rating:'4.9', img:'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=700&q=80' },
+        { name:'Colis Urgents', cat:'cargo', color:'bg-[#b04cff]', text:'text-white', price:'Express', dist:'France', rating:'4.8', img:'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=700&q=80' },
+        { name:'Transfert Aéroport', cat:'airport', color:'bg-[#ff5a2c]', text:'text-black', price:'Fixe', dist:'Ponctuel', rating:'4.7', img:'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=700&q=80' },
+        { name:'Avec Remorque', cat:'special', color:'bg-[#3b3bff]', text:'text-white', price:'Sur Devis', dist:'Volumineux', rating:'4.9', img:'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=700&q=80' }, // Reusing Tiguan image for remorque
     ];
 
     const testimonials = [
-        { name:'Guillermo Rauch', city:'Tokyo', text:'I am very impressed with this taxi booking service! The booking process was easy and fast, and most importantly, the cars provided were truly luxurious. I felt like a celebrity sitting inside. Thank you so much for this unforgettable experience!' },
-        { name:'Ayaka Kamisato', city:'Inazuma', text:'I have used this taxi booking service several times and I am always satisfied with my experience. The cars provided are always clean and comfortable, and the drivers are very friendly and professional. Highly recommended.' },
-        { name:'Luna M', city:'Kyoto', text:'I recently used this taxi booking service for my business trip, and I was very impressed. The quick and easy booking process made it very efficient, and the luxurious cars provided added an elegant touch.' },
-        { name:'Ayato Kamisato', city:'Inazuma', text:'I cannot emphasize enough how extraordinary the experience of using this service was. From booking to drop-off, everything went smoothly. The cars offered are the latest models with full amenities, making me feel like a VIP.' },
-        { name:'Diluc Maulana', city:'Tokyo', text:'I always look for a combination of comfort and style in every journey, and this taxi booking service delivers both perfectly. From the range of luxurious cars available to the friendly customer service, everything makes me feel valued.' },
-        { name:'Diego L', city:'Sapporo', text:'I have used this taxi booking service for my airport transfers several times, and each time I am very impressed. The luxurious cars provided always arrive on time and in pristine condition.' },
-        { name:'Furnia', city:'Kyoto', text:'As someone who values both comfort and style, I was delighted with the luxury car I booked through this service. It offered the perfect blend of comfort and sophistication, making my journey enjoyable from start to finish.' },
-        { name:'Isabella S', city:'Tokyo', text:'This taxi booking service redefines luxury travel. The fleet of luxury cars available is impressive, and the one I selected for my journey exceeded all expectations. The ride was smooth and the interior immaculate.' },
-        { name:'Emily W', city:'Fukuoka', text:'I recently used this taxi booking service for a special occasion, and I could not have been happier. The luxury car provided added a touch of elegance to my journey, and it arrived precisely on time.' },
+        { name:'Jean Dupont', city:'Tignieu Jameyzieu', text:'Service impeccable ! Le chauffeur était très professionnel et le véhicule d\'un confort exceptionnel. Je recommande vivement Taxi TJ pour tous vos déplacements.' },
+        { name:'Marie Curie', city:'Lyon', text:'J\'ai utilisé le service de taxi conventionné pour mes rendez-vous médicaux à Lyon. La prise en charge a été parfaite et le trajet très agréable. Merci !' },
+        { name:'Paul Bernard', city:'Bourgoin-Jallieu', text:'Transport de colis urgent effectué avec une grande réactivité. Le colis est arrivé à destination en parfait état et dans les délais. Excellent service !' },
+        { name:'Sophie Martin', city:'Genève', text:'Transfert vers l\'aéroport de Genève sans aucun stress. Le SUV 7 places est très spacieux et confortable. Ponctualité irréprochable.' },
+        { name:'Lucie Dubois', city:'Ain', text:'J\'avais besoin d\'une remorque pour transporter du matériel, Taxi TJ a su répondre à mon besoin avec professionnalisme. Très satisfait !' },
+        { name:'Marc Petit', city:'Grenoble', text:'Un service de qualité pour mes déplacements professionnels en Isère. Le chauffeur est courtois et la voiture toujours propre. Je n\'hésiterai pas à refaire appel à eux.' },
     ];
 
     const faqs = [
-        { q:'What is LuxeDrive?', a:'LuxeDrive is a premium taxi booking service offering luxury vehicles with professional, trained chauffeurs for a seamless and elegant travel experience.' },
-        { q:'How do I place an order with LuxeDrive?', a:'Simply choose your pickup location, destination, and preferred date and time in the booking bar, then confirm your ride. You will receive instant confirmation.' },
-        { q:'What cuisines does LuxeDrive offer?', a:'LuxeDrive is a luxury transportation service, not a food service. We focus on delivering premium rides with comfort and style.' },
-        { q:'Can I track my order in real-time?', a:'Yes, once your ride is confirmed you can track your chauffeur in real-time directly from the LuxeDrive app.' },
-        { q:'Does LuxeDrive operate in my city?', a:'LuxeDrive operates in major cities worldwide and is expanding rapidly. Enter your location in the booking bar to check availability.' },
+        { q:'Qu\'est-ce que Taxi TJ ?', a:'Taxi TJ est un service de taxi premium basé à Tignieu Jameyzieu, spécialisé dans le transport de personnes (conventionné ou classique) et de colis urgents, opérant sur Lyon, l\'Ain, l\'Isère et toute la France.' },
+        { q:'Comment réserver un taxi conventionné ?', a:'Contactez-nous par téléphone ou via le formulaire de contact en précisant que vous avez une prescription médicale de transport. Nous nous occupons des démarches avec la CPAM.' },
+        { q:'Disposez-vous d\'un véhicule adapté aux groupes ?', a:'Oui, nous disposons d\'un SUV Volkswagen Tiguan 7 places, idéal pour les familles ou les petits groupes, offrant un grand confort et de l\'espace.' },
+        { q:'Puis-je transporter des colis volumineux ou des lettres urgentes ?', a:'Absolument. Nous proposons un service de transport de colis et lettres urgents. De plus, notre véhicule est équipé d\'une attache remorque pour les objets les plus volumineux.' },
+        { q:'Quelles sont vos zones d\'intervention ?', a:'Notre base est à Tignieu Jameyzieu, mais nous intervenons principalement sur Lyon, l\'Ain et l\'Isère. Nous effectuons également des trajets longue distance dans toute la France.' },
+        { q:'Comment obtenir un devis pour un trajet spécifique ?', a:'Pour toute demande de trajet longue distance, avec remorque ou toute autre prestation spécifique, veuillez nous contacter directement par téléphone ou via le formulaire de demande de devis.' },
     ];
 
     /* ---------- Stars helper ---------- */
     function stars(){
         return '<span class="inline-flex items-center gap-0.5 text-lime">'+
-            Array(4).fill('<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.2 6.8.6-5.1 4.5 1.5 6.7L12 17l-6 3.5 1.5-6.7L2.4 8.8l6.8-.6z"/></svg>').join('')+
+            Array(4).fill('<i class="fas fa-star"></i>').join('')+
             '</span>';
     }
 
-    /* ---------- Render cars ---------- */
+    /* ---------- Render cars (Services) ---------- */
     const carGrid = document.getElementById('car-grid');
     function renderCars(filter){
         const list = cars.filter(c => filter === 'all' ? true : c.cat === filter);
@@ -443,33 +554,32 @@
             <div class="flex items-center gap-2">
               <div class="grid h-8 w-8 place-items-center rounded-full bg-black/15 text-xs font-bold">${c.name.charAt(0)}</div>
               <div>
-                <p class="text-[10px] uppercase tracking-wide opacity-70">${c.name.split(' - ')[1] || ''}</p>
-                <p class="text-sm font-semibold leading-tight">${c.name.split(' - ')[0]}</p>
+                <p class="text-[10px] uppercase tracking-wide opacity-70">${c.dist}</p>
+                <p class="text-sm font-semibold leading-tight">${c.name}</p>
               </div>
             </div>
-            <span class="flex items-center gap-1 rounded-full bg-black/15 px-2 py-1 text-[11px] font-medium"><i data-lucide="clock" class="h-3 w-3"></i>${c.dist}</span>
+            <span class="flex items-center gap-1 rounded-full bg-black/15 px-2 py-1 text-[11px] font-medium"><i class="fas fa-star"></i>${c.rating}</span>
           </div>
 
           <div class="my-3 flex items-center gap-3 text-[11px] font-medium">
             ${stars()}
             <span class="opacity-80">${c.rating}</span>
-            <span class="opacity-70">85% Recommend Driver</span>
+            <span class="opacity-70">${c.dist}</span>
           </div>
 
           <img src="${c.img}" alt="${c.name}" class="car-img mx-auto my-2 h-28 w-full rounded-xl object-cover" />
 
           <div class="mt-3 flex items-end justify-between">
             <div>
-              <p class="text-[11px] opacity-70">Travel expense</p>
+              <p class="text-[11px] opacity-70">Prestation</p>
               <p class="font-display text-2xl font-bold">${c.price}</p>
             </div>
             <button class="go-btn grid h-10 w-10 place-items-center rounded-full bg-lime text-black">
-              <i data-lucide="arrow-right" class="h-5 w-5"></i>
+              <i class="fas fa-arrow-right h-5 w-5"></i>
             </button>
           </div>
         </article>
       `).join('');
-        if (window.lucide) lucide.createIcons();
         if (window.AOS) AOS.refreshHard();
     }
 
@@ -503,11 +613,10 @@
     }
     document.getElementById('show-more').addEventListener('click', function(){
         showingAll = !showingAll;
-        this.childNodes[0].nodeValue = showingAll ? 'Show Less ' : 'Show More ';
+        this.childNodes[0].nodeValue = showingAll ? 'Voir Moins ' : 'Voir Plus ';
         const icon = this.querySelector('i');
-        icon.setAttribute('data-lucide', showingAll ? 'chevron-up' : 'chevron-down');
+        icon.className = showingAll ? 'fas fa-chevron-up h-4 w-4' : 'fas fa-chevron-down h-4 w-4';
         renderTestimonials();
-        if (window.lucide) lucide.createIcons();
     });
 
     /* ---------- Render FAQ ---------- */
@@ -516,7 +625,7 @@
       <div class="faq-item rounded-2xl border border-borderc bg-surface/60" data-aos="fade-up" data-aos-delay="${i*60}">
         <button class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
           <span class="text-sm font-medium">${f.q}</span>
-          <i data-lucide="chevron-down" class="faq-chevron h-5 w-5 shrink-0 text-mutedc"></i>
+          <i class="fas fa-chevron-down faq-chevron h-5 w-5 shrink-0 text-mutedc"></i>
         </button>
         <div class="faq-body"><div><p class="px-5 pb-4 text-sm leading-relaxed text-mutedc">${f.a}</p></div></div>
       </div>
@@ -558,9 +667,8 @@
     /* ---------- Init ---------- */
     window.addEventListener('DOMContentLoaded', () => {
         AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
-        renderCars('Sedan');
+        renderCars('all'); // Render all services by default
         renderTestimonials();
-        if (window.lucide) lucide.createIcons();
         startLoader();
     });
 </script>

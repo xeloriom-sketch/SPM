@@ -5,6 +5,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { motion, useInView } from "framer-motion";
 import { Phone, Mail, MapPin, CheckCircle2, AlertCircle, ArrowRight } from "lucide-react";
 import { submitContact, type ContactFormState } from "@/app/actions/contact";
+import SplitText from "@/components/ui/SplitText";
 
 const initialState: ContactFormState = { success: false, message: "" };
 
@@ -47,14 +48,9 @@ export default function Contact() {
 
         {/* Header centré */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4"
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            Votre devis gratuit
-          </motion.h2>
+          <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4">
+            <SplitText text="Votre devis gratuit" mode="word" />
+          </h2>
           <motion.p
             className="text-xs sm:text-sm text-[#555555] leading-relaxed"
             initial={{ opacity: 0, y: 15 }}

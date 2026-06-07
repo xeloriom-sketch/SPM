@@ -1,6 +1,7 @@
 import Loader from "@/components/Loader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import SmoothScroll from "@/components/SmoothScroll";
 import Services from "@/components/Services";
 import Vehicle from "@/components/Vehicle";
 import Coverage from "@/components/Coverage";
@@ -76,7 +77,7 @@ const jsonLd = {
 
 export default function Home() {
   return (
-    <>
+    <SmoothScroll>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -93,6 +94,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </SmoothScroll>
   );
 }

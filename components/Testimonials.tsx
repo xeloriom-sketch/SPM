@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import SplitText from "@/components/ui/SplitText";
 
 const testimonials = [
   { name: "Marie-Claire D.", city: "Lyon 6e", service: "Aéroport", text: "Ponctuel, professionnel et très agréable. Le Tiguan est spacieux et confortable. Je ne changerais pour rien au monde." },
@@ -25,14 +26,9 @@ export default function Testimonials() {
       {/* Header */}
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 mb-14">
         <div className="text-center max-w-2xl mx-auto">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4"
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            Ils me font confiance
-          </motion.h2>
+          <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4">
+            <SplitText text="Ils me font confiance" mode="word" />
+          </h2>
           <motion.div
             className="flex items-center justify-center gap-2"
             initial={{ opacity: 0, y: 10 }}

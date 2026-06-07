@@ -1,4 +1,4 @@
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const basePath = process.env.NEXT_PUBLIC_STATIC === "1" ? "/SPM" : "";
 
 export function sitePath(path: string) {
   if (!basePath) return path;

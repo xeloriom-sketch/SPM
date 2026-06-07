@@ -37,7 +37,6 @@ jobs:
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          NEXT_PUBLIC_BASE_PATH: "/SPM"
         run: npm run build
 
       - name: Upload artifact

@@ -1,9 +1,5 @@
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath,
-  assetPrefix: basePath,
   images: {
     remotePatterns: [
       {
@@ -24,5 +20,10 @@ const nextConfig = {
     ],
   },
 };
+
+if (process.env.NEXT_PUBLIC_STATIC === "1") {
+  nextConfig.basePath = "/SPM";
+  nextConfig.assetPrefix = "/SPM";
+}
 
 export default nextConfig;

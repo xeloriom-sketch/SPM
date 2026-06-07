@@ -198,7 +198,7 @@ export default function Hero() {
               href="#services"
               className="flex h-16 w-16 items-center justify-center rounded-full bg-[#111] text-white shadow-xl"
             >
-              <ChevronDown className="h-7 w-7" strokeWidth={2.8} />
+              <ChevronDown className="h-7 w-7" strokeWidth={2} />
             </a>
           </motion.div>
         </div>

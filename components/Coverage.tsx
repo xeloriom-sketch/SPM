@@ -2,11 +2,12 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 const zones = [
-  { region: "Ain (01)", cities: ["Tignieu-Jameyzieu", "Ambérieu-en-Bugey", "Bourg-en-Bresse", "Belley"] },
+  { region: "Ain (01)", cities: ["Tignieu", "Ambérieu", "Bourg", "Belley"] },
   { region: "Isère (38)", cities: ["Grenoble", "Bourgoin-Jallieu", "Vienne", "Pont-de-Chéruy"] },
-  { region: "Rhône (69)", cities: ["Lyon", "Villeurbanne", "Bron", "Décines-Charpieu"] },
+  { region: "Rhône (69)", cities: ["Lyon", "Villeurbanne", "Bron", "Décines"] },
   { region: "France entière", cities: ["Paris", "Marseille", "Bordeaux", "Genève (CH)"] },
 ];
 
@@ -15,124 +16,136 @@ const airports = [
   { name: "Genève-Cointrin", code: "GVA", dist: "~1h30" },
   { name: "Gare Part-Dieu", code: "TGV", dist: "~40 min" },
   { name: "Gare Perrache", code: "SNCF", dist: "~45 min" },
-  { name: "Gare Ambérieu", code: "SNCF", dist: "~15 min" },
 ];
 
 export default function Coverage() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="zone" className="w-full bg-white py-24 px-6 sm:px-10 lg:px-16">
-      <div ref={ref} className="max-w-[1440px] mx-auto">
-        {/* Header */}
-        <div className="mb-16">
-          <motion.p
-            className="text-xs uppercase tracking-[0.2em] text-mutedc mb-3"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5 }}
-          >
-            Zone de couverture
-          </motion.p>
-          <div className="overflow-hidden">
-            <motion.h2
-              className="font-sans text-4xl font-black tracking-tighter text-dark sm:text-5xl lg:text-6xl max-w-2xl"
-              initial={{ y: "100%" }}
-              animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            >
-              Je me déplace<br />
-              <span className="text-mutedc">partout en France</span>
-            </motion.h2>
-          </div>
-        </div>
+      <section ref={containerRef} id="zone" className="w-full bg-white py-20 font-sans">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          {/* Zone cards */}
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {zones.map((z, i) => (
-              <motion.div
-                key={z.region}
-                className="group rounded-2xl border border-borderc bg-white p-5 hover:border-dark/30 transition-colors"
-                initial={{ opacity: 0, y: 30 }}
+          {/* ── HEADER DE SECTION (Minimaliste et centré à la NIO) ── */}
+          <div className="text-center max-w-2xl mx-auto mb-20">
+            <motion.h2
+                className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4"
+                initial={{ opacity: 0, y: 15 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ type: "spring", stiffness: 120, damping: 20, delay: i * 0.08 }}
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="h-1.5 w-1.5 rounded-full bg-lime-dark" />
-                  <p className="text-xs font-bold uppercase tracking-wide text-dark">{z.region}</p>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {z.cities.map((city) => (
-                    <span key={city} className="rounded-full bg-surface px-2.5 py-1 text-xs text-mutedc">
-                      {city}
-                    </span>
+                transition={{ duration: 0.8 }}
+            >
+              Zone de Couverture
+            </motion.h2>
+            <motion.p
+                className="text-xs sm:text-sm text-[#555555] leading-relaxed font-normal"
+                initial={{ opacity: 0, y: 15 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.15 }}
+            >
+              Basé à Tignieu-Jameyzieu, notre service se déploie à l'échelle régionale
+              et nationale pour garantir un confort optimal à chaque trajet.
+            </motion.p>
+          </div>
+
+          {/* ── MOSAÏQUE ASYMÉTRIQUE (BENTO GRID - Style image_4a1bc7.jpg) ── */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
+
+            {/* BLOC 1 : Régions Desservies (Colonne gauche - Large) */}
+            <motion.div
+                className="md:col-span-7 bg-[#fbfbfb] rounded-[24px] p-8 lg:p-10 flex flex-col justify-between min-h-[380px] border border-black/[0.02]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <div>
+              <span className="text-[10px] font-bold tracking-widest uppercase text-black/30 block mb-8">
+                Régions Référentes
+              </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+                  {zones.map((z) => (
+                      <div key={z.region} className="flex flex-col">
+                        <p className="text-xs font-semibold text-black tracking-wide mb-2 uppercase">
+                          {z.region}
+                        </p>
+                        <p className="text-xs text-[#777777] leading-relaxed">
+                          {z.cities.join(" · ")}
+                        </p>
+                      </div>
                   ))}
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
 
-          {/* Right panel */}
-          <div className="flex flex-col gap-4">
-            {/* Airports */}
+              <div className="mt-8">
+                <a
+                    href="#contact"
+                    className="group inline-flex items-center gap-4 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-[11px] font-medium tracking-wider text-white transition-all hover:bg-[#111111]"
+                >
+                  <span>Calculer l'itinéraire</span>
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:translate-x-0.5">
+                    <ArrowRight className="h-3.5 w-3.5 stroke-[2.5]" />
+                  </div>
+                </a>
+              </div>
+            </motion.div>
+
+            {/* BLOC 2 : Carte interactive Google Maps (Colonne droite - Étroite) */}
             <motion.div
-              className="rounded-2xl bg-dark p-6 flex-1"
-              initial={{ opacity: 0, x: 30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
+                className="md:col-span-5 relative bg-[#f3f3f3] rounded-[24px] overflow-hidden min-h-[380px]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <p className="text-xs uppercase tracking-[0.2em] text-white/30 mb-4">Aéroports & Gares</p>
-              <div className="flex flex-col gap-2">
+              <iframe
+                  title="Tignieu-Jameyzieu"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22315.2!2d5.17!3d45.72!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f46e6c8c8c8c8c%3A0x0!2sTignieu-Jameyzieu!5e0!3m2!1sfr!2sfr!4v1700000000000"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ border: 0, filter: "grayscale(100%) contrast(1.1) brightness(0.95)" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+              />
+              {/* Overlay d'information discret en bas de la carte */}
+              <div className="absolute bottom-5 inset-x-5 bg-white/80 backdrop-blur-md rounded-xl p-4 flex justify-between items-center border border-white/20 shadow-sm">
+                <div>
+                  <p className="text-[11px] font-bold text-black tracking-wide uppercase">Ancrage Local</p>
+                  <p className="text-[10px] text-[#555555]">Tignieu-Jameyzieu · France</p>
+                </div>
+                <span className="text-[10px] font-semibold text-black/40">01 / 38 / 69</span>
+              </div>
+            </motion.div>
+
+            {/* BLOC 3 : Hubs Transports - Gares & Aéroports (Plein écran horizontal en bas) */}
+            <motion.div
+                className="md:col-span-12 bg-[#fbfbfb] rounded-[24px] p-8 lg:p-10 border border-black/[0.02]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.4 }}
+            >
+            <span className="text-[10px] font-bold tracking-widest uppercase text-black/30 block mb-6">
+              Liaisons Gares & Aéroports
+            </span>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {airports.map((a, i) => (
-                  <motion.div
-                    key={a.name}
-                    className="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 hover:bg-white/10 transition-colors"
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ type: "spring", stiffness: 150, damping: 22, delay: 0.3 + i * 0.06 }}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="rounded-md bg-lime px-1.5 py-0.5 text-[10px] font-black text-dark">{a.code}</span>
-                      <span className="text-sm text-white/70">{a.name}</span>
+                    <div key={a.name} className="flex items-center">
+                      {/* Ligne séparatrice verticale entre les gares (desktop uniquement) */}
+                      {i !== 0 && (
+                          <div className="hidden lg:block h-8 w-px bg-black/10 mr-8 self-center" />
+                      )}
+                      <div className="flex flex-col flex-1">
+                        <div className="flex items-baseline justify-between mb-1.5">
+                          <span className="text-xs font-bold text-black tracking-tight">{a.name}</span>
+                          <span className="text-[10px] font-mono text-black/40">[{a.code}]</span>
+                        </div>
+                        <span className="text-[11px] text-[#777777]">Prise en charge {a.dist}</span>
+                      </div>
                     </div>
-                    <span className="text-xs text-white/30">{a.dist}</span>
-                  </motion.div>
                 ))}
               </div>
             </motion.div>
 
-            {/* Google Map */}
-            <motion.div
-              className="overflow-hidden rounded-2xl border border-borderc"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
-            >
-              <iframe
-                title="Tignieu-Jameyzieu"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22315.2!2d5.17!3d45.72!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f46e6c8c8c8c8c%3A0x0!2sTignieu-Jameyzieu!5e0!3m2!1sfr!2sfr!4v1700000000000"
-                width="100%"
-                height="180"
-                style={{ border: 0, display: "block", filter: "grayscale(100%) contrast(1.1)" }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-              <div className="flex items-center justify-between bg-surface px-4 py-3">
-                <div>
-                  <p className="text-xs font-semibold text-dark">Tignieu-Jameyzieu</p>
-                  <p className="text-[10px] text-mutedc">Ain (01) · Auvergne-Rhône-Alpes</p>
-                </div>
-                <a href="#contact" className="rounded-full bg-dark px-3 py-1.5 text-xs font-bold text-white hover:bg-dark/80 transition-colors">
-                  Devis →
-                </a>
-              </div>
-            </motion.div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
   );
 }

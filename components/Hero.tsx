@@ -2,84 +2,54 @@
 
 import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { ArrowDown, Phone } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
-/* ─── Stagger word reveal ─────────────────────────────── */
-function RevealWord({
-  text,
-  delay = 0,
-  className = "",
-  style,
-}: {
-  text: string;
-  delay?: number;
-  className?: string;
-  style?: React.CSSProperties;
-}) {
-  return (
-    <span className={`inline-block overflow-hidden align-bottom ${className}`} style={style}>
-      <motion.span
-        className="inline-block"
-        initial={{ y: "105%" }}
-        animate={{ y: 0 }}
-        transition={{
-          duration: 1,
-          delay,
-          ease: [0.16, 1, 0.3, 1],
-        }}
-      >
-        {text}
-      </motion.span>
-    </span>
-  );
-}
+/* Délais calibrés pour apparaître juste après la sortie du loader (≈3.35s) */
+const LOADER_OUT = 3.0;
 
-/* ─── Hero ────────────────────────────────────────────── */
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef     = useRef<HTMLVideoElement>(null);
 
-  /* Force play on mount — belt & suspenders */
+  /* Autoplay forcé */
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     v.muted = true;
-    v.play().catch(() => {/* silently ignore if blocked */});
+    v.play().catch(() => {});
   }, []);
 
-  /* Parallax */
+  /* Scroll parallaxe */
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
-  const rawVideoScale = useTransform(scrollYProgress, [0, 1], [1, 1.18]);
-  const rawOverlay    = useTransform(scrollYProgress, [0, 0.7], [0.38, 0.72]);
-  const rawTextY      = useTransform(scrollYProgress, [0, 1], ["0%", "-28%"]);
-  const rawTextOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-  const videoScale  = useSpring(rawVideoScale,  { stiffness: 60, damping: 20 });
-  const textY       = useSpring(rawTextY,       { stiffness: 60, damping: 20 });
+  const rawScale       = useTransform(scrollYProgress, [0, 1], [1, 1.07]);
+  const rawTextY       = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
+  const rawTextOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
+
+  const videoScale  = useSpring(rawScale,  { stiffness: 38, damping: 13 });
+  const textY       = useSpring(rawTextY,  { stiffness: 38, damping: 13 });
   const textOpacity = rawTextOpacity;
-  const overlay     = rawOverlay;
 
-  /* Info-bar items */
-  const barItems = [
+  const specs = [
     { label: "Disponibilité", value: "7j/7 — 24h/24" },
-    { label: "Couverture",    value: "Toute la France" },
-    { label: "Devis",         value: "Gratuit & rapide" },
-    { label: "Véhicule",      value: "Tiguan 7 places" },
+    { label: "Zone",          value: "Lyon · Ain · Isère" },
+    { label: "Convention",    value: "CPAM 100%" },
+    { label: "Capacité",      value: "7 places SUV" },
   ];
 
   return (
     <section
       ref={containerRef}
       id="accueil"
-      className="relative w-full overflow-hidden bg-dark"
+      className="relative w-full overflow-hidden bg-black flex flex-col select-none"
       style={{ height: "100svh" }}
     >
-      {/* ── VIDEO ─────────────────────────────────────── */}
+      {/* ── VIDÉO propre, entièrement visible ── */}
       <motion.div
-        className="absolute inset-0"
+        className="absolute inset-0 z-0 will-change-transform"
         style={{ scale: videoScale }}
       >
         <video
@@ -92,141 +62,114 @@ export default function Hero() {
           playsInline
           preload="auto"
           disablePictureInPicture
-          style={{ display: "block" }}
         />
       </motion.div>
 
-      {/* ── OVERLAYS ──────────────────────────────────── */}
-      <motion.div
-        className="absolute inset-0 bg-dark"
-        style={{ opacity: overlay }}
-      />
-      {/* Cinematic letterbox vignette */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-dark/60 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-dark/90 to-transparent" />
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-dark/30 to-transparent" />
+      {/* ── VOILE : seulement en bas ── */}
+      <div className="pointer-events-none absolute inset-0 z-[5]">
+        {/* Gradient bas fort pour les specs */}
+        <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+        {/* Vignette haut très légère (nav lisible) */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/18 to-transparent" />
       </div>
 
-      {/* ── CONTENT ───────────────────────────────────── */}
+      {/* ── TEXTE + SPECS : au bas, monte au scroll ── */}
       <motion.div
-        className="relative z-10 flex h-full flex-col justify-end px-6 pb-28 sm:px-10 lg:px-16 xl:px-20"
+        className="relative z-[10] w-full mt-auto"
         style={{ y: textY, opacity: textOpacity }}
       >
-        {/* Badge */}
-        <motion.span
-          className="mb-8 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-xs font-medium text-white/70 backdrop-blur-sm"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-lime" style={{ animation: "pulse 2s ease-in-out infinite" }} />
-          Taxi conventionné · Disponible 7j/7
-        </motion.span>
-
-        {/* ── HEADLINE ─────────────────────────────── */}
-        <h1
-          className="font-sans font-black text-white leading-[0.88] tracking-[-0.04em]"
-          style={{ fontSize: "clamp(3rem, 11vw, 9.5rem)" }}
-        >
-          {/* Line 1 */}
-          <div>
-            <RevealWord text="NOUS" delay={0.38} className="mr-[1.5vw]" />
-            <RevealWord text="ALLONS" delay={0.50} className="mr-[1.5vw]" />
-            <RevealWord text="OÙ" delay={0.62} />
-          </div>
-          {/* Line 2 — lime */}
-          <div>
-            <RevealWord
-              text="VOUS"
-              delay={0.74}
-              className="mr-[1.5vw] text-lime"
-              style={{ textShadow: "0 0 60px rgba(232,255,61,0.25)" } as React.CSSProperties}
-            />
-            <RevealWord text="VOULEZ" delay={0.86} className="text-lime" />
-          </div>
-        </h1>
-
-        {/* Subline */}
-        <motion.p
-          className="mt-6 max-w-sm text-sm font-light leading-relaxed text-white/55 sm:text-base"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 1.05, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Tignieu-Jameyzieu · Lyon · Ain · Isère — et toute la France.
-          <br />Volkswagen Tiguan 7 places, disponible maintenant.
-        </motion.p>
-
-        {/* CTA */}
-        <motion.div
-          className="mt-8 flex flex-wrap items-center gap-3"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 1.15, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <a
-            href="tel:0600000000"
-            className="group relative flex items-center gap-2.5 overflow-hidden rounded-full bg-lime px-6 py-3 text-sm font-semibold text-dark transition-transform hover:-translate-y-px active:translate-y-0"
-          >
-            <span className="absolute inset-0 translate-y-full bg-white/90 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
-            <Phone className="relative z-10 h-4 w-4" />
-            <span className="relative z-10">Appeler maintenant</span>
-          </a>
-          <a
-            href="#contact"
-            className="flex items-center gap-2 text-sm font-medium text-white/50 transition-colors hover:text-white"
-          >
-            Demander un devis
+        {/* Headline */}
+        <div className="px-8 pb-8 md:px-14">
+          <div className="overflow-hidden">
             <motion.span
-              animate={{ x: [0, 5, 0] }}
-              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              className="block font-sans font-black text-white leading-[0.92] tracking-[-0.03em]"
+              style={{ fontSize: "clamp(2.8rem, 9vw, 8rem)" }}
+              initial={{ y: "105%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1], delay: LOADER_OUT }}
             >
-              →
+              Nous allons
             </motion.span>
-          </a>
-        </motion.div>
-      </motion.div>
+          </div>
+          <div className="overflow-hidden">
+            <motion.span
+              className="block font-sans font-black text-white leading-[0.92] tracking-[-0.03em]"
+              style={{ fontSize: "clamp(2.8rem, 9vw, 8rem)" }}
+              initial={{ y: "105%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1], delay: LOADER_OUT + 0.14 }}
+            >
+              où vous{" "}
+              <span className="font-light italic text-white/50">voulez.</span>
+            </motion.span>
+          </div>
 
-      {/* ── SCROLL HINT ───────────────────────────────── */}
-      <motion.div
-        className="absolute bottom-8 right-8 z-10 hidden flex-col items-center gap-2 lg:flex"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.7, duration: 0.8 }}
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-        >
-          <ArrowDown className="h-4 w-4 text-white/25" />
-        </motion.div>
-        <p
-          className="text-white/20"
-          style={{ fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
-        >
-          Scroll
-        </p>
-      </motion.div>
+          {/* Sous-titre */}
+          <motion.p
+            className="mt-4 text-sm font-light text-white/45 tracking-wide"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: LOADER_OUT + 0.4 }}
+          >
+            SPM · Tignieu-Jameyzieu · Lyon · Ain · Isère — et toute la France
+          </motion.p>
+        </div>
 
-      {/* ── BOTTOM INFO BAR ───────────────────────────── */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 z-10"
-        initial={{ y: 80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.9, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="flex items-stretch divide-x divide-white/8 border-t border-white/8 bg-dark/55 backdrop-blur-xl">
-          {barItems.map((item) => (
-            <div key={item.label} className="flex flex-1 flex-col justify-center px-4 py-3 sm:px-7">
-              <p className="text-white/30" style={{ fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase" }}>
-                {item.label}
-              </p>
-              <p className="mt-0.5 text-xs font-semibold text-white/75 sm:text-sm">
-                {item.value}
-              </p>
-            </div>
+        {/* Barre specs */}
+        <div className="grid grid-cols-2 gap-y-5 border-t border-white/10 px-8 pb-14 pt-5 text-white md:grid-cols-4 md:px-14">
+          {specs.map((s, i) => (
+            <motion.div
+              key={i}
+              className={`flex flex-col ${i !== 0 ? "md:pl-8 md:border-l md:border-white/10" : ""}`}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.75,
+                ease: [0.16, 1, 0.3, 1],
+                delay: LOADER_OUT + 0.55 + i * 0.09,
+              }}
+            >
+              <span className="mb-1 text-[10px] font-semibold tracking-[0.22em] uppercase text-white/32">
+                {s.label}
+              </span>
+              <span className="text-base font-semibold tracking-tight text-white md:text-[1.1rem]">
+                {s.value}
+              </span>
+            </motion.div>
           ))}
+        </div>
+
+        {/* Vague SVG + bouton scroll */}
+        <div className="relative h-12 w-full bg-[#f8f9fa] flex justify-center items-end">
+          <div className="absolute top-[-44px] h-[45px] w-[260px] pointer-events-none">
+            <svg viewBox="0 0 260 45" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+              <path d="M0 45C60 45 70 0 130 0C190 0 200 45 260 45H0Z" fill="#f8f9fa" />
+            </svg>
+          </div>
+          <motion.div
+            className="absolute -top-5 z-40"
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              delay: LOADER_OUT + 1.1,
+              duration: 0.6,
+              type: "spring",
+              stiffness: 220,
+              damping: 18,
+            }}
+          >
+            <a
+              href="#services"
+              className="flex h-14 w-14 items-center justify-center rounded-full bg-[#111] text-white/55 shadow-xl transition-all hover:scale-110 hover:text-white active:scale-95"
+            >
+              <motion.div
+                animate={{ y: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              >
+                <ChevronDown className="h-5 w-5" />
+              </motion.div>
+            </a>
+          </motion.div>
         </div>
       </motion.div>
     </section>

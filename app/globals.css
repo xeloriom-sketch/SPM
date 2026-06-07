@@ -16,6 +16,8 @@
 
 html {
   background: #ffffff;
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px; /* hauteur navbar fixe */
 }
 
 body {

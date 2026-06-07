@@ -1,145 +1,193 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, useSpring, useTransform, useMotionValue } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+
+const stats = [
+  { value: "4",    label: "Services exclusifs" },
+  { value: "47",   label: "Avis 5 étoiles" },
+  { value: "7j/7", label: "Disponibilité" },
+];
 
 const services = [
   {
     number: "01",
-    title: "Transferts\nGare & Aéroport",
-    desc: "Lyon Saint-Exupéry, Part-Dieu, Perrache, Genève. Prise en charge à domicile. Suivi des vols en temps réel.",
-    tags: ["Lyon-St-Exupéry", "Part-Dieu", "Genève"],
-    accent: "#e8ff3d",
+    title: "Transferts Gare & Aéroport",
+    desc: "Lyon Saint-Exupéry, Part-Dieu, Perrache, Genève. Prise en charge à domicile, suivi des vols en temps réel.",
   },
   {
     number: "02",
-    title: "Colis &\nCourriers Urgents",
-    desc: "Livraison rapide de colis et lettres urgentes dans toute la région. Sécurité et traçabilité garanties.",
-    tags: ["Same-day", "Sécurisé", "Toute la France"],
-    accent: "#000000",
+    title: "Colis & Courriers Urgents",
+    desc: "Livraison rapide et sécurisée de colis et lettres urgentes. Traçabilité garantie partout en France.",
   },
   {
     number: "03",
-    title: "Remorque\nà Disposition",
-    desc: "Attache-remorque homologuée. Transport de matériel, véhicules en panne, déménagements partiels.",
-    tags: ["Équipement unique", "Matériel lourd"],
-    accent: "#e8ff3d",
+    title: "Remorque à Disposition",
+    desc: "Attache-remorque homologuée. Transport de matériel lourd, véhicules en panne, déménagements.",
   },
   {
     number: "04",
-    title: "France\nEntière",
-    desc: "De Lyon à Paris, Marseille, Bordeaux… Je vous conduis partout. Longue distance sur devis, confort absolu.",
-    tags: ["Paris", "Marseille", "Sur devis"],
-    accent: "#000000",
+    title: "Déplacements France Entière",
+    desc: "De Lyon à Paris, Marseille, Bordeaux, Genève. Longue distance sur devis, confort absolu.",
   },
 ];
 
-function ServiceCard({ s, i }: { s: typeof services[0]; i: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+export default function Services() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef    = useRef<HTMLDivElement>(null);
+  const isInView    = useInView(containerRef, { once: true, margin: "-80px" });
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const rotateX = useSpring(useTransform(mouseY, [-150, 150], [8, -8]), { stiffness: 300, damping: 30 });
-  const rotateY = useSpring(useTransform(mouseX, [-150, 150], [-8, 8]), { stiffness: 300, damping: 30 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left - rect.width / 2);
-    mouseY.set(e.clientY - rect.top - rect.height / 2);
-  };
-  const handleMouseLeave = () => { mouseX.set(0); mouseY.set(0); };
-
-  const isAccentYellow = s.accent === "#e8ff3d";
+  /* Parallaxe image droite */
+  const { scrollYProgress } = useScroll({
+    target: imageRef,
+    offset: ["start end", "end start"],
+  });
+  const rawY     = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const rawScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1, 1.05]);
+  const imageY   = useSpring(rawY,     { stiffness: 50, damping: 18 });
+  const imageScale = useSpring(rawScale, { stiffness: 50, damping: 18 });
 
   return (
-    <motion.div
-      ref={ref}
-      className="group relative"
-      initial={{ opacity: 0, y: 60 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: i * 0.1, type: "spring", stiffness: 80, damping: 18 }}
-      style={{ perspective: 800 }}
+    <section
+      ref={containerRef}
+      id="services"
+      className="w-full overflow-hidden bg-[#f8f9fa] py-24 md:py-36 font-sans"
     >
-      <motion.div
-        className={`relative overflow-hidden rounded-3xl p-7 h-full cursor-pointer ${isAccentYellow ? "bg-lime text-dark" : "bg-dark text-white"}`}
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        whileHover={{ scale: 1.02 }}
-        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-      >
-        {/* Number */}
-        <span className={`absolute top-6 right-7 font-mono text-xs font-medium ${isAccentYellow ? "text-dark/30" : "text-white/20"}`}>
-          {s.number}
-        </span>
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
 
-        {/* Icon circle */}
-        <div className={`mb-6 grid h-12 w-12 place-items-center rounded-2xl ${isAccentYellow ? "bg-dark/10" : "bg-white/10"}`}>
-          <div className={`h-5 w-5 rounded-full ${isAccentYellow ? "bg-dark" : "bg-white"}`} />
+        {/* ── TOP : Intro + voiture ── */}
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-6 items-center mb-24 lg:mb-32">
+
+          {/* Gauche — texte */}
+          <div className="lg:col-span-5 flex flex-col justify-center z-10">
+            <div className="overflow-hidden mb-7">
+              <motion.h2
+                className="font-sans font-medium text-black tracking-tight leading-tight text-4xl sm:text-5xl lg:text-[3.4rem]"
+                initial={{ y: "100%" }}
+                animate={isInView ? { y: 0 } : {}}
+                transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+              >
+                SPM — Taxi<br />
+                <span className="text-black/30">Conventionné</span>
+              </motion.h2>
+            </div>
+
+            <motion.p
+              className="text-sm leading-relaxed text-[#555] max-w-sm font-normal mb-14"
+              initial={{ opacity: 0, y: 18 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.18 }}
+            >
+              Volkswagen Tiguan 7 places, conventionné CPAM. Disponible 7j/7 pour vos
+              transferts aéroport, transports médicaux, colis urgents et déplacements
+              longue distance dans toute la France. Devis gratuit, réponse sous 2h.
+            </motion.p>
+
+            {/* Stats */}
+            <div className="flex items-center flex-wrap gap-8 sm:gap-12 mb-14">
+              {stats.map((stat, i) => (
+                <motion.div
+                  key={i}
+                  className="flex items-center"
+                  initial={{ opacity: 0, y: 22 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.65, delay: 0.32 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  {i !== 0 && <div className="h-12 w-px bg-black/12 mr-8 sm:mr-12" />}
+                  <div className="flex flex-col">
+                    <span className="text-[10px] tracking-widest text-[#888] mb-1.5 font-semibold uppercase">
+                      {stat.label}
+                    </span>
+                    <span className="text-3xl sm:text-4xl font-bold tracking-tight text-black">
+                      {stat.value}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* CTA pill */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.65, delay: 0.65 }}
+            >
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-4 rounded-full bg-black pl-6 pr-1.5 py-1.5 text-[11px] font-semibold tracking-[0.2em] uppercase text-white transition-all hover:bg-[#111]"
+              >
+                <span>Demander un devis</span>
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:translate-x-0.5">
+                  <ArrowRight className="h-4 w-4 stroke-[2.5]" />
+                </div>
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Droite — voiture + parallaxe */}
+          <div
+            ref={imageRef}
+            className="lg:col-span-7 relative w-full overflow-hidden lg:-mr-20 xl:-mr-32"
+            style={{ height: "clamp(260px, 42vw, 520px)" }}
+          >
+            {/* Halo doux sous la voiture */}
+            <div
+              className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[60%] pointer-events-none"
+              style={{ height: 32, background: "radial-gradient(ellipse, rgba(0,0,0,0.09) 0%, transparent 70%)" }}
+            />
+            <motion.div
+              className="relative w-full h-full will-change-transform"
+              style={{ y: imageY, scale: imageScale }}
+              initial={{ opacity: 0, x: 50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Image
+                src="https://res.cloudinary.com/dkugkfusy/image/upload/v1715934872/cars/models/ouvb1yadbx8zrhvh9kvv.png"
+                alt="SPM Volkswagen Tiguan Allspace 7 places"
+                fill
+                priority
+                quality={95}
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-contain object-right"
+                style={{
+                  objectPosition: "70% center",
+                  filter: "drop-shadow(0 30px 55px rgba(0,0,0,0.14))",
+                }}
+              />
+            </motion.div>
+          </div>
         </div>
 
-        {/* Title */}
-        <h3 className="font-sans text-2xl font-black leading-[1.1] tracking-tight whitespace-pre-line mb-4">
-          {s.title}
-        </h3>
-
-        {/* Desc */}
-        <p className={`text-sm leading-relaxed mb-6 ${isAccentYellow ? "text-dark/65" : "text-white/55"}`}>
-          {s.desc}
-        </p>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2">
-          {s.tags.map((tag) => (
-            <span key={tag} className={`rounded-full px-3 py-1 text-xs font-medium ${isAccentYellow ? "bg-dark/10 text-dark/70" : "bg-white/10 text-white/60"}`}>
-              {tag}
-            </span>
+        {/* ── BAS : 4 cartes services ── */}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((s, i) => (
+            <motion.a
+              key={s.number}
+              href="#contact"
+              className="group flex flex-col justify-between rounded-[22px] border border-black/[0.06] bg-white p-7 transition-all duration-300 hover:border-black/18 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)]"
+              initial={{ opacity: 0, y: 32 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.22 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div>
+                <span className="mb-5 block text-[10px] font-bold tracking-[0.25em] text-black/22 uppercase">
+                  {s.number}
+                </span>
+                <h3 className="font-sans text-base font-semibold tracking-tight text-black leading-snug mb-3">
+                  {s.title}
+                </h3>
+                <p className="text-xs leading-relaxed text-[#777]">{s.desc}</p>
+              </div>
+              <div className="mt-7 flex h-8 w-8 items-center justify-center rounded-full border border-black/10 text-black/28 transition-all duration-300 group-hover:border-black group-hover:bg-black group-hover:text-white">
+                <ArrowRight className="h-3.5 w-3.5" />
+              </div>
+            </motion.a>
           ))}
         </div>
 
-        {/* Arrow */}
-        <div className={`absolute bottom-7 right-7 grid h-9 w-9 place-items-center rounded-full transition-all duration-300 group-hover:scale-110 ${isAccentYellow ? "bg-dark text-white" : "bg-white text-dark"}`}>
-          <span className="text-sm font-bold">→</span>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
-
-export default function Services() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <section id="services" className="w-full bg-white py-24 px-6 sm:px-10 lg:px-16">
-      {/* Header */}
-      <div ref={ref} className="mb-14 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between max-w-[1440px] mx-auto">
-        <div className="overflow-hidden">
-          <motion.h2
-            className="font-sans text-4xl font-black tracking-tighter text-dark sm:text-5xl lg:text-6xl"
-            initial={{ y: "100%" }}
-            animate={isInView ? { y: 0 } : {}}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Mes services
-          </motion.h2>
-        </div>
-        <motion.p
-          className="max-w-xs text-sm leading-relaxed text-mutedc"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Taxi conventionné avec équipements professionnels — pour particuliers et entreprises.
-        </motion.p>
-      </div>
-
-      {/* Grid */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 max-w-[1440px] mx-auto">
-        {services.map((s, i) => (
-          <ServiceCard key={s.number} s={s} i={i} />
-        ))}
       </div>
     </section>
   );

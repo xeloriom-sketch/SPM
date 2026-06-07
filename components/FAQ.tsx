@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 const faqs = [
   { q: "Qu'est-ce qu'un taxi conventionné ?", a: "Un taxi conventionné est agréé par la CPAM pour les transports médicaux. Les trajets peuvent être pris en charge partiellement ou totalement par l'Assurance Maladie sur prescription médicale." },
@@ -18,98 +19,95 @@ export default function FAQ() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="faq" className="w-full bg-white py-24 px-6 sm:px-10 lg:px-16">
-      <div ref={ref} className="max-w-[1440px] mx-auto">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          {/* Left */}
-          <div className="flex flex-col justify-between">
-            <div>
-              <motion.p
-                className="text-xs uppercase tracking-[0.2em] text-mutedc mb-3"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.5 }}
-              >
-                FAQ
-              </motion.p>
-              <div className="overflow-hidden mb-6">
-                <motion.h2
-                  className="font-sans text-4xl font-black tracking-tighter text-dark sm:text-5xl"
-                  initial={{ y: "100%" }}
-                  animate={isInView ? { y: 0 } : {}}
-                  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  Questions<br />fréquentes
-                </motion.h2>
-              </div>
-              <motion.p
-                className="text-sm leading-relaxed text-mutedc"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Vous avez une autre question ? Contactez-moi directement, je réponds sous 2h.
-              </motion.p>
-            </div>
-            <motion.a
-              href="#contact"
-              className="group mt-10 inline-flex items-center gap-3 rounded-2xl bg-dark p-5 lg:mt-0"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+    <section id="faq" className="w-full bg-[#f8f9fa] py-20 md:py-28 font-sans">
+      <div ref={ref} className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
+
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <motion.h2
+            className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+          >
+            Questions fréquentes
+          </motion.h2>
+          <motion.p
+            className="text-xs sm:text-sm text-[#555555] leading-relaxed font-normal"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.15 }}
+          >
+            Vous avez une autre question ? Contactez-moi directement, je réponds sous 2h.
+          </motion.p>
+        </div>
+
+        {/* Grid 2 colonnes */}
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-4">
+          {faqs.map((f, i) => (
+            <motion.div
+              key={i}
+              className={`rounded-[20px] border overflow-hidden transition-all duration-300 ${
+                open === i
+                  ? "border-black/15 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
+                  : "border-black/[0.06] bg-white hover:border-black/12"
+              }`}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-lime text-dark">
-                <span className="text-lg font-black">?</span>
-              </div>
-              <div>
-                <p className="text-sm font-bold text-white">Autre question ?</p>
-                <p className="text-xs text-white/40">Réponse garantie sous 2h</p>
-              </div>
-              <span className="ml-auto text-white/30 group-hover:text-white transition-colors">→</span>
-            </motion.a>
-          </div>
-
-          {/* Right accordion */}
-          <div className="flex flex-col gap-2">
-            {faqs.map((f, i) => (
-              <motion.div
-                key={i}
-                className={`rounded-2xl border overflow-hidden transition-colors ${open === i ? "border-dark/20 bg-surface" : "border-borderc bg-white hover:border-dark/15"}`}
-                initial={{ opacity: 0, y: 24 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ type: "spring", stiffness: 120, damping: 20, delay: 0.1 + i * 0.07 }}
+              <button
+                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                onClick={() => setOpen(open === i ? null : i)}
               >
-                <button
-                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
-                  onClick={() => setOpen(open === i ? null : i)}
+                <span className="text-sm font-medium text-black tracking-tight">{f.q}</span>
+                <motion.div
+                  className="shrink-0 grid h-6 w-6 place-items-center rounded-full border border-black/10 text-black/30 text-xs transition-colors"
+                  animate={{
+                    rotate: open === i ? 45 : 0,
+                    backgroundColor: open === i ? "#000" : "transparent",
+                    color: open === i ? "#fff" : undefined,
+                    borderColor: open === i ? "#000" : undefined,
+                  }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
                 >
-                  <span className="text-sm font-semibold text-dark">{f.q}</span>
-                  <motion.span
-                    className="shrink-0 grid h-7 w-7 place-items-center rounded-full border border-borderc text-mutedc text-xs"
-                    animate={{ rotate: open === i ? 45 : 0, background: open === i ? "#080808" : "transparent", color: open === i ? "#ffffff" : "#888" }}
-                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  +
+                </motion.div>
+              </button>
+              <AnimatePresence initial={false}>
+                {open === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    +
-                  </motion.span>
-                </button>
-                <AnimatePresence initial={false}>
-                  {open === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      <p className="px-5 pb-5 text-sm leading-relaxed text-mutedc">{f.a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            ))}
-          </div>
+                    <p className="px-6 pb-6 text-xs sm:text-sm leading-relaxed text-[#555555]">{f.a}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
         </div>
+
+        {/* CTA bas */}
+        <motion.div
+          className="mt-12 flex justify-center"
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.7 }}
+        >
+          <a
+            href="#contact"
+            className="group inline-flex items-center gap-4 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-[11px] font-medium tracking-wider text-white transition-all hover:bg-[#111111]"
+          >
+            <span>Poser une autre question</span>
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:translate-x-0.5">
+              <ArrowRight className="h-3.5 w-3.5 stroke-[2.5]" />
+            </div>
+          </a>
+        </motion.div>
+
       </div>
     </section>
   );

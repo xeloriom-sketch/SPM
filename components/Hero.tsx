@@ -83,10 +83,7 @@ export default function Hero() {
   });
 
   const rawScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const rawTextY = useTransform(scrollYProgress, [0, 1], ["0%", "-14%"]);
-
   const videoScale = useSpring(rawScale, { stiffness: 32, damping: 14 });
-  const textY      = useSpring(rawTextY, { stiffness: 32, damping: 14 });
 
   return (
     <section
@@ -133,10 +130,7 @@ export default function Hero() {
       />
 
       {/* ── TEXTE ── */}
-      <motion.div
-        className="relative z-[10] w-full mt-auto"
-        style={{ y: textY }}
-      >
+      <div className="relative z-[10] w-full mt-auto">
         {/* Headline */}
         <div className="px-6 pb-5 sm:px-8 sm:pb-6 md:px-14">
           <CharLine text="Nous allons" delay={LOADER_OUT} />
@@ -186,6 +180,7 @@ export default function Hero() {
           ))}
         </div>
 
+
         {/* Wave transition + scroll button */}
         <div className="relative h-12 w-full bg-[#f8f9fa] flex justify-center">
           <div className="absolute top-[-44px] h-[45px] w-[260px] pointer-events-none">
@@ -212,7 +207,7 @@ export default function Hero() {
             </a>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

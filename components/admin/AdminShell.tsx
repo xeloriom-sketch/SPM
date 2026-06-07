@@ -10,6 +10,7 @@ import {
   LogOut,
   ExternalLink,
 } from "lucide-react";
+import { sitePath } from "@/lib/site-path";
 
 const navItems = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Tableau de bord" },
@@ -70,7 +71,7 @@ export default function AdminShell({
 
         <div className="p-3 border-t border-borderc flex flex-col gap-1">
           <a
-            href="/"
+            href={sitePath("/")}
             target="_blank"
             className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-mutedc hover:bg-surface2 hover:text-foreground transition-all"
           >
@@ -78,7 +79,7 @@ export default function AdminShell({
             Voir le site
           </a>
           <button
-            onClick={() => signOut({ callbackUrl: "/admin/login" })}
+            onClick={() => signOut({ callbackUrl: sitePath("/admin/login") })}
             className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-mutedc hover:bg-red-500/10 hover:text-red-400 transition-all"
           >
             <LogOut className="h-4 w-4 shrink-0" />
@@ -107,7 +108,7 @@ export default function AdminShell({
             </Link>
           ))}
           <button
-            onClick={() => signOut({ callbackUrl: "/admin/login" })}
+            onClick={() => signOut({ callbackUrl: sitePath("/admin/login") })}
             className="grid h-8 w-8 place-items-center rounded-lg text-mutedc hover:text-red-400 transition-colors"
           >
             <LogOut className="h-4 w-4" />

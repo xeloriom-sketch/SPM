@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import AdminShell from "@/components/admin/AdminShell";
+import { sitePath } from "@/lib/site-path";
 import { MessageSquare, CheckCircle2, Clock, Mail } from "lucide-react";
 
 export default async function DashboardPage() {
@@ -82,7 +83,7 @@ export default async function DashboardPage() {
           <div className="rounded-2xl border border-borderc bg-surface p-5">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-sm font-semibold">Derniers messages</h2>
-              <a href="/admin/messages" className="text-xs text-lime hover:underline">Voir tout →</a>
+              <a href={sitePath("/admin/messages")} className="text-xs text-lime hover:underline">Voir tout →</a>
             </div>
             <div className="flex flex-col gap-3">
               {(recent ?? []).length === 0 && (
@@ -91,7 +92,7 @@ export default async function DashboardPage() {
               {(recent ?? []).map((m: { id: string; name: string; service: string; phone: string; read: boolean; created_at: string }) => (
                 <a
                   key={m.id}
-                  href="/admin/messages"
+                  href={sitePath("/admin/messages")}
                   className="flex items-center gap-3 rounded-xl border border-borderc/50 bg-surface2 px-4 py-3 transition-colors hover:border-borderc"
                 >
                   <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-lime text-xs font-bold text-black">

@@ -3,6 +3,10 @@ import Lenis from "lenis";
 import { useEffect } from "react";
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+  if (process.env.NEXT_PUBLIC_STATIC === "1") {
+    return <>{children}</>;
+  }
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.15,

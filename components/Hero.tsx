@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { sitePath } from "@/lib/site-path";
 
 const LOADER_OUT = 3.0;
 
@@ -100,7 +101,7 @@ export default function Hero() {
         <video
           ref={videoRef}
           className="h-full w-full object-cover"
-          src="/videos/hero.mp4"
+          src={sitePath("/videos/hero.mp4")}
           autoPlay
           muted
           loop

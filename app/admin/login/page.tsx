@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff, LogIn, Loader2 } from "lucide-react";
 import { Suspense } from "react";
+import { sitePath } from "@/lib/site-path";
 
 function LoginForm() {
   const router = useRouter();
@@ -110,7 +111,7 @@ function LoginForm() {
           </form>
         </div>
 
-        <a href="/" className="mt-6 block text-center text-xs text-mutedc hover:text-foreground transition-colors">
+        <a href={sitePath("/")} className="mt-6 block text-center text-xs text-mutedc hover:text-foreground transition-colors">
           ← Retour au site
         </a>
       </div>

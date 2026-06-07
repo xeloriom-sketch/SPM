@@ -198,12 +198,7 @@ export default function Hero() {
               href="#services"
               className="flex h-16 w-16 items-center justify-center rounded-full bg-[#111] text-white/60 shadow-xl transition-all hover:scale-110 hover:text-white active:scale-95"
             >
-              <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
-              >
-                <ChevronDown className="h-7 w-7" strokeWidth={2.8} />
-              </motion.div>
+              <ChevronDown className="h-7 w-7" strokeWidth={2.8} />
             </a>
           </motion.div>
         </div>

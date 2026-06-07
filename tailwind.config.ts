@@ -9,46 +9,60 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        /* Dark green-tinted base — gives life vs pure black */
-        background: "#080c0a",
-        surface: "#0f1610",
-        surface2: "#172019",
-        borderc: "#1e2a22",
-        foreground: "#f0f5f2",
-        mutedc: "#7a9080",
-        /* Vivid lime — the hero accent */
-        lime: "#b6f000",
-        /* Warm amber for highlights */
-        amber: "#f5a623",
-        /* Sky for trust signals */
-        sky: "#38bdf8",
+        background: "#ffffff",
+        surface: "#f5f5f5",
+        surface2: "#ebebeb",
+        borderc: "#e0e0e0",
+        foreground: "#080808",
+        mutedc: "#888888",
+        dark: "#080808",
+        "dark-2": "#141414",
+        lime: "#e8ff3d",
+        "lime-dark": "#c8df00",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        display: ["var(--font-sora)", "sans-serif"],
+        sans: [
+          "var(--font-geist)",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "SF Pro Display",
+          "SF Pro Text",
+          "Helvetica Neue",
+          "sans-serif",
+        ],
+        display: [
+          "var(--font-geist)",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "SF Pro Display",
+          "Helvetica Neue",
+          "sans-serif",
+        ],
+        mono: ["var(--font-geist-mono)", "SF Mono", "monospace"],
       },
-      backgroundImage: {
-        "lime-radial": "radial-gradient(circle at 30% 50%, rgba(182,240,0,0.08) 0%, transparent 60%)",
-        "lime-top": "radial-gradient(ellipse at 50% 0%, rgba(182,240,0,0.06) 0%, transparent 50%)",
+      letterSpacing: {
+        tightest: "-0.06em",
+        tighter: "-0.04em",
+        tight: "-0.02em",
       },
       keyframes: {
         floaty: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-6px)" },
+          "0%,100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
         },
-        pulse_lime: {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.4" },
+        spin_slow: {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
         },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
         },
       },
       animation: {
         floaty: "floaty 3s ease-in-out infinite",
-        pulse_lime: "pulse_lime 2s ease-in-out infinite",
-        shimmer: "shimmer 2.5s linear infinite",
+        spin_slow: "spin_slow 8s linear infinite",
+        marquee: "marquee 18s linear infinite",
       },
     },
   },

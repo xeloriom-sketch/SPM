@@ -1,137 +1,207 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { ArrowUpRight, Phone, Shield, MapPin, FileText, Star } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { ArrowDown, Phone } from "lucide-react";
 
-const stats = [
-  { icon: Shield, label: "Taxi conventionné", sub: "Agrément CPAM officiel", color: "text-lime" },
-  { icon: MapPin, label: "Toute la France", sub: "Déplacement national", color: "text-sky" },
-  { icon: FileText, label: "Devis gratuit", sub: "Réponse sous 2h", color: "text-amber" },
-];
+const words = ["VOUS", "VOULEZ"];
+const phrase = ["NOUS", "ALLONS", "OÙ"];
+
+function SplitWord({ text, delay = 0 }: { text: string; delay?: number }) {
+  return (
+    <span className="inline-block overflow-hidden">
+      <motion.span
+        className="inline-block"
+        initial={{ y: "110%" }}
+        animate={{ y: 0 }}
+        transition={{ duration: 1.1, delay, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {text}
+      </motion.span>
+    </span>
+  );
+}
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [ready, setReady] = useState(false);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const videoOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-35%"]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.6], [0.45, 0.75]);
+
+  const springY = useSpring(textY, { stiffness: 80, damping: 20 });
+
+  useEffect(() => {
+    const timer = setTimeout(() => setReady(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const allWords = [...phrase, ...words];
+
   return (
-    <section id="accueil" className="pt-28 px-4 sm:px-6 max-w-[1240px] mx-auto">
-      <div className="relative overflow-hidden rounded-3xl">
-        {/* Background — VW Tiguan on road */}
-        <Image
-          src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1600&q=85"
-          alt="Volkswagen Tiguan SUV taxi professionnel sur route"
-          width={1600}
-          height={700}
-          className="h-[520px] w-full object-cover sm:h-[620px]"
-          priority
+    <section ref={containerRef} className="relative w-full h-[100svh] overflow-hidden bg-dark" id="accueil">
+      {/* VIDEO */}
+      <motion.div
+        className="absolute inset-0 w-full h-full"
+        style={{ scale: videoScale, opacity: videoOpacity }}
+      >
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/videos/hero.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          onCanPlay={() => setReady(true)}
         />
+      </motion.div>
 
-        {/* Rich layered overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/92 via-black/60 to-black/15" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-        {/* Lime chromatic glow */}
-        <div className="absolute left-0 top-0 h-full w-[45%] bg-gradient-to-r from-lime/[0.07] to-transparent pointer-events-none" />
-        <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-background/40 to-transparent pointer-events-none" />
+      {/* OVERLAY */}
+      <motion.div
+        className="absolute inset-0 bg-dark"
+        style={{ opacity: overlayOpacity }}
+      />
 
-        {/* Left accent stripe */}
-        <div className="absolute left-0 top-8 bottom-8 w-1 rounded-r-full bg-gradient-to-b from-transparent via-lime to-transparent" />
+      {/* VIGNETTE */}
+      <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-dark/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-dark/30 via-transparent to-dark/10 pointer-events-none" />
 
-        {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-center px-8 sm:px-12 lg:px-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            {/* Live badge */}
-            <span className="inline-flex items-center gap-2 rounded-full border border-lime/40 bg-lime/12 px-3.5 py-1.5 text-xs font-semibold text-lime mb-6 backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-lime animate-pulse_lime" />
-              Disponible 7j/7 — 24h/24
-            </span>
-          </motion.div>
+      {/* CONTENT */}
+      <motion.div
+        className="relative z-10 flex flex-col justify-end h-full px-6 pb-32 sm:px-10 lg:px-16"
+        style={{ y: springY, opacity: textOpacity }}
+      >
+        {/* Badge */}
+        <AnimatePresence>
+          {ready && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mb-8"
+            >
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/8 px-4 py-2 text-xs font-medium text-white/80 backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-lime animate-pulse" />
+                Taxi conventionné · Disponible 7j/7
+              </span>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-          <motion.h1
-            className="font-display text-4xl font-bold leading-[1.05] text-balance sm:text-5xl lg:text-[3.5rem] max-w-xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            Taxi Conventionné<br />
-            <span className="text-lime drop-shadow-[0_0_20px_rgba(182,240,0,0.4)]">
-              Lyon · Ain · Isère
-            </span>
-          </motion.h1>
-
-          <motion.p
-            className="mt-5 max-w-[420px] text-sm leading-relaxed text-white/80 sm:text-[15px]"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            Votre chauffeur de confiance basé à Tignieu-Jameyzieu.{" "}
-            <strong className="text-white">Volkswagen Tiguan 7 places</strong> — transferts gare & aéroport,
-            colis urgents, remorque disponible.
-          </motion.p>
-
-          {/* Rating */}
-          <motion.div
-            className="mt-4 flex items-center gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.28 }}
-          >
-            <div className="flex items-center gap-0.5 text-amber">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-3.5 w-3.5 fill-current" />
+        {/* MAIN HEADLINE */}
+        <h1 className="font-sans font-black text-white leading-[0.9] tracking-tightest">
+          <div className="text-[13vw] sm:text-[11vw] lg:text-[9.5vw]">
+            {ready && phrase.map((w, i) => (
+              <span key={w} className="mr-[2vw] last:mr-0">
+                <SplitWord text={w} delay={0.4 + i * 0.12} />
+              </span>
+            ))}
+          </div>
+          <div className="flex items-end gap-[2vw] mt-[-0.5vw]">
+            <div className="text-[13vw] sm:text-[11vw] lg:text-[9.5vw] text-lime leading-[0.9]">
+              {ready && words.map((w, i) => (
+                <span key={w} className="mr-[2vw] last:mr-0">
+                  <SplitWord text={w} delay={0.76 + i * 0.12} />
+                </span>
               ))}
             </div>
-            <span className="text-sm font-semibold text-white">5.0</span>
-            <span className="text-sm text-white/55">— Clients satisfaits</span>
-          </motion.div>
+            {/* Pill badge on same line */}
+            {ready && (
+              <motion.div
+                className="hidden lg:flex flex-col items-start gap-1 pb-2"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <p className="text-sm font-medium text-white/60 leading-tight">Tignieu-Jameyzieu</p>
+                <p className="text-sm font-medium text-white/40 leading-tight">Lyon · Ain · Isère · France</p>
+              </motion.div>
+            )}
+          </div>
+        </h1>
 
+        {/* CTA Row */}
+        {ready && (
           <motion.div
-            className="mt-8 flex flex-wrap gap-3"
+            className="mt-10 flex flex-wrap items-center gap-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.32, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.8, delay: 1.05, ease: [0.16, 1, 0.3, 1] }}
           >
             <a
               href="tel:0600000000"
-              className="flex items-center gap-2 rounded-full bg-lime px-5 py-3 text-sm font-bold text-black transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 lime-glow-sm"
+              className="group relative flex items-center gap-3 overflow-hidden rounded-full bg-lime px-7 py-3.5 text-sm font-bold text-dark"
+              data-cursor
             >
-              <Phone className="h-4 w-4" />
-              Appeler maintenant
+              <span className="absolute inset-0 translate-y-full bg-white transition-transform duration-300 ease-out group-hover:translate-y-0" />
+              <Phone className="relative z-10 h-4 w-4" />
+              <span className="relative z-10">Appeler maintenant</span>
             </a>
             <a
               href="#contact"
-              className="flex items-center gap-2 rounded-full border border-white/20 bg-white/8 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:border-lime/30 hover:bg-lime/10 hover:text-lime"
+              className="group flex items-center gap-2 text-sm font-medium text-white/70 transition-colors hover:text-white"
             >
-              Demander un devis
-              <ArrowUpRight className="h-4 w-4" />
+              <span>Demander un devis</span>
+              <motion.span
+                animate={{ x: [0, 4, 0] }}
+                transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+              >→</motion.span>
             </a>
           </motion.div>
-        </div>
+        )}
+      </motion.div>
 
-        {/* Stats bar */}
+      {/* SCROLL INDICATOR */}
+      {ready && (
         <motion.div
-          className="absolute bottom-0 left-1/2 w-[94%] max-w-[820px] -translate-x-1/2 translate-y-1/2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.6, duration: 0.8 }}
         >
-          <div className="nav-blur flex flex-col gap-0 rounded-2xl border border-borderc/80 bg-surface/95 overflow-hidden sm:flex-row sm:divide-x sm:divide-borderc/60">
-            {stats.map(({ icon: Icon, label, sub, color }) => (
-              <div key={label} className="flex flex-1 items-center gap-3 px-5 py-4">
-                <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-surface2 ${color}`}>
-                  <Icon className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">{label}</p>
-                  <p className="text-xs text-mutedc">{sub}</p>
-                </div>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.6, ease: [0.45, 0, 0.55, 1] }}
+          >
+            <ArrowDown className="h-5 w-5 text-white/40" />
+          </motion.div>
+          <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Découvrir</p>
+        </motion.div>
+      )}
+
+      {/* BOTTOM INFO BAR */}
+      {ready && (
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 z-10"
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.9, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="flex items-stretch divide-x divide-white/10 border-t border-white/10 bg-dark/60 backdrop-blur-md">
+            {[
+              { label: "Disponibilité", value: "7j/7 — 24h/24" },
+              { label: "Couverture", value: "Toute la France" },
+              { label: "Devis", value: "Gratuit & rapide" },
+              { label: "Véhicule", value: "Tiguan 7 places" },
+            ].map((item) => (
+              <div key={item.label} className="flex flex-1 flex-col justify-center px-5 py-3.5 sm:px-8">
+                <p className="text-[10px] uppercase tracking-widest text-white/35">{item.label}</p>
+                <p className="mt-0.5 text-xs font-semibold text-white/80 sm:text-sm">{item.value}</p>
               </div>
             ))}
           </div>
         </motion.div>
-      </div>
+      )}
     </section>
   );
 }

@@ -1,118 +1,114 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Mail } from "lucide-react";
+import { useState, useRef } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const faqs = [
-  {
-    q: "Qu'est-ce qu'un taxi conventionné ?",
-    a: "Un taxi conventionné est un taxi agréé par la Sécurité Sociale et la CPAM pour transporter des patients vers leurs soins médicaux. Les trajets peuvent être pris en charge partiellement ou totalement par l'Assurance Maladie sur prescription médicale. Je dispose de l'agrément officiel pour ces transports.",
-  },
-  {
-    q: "Comment obtenir un devis pour mon trajet ?",
-    a: "Remplissez simplement le formulaire de contact sur cette page en précisant votre point de départ, votre destination, la date et le type de service souhaité. Je vous réponds généralement sous 2h avec une estimation de prix. Les devis sont gratuits et sans engagement.",
-  },
-  {
-    q: "Quelles zones géographiques couvrez-vous ?",
-    a: "Je suis basé à Tignieu-Jameyzieu et j'interviens principalement dans l'Ain, à Lyon et en Isère. Je dessers tous les aéroports et gares de la région (Lyon Saint-Exupéry, Part-Dieu, Perrache, Genève). Pour les longues distances, je me déplace dans toute la France sur devis.",
-  },
-  {
-    q: "Puis-je transporter des animaux de compagnie ?",
-    a: "Oui, les animaux de compagnie sont acceptés dans le véhicule, sous réserve qu'ils soient placés dans une caisse de transport adaptée ou attachés avec un harnais de sécurité. Merci de me le signaler au moment de la réservation pour que je puisse préparer l'espace en conséquence.",
-  },
-  {
-    q: "Puis-je réserver à l'avance ?",
-    a: "Absolument ! Je vous encourage même à réserver à l'avance pour les transferts aéroport, les rendez-vous médicaux et les trajets longue distance. Vous pouvez réserver par téléphone ou via le formulaire de contact. Les réservations de dernière minute sont également acceptées selon disponibilité.",
-  },
-  {
-    q: "Acceptez-vous les cartes bancaires ?",
-    a: "Oui, j'accepte les règlements en espèces, par carte bancaire (CB, Visa, Mastercard) et par chèque. Pour les transports médicaux conventionnés, la prise en charge par la CPAM est gérée directement avec les caisses concernées.",
-  },
+  { q: "Qu'est-ce qu'un taxi conventionné ?", a: "Un taxi conventionné est agréé par la CPAM pour les transports médicaux. Les trajets peuvent être pris en charge partiellement ou totalement par l'Assurance Maladie sur prescription médicale." },
+  { q: "Comment obtenir un devis ?", a: "Remplissez le formulaire de contact ou appelez directement. Je réponds sous 2h avec une estimation de prix. Devis gratuits et sans engagement." },
+  { q: "Quelles zones couvrez-vous ?", a: "Je suis basé à Tignieu-Jameyzieu et j'interviens dans l'Ain, à Lyon et en Isère. Pour les longues distances, je me déplace partout en France sur devis." },
+  { q: "Puis-je transporter des animaux ?", a: "Oui, dans une caisse de transport adaptée ou avec un harnais de sécurité. Merci de le signaler à la réservation." },
+  { q: "Puis-je réserver à l'avance ?", a: "Absolument — je vous encourage même à réserver tôt pour les aéroports et rendez-vous médicaux. Les réservations de dernière minute sont aussi acceptées selon disponibilité." },
+  { q: "Quels modes de paiement acceptez-vous ?", a: "Espèces, carte bancaire (CB, Visa, Mastercard) et chèque. Pour les transports médicaux, la prise en charge CPAM est gérée directement." },
 ];
 
 export default function FAQ() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="faq" className="mt-24 px-4 sm:px-6 max-w-[1240px] mx-auto">
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-        {/* Left */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="text-xs uppercase tracking-widest text-mutedc mb-2">FAQ</p>
-          <h2 className="font-display text-3xl font-bold text-balance sm:text-4xl">
-            Questions fréquentes
-          </h2>
-          <p className="mt-4 text-sm leading-relaxed text-mutedc max-w-xs">
-            Vous avez une question ? Consultez notre FAQ ou contactez-moi directement.
-          </p>
-
-          <div className="mt-8 rounded-2xl border border-borderc bg-surface p-5">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="grid h-9 w-9 place-items-center rounded-full bg-lime/10 text-lime">
-                <Mail className="h-4 w-4" />
-              </div>
-              <p className="text-sm font-semibold">Une autre question ?</p>
-            </div>
-            <p className="text-sm text-mutedc mb-4">Écrivez-moi directement, je vous réponds sous 2h.</p>
-            <a
-              href="#contact"
-              className="flex w-full items-center justify-center gap-2 rounded-full bg-lime px-4 py-2.5 text-sm font-semibold text-black transition-all hover:-translate-y-0.5 hover:brightness-105"
-            >
-              Envoyer un message
-            </a>
-          </div>
-        </motion.div>
-
-        {/* Right: accordion */}
-        <div className="flex flex-col gap-3">
-          {faqs.map((f, i) => (
-            <motion.div
-              key={i}
-              className={`rounded-2xl border transition-all duration-200 ${
-                open === i
-                  ? "border-borderc/80 bg-surface"
-                  : "border-borderc/50 bg-surface/60 hover:border-borderc/70"
-              }`}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-            >
-              <button
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
-                onClick={() => setOpen(open === i ? null : i)}
-                aria-expanded={open === i}
+    <section id="faq" className="w-full bg-white py-24 px-6 sm:px-10 lg:px-16">
+      <div ref={ref} className="max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          {/* Left */}
+          <div className="flex flex-col justify-between">
+            <div>
+              <motion.p
+                className="text-xs uppercase tracking-[0.2em] text-mutedc mb-3"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.5 }}
               >
-                <span className="text-sm font-medium pr-2">{f.q}</span>
-                <ChevronDown
-                  className={`h-5 w-5 shrink-0 text-mutedc transition-all duration-300 ${
-                    open === i ? "rotate-180 text-lime" : ""
-                  }`}
-                />
-              </button>
+                FAQ
+              </motion.p>
+              <div className="overflow-hidden mb-6">
+                <motion.h2
+                  className="font-sans text-4xl font-black tracking-tighter text-dark sm:text-5xl"
+                  initial={{ y: "100%" }}
+                  animate={isInView ? { y: 0 } : {}}
+                  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  Questions<br />fréquentes
+                </motion.h2>
+              </div>
+              <motion.p
+                className="text-sm leading-relaxed text-mutedc"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Vous avez une autre question ? Contactez-moi directement, je réponds sous 2h.
+              </motion.p>
+            </div>
+            <motion.a
+              href="#contact"
+              className="group mt-10 inline-flex items-center gap-3 rounded-2xl bg-dark p-5 lg:mt-0"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+            >
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-lime text-dark">
+                <span className="text-lg font-black">?</span>
+              </div>
+              <div>
+                <p className="text-sm font-bold text-white">Autre question ?</p>
+                <p className="text-xs text-white/40">Réponse garantie sous 2h</p>
+              </div>
+              <span className="ml-auto text-white/30 group-hover:text-white transition-colors">→</span>
+            </motion.a>
+          </div>
 
-              <AnimatePresence initial={false}>
-                {open === i && (
-                  <motion.div
-                    key="content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    style={{ overflow: "hidden" }}
+          {/* Right accordion */}
+          <div className="flex flex-col gap-2">
+            {faqs.map((f, i) => (
+              <motion.div
+                key={i}
+                className={`rounded-2xl border overflow-hidden transition-colors ${open === i ? "border-dark/20 bg-surface" : "border-borderc bg-white hover:border-dark/15"}`}
+                initial={{ opacity: 0, y: 24 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ type: "spring", stiffness: 120, damping: 20, delay: 0.1 + i * 0.07 }}
+              >
+                <button
+                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+                  onClick={() => setOpen(open === i ? null : i)}
+                >
+                  <span className="text-sm font-semibold text-dark">{f.q}</span>
+                  <motion.span
+                    className="shrink-0 grid h-7 w-7 place-items-center rounded-full border border-borderc text-mutedc text-xs"
+                    animate={{ rotate: open === i ? 45 : 0, background: open === i ? "#080808" : "transparent", color: open === i ? "#ffffff" : "#888" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
                   >
-                    <p className="px-5 pb-5 text-sm leading-relaxed text-mutedc">{f.a}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                    +
+                  </motion.span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {open === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <p className="px-5 pb-5 text-sm leading-relaxed text-mutedc">{f.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

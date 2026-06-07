@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Phone } from "lucide-react";
 
 const links = [
-  { label: "Accueil", href: "#accueil" },
   { label: "Services", href: "#services" },
   { label: "Véhicule", href: "#vehicule" },
   { label: "Zone", href: "#zone" },
@@ -12,96 +12,96 @@ const links = [
 ];
 
 export default function Navbar() {
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [active, setActive] = useState("accueil");
 
   useEffect(() => {
     const onScroll = () => {
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(h > 0 ? (window.scrollY / h) * 100 : 0);
-      setScrolled(window.scrollY > 40);
-
-      const sections = links.map((l) => l.href.replace("#", ""));
-      for (const id of [...sections].reverse()) {
-        const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 120) {
-          setActive(id);
-          break;
-        }
-      }
+      const vh = window.innerHeight;
+      const scrollY = window.scrollY;
+      const docH = document.documentElement.scrollHeight - vh;
+      setProgress(docH > 0 ? (scrollY / docH) * 100 : 0);
+      setIsHeroVisible(scrollY < vh * 0.85);
+      setScrolled(scrollY > 30);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const isLight = !isHeroVisible;
+
   return (
     <>
-      {/* Scroll progress */}
+      {/* Progress bar */}
       <div
-        className="fixed top-0 left-0 h-[3px] bg-lime z-[70] transition-[width] duration-100"
-        style={{ width: `${progress}%` }}
+        className="fixed top-0 left-0 h-[2px] z-[70] transition-[width] duration-100"
+        style={{ width: `${progress}%`, background: isLight ? "#080808" : "#e8ff3d" }}
       />
 
-      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
-        <header
-          className={`w-full max-w-[1240px] transition-all duration-300 ${
-            scrolled ? "scale-[0.99]" : ""
+      <motion.header
+        className="fixed top-0 left-0 right-0 z-50"
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.7, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <nav
+          className={`flex items-center justify-between px-6 py-4 transition-all duration-500 sm:px-10 lg:px-16 ${
+            scrolled
+              ? isLight
+                ? "bg-white/90 backdrop-blur-xl border-b border-borderc/50 shadow-sm"
+                : "bg-dark/60 backdrop-blur-xl border-b border-white/5"
+              : "bg-transparent"
           }`}
         >
-          <nav className="nav-blur flex items-center justify-between rounded-2xl border border-borderc/70 bg-surface/70 px-4 py-3 sm:px-6">
-            {/* Logo */}
-            <a href="#accueil" className="flex items-center gap-2.5">
-              <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5"
-                  stroke="#b6f000"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <circle cx="7" cy="16" r="1" fill="#b6f000" />
-                <circle cx="17" cy="16" r="1" fill="#b6f000" />
+          {/* Logo */}
+          <a href="#accueil" className="flex items-center gap-2.5 group">
+            <div className={`grid h-8 w-8 place-items-center rounded-full transition-colors duration-300 ${isLight ? "bg-dark" : "bg-white"}`}>
+              <svg className={`h-4 w-4 ${isLight ? "text-white" : "text-dark"}`} viewBox="0 0 24 24" fill="none">
+                <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="7" cy="16" r="1" fill="currentColor"/>
+                <circle cx="17" cy="16" r="1" fill="currentColor"/>
               </svg>
-              <div className="flex flex-col leading-none">
-                <span className="font-display text-base font-bold tracking-tight">
-                  Taxi Tignieu
-                </span>
-                <span className="text-[10px] text-mutedc">Conventionné</span>
-              </div>
-            </a>
-
-            {/* Desktop nav */}
-            <div className="hidden items-center gap-6 rounded-full border border-borderc/60 bg-background/60 px-6 py-2.5 text-sm text-mutedc md:flex">
-              {links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  className={`relative transition-colors duration-200 hover:text-foreground pb-0.5
-                    after:absolute after:left-0 after:bottom-[-6px] after:h-[2px] after:rounded-full after:bg-lime after:transition-[width] after:duration-200
-                    ${
-                      active === l.href.replace("#", "")
-                        ? "text-foreground after:w-full"
-                        : "after:w-0"
-                    }
-                  `}
-                >
-                  {l.label}
-                </a>
-              ))}
             </div>
+            <div>
+              <span className={`font-sans text-sm font-bold tracking-tight transition-colors duration-300 ${isLight ? "text-dark" : "text-white"}`}>
+                Taxi Tignieu
+              </span>
+            </div>
+          </a>
 
-            {/* CTA */}
-            <a
-              href="tel:0600000000"
-              className="flex items-center gap-2 rounded-full bg-lime px-4 py-2.5 text-sm font-semibold text-black transition-all duration-200 hover:-translate-y-0.5 hover:brightness-105 hover:shadow-[0_10px_30px_-8px_rgba(182,240,0,0.5)]"
-            >
-              <Phone className="h-4 w-4" />
-              <span className="hidden sm:inline">Appeler</span>
-            </a>
-          </nav>
-        </header>
-      </div>
+          {/* Desktop nav */}
+          <div className="hidden items-center gap-8 text-sm md:flex">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className={`relative font-medium transition-colors duration-300 after:absolute after:left-0 after:bottom-[-4px] after:h-px after:w-0 after:transition-[width] after:duration-300 hover:after:w-full ${
+                  isLight
+                    ? "text-dark/50 hover:text-dark after:bg-dark"
+                    : "text-white/50 hover:text-white after:bg-white"
+                }`}
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <a
+            href="tel:0600000000"
+            className={`group relative flex items-center gap-2 overflow-hidden rounded-full px-5 py-2.5 text-sm font-bold transition-all duration-300 ${
+              isLight
+                ? "bg-dark text-white hover:bg-dark/90"
+                : "bg-white text-dark hover:bg-white/90"
+            }`}
+            data-cursor
+          >
+            <Phone className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Appeler</span>
+          </a>
+        </nav>
+      </motion.header>
     </>
   );
 }

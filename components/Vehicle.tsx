@@ -1,129 +1,151 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { Users, Zap, Link2, Wind, Wifi, ShieldCheck } from "lucide-react";
 
 const specs = [
-  { icon: Users, label: "7 places", sub: "Confort familial", color: "text-lime" },
-  { icon: Zap, label: "TDI / Hybrid", sub: "Faibles émissions", color: "text-sky" },
-  { icon: Link2, label: "Remorque", sub: "Équipement homologué", color: "text-amber" },
-  { icon: Wind, label: "Clima bi-zone", sub: "Confort optimal", color: "text-lime" },
-  { icon: Wifi, label: "Wi-Fi bord", sub: "Connecté en route", color: "text-sky" },
-  { icon: ShieldCheck, label: "Assuré Pro", sub: "Couverture taxi", color: "text-amber" },
+  { value: "7", unit: "places", label: "SUV confort" },
+  { value: "1", unit: "remorque", label: "Équipement unique" },
+  { value: "24", unit: "h/24", label: "Disponible" },
+  { value: "∞", unit: "km", label: "Toute la France" },
 ];
 
-export default function Vehicle() {
+const features = [
+  "Climatisation bi-zone automatique",
+  "Wi-Fi haute vitesse à bord",
+  "Attache-remorque homologuée",
+  "Assurance professionnelle taxi",
+  "Sièges confortables grand espace",
+  "Chargement USB / sans fil",
+];
+
+function Counter({ value, unit }: { value: string; unit: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
   return (
-    <section id="vehicule" className="mt-28 px-4 sm:px-6 max-w-[1240px] mx-auto">
-      <motion.div
-        className="relative overflow-hidden rounded-3xl"
+    <div ref={ref} className="flex flex-col">
+      <motion.span
+        className="font-sans text-5xl font-black tracking-tighter text-dark sm:text-6xl"
         initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ type: "spring", stiffness: 120, damping: 20, delay: 0.1 }}
       >
-        {/* VW Tiguan 7 places */}
-        <Image
-          src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1600&q=85"
-          alt="Volkswagen Tiguan 7 places SUV — Taxi conventionné Tignieu"
-          width={1600}
-          height={700}
-          className="h-[440px] w-full object-cover sm:h-[540px]"
-        />
+        {value}
+        <span className="text-lime-dark text-3xl sm:text-4xl">{unit}</span>
+      </motion.span>
+    </div>
+  );
+}
 
-        {/* Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/65 to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-        {/* Lime glow left */}
-        <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-lime/[0.06] to-transparent pointer-events-none" />
-        {/* Left stripe */}
-        <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-transparent via-lime to-transparent" />
+export default function Vehicle() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-        {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-end p-7 sm:p-10 lg:p-14">
-          <span className="mb-3 inline-flex w-fit items-center gap-2 rounded-full border border-lime/30 bg-lime/10 px-3 py-1 text-xs font-semibold text-lime">
-            <span className="h-1.5 w-1.5 rounded-full bg-lime" />
-            Flotte principale
-          </span>
-          <h2 className="font-display text-3xl font-bold text-balance sm:text-4xl lg:text-5xl">
-            Volkswagen Tiguan<br />
-            <span className="text-lime drop-shadow-[0_0_20px_rgba(182,240,0,0.35)]">SUV 7 Places</span>
-          </h2>
-          <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/75 sm:text-[15px]">
-            Un SUV spacieux et premium pour tous vos déplacements. Idéal en famille,
-            pour les groupes professionnels et les voyages longue distance.
-          </p>
+  const { scrollYProgress } = useScroll({
+    target: imageRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
-          {/* Specs */}
-          <div className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6 max-w-3xl">
-            {specs.map(({ icon: Icon, label, sub, color }, i) => (
-              <motion.div
-                key={label}
-                className="flex flex-col gap-1.5 rounded-2xl border border-white/10 bg-black/30 p-3 backdrop-blur-sm"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.3 + i * 0.07, ease: "easeOut" }}
-              >
-                <Icon className={`h-4 w-4 ${color}`} />
-                <p className="text-xs font-bold text-white">{label}</p>
-                <p className="text-[10px] text-white/50">{sub}</p>
-              </motion.div>
-            ))}
+  return (
+    <section id="vehicule" ref={sectionRef} className="w-full bg-surface overflow-hidden py-24">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
+        {/* Header */}
+        <div className="mb-16 flex flex-col gap-3">
+          <motion.p
+            className="text-xs uppercase tracking-[0.2em] text-mutedc"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5 }}
+          >
+            Flotte
+          </motion.p>
+          <div className="overflow-hidden">
+            <motion.h2
+              className="font-sans text-4xl font-black tracking-tighter text-dark sm:text-5xl lg:text-6xl"
+              initial={{ y: "100%" }}
+              animate={isInView ? { y: 0 } : {}}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Volkswagen Tiguan <br className="hidden sm:block" />
+              <span className="text-mutedc">SUV 7 Places</span>
+            </motion.h2>
           </div>
         </div>
-      </motion.div>
 
-      {/* Bottom two cards */}
-      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-        <motion.div
-          className="relative overflow-hidden rounded-3xl group"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.05 }}
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=900&q=85"
-            alt="Intérieur confortable SUV taxi"
-            width={900}
-            height={400}
-            className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-          {/* Lime accent bar */}
-          <div className="absolute bottom-0 left-0 h-0.5 w-full bg-gradient-to-r from-lime via-lime/50 to-transparent" />
-          <div className="absolute bottom-5 left-5 right-5">
-            <p className="font-display text-xl font-bold">Intérieur premium</p>
-            <p className="mt-1 text-sm text-white/60">Sièges confortables · Wi-Fi · Climatisation bi-zone</p>
+        {/* Two columns */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
+          {/* Left — image with parallax */}
+          <div ref={imageRef} className="relative overflow-hidden rounded-3xl aspect-[4/3]">
+            <motion.div className="absolute inset-0 scale-110" style={{ y: imageY }}>
+              <Image
+                src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=85"
+                alt="Volkswagen Tiguan 7 places — Taxi Tignieu"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+            {/* Overlay badge */}
+            <div className="absolute bottom-5 left-5 right-5">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 backdrop-blur-sm">
+                <span className="h-2 w-2 rounded-full bg-lime-dark" />
+                <span className="text-xs font-semibold text-dark">Taxi conventionné CPAM</span>
+              </div>
+            </div>
           </div>
-        </motion.div>
 
-        <motion.div
-          className="relative overflow-hidden rounded-3xl group"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.13 }}
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=900&q=85"
-            alt="Attache remorque taxi professionnel"
-            width={900}
-            height={400}
-            className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-          <div className="absolute bottom-0 left-0 h-0.5 w-full bg-gradient-to-r from-amber via-amber/50 to-transparent" />
-          <div className="absolute bottom-5 left-5 right-5">
-            <span className="inline-block rounded-full bg-amber/90 px-3 py-0.5 text-xs font-bold text-black mb-2">
-              Équipement unique
-            </span>
-            <p className="font-display text-xl font-bold">Remorque à disposition</p>
-            <p className="mt-1 text-sm text-white/60">Transport de matériel, véhicules, déménagement</p>
+          {/* Right — specs + features */}
+          <div className="flex flex-col gap-8">
+            {/* Stats row */}
+            <div className="grid grid-cols-2 gap-5 sm:grid-cols-4 lg:grid-cols-2">
+              {specs.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  className="flex flex-col gap-1 rounded-2xl bg-white p-5"
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                  transition={{ type: "spring", stiffness: 180, damping: 22, delay: 0.2 + i * 0.08 }}
+                >
+                  <Counter value={s.value} unit={s.unit} />
+                  <p className="text-xs text-mutedc">{s.label}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Features list */}
+            <div className="rounded-2xl bg-dark p-6">
+              <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/30">Équipements à bord</p>
+              <ul className="flex flex-col gap-3">
+                {features.map((f, i) => (
+                  <motion.li
+                    key={f}
+                    className="flex items-center gap-3 text-sm text-white/75"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ type: "spring", stiffness: 200, damping: 25, delay: 0.4 + i * 0.07 }}
+                  >
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime" />
+                    {f}
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            {/* CTA */}
+            <motion.a
+              href="#contact"
+              className="group flex items-center justify-between rounded-2xl bg-lime p-5 transition-all hover:bg-lime-dark"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            >
+              <span className="font-bold text-dark">Réserver ce véhicule</span>
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-dark text-white text-sm font-bold group-hover:rotate-45 transition-transform duration-300">→</span>
+            </motion.a>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

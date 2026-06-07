@@ -2,37 +2,11 @@
 
 import { useRef } from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Phone, Mail, MapPin, CheckCircle2, AlertCircle } from "lucide-react";
 import { submitContact, type ContactFormState } from "@/app/actions/contact";
 
 const initialState: ContactFormState = { success: false, message: "" };
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="flex items-center justify-center gap-2 rounded-full bg-lime py-3 text-sm font-semibold text-black transition-all hover:-translate-y-0.5 hover:brightness-105 hover:shadow-[0_10px_30px_-8px_rgba(182,240,0,0.5)] disabled:opacity-60 disabled:hover:translate-y-0"
-    >
-      {pending ? (
-        <>
-          <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.4 0 0 5.4 0 12h4z"/>
-          </svg>
-          Envoi en cours…
-        </>
-      ) : (
-        <>
-          <Send className="h-4 w-4" />
-          Envoyer ma demande
-        </>
-      )}
-    </button>
-  );
-}
 
 const serviceOptions = [
   "Transfert aéroport / gare",
@@ -43,137 +17,160 @@ const serviceOptions = [
   "Autre",
 ];
 
-const contactInfo = [
-  { icon: Phone, label: "Téléphone", value: "06 XX XX XX XX", href: "tel:0600000000" },
-  { icon: Mail, label: "Email", value: "contact@taxi-tignieu.fr", href: "mailto:contact@taxi-tignieu.fr" },
-  { icon: MapPin, label: "Basé à", value: "Tignieu-Jameyzieu, Ain (01)", href: null },
-];
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <motion.button
+      type="submit"
+      disabled={pending}
+      className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-dark py-4 text-sm font-bold text-white disabled:opacity-60"
+      whileHover={{ scale: pending ? 1 : 1.01 }}
+      whileTap={{ scale: pending ? 1 : 0.98 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+    >
+      <span className="absolute inset-0 translate-y-full bg-lime transition-transform duration-300 ease-out group-hover:translate-y-0" />
+      <span className="relative z-10 text-white group-hover:text-dark transition-colors duration-300">
+        {pending ? "Envoi…" : "Envoyer ma demande"}
+      </span>
+    </motion.button>
+  );
+}
 
 export default function Contact() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [state, action] = useFormState(submitContact, initialState);
-  const formRef = useRef<HTMLFormElement>(null);
-
-  if (state.success && formRef.current) {
-    formRef.current.reset();
-  }
 
   return (
-    <section id="contact" className="mt-24 px-4 sm:px-6 max-w-[1240px] mx-auto">
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-        {/* Left info */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="text-xs uppercase tracking-widest text-mutedc mb-2">Contact & Devis</p>
-          <h2 className="font-display text-3xl font-bold text-balance sm:text-4xl">
-            Demandez votre<br />
-            <span className="text-lime">devis gratuit</span>
-          </h2>
-          <p className="mt-4 text-sm leading-relaxed text-mutedc">
-            Disponible 7j/7. Réponse garantie sous 2h pour les demandes de devis.
-            Pour un besoin urgent, préférez l'appel direct.
-          </p>
+    <section id="contact" className="w-full bg-surface py-24 px-6 sm:px-10 lg:px-16">
+      <div ref={ref} className="max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          {/* Left */}
+          <div>
+            <motion.p
+              className="text-xs uppercase tracking-[0.2em] text-mutedc mb-3"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5 }}
+            >
+              Contact
+            </motion.p>
+            <div className="overflow-hidden mb-5">
+              <motion.h2
+                className="font-sans text-4xl font-black tracking-tighter text-dark sm:text-5xl"
+                initial={{ y: "100%" }}
+                animate={isInView ? { y: 0 } : {}}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              >
+                Votre devis<br />
+                <span className="text-mutedc">gratuit</span>
+              </motion.h2>
+            </div>
+            <motion.p
+              className="text-sm leading-relaxed text-mutedc mb-10 max-w-xs"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              Disponible 7j/7. Réponse sous 2h. Pour un besoin urgent, préférez l'appel direct.
+            </motion.p>
 
-          <div className="mt-8 flex flex-col gap-4">
-            {contactInfo.map(({ icon: Icon, label, value, href }) => (
-              <div key={label} className="flex items-center gap-4">
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-borderc bg-surface2 text-lime">
-                  <Icon className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-xs text-mutedc">{label}</p>
+            {/* Contact infos */}
+            <div className="flex flex-col gap-3">
+              {[
+                { icon: Phone, label: "06 XX XX XX XX", href: "tel:0600000000" },
+                { icon: Mail, label: "contact@taxi-tignieu.fr", href: "mailto:contact@taxi-tignieu.fr" },
+                { icon: MapPin, label: "Tignieu-Jameyzieu, Ain (01)", href: null },
+              ].map(({ icon: Icon, label, href }) => (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ type: "spring", stiffness: 150, damping: 22, delay: 0.25 }}
+                >
                   {href ? (
-                    <a href={href} className="text-sm font-medium transition-colors hover:text-lime">
-                      {value}
+                    <a href={href} className="group flex items-center gap-3 rounded-xl border border-borderc bg-white p-4 hover:border-dark/20 transition-colors">
+                      <Icon className="h-4 w-4 text-mutedc group-hover:text-dark transition-colors" />
+                      <span className="text-sm font-medium text-dark">{label}</span>
                     </a>
                   ) : (
-                    <p className="text-sm font-medium">{value}</p>
+                    <div className="flex items-center gap-3 rounded-xl border border-borderc bg-white p-4">
+                      <Icon className="h-4 w-4 text-mutedc" />
+                      <span className="text-sm text-mutedc">{label}</span>
+                    </div>
                   )}
-                </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Phone CTA */}
+            <motion.a
+              href="tel:0600000000"
+              className="group mt-6 flex items-center gap-4 rounded-2xl bg-dark p-5 hover:bg-dark/90 transition-colors"
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+            >
+              <div className="grid h-11 w-11 place-items-center rounded-xl bg-lime">
+                <Phone className="h-5 w-5 text-dark animate-floaty" />
               </div>
-            ))}
+              <div>
+                <p className="text-sm font-bold text-white">Appel direct</p>
+                <p className="text-xs text-white/40">06 XX XX XX XX — Disponible maintenant</p>
+              </div>
+            </motion.a>
           </div>
 
-          {/* Direct call CTA */}
-          <a
-            href="tel:0600000000"
-            className="mt-8 flex items-center justify-center gap-3 rounded-2xl border border-lime/20 bg-lime/5 p-5 transition-all hover:border-lime/40 hover:bg-lime/10"
+          {/* Right form */}
+          <motion.div
+            className="rounded-3xl border border-borderc bg-white p-7 sm:p-8"
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ type: "spring", stiffness: 80, damping: 20, delay: 0.15 }}
           >
-            <div className="grid h-11 w-11 place-items-center rounded-full bg-lime text-black animate-floaty">
-              <Phone className="h-5 w-5" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold">Appel direct</p>
-              <p className="text-xs text-mutedc">06 XX XX XX XX — Disponible maintenant</p>
-            </div>
-          </a>
-        </motion.div>
-
-        {/* Right form */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-        >
-          <div className="rounded-3xl border border-borderc bg-surface p-6 sm:p-8">
             {state.success ? (
-              <motion.div
-                className="flex flex-col items-center justify-center gap-4 py-12 text-center"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-              >
-                <div className="grid h-16 w-16 place-items-center rounded-full bg-lime/15 text-lime">
-                  <CheckCircle2 className="h-8 w-8" />
-                </div>
+              <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
+                <motion.div
+                  className="grid h-16 w-16 place-items-center rounded-full bg-lime"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <CheckCircle2 className="h-8 w-8 text-dark" />
+                </motion.div>
                 <div>
-                  <p className="font-display text-xl font-bold">Message envoyé !</p>
+                  <p className="font-sans text-xl font-black text-dark">Message envoyé !</p>
                   <p className="mt-2 text-sm text-mutedc max-w-xs">{state.message}</p>
                 </div>
-                <button
-                  onClick={() => window.location.reload()}
-                  className="mt-2 rounded-full border border-borderc px-5 py-2 text-sm text-mutedc transition-colors hover:text-foreground"
-                >
-                  Nouvelle demande
-                </button>
-              </motion.div>
+              </div>
             ) : (
-              <form ref={formRef} action={action} className="flex flex-col gap-4">
+              <form action={action} className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-1.5 block text-xs font-medium text-mutedc" htmlFor="name">
-                      Nom complet <span className="text-lime">*</span>
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      placeholder="Jean Dupont"
-                      className="w-full rounded-xl border border-borderc bg-surface2 px-4 py-2.5 text-sm outline-none transition placeholder:text-mutedc/50 focus:border-lime/50 focus:ring-1 focus:ring-lime/20"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-1.5 block text-xs font-medium text-mutedc" htmlFor="phone">
-                      Téléphone <span className="text-lime">*</span>
-                    </label>
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      required
-                      placeholder="06 XX XX XX XX"
-                      className="w-full rounded-xl border border-borderc bg-surface2 px-4 py-2.5 text-sm outline-none transition placeholder:text-mutedc/50 focus:border-lime/50 focus:ring-1 focus:ring-lime/20"
-                    />
-                  </div>
+                  {[
+                    { id: "name", label: "Nom complet", placeholder: "Jean Dupont", type: "text" },
+                    { id: "phone", label: "Téléphone", placeholder: "06 XX XX XX XX", type: "tel" },
+                  ].map((f) => (
+                    <div key={f.id}>
+                      <label className="mb-1.5 block text-xs font-semibold text-dark/60" htmlFor={f.id}>
+                        {f.label} <span className="text-dark">*</span>
+                      </label>
+                      <input
+                        id={f.id}
+                        name={f.id}
+                        type={f.type}
+                        required
+                        placeholder={f.placeholder}
+                        className="w-full rounded-xl border border-borderc bg-surface px-4 py-3 text-sm outline-none transition placeholder:text-mutedc/50 focus:border-dark/40 focus:ring-2 focus:ring-dark/5"
+                      />
+                    </div>
+                  ))}
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-xs font-medium text-mutedc" htmlFor="email">
-                    Email <span className="text-lime">*</span>
+                  <label className="mb-1.5 block text-xs font-semibold text-dark/60" htmlFor="email">
+                    Email <span className="text-dark">*</span>
                   </label>
                   <input
                     id="email"
@@ -181,55 +178,53 @@ export default function Contact() {
                     type="email"
                     required
                     placeholder="jean.dupont@email.com"
-                    className="w-full rounded-xl border border-borderc bg-surface2 px-4 py-2.5 text-sm outline-none transition placeholder:text-mutedc/50 focus:border-lime/50 focus:ring-1 focus:ring-lime/20"
+                    className="w-full rounded-xl border border-borderc bg-surface px-4 py-3 text-sm outline-none transition placeholder:text-mutedc/50 focus:border-dark/40 focus:ring-2 focus:ring-dark/5"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
-                    <label className="mb-1.5 block text-xs font-medium text-mutedc" htmlFor="service">
-                      Type de service <span className="text-lime">*</span>
+                    <label className="mb-1.5 block text-xs font-semibold text-dark/60" htmlFor="service">
+                      Service <span className="text-dark">*</span>
                     </label>
                     <select
                       id="service"
                       name="service"
                       required
-                      className="w-full rounded-xl border border-borderc bg-surface2 px-4 py-2.5 text-sm outline-none transition focus:border-lime/50 focus:ring-1 focus:ring-lime/20 text-foreground"
+                      className="w-full rounded-xl border border-borderc bg-surface px-4 py-3 text-sm outline-none transition focus:border-dark/40 focus:ring-2 focus:ring-dark/5 text-dark"
                     >
                       <option value="">Sélectionner…</option>
-                      {serviceOptions.map((o) => (
-                        <option key={o} value={o}>{o}</option>
-                      ))}
+                      {serviceOptions.map((o) => <option key={o} value={o}>{o}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-xs font-medium text-mutedc" htmlFor="date">
+                    <label className="mb-1.5 block text-xs font-semibold text-dark/60" htmlFor="date">
                       Date souhaitée
                     </label>
                     <input
                       id="date"
                       name="date"
                       type="date"
-                      className="w-full rounded-xl border border-borderc bg-surface2 px-4 py-2.5 text-sm outline-none transition focus:border-lime/50 focus:ring-1 focus:ring-lime/20 text-foreground [color-scheme:dark]"
+                      className="w-full rounded-xl border border-borderc bg-surface px-4 py-3 text-sm outline-none transition focus:border-dark/40 focus:ring-2 focus:ring-dark/5 text-dark"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-xs font-medium text-mutedc" htmlFor="message">
+                  <label className="mb-1.5 block text-xs font-semibold text-dark/60" htmlFor="message">
                     Détails du trajet
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={4}
-                    placeholder="Départ : …&#10;Arrivée : …&#10;Nombre de personnes : …"
-                    className="w-full rounded-xl border border-borderc bg-surface2 px-4 py-2.5 text-sm outline-none transition placeholder:text-mutedc/50 focus:border-lime/50 focus:ring-1 focus:ring-lime/20 resize-none"
+                    rows={3}
+                    placeholder="Départ : …  Arrivée : …  Personnes : …"
+                    className="w-full rounded-xl border border-borderc bg-surface px-4 py-3 text-sm outline-none transition placeholder:text-mutedc/50 focus:border-dark/40 focus:ring-2 focus:ring-dark/5 resize-none"
                   />
                 </div>
 
                 {state.message && !state.success && (
-                  <div className="flex items-center gap-2 rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+                  <div className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
                     <AlertCircle className="h-4 w-4 shrink-0" />
                     {state.message}
                   </div>
@@ -238,8 +233,8 @@ export default function Contact() {
                 <SubmitButton />
               </form>
             )}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

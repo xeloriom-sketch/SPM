@@ -1,19 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Sora } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const sora = Sora({
-  subsets: ["latin"],
-  variable: "--font-sora",
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.taxi-tignieu.fr"),
@@ -24,74 +12,38 @@ export const metadata: Metadata = {
   description:
     "Taxi conventionné à Tignieu-Jameyzieu. Transport de personnes, colis urgents, transferts aéroport Lyon Saint-Exupéry, gares. Volkswagen Tiguan 7 places. Remorque disponible. Devis gratuit.",
   keywords: [
-    "taxi conventionné",
-    "taxi Tignieu-Jameyzieu",
-    "taxi Lyon",
-    "taxi Ain",
-    "taxi Isère",
-    "transfert aéroport Lyon Saint-Exupéry",
-    "transport colis urgent",
-    "taxi avec remorque",
-    "VTC Lyon",
-    "taxi 7 places",
-    "Tiguan taxi",
-    "taxi France",
+    "taxi conventionné", "taxi Tignieu-Jameyzieu", "taxi Lyon", "taxi Ain",
+    "taxi Isère", "transfert aéroport Lyon Saint-Exupéry", "transport colis urgent",
+    "taxi avec remorque", "taxi 7 places", "Tiguan taxi", "taxi France",
   ],
   authors: [{ name: "Taxi Tignieu" }],
-  creator: "Taxi Tignieu",
   openGraph: {
-    type: "website",
-    locale: "fr_FR",
-    url: "https://www.taxi-tignieu.fr",
-    siteName: "Taxi Tignieu",
-    title: "Taxi Conventionné — Lyon · Ain · Isère | Tignieu-Jameyzieu",
-    description:
-      "Taxi conventionné de Tignieu-Jameyzieu. Transferts gare & aéroport, transport colis urgent, remorque disponible. Volkswagen Tiguan 7 places. Devis gratuit, disponible 7j/7.",
-    images: [
-      {
-        url: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=80",
-        width: 1200,
-        height: 630,
-        alt: "Taxi Conventionné Tignieu-Jameyzieu",
-      },
-    ],
+    type: "website", locale: "fr_FR",
+    url: "https://www.taxi-tignieu.fr", siteName: "Taxi Tignieu",
+    title: "Taxi Conventionné — Lyon · Ain · Isère",
+    description: "Taxi conventionné de Tignieu-Jameyzieu. Volkswagen Tiguan 7 places. Devis gratuit.",
+    images: [{ url: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80", width: 1200, height: 630, alt: "Taxi Tignieu" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Taxi Conventionné — Lyon · Ain · Isère",
-    description:
-      "Taxi conventionné de Tignieu-Jameyzieu. Transferts, colis urgents, remorque. Tiguan 7 places. Devis gratuit.",
-    images: [
-      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=80",
-    ],
+    description: "Taxi conventionné. Tiguan 7 places. Devis gratuit.",
+    images: ["https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80"],
   },
   robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    index: true, follow: true,
+    googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 },
   },
-  alternates: {
-    canonical: "https://www.taxi-tignieu.fr",
-  },
+  alternates: { canonical: "https://www.taxi-tignieu.fr" },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${inter.variable} ${sora.variable} bg-background`}>
+    <html lang="fr" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
-        <meta name="theme-color" content="#080c0a" />
+        <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className="font-sans bg-background text-foreground grain">
+      <body className="font-sans bg-background text-foreground noise">
         {children}
       </body>
     </html>

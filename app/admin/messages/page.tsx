@@ -7,6 +7,21 @@ import MessagesClient from "@/components/admin/MessagesClient";
 import type { ContactMessage } from "@/lib/supabase";
 
 export default async function MessagesPage() {
+  if (process.env.NEXT_PUBLIC_STATIC === "1") {
+    return (
+      <AdminShell unread={0}>
+        <div className="p-6 max-w-3xl mx-auto">
+          <div className="rounded-2xl border border-borderc bg-surface p-6">
+            <h1 className="font-display text-2xl font-bold">Messages</h1>
+            <p className="mt-2 text-sm text-mutedc">
+              Les messages entrants ne sont pas disponibles sur la version statique GitHub Pages.
+            </p>
+          </div>
+        </div>
+      </AdminShell>
+    );
+  }
+
   const session = await getServerSession(authOptions);
   if (!session) redirect("/admin/login");
 

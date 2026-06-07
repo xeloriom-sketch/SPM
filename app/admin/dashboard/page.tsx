@@ -6,6 +6,24 @@ import AdminShell from "@/components/admin/AdminShell";
 import { MessageSquare, CheckCircle2, Clock, Mail } from "lucide-react";
 
 export default async function DashboardPage() {
+  if (process.env.NEXT_PUBLIC_STATIC === "1") {
+    return (
+      <AdminShell unread={0}>
+        <div className="p-6 max-w-3xl mx-auto">
+          <div className="rounded-2xl border border-borderc bg-surface p-6">
+            <h1 className="font-display text-2xl font-bold">Tableau de bord</h1>
+            <p className="mt-2 text-sm text-mutedc">
+              L'espace administration n'est pas disponible sur la version GitHub Pages.
+            </p>
+            <p className="mt-4 text-sm text-mutedc">
+              Déployez sur un hébergement server-side pour activer l'authentification et les données live.
+            </p>
+          </div>
+        </div>
+      </AdminShell>
+    );
+  }
+
   const session = await getServerSession(authOptions);
   if (!session) redirect("/admin/login");
 

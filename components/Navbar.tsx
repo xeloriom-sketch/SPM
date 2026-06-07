@@ -95,7 +95,7 @@ export default function Navbar() {
                 ? "bg-dark text-white hover:bg-dark/90"
                 : "bg-white text-dark hover:bg-white/90"
             }`}
-            data-cursor
+
           >
             <Phone className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Appeler</span>

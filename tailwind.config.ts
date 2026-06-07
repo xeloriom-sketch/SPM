@@ -22,23 +22,23 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
-          "var(--font-geist)",
           "-apple-system",
           "BlinkMacSystemFont",
           "SF Pro Display",
           "SF Pro Text",
           "Helvetica Neue",
+          "Arial",
           "sans-serif",
         ],
         display: [
-          "var(--font-geist)",
           "-apple-system",
           "BlinkMacSystemFont",
           "SF Pro Display",
           "Helvetica Neue",
+          "Arial",
           "sans-serif",
         ],
-        mono: ["var(--font-geist-mono)", "SF Mono", "monospace"],
+        mono: ["SF Mono", "ui-monospace", "Menlo", "monospace"],
       },
       letterSpacing: {
         tightest: "-0.06em",

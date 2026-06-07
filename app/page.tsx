@@ -7,8 +7,6 @@ import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import Cursor from "@/components/Cursor";
-
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -38,7 +36,6 @@ export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Cursor />
       <Navbar />
       <main className="w-full overflow-hidden">
         <Hero />

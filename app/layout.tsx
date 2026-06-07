@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,13 +20,12 @@ export const metadata: Metadata = {
     url: "https://www.taxi-tignieu.fr", siteName: "Taxi Tignieu",
     title: "Taxi Conventionné — Lyon · Ain · Isère",
     description: "Taxi conventionné de Tignieu-Jameyzieu. Volkswagen Tiguan 7 places. Devis gratuit.",
-    images: [{ url: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80", width: 1200, height: 630, alt: "Taxi Tignieu" }],
+    images: [{ url: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Taxi Conventionné — Lyon · Ain · Isère",
     description: "Taxi conventionné. Tiguan 7 places. Devis gratuit.",
-    images: ["https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80"],
   },
   robots: {
     index: true, follow: true,
@@ -39,11 +36,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="fr">
       <head>
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className="font-sans bg-background text-foreground noise">
+      <body className="bg-background text-foreground noise">
         {children}
       </body>
     </html>

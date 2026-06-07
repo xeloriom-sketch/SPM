@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { Save, CheckCircle2, Loader2 } from "lucide-react";
-import { saveSetting } from "@/app/actions/admin";
+import { saveSetting } from "@/lib/actions/admin";
 
 type Field = { key: string; label: string; placeholder: string; type?: "text" | "textarea" };
 

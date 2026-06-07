@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { motion, useInView } from "framer-motion";
 import { Phone, Mail, MapPin, CheckCircle2, AlertCircle, ArrowRight } from "lucide-react";
-import { submitContact, type ContactFormState } from "@/app/actions/contact";
+import { submitContact, type ContactFormState } from "@/lib/actions/contact";
 import SplitText from "@/components/ui/SplitText";
 
 const initialState: ContactFormState = { success: false, message: "" };

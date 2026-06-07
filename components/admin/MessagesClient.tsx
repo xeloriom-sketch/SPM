@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { Phone, Mail, MessageSquare, Check, Trash2, Calendar, RefreshCw } from "lucide-react";
 import type { ContactMessage } from "@/lib/supabase";
-import { markAsRead, deleteMessage } from "@/app/actions/admin";
+import { markAsRead, deleteMessage } from "@/lib/actions/admin";
 
 export default function MessagesClient({ messages: initial }: { messages: ContactMessage[] }) {
   const [messages, setMessages] = useState(initial);

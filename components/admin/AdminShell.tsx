@@ -45,7 +45,7 @@ export default function AdminShell({
 
         <nav className="flex flex-col gap-1 p-3 flex-1">
           {navItems.map(({ href, icon: Icon, label }) => {
-            const active = pathname.startsWith(href);
+            const active = pathname?.startsWith(href) ?? false;
             return (
               <Link
                 key={href}
@@ -101,7 +101,7 @@ export default function AdminShell({
             <Link
               key={href}
               href={href}
-              className={`grid h-8 w-8 place-items-center rounded-lg transition-colors ${pathname.startsWith(href) ? "bg-lime/10 text-lime" : "text-mutedc"}`}
+              className={`grid h-8 w-8 place-items-center rounded-lg transition-colors ${pathname?.startsWith(href) ?? false ? "bg-lime/10 text-lime" : "text-mutedc"}`}
             >
               <Icon className="h-4 w-4" />
             </Link>

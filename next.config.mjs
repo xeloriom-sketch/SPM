@@ -1,3 +1,5 @@
+import path from "node:path";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -18,6 +20,17 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  webpack(config) {
+    if (process.env.NEXT_PUBLIC_STATIC === "1") {
+      config.resolve.alias = {
+        ...(config.resolve.alias ?? {}),
+        "@/app/actions/contact": path.resolve("./app/actions/contact.static.ts"),
+        "@/app/actions/admin": path.resolve("./app/actions/admin.static.ts"),
+      };
+    }
+
+    return config;
   },
 };
 

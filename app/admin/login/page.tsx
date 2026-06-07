@@ -13,7 +13,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(params.get("error") ? "Identifiants incorrects." : "");
+  const [error, setError] = useState(params?.get("error") ? "Identifiants incorrects." : "");
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();

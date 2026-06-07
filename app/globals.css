@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #080c0a;
+  --foreground: #f0f5f2;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #080c0a;
+}
+
+body {
+  background: #080c0a;
+  color: #f0f5f2;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #b6f000;
+  color: #080c0a;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080c0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2a22;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2d3d32;
+}
+
+@layer utilities {
+  .nav-blur {
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .lime-glow {
+    box-shadow: 0 0 40px -10px rgba(182, 240, 0, 0.35);
+  }
+  .lime-glow-sm {
+    box-shadow: 0 0 20px -5px rgba(182, 240, 0, 0.25);
+  }
+}
+
+/* Subtle grain for depth */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}

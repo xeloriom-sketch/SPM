@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#0a0a0a]">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LuxeDrive — Exclusive Taxis, Premier Service</title>
+    <meta name="description" content="Luxury taxi booking with trained chauffeurs and premium cars. Book now and enjoy a special trip." />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#0a0a0a',
+                        surface: '#141414',
+                        surface2: '#1c1c1c',
+                        borderc: '#262626',
+                        foreground: '#f5f5f5',
+                        mutedc: '#8a8a8a',
+                        lime: '#b6f000',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Sora', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <!-- ===== Inline styles ===== -->
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background:#0a0a0a; color:#f5f5f5; overflow-x:hidden; }
+        body.loading { overflow: hidden; height: 100vh; }
+
+        /* ---------- Loader ---------- */
+        #loader{
+            position:fixed; inset:0; z-index:100;
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            gap:22px; background:#0a0a0a;
+            transition:opacity .6s ease, visibility .6s ease;
+        }
+        #loader.hide{ opacity:0; visibility:hidden; }
+        .loader-logo{ display:flex; align-items:center; gap:10px; animation:floaty 2s ease-in-out infinite; }
+        .loader-logo svg{ width:38px; height:38px; }
+        .loader-logo span{ font-family:'Sora',sans-serif; font-weight:800; font-size:26px; letter-spacing:-.5px; }
+        .loader-bar{ width:220px; height:4px; border-radius:99px; background:#262626; overflow:hidden; }
+        .loader-bar-fill{ height:100%; width:0%; border-radius:99px; background:#b6f000; transition:width .15s linear; }
+        .loader-pct{ font-size:12px; color:#8a8a8a; letter-spacing:.3px; }
+        @keyframes floaty{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-6px) } }
+
+        /* ---------- Scroll progress ---------- */
+        #scroll-progress{
+            position:fixed; top:0; left:0; height:3px; width:0%;
+            background:#b6f000; z-index:60; transition:width .1s linear;
+        }
+
+        /* ---------- Navbar ---------- */
+        .nav-blur{ backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
+        .nav-link{ position:relative; transition:color .25s ease; }
+        .nav-link:hover{ color:#f5f5f5; }
+        .nav-link::after{
+            content:''; position:absolute; left:0; bottom:-6px; height:2px; width:0;
+            background:#b6f000; border-radius:99px; transition:width .25s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after{ width:100%; }
+
+        /* ---------- Lime button ---------- */
+        .btn-lime{
+            background:#b6f000; color:#0a0a0a;
+            transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+        }
+        .btn-lime:hover{ transform:translateY(-2px); filter:brightness(1.05); box-shadow:0 10px 30px -8px rgba(182,240,0,.5); }
+        .btn-lime:active{ transform:translateY(0); }
+        .btn-lime i{ transition:transform .25s ease; }
+        .btn-lime:hover i{ transform:rotate(8deg) translateX(1px); }
+
+        /* ---------- Image hover zoom ---------- */
+        .img-zoom img{ transition:transform .8s cubic-bezier(.2,.8,.2,1); }
+        .img-zoom:hover img{ transform:scale(1.06); }
+
+        /* ---------- Category tabs ---------- */
+        .cat-tab{ position:relative; padding-bottom:4px; transition:color .25s ease; }
+        .cat-tab.active{ color:#f5f5f5; }
+        .cat-tab.active::after{
+            content:''; position:absolute; left:0; bottom:-2px; height:2px; width:100%;
+            background:#b6f000; border-radius:99px;
+        }
+        .cat-tab:hover{ color:#f5f5f5; }
+
+        /* ---------- Car cards ---------- */
+        .car-card{
+            transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+            will-change:transform;
+        }
+        .car-card:hover{ transform:translateY(-8px); box-shadow:0 24px 50px -20px rgba(0,0,0,.7); }
+        .car-card .car-img{ transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+        .car-card:hover .car-img{ transform:translateX(8px) scale(1.04); }
+        .car-card .go-btn{ transition:transform .3s ease; }
+        .car-card:hover .go-btn{ transform:scale(1.12) rotate(-8deg); }
+
+        /* ---------- FAQ ---------- */
+        .faq-item{ transition:border-color .25s ease, background .25s ease; }
+        .faq-item:hover{ border-color:#3a3a3a; }
+        .faq-body{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
+        .faq-item.open .faq-body{ grid-template-rows:1fr; }
+        .faq-body > div{ overflow:hidden; }
+        .faq-chevron{ transition:transform .3s ease, color .3s ease; }
+        .faq-item.open .faq-chevron{ transform:rotate(180deg); color:#b6f000; }
+        .faq-item.open{ background:#141414; }
+
+        /* ---------- Testimonial card ---------- */
+        .tcard{ transition:transform .3s ease, border-color .3s ease; }
+        .tcard:hover{ transform:translateY(-4px); border-color:#3a3a3a; }
+
+        ::selection{ background:#b6f000; color:#0a0a0a; }
+        ::-webkit-scrollbar{ width:10px; }
+        ::-webkit-scrollbar-track{ background:#0a0a0a; }
+        ::-webkit-scrollbar-thumb{ background:#262626; border-radius:99px; }
+        ::-webkit-scrollbar-thumb:hover{ background:#3a3a3a; }
+    </style>
+</head>
+
+<body class="loading font-sans bg-background text-foreground">
+
+<!-- ===== Scroll progress ===== -->
+<div id="scroll-progress"></div>
+
+<!-- ===== Loader ===== -->
+<div id="loader">
+    <div class="loader-logo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="#b6f000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="7" cy="16" r="1" fill="#b6f000"/>
+            <circle cx="17" cy="16" r="1" fill="#b6f000"/>
+        </svg>
+        <span>LuxeDrive</span>
+    </div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <div class="loader-pct">Preparing your premium ride…</div>
+</div>
+
+<!-- ===== Page wrapper ===== -->
+<div class="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
+
+    <!-- ===== Navbar ===== -->
+    <header class="sticky top-4 z-50 mt-4">
+        <nav class="nav-blur flex items-center justify-between rounded-2xl border border-borderc/70 bg-surface/70 px-4 py-3 sm:px-6">
+            <a href="#" class="flex items-center gap-2">
+                <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="#b6f000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="7" cy="16" r="1" fill="#b6f000"/><circle cx="17" cy="16" r="1" fill="#b6f000"/>
+                </svg>
+                <span class="font-display text-lg font-bold tracking-tight">LuxeDrive</span>
+            </a>
+
+            <div class="hidden items-center gap-7 rounded-full border border-borderc/70 bg-background/60 px-7 py-2.5 text-sm text-mutedc md:flex">
+                <a href="#" class="nav-link active text-foreground">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#customers" class="nav-link">Customers</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+            </div>
+
+            <button class="btn-lime flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold sm:px-5">
+                Download App
+                <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- ===== Hero ===== -->
+    <section class="mt-6">
+        <div class="img-zoom relative overflow-hidden rounded-3xl">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80" alt="Luxury sedan driving on a road" class="h-[440px] w-full object-cover sm:h-[520px]" />
+            <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-transparent"></div>
+
+            <div class="absolute inset-0 flex flex-col justify-center px-6 sm:px-12">
+                <h1 class="font-display text-4xl font-bold leading-[1.05] text-balance sm:text-6xl" data-aos="fade-up">
+                    Exclusive Taxis,<br />Premier Service
+                </h1>
+                <p class="mt-5 max-w-md text-sm leading-relaxed text-white/80 sm:text-base" data-aos="fade-up" data-aos-delay="120">
+                    Exclusive Taxi, Excellent Service. Offering luxury taxis with trained drivers to ensure your trip goes smoothly. Book now and enjoy a special trip.
+                </p>
+            </div>
+
+            <!-- Booking bar -->
+            <div class="absolute bottom-5 left-1/2 w-[92%] max-w-[760px] -translate-x-1/2" data-aos="fade-up" data-aos-delay="240">
+                <div class="nav-blur flex flex-col items-stretch gap-3 rounded-2xl border border-borderc/70 bg-surface/85 p-3 sm:flex-row sm:items-center">
+                    <div class="flex-1 rounded-xl px-4 py-2">
+                        <p class="text-[11px] uppercase tracking-wide text-mutedc">Pick Up</p>
+                        <p class="text-sm font-medium">Dubai Airport</p>
+                    </div>
+                    <div class="hidden h-9 w-px bg-borderc sm:block"></div>
+                    <div class="flex-1 rounded-xl px-4 py-2">
+                        <p class="text-[11px] uppercase tracking-wide text-mutedc">Enter destination</p>
+                        <p class="text-sm font-medium">Dubai Silicon Oasis</p>
+                    </div>
+                    <div class="hidden h-9 w-px bg-borderc sm:block"></div>
+                    <div class="flex-1 rounded-xl px-4 py-2">
+                        <p class="text-[11px] uppercase tracking-wide text-mutedc">Pick up date</p>
+                        <p class="text-sm font-medium">11/04/2024 · 10:00 AM</p>
+                    </div>
+                    <button class="btn-lime grid h-12 w-12 shrink-0 place-items-center self-center rounded-full">
+                        <i data-lucide="search" class="h-5 w-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Car Lineup ===== -->
+    <section id="features" class="mt-20">
+        <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between" data-aos="fade-up">
+            <h2 class="font-display text-3xl font-bold sm:text-4xl">Line Up Luxury Car</h2>
+            <div class="flex flex-wrap items-center gap-6 text-sm text-mutedc" id="cat-tabs">
+                <button class="cat-tab active" data-cat="Sedan">Sedan</button>
+                <button class="cat-tab" data-cat="Bev">Bev</button>
+                <button class="cat-tab" data-cat="Mpv">Mpv</button>
+                <button class="cat-tab" data-cat="Suv">Suv</button>
+                <button class="cat-tab" data-cat="Sport">Sport</button>
+            </div>
+        </div>
+
+        <div id="car-grid" class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+    <!-- ===== Experience / Savings ===== -->
+    <section id="about" class="mt-24">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-end">
+            <h2 class="font-display text-3xl font-bold leading-tight text-balance sm:text-4xl" data-aos="fade-up">
+                Experience luxury on wheels with exclusive savings
+            </h2>
+            <p class="text-sm leading-relaxed text-mutedc" data-aos="fade-up" data-aos-delay="120">
+                Unlock the pinnacle of luxury travel with our fleet of premium vehicles, and elevate every journey with comfort and style. Plus, take advantage of our exclusive savings to make your luxurious experience even more rewarding.
+            </p>
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
+            <!-- promo 1 -->
+            <div class="img-zoom relative overflow-hidden rounded-3xl" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=900&q=80" alt="Car on a scenic mountain road" class="h-64 w-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+                <span class="absolute right-4 top-4 rounded-full bg-lime px-3 py-1 text-xs font-semibold text-black">Valid only on 10 Feb – 29 Feb 2024</span>
+                <div class="absolute bottom-5 left-5">
+                    <p class="max-w-[220px] text-sm font-medium">Experience the Holidays with Our Festive Promotions</p>
+                    <p class="mt-1 font-display text-5xl font-bold text-lime">40%</p>
+                    <p class="text-[11px] text-white/60">*With Terms and condition</p>
+                </div>
+            </div>
+            <!-- promo 2 -->
+            <div class="img-zoom relative overflow-hidden rounded-3xl" data-aos="fade-up" data-aos-delay="120">
+                <img src="https://images.unsplash.com/photo-1452378174528-3090a4bba7b2?auto=format&fit=crop&w=900&q=80" alt="Luxury sedan in the desert" class="h-64 w-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+                <span class="absolute right-4 top-4 rounded-full bg-lime px-3 py-1 text-xs font-semibold text-black">Valid only on 10 Feb – 29 Feb 2024</span>
+                <div class="absolute bottom-5 left-5">
+                    <p class="max-w-[220px] text-sm font-medium">Experience the Holidays with Our Festive Promotions</p>
+                    <p class="mt-1 font-display text-5xl font-bold text-lime">45%</p>
+                    <p class="text-[11px] text-white/60">*With Terms and condition</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Reserve ===== -->
+    <section class="mt-20 grid grid-cols-1 gap-5 lg:grid-cols-[1.4fr_1fr]">
+        <!-- left feature -->
+        <div class="img-zoom relative overflow-hidden rounded-3xl" data-aos="fade-up">
+            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1100&q=80" alt="Luxury car with glowing tail lights" class="h-full min-h-[320px] w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
+            <div class="absolute inset-0 flex flex-col justify-center px-7">
+                <h3 class="max-w-sm font-display text-2xl font-bold leading-tight sm:text-3xl">Reserve Your Luxurious Journey Today!</h3>
+                <p class="mt-3 max-w-xs text-sm text-white/75">Embark on a Stylish and Comfortable Ride with Our Exclusive Fleet</p>
+                <button class="btn-lime mt-5 flex w-fit items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold">
+                    Booking Now <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- right stacked -->
+        <div class="grid grid-cols-1 gap-5">
+            <div class="img-zoom relative overflow-hidden rounded-3xl" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80" alt="Curated luxury car" class="h-44 w-full object-cover" />
+                <div class="absolute inset-0 bg-black/45"></div>
+                <p class="absolute inset-0 flex items-center justify-center px-6 text-center font-display text-lg font-semibold">Curated Luxury Car Options</p>
+            </div>
+            <div class="img-zoom relative overflow-hidden rounded-3xl" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=900&q=80" alt="Experienced chauffeur" class="h-44 w-full object-cover" />
+                <div class="absolute inset-0 bg-black/45"></div>
+                <p class="absolute inset-0 flex items-center justify-center px-6 text-center font-display text-lg font-semibold">Experienced Chauffeurs for a Seamless Ride</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Testimonials ===== -->
+    <section id="customers" class="mt-24">
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-end">
+            <h2 class="font-display text-3xl font-bold leading-tight text-balance sm:text-4xl" data-aos="fade-up">
+                What our enchanted customers say
+            </h2>
+            <p class="text-sm leading-relaxed text-mutedc" data-aos="fade-up" data-aos-delay="120">
+                Join the chorus of satisfied customers who have experienced the LuxeDrive. Here's what they have to say about our enchanting Taxi Booking service.
+            </p>
+        </div>
+
+        <div id="testimonial-grid" class="mt-8 columns-1 gap-5 sm:columns-2 lg:columns-3 [&>*]:mb-5"></div>
+
+        <div class="mt-6 flex justify-center">
+            <button id="show-more" class="btn-lime flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold">
+                Show More <i data-lucide="chevron-down" class="h-4 w-4"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section id="pricing" class="mt-24">
+        <div class="grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+            <div data-aos="fade-up">
+                <h2 class="font-display text-3xl font-bold leading-tight text-balance sm:text-4xl">Frequently Asked Questions (FAQ)</h2>
+                <p class="mt-4 text-sm leading-relaxed text-mutedc">Welcome to our FAQ section, where we address common queries about LuxeDrive to help you make informed decisions.</p>
+                <form class="mt-6 flex max-w-md items-center gap-2" onsubmit="return false">
+                    <input type="email" placeholder="Enter your email" class="flex-1 rounded-full border border-borderc bg-surface px-4 py-2.5 text-sm outline-none transition focus:border-lime" />
+                    <button class="btn-lime flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold">
+                        Submit <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div id="faq-list" class="flex flex-col gap-3"></div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="mt-24 border-t border-borderc py-12">
+        <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+            <div>
+                <a href="#" class="flex items-center gap-2">
+                    <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="#b6f000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="7" cy="16" r="1" fill="#b6f000"/><circle cx="17" cy="16" r="1" fill="#b6f000"/>
+                    </svg>
+                    <span class="font-display text-lg font-bold tracking-tight">LuxeDrive</span>
+                </a>
+                <p class="mt-4 max-w-xs text-sm leading-relaxed text-mutedc">LuxeDrive offers unmatched luxury travel. With premium cars and expert chauffeurs, we ensure an unforgettable experience. Opt for LuxeDrive for the epitome of style and comfort.</p>
+            </div>
+
+            <div>
+                <h4 class="text-sm font-semibold">Company</h4>
+                <ul class="mt-4 flex flex-col gap-3 text-sm text-mutedc">
+                    <li><a href="#" class="transition hover:text-lime">User Login</a></li>
+                    <li><a href="#" class="transition hover:text-lime">Testimonial</a></li>
+                    <li><a href="#" class="transition hover:text-lime">Line Up Car</a></li>
+                    <li><a href="#" class="transition hover:text-lime">Feature</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-sm font-semibold">Legal</h4>
+                <ul class="mt-4 flex flex-col gap-3 text-sm text-mutedc">
+                    <li><a href="#" class="transition hover:text-lime">Terms and Conditions</a></li>
+                    <li><a href="#" class="transition hover:text-lime">Privacy Policy</a></li>
+                    <li><a href="#" class="transition hover:text-lime">System Status</a></li>
+                    <li><a href="#" class="transition hover:text-lime">Get User Account</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-sm font-semibold">Contact</h4>
+                <ul class="mt-4 flex flex-col gap-3 text-sm text-mutedc">
+                    <li class="flex items-center gap-2"><i data-lucide="phone" class="h-4 w-4 text-lime"></i> 01 2828 8391</li>
+                    <li class="flex items-center gap-2"><i data-lucide="mail" class="h-4 w-4 text-lime"></i> hello@luxdrive.com</li>
+                    <li class="flex items-start gap-2"><i data-lucide="map-pin" class="mt-0.5 h-4 w-4 text-lime"></i> 6391 Elgin St. Celina, Delaware 10299</li>
+                </ul>
+            </div>
+        </div>
+        <p class="mt-10 text-center text-xs text-mutedc">© 2026 LuxeDrive. All rights reserved.</p>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<!-- ===== Inline JS ===== -->
+<script>
+    /* ---------- Data ---------- */
+    const cars = [
+        { name:'Sedan Supra - B234XID', cat:'Sport', color:'bg-[#ff5a2c]', text:'text-black', price:'$45', dist:'40mins', rating:'4.7', img:'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=700&q=80' },
+        { name:'Nissan GTR - B457XID', cat:'Sport', color:'bg-[#2e6bff]', text:'text-white', price:'$40', dist:'50mins', rating:'4.7', img:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=700&q=80' },
+        { name:'BMW Sedan GTR - B437XID', cat:'Sedan', color:'bg-[#ffb20a]', text:'text-black', price:'$40', dist:'50mins', rating:'4.7', img:'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=700&q=80' },
+        { name:'Sedan Supra - B234XID', cat:'Sedan', color:'bg-[#b04cff]', text:'text-white', price:'$45', dist:'40mins', rating:'4.7', img:'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=700&q=80' },
+        { name:'Nissan GTR 2018 - B457XID', cat:'Bev', color:'bg-[#3b3bff]', text:'text-white', price:'$42', dist:'85mins', rating:'4.7', img:'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=700&q=80' },
+        { name:'Nissan GTR 2017 - B437XID', cat:'Suv', color:'bg-[#1f1f1f]', text:'text-white', price:'$44', dist:'50mins', rating:'4.7', img:'https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=700&q=80' },
+    ];
+
+    const testimonials = [
+        { name:'Guillermo Rauch', city:'Tokyo', text:'I am very impressed with this taxi booking service! The booking process was easy and fast, and most importantly, the cars provided were truly luxurious. I felt like a celebrity sitting inside. Thank you so much for this unforgettable experience!' },
+        { name:'Ayaka Kamisato', city:'Inazuma', text:'I have used this taxi booking service several times and I am always satisfied with my experience. The cars provided are always clean and comfortable, and the drivers are very friendly and professional. Highly recommended.' },
+        { name:'Luna M', city:'Kyoto', text:'I recently used this taxi booking service for my business trip, and I was very impressed. The quick and easy booking process made it very efficient, and the luxurious cars provided added an elegant touch.' },
+        { name:'Ayato Kamisato', city:'Inazuma', text:'I cannot emphasize enough how extraordinary the experience of using this service was. From booking to drop-off, everything went smoothly. The cars offered are the latest models with full amenities, making me feel like a VIP.' },
+        { name:'Diluc Maulana', city:'Tokyo', text:'I always look for a combination of comfort and style in every journey, and this taxi booking service delivers both perfectly. From the range of luxurious cars available to the friendly customer service, everything makes me feel valued.' },
+        { name:'Diego L', city:'Sapporo', text:'I have used this taxi booking service for my airport transfers several times, and each time I am very impressed. The luxurious cars provided always arrive on time and in pristine condition.' },
+        { name:'Furnia', city:'Kyoto', text:'As someone who values both comfort and style, I was delighted with the luxury car I booked through this service. It offered the perfect blend of comfort and sophistication, making my journey enjoyable from start to finish.' },
+        { name:'Isabella S', city:'Tokyo', text:'This taxi booking service redefines luxury travel. The fleet of luxury cars available is impressive, and the one I selected for my journey exceeded all expectations. The ride was smooth and the interior immaculate.' },
+        { name:'Emily W', city:'Fukuoka', text:'I recently used this taxi booking service for a special occasion, and I could not have been happier. The luxury car provided added a touch of elegance to my journey, and it arrived precisely on time.' },
+    ];
+
+    const faqs = [
+        { q:'What is LuxeDrive?', a:'LuxeDrive is a premium taxi booking service offering luxury vehicles with professional, trained chauffeurs for a seamless and elegant travel experience.' },
+        { q:'How do I place an order with LuxeDrive?', a:'Simply choose your pickup location, destination, and preferred date and time in the booking bar, then confirm your ride. You will receive instant confirmation.' },
+        { q:'What cuisines does LuxeDrive offer?', a:'LuxeDrive is a luxury transportation service, not a food service. We focus on delivering premium rides with comfort and style.' },
+        { q:'Can I track my order in real-time?', a:'Yes, once your ride is confirmed you can track your chauffeur in real-time directly from the LuxeDrive app.' },
+        { q:'Does LuxeDrive operate in my city?', a:'LuxeDrive operates in major cities worldwide and is expanding rapidly. Enter your location in the booking bar to check availability.' },
+    ];
+
+    /* ---------- Stars helper ---------- */
+    function stars(){
+        return '<span class="inline-flex items-center gap-0.5 text-lime">'+
+            Array(4).fill('<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.2 6.8.6-5.1 4.5 1.5 6.7L12 17l-6 3.5 1.5-6.7L2.4 8.8l6.8-.6z"/></svg>').join('')+
+            '</span>';
+    }
+
+    /* ---------- Render cars ---------- */
+    const carGrid = document.getElementById('car-grid');
+    function renderCars(filter){
+        const list = cars.filter(c => filter === 'all' ? true : c.cat === filter);
+        const show = list.length ? list : cars; /* fallback so grid is never empty */
+        carGrid.innerHTML = show.map((c, i) => `
+        <article class="car-card ${c.color} ${c.text} rounded-3xl p-4" data-aos="fade-up" data-aos-delay="${i*60}">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2">
+              <div class="grid h-8 w-8 place-items-center rounded-full bg-black/15 text-xs font-bold">${c.name.charAt(0)}</div>
+              <div>
+                <p class="text-[10px] uppercase tracking-wide opacity-70">${c.name.split(' - ')[1] || ''}</p>
+                <p class="text-sm font-semibold leading-tight">${c.name.split(' - ')[0]}</p>
+              </div>
+            </div>
+            <span class="flex items-center gap-1 rounded-full bg-black/15 px-2 py-1 text-[11px] font-medium"><i data-lucide="clock" class="h-3 w-3"></i>${c.dist}</span>
+          </div>
+
+          <div class="my-3 flex items-center gap-3 text-[11px] font-medium">
+            ${stars()}
+            <span class="opacity-80">${c.rating}</span>
+            <span class="opacity-70">85% Recommend Driver</span>
+          </div>
+
+          <img src="${c.img}" alt="${c.name}" class="car-img mx-auto my-2 h-28 w-full rounded-xl object-cover" />
+
+          <div class="mt-3 flex items-end justify-between">
+            <div>
+              <p class="text-[11px] opacity-70">Travel expense</p>
+              <p class="font-display text-2xl font-bold">${c.price}</p>
+            </div>
+            <button class="go-btn grid h-10 w-10 place-items-center rounded-full bg-lime text-black">
+              <i data-lucide="arrow-right" class="h-5 w-5"></i>
+            </button>
+          </div>
+        </article>
+      `).join('');
+        if (window.lucide) lucide.createIcons();
+        if (window.AOS) AOS.refreshHard();
+    }
+
+    /* ---------- Category tabs ---------- */
+    document.getElementById('cat-tabs').addEventListener('click', (e) => {
+        const btn = e.target.closest('.cat-tab');
+        if(!btn) return;
+        document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        renderCars(btn.dataset.cat);
+    });
+
+    /* ---------- Render testimonials ---------- */
+    const tGrid = document.getElementById('testimonial-grid');
+    let showingAll = false;
+    function renderTestimonials(){
+        const list = showingAll ? testimonials : testimonials.slice(0, 6);
+        tGrid.innerHTML = list.map((t, i) => `
+        <div class="tcard break-inside-avoid rounded-2xl border border-borderc bg-surface p-5" data-aos="fade-up" data-aos-delay="${(i%3)*80}">
+          <div class="flex items-center gap-3">
+            <div class="grid h-10 w-10 place-items-center rounded-full bg-lime text-sm font-bold text-black">${t.name.charAt(0)}</div>
+            <div>
+              <p class="text-sm font-semibold">${t.name}</p>
+              <p class="text-xs text-mutedc">${t.city}</p>
+            </div>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-mutedc">${t.text}</p>
+        </div>
+      `).join('');
+        if (window.AOS) AOS.refreshHard();
+    }
+    document.getElementById('show-more').addEventListener('click', function(){
+        showingAll = !showingAll;
+        this.childNodes[0].nodeValue = showingAll ? 'Show Less ' : 'Show More ';
+        const icon = this.querySelector('i');
+        icon.setAttribute('data-lucide', showingAll ? 'chevron-up' : 'chevron-down');
+        renderTestimonials();
+        if (window.lucide) lucide.createIcons();
+    });
+
+    /* ---------- Render FAQ ---------- */
+    const faqList = document.getElementById('faq-list');
+    faqList.innerHTML = faqs.map((f, i) => `
+      <div class="faq-item rounded-2xl border border-borderc bg-surface/60" data-aos="fade-up" data-aos-delay="${i*60}">
+        <button class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+          <span class="text-sm font-medium">${f.q}</span>
+          <i data-lucide="chevron-down" class="faq-chevron h-5 w-5 shrink-0 text-mutedc"></i>
+        </button>
+        <div class="faq-body"><div><p class="px-5 pb-4 text-sm leading-relaxed text-mutedc">${f.a}</p></div></div>
+      </div>
+    `).join('');
+    faqList.addEventListener('click', (e) => {
+        const trig = e.target.closest('.faq-trigger');
+        if(!trig) return;
+        const item = trig.parentElement;
+        const isOpen = item.classList.contains('open');
+        faqList.querySelectorAll('.faq-item').forEach(it => it.classList.remove('open'));
+        if(!isOpen) item.classList.add('open');
+    });
+
+    /* ---------- Scroll progress ---------- */
+    const prog = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        prog.style.width = (window.scrollY / h * 100) + '%';
+    });
+
+    /* ---------- Loader ---------- */
+    function startLoader(){
+        const fill = document.querySelector('.loader-bar-fill');
+        let p = 0;
+        const tick = setInterval(() => {
+            p += Math.random() * 18;
+            if(p >= 100){ p = 100; clearInterval(tick); finish(); }
+            fill.style.width = p + '%';
+        }, 130);
+        function finish(){
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hide');
+                document.body.classList.remove('loading');
+                if (window.AOS) AOS.refreshHard();
+            }, 350);
+        }
+    }
+
+    /* ---------- Init ---------- */
+    window.addEventListener('DOMContentLoaded', () => {
+        AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
+        renderCars('Sedan');
+        renderTestimonials();
+        if (window.lucide) lucide.createIcons();
+        startLoader();
+    });
+</script>
+</body>
+</html>

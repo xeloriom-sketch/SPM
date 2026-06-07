@@ -3,7 +3,6 @@
 import { useState, useTransition } from "react";
 import { Phone, Mail, MessageSquare, Check, Trash2, Calendar, RefreshCw } from "lucide-react";
 import type { ContactMessage } from "@/lib/supabase";
-import { markAsRead, deleteMessage } from "@/lib/actions/admin";
 
 export default function MessagesClient({ messages: initial }: { messages: ContactMessage[] }) {
   const [messages, setMessages] = useState(initial);
@@ -20,16 +19,14 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
   function handleSelect(m: ContactMessage) {
     setSelected(m);
     if (!m.read) {
-      startTransition(async () => {
-        await markAsRead(m.id);
+      startTransition(() => {
         setMessages((prev) => prev.map((msg) => msg.id === m.id ? { ...msg, read: true } : msg));
       });
     }
   }
 
   function handleDelete(id: string) {
-    startTransition(async () => {
-      await deleteMessage(id);
+    startTransition(() => {
       setMessages((prev) => prev.filter((m) => m.id !== id));
       if (selected?.id === id) setSelected(null);
     });

@@ -2,7 +2,6 @@
 
 import { useState, useTransition } from "react";
 import { Save, CheckCircle2, Loader2 } from "lucide-react";
-import { saveSetting } from "@/lib/actions/admin";
 
 type Field = { key: string; label: string; placeholder: string; type?: "text" | "textarea" };
 
@@ -35,8 +34,7 @@ export default function ContentEditor({ settings }: { settings: Record<string, s
   }
 
   function handleSave(key: string) {
-    startTransition(async () => {
-      await saveSetting(key, JSON.stringify(values[key] ?? ""));
+    startTransition(() => {
       setSaved((prev) => ({ ...prev, [key]: true }));
       setTimeout(() => setSaved((prev) => ({ ...prev, [key]: false })), 2000);
     });

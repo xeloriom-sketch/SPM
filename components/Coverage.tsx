@@ -7,10 +7,10 @@ import SplitText from "@/components/ui/SplitText";
 import { spring, springFast, revealVariants, revealSubtle } from "@/lib/motion";
 
 const zones = [
-  { region: "Ain (01)", cities: ["Villebois", "Ambérieu", "Bourg", "Belley"] },
-  { region: "Isère (38)", cities: ["Grenoble", "Bourgoin-Jallieu", "Vienne", "Pont-de-Chéruy"] },
-  { region: "Rhône (69)", cities: ["Lyon", "Villeurbanne", "Bron", "Décines"] },
-  { region: "France entière", cities: ["Paris", "Marseille", "Bordeaux", "Genève (CH)"] },
+  { region: "Ain (01)", cities: ["Villebois", "Ambérieu-en-Bugey", "Bourg-en-Bresse", "Belley", "Montluel", "Meximieux", "Pérouges", "Lagnieu", "Saint-Rambert", "Chazey-sur-Ain"] },
+  { region: "Rhône (69)", cities: ["Lyon", "Villeurbanne", "Bron", "Décines", "Meyzieu", "Saint-Priest", "Mions", "Corbas", "Vaulx-en-Velin", "Rillieux-la-Pape"] },
+  { region: "Isère (38)", cities: ["Grenoble", "Bourgoin-Jallieu", "Vienne", "Pont-de-Chéruy", "L'Isle-d'Abeau", "La Tour-du-Pin", "Crémieu", "Morestel"] },
+  { region: "France entière", cities: ["Paris", "Marseille", "Bordeaux", "Nice", "Strasbourg", "Genève (CH)", "Annecy", "Chambéry"] },
 ];
 
 const airports = [

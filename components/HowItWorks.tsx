@@ -92,22 +92,6 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        {/* CTA */}
-        <motion.div
-          className="mt-12 flex justify-center"
-          variants={revealSubtle} initial="hidden" animate={isIn ? "visible" : "hidden"} custom={0.55}
-        >
-          <motion.a
-            href="tel:+33767751898"
-            className="inline-flex items-center gap-3 rounded-full border border-black/15 text-black/70 px-7 py-3 text-[11px] font-semibold tracking-[0.18em] uppercase hover:border-black/40 hover:text-black transition-all"
-            whileHover={{ scale: 1.04, y: -2 }}
-            whileTap={{ scale: 0.96 }}
-            transition={spring}
-          >
-            <Phone className="h-3.5 w-3.5" />
-            Réserver maintenant — 07 67 75 18 98
-          </motion.a>
-        </motion.div>
       </div>
     </section>
   );

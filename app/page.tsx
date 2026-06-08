@@ -14,6 +14,8 @@ import Footer from "@/components/Footer";
 import PowerStation from "@/components/PowerStation";
 import CommunityCTA from "@/components/CommunityCTA";
 import NewsUpdates from "@/components/NewsUpdates";
+import CPAMGuide from "@/components/CPAMGuide";
+import Entreprises from "@/components/Entreprises";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -140,9 +142,11 @@ export default function Home() {
         <Hero />
         <Services />
         <HowItWorks />
+        <CPAMGuide />
         <Vehicle />
         <WhyUs />
         <Coverage />
+        <Entreprises />
         <PowerStation />
         <NewsUpdates />
         <CommunityCTA />

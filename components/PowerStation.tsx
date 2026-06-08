@@ -101,21 +101,16 @@ export default function PowerStation() {
           </div>
 
           <div className="md:col-span-3 md:justify-self-end">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            <motion.a
+              href="/services"
+              className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wide text-black/40 hover:text-black transition-colors"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <a
-                href="tel:+33767751898"
-                className="group inline-flex items-center gap-4 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-[11px] font-medium tracking-wider text-white transition-all hover:bg-black/85"
-              >
-                <span>Réserver maintenant</span>
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:translate-x-0.5">
-                  <ArrowRight className="h-3.5 w-3.5 stroke-[2.5]" />
-                </div>
-              </a>
-            </motion.div>
+              Voir tous les services
+              <ArrowRight className="h-3 w-3" />
+            </motion.a>
           </div>
 
         </div>

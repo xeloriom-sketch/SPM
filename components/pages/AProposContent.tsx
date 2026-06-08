@@ -79,22 +79,18 @@ export default function AProposContent() {
     <>
       {/* ── HERO ── */}
       <section className="relative w-full bg-black overflow-hidden" style={{ minHeight: "58vh" }}>
-        <motion.div
-          className="absolute right-0 bottom-0 w-[55%] sm:w-[47%] lg:w-[41%] pointer-events-none select-none"
-          style={{ y: carY }}
-        >
+        {/* Photo plein écran */}
+        <motion.div className="absolute inset-0" style={{ y: carY }}>
           <Image
-            src={sitePath("/image/tiguan-front-quarter.png")}
-            alt="Volkswagen Tiguan — SPM Taxi"
-            width={1344}
-            height={768}
-            className="w-full h-auto"
-            style={{ filter: "drop-shadow(-20px 0 64px rgba(0,0,0,0.8))" }}
+            src={sitePath("/image/volkswagen-tiguan-r-line-2020-5k-8k-9500x6333-1639.jpeg")}
+            alt="Volkswagen Tiguan R-Line — SPM Taxi"
+            fill
+            className="object-cover object-center"
             priority
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/88 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
 
         <div className="relative z-10 flex flex-col justify-end px-4 sm:px-10 lg:px-20 pb-14 md:pb-20 pt-32">
           <div className="max-w-2xl">
@@ -167,12 +163,12 @@ export default function AProposContent() {
                 SPM Taxi est votre partenaire de mobilité de confiance dans l&apos;Ain et au-delà.
               </p>
             </motion.div>
-            <div className="lg:col-span-2 relative aspect-[4/3] rounded-2xl overflow-hidden">
+            <div className="lg:col-span-2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#f8f9fa]">
               <Image
-                src={sitePath("/image/volkswagen-tiguan-r-line-2020-5k-8k-9500x6333-1639.jpeg")}
-                alt="Volkswagen Tiguan R-Line — SPM Taxi"
+                src={sitePath("/image/tiguan-side.png")}
+                alt="Volkswagen Tiguan Allspace — SPM Taxi"
                 fill
-                className="object-cover object-center"
+                className="object-contain object-center p-4"
               />
             </div>
           </div>

@@ -25,11 +25,10 @@ const features = [
 ];
 
 const views = [
-  { src: sitePath("/image/tiguan-front-quarter.png"),                              label: "Vue 3/4 avant",  alt: "Volkswagen Tiguan Allspace — avant 3/4", cover: false },
-  { src: sitePath("/image/tiguan-side.png"),                                       label: "Profil",         alt: "Volkswagen Tiguan Allspace — profil",    cover: false },
-  { src: sitePath("/image/tiguan-front.png"),                                      label: "Face avant",     alt: "Volkswagen Tiguan Allspace — face avant", cover: false },
-  { src: sitePath("/image/tiguan-rear.png"),                                       label: "Vue arrière",    alt: "Volkswagen Tiguan Allspace — arrière",   cover: false },
-  { src: sitePath("/image/volkswagen-tiguan-r-line-2020-5k-8k-9500x6333-1639.jpeg"), label: "Photo réelle", alt: "Volkswagen Tiguan R-Line — SPM Taxi",    cover: true  },
+  { src: sitePath("/image/tiguan-front-quarter.png"), label: "Vue 3/4 avant", alt: "Volkswagen Tiguan Allspace — avant 3/4" },
+  { src: sitePath("/image/tiguan-side.png"),          label: "Profil",        alt: "Volkswagen Tiguan Allspace — profil" },
+  { src: sitePath("/image/tiguan-front.png"),         label: "Face avant",    alt: "Volkswagen Tiguan Allspace — face avant" },
+  { src: sitePath("/image/tiguan-rear.png"),          label: "Vue arrière",   alt: "Volkswagen Tiguan Allspace — arrière" },
 ];
 
 export default function Vehicle() {
@@ -216,8 +215,8 @@ export default function Vehicle() {
                   fill
                   priority={current === 0}
                   unoptimized
-                  className={views[current].cover ? "object-cover object-center rounded-2xl" : "object-contain object-center"}
-                  style={views[current].cover ? {} : { filter: "drop-shadow(0 6px 18px rgba(0,0,0,0.22))" }}
+                  className="object-contain object-center"
+                  style={{ filter: "drop-shadow(0 6px 18px rgba(0,0,0,0.22))" }}
                 />
               </motion.div>
             </AnimatePresence>

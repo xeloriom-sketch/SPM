@@ -8,42 +8,7 @@ import HeroVideo from "@/components/HeroVideo";
 import SplitText from "@/components/ui/SplitText";
 import { revealVariants, revealSubtle, spring } from "@/lib/motion";
 import { sitePath } from "@/lib/site-path";
-
-const tarifs = [
-  {
-    cat: "Transferts Aéroport & Gare",
-    dark: true,
-    items: [
-      { trajet: "Villebois → Lyon Saint-Exupéry",    prix: "À partir de 65 €" },
-      { trajet: "Ambérieu → Lyon Saint-Exupéry",     prix: "À partir de 70 €" },
-      { trajet: "Bourg-en-Bresse → Lyon Part-Dieu",  prix: "À partir de 75 €" },
-      { trajet: "Lyon Centre → Saint-Exupéry",       prix: "À partir de 55 €" },
-      { trajet: "Grenoble → Lyon Saint-Exupéry",     prix: "À partir de 90 €" },
-    ],
-  },
-  {
-    cat: "Transport Médical CPAM",
-    dark: false,
-    items: [
-      { trajet: "Trajet court (< 15 km)",    prix: "Prise en charge CPAM" },
-      { trajet: "Trajet moyen (15–50 km)",   prix: "Prise en charge CPAM" },
-      { trajet: "Trajet long (> 50 km)",     prix: "Prise en charge CPAM" },
-      { trajet: "Chimiothérapie / Dialyse",  prix: "Forfait mensuel CPAM" },
-      { trajet: "Hospitalisation",           prix: "Sur prescription médicale" },
-    ],
-  },
-  {
-    cat: "Longue Distance",
-    dark: false,
-    items: [
-      { trajet: "Lyon → Paris",     prix: "À partir de 420 €" },
-      { trajet: "Lyon → Marseille", prix: "À partir de 290 €" },
-      { trajet: "Lyon → Genève",    prix: "À partir de 140 €" },
-      { trajet: "Lyon → Bordeaux",  prix: "À partir de 520 €" },
-      { trajet: "Lyon → Nice",      prix: "À partir de 400 €" },
-    ],
-  },
-];
+import { useSettings } from "@/lib/settings-context";
 
 const inclus = [
   "Prise en charge à domicile incluse",
@@ -61,6 +26,44 @@ const paiements = [
 ];
 
 export default function TarifsContent() {
+  const s = useSettings();
+
+  const tarifs = [
+    {
+      cat: "Transferts Aéroport & Gare",
+      dark: true,
+      items: [
+        { trajet: s.tarif_route1_label, prix: s.tarif_route1_price },
+        { trajet: s.tarif_route2_label, prix: s.tarif_route2_price },
+        { trajet: s.tarif_route3_label, prix: s.tarif_route3_price },
+        { trajet: s.tarif_route4_label, prix: s.tarif_route4_price },
+        { trajet: s.tarif_route5_label, prix: s.tarif_route5_price },
+      ],
+    },
+    {
+      cat: "Transport Médical CPAM",
+      dark: false,
+      items: [
+        { trajet: "Trajet court (< 15 km)",    prix: "Prise en charge CPAM" },
+        { trajet: "Trajet moyen (15–50 km)",   prix: "Prise en charge CPAM" },
+        { trajet: "Trajet long (> 50 km)",     prix: "Prise en charge CPAM" },
+        { trajet: "Chimiothérapie / Dialyse",  prix: "Forfait mensuel CPAM" },
+        { trajet: "Hospitalisation",           prix: "Sur prescription médicale" },
+      ],
+    },
+    {
+      cat: "Longue Distance",
+      dark: false,
+      items: [
+        { trajet: s.tarif_route6_label,  prix: s.tarif_route6_price },
+        { trajet: s.tarif_route7_label,  prix: s.tarif_route7_price },
+        { trajet: s.tarif_route8_label,  prix: s.tarif_route8_price },
+        { trajet: s.tarif_route9_label,  prix: s.tarif_route9_price },
+        { trajet: s.tarif_route10_label, prix: s.tarif_route10_price },
+      ],
+    },
+  ];
+
   const heroRef   = useRef<HTMLElement>(null);
   const tablesRef = useRef<HTMLDivElement>(null);
   const inclusRef = useRef<HTMLElement>(null);
@@ -147,7 +150,7 @@ export default function TarifsContent() {
               transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.55 }}
             >
               <a
-                href="tel:+33767751898"
+                href={`tel:${s.contact_phone.replace(/[\s.-]/g, "")}`}
                 className="inline-flex items-center gap-2.5 rounded-full bg-white text-black pl-4 pr-5 py-2.5 text-[11px] font-semibold tracking-wide hover:bg-white/90 transition-colors"
               >
                 <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
@@ -175,15 +178,15 @@ export default function TarifsContent() {
               { label: "Tarification",   value: "Prix fixe bloqué" },
               { label: "Engagement",     value: "Zéro surprise" },
               { label: "Paiement",       value: "CB · Espèces · Chèque" },
-            ].map((s, i) => (
+            ].map((item, i) => (
               <motion.div
                 key={i}
                 className={`flex flex-col ${i !== 0 ? "md:pl-8 md:border-l md:border-white/10" : ""}`}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.7 + i * 0.07 }}
               >
-                <span className="mb-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] uppercase text-white/30">{s.label}</span>
-                <span className="text-sm sm:text-base font-semibold tracking-tight text-white">{s.value}</span>
+                <span className="mb-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] uppercase text-white/30">{item.label}</span>
+                <span className="text-sm sm:text-base font-semibold tracking-tight text-white">{item.value}</span>
               </motion.div>
             ))}
           </div>
@@ -291,11 +294,11 @@ export default function TarifsContent() {
           <p className="text-white/45 text-sm mb-10">Réponse sous 2h · Tarif fixe garanti · Sans engagement</p>
           <div className="flex flex-wrap justify-center gap-4">
             <motion.a
-              href="tel:+33767751898"
+              href={`tel:${s.contact_phone.replace(/[\s.-]/g, "")}`}
               className="inline-flex items-center gap-2 rounded-full bg-white text-black px-7 py-3 text-sm font-semibold"
               whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={spring}
             >
-              <Phone className="h-4 w-4" /> 07 67 75 18 98
+              <Phone className="h-4 w-4" /> {s.contact_phone}
             </motion.a>
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.95 }} transition={spring}>
               <Link href="/#contact" className="inline-flex items-center gap-2 rounded-full border border-white/25 text-white px-7 py-3 text-sm font-semibold hover:border-white/55 transition-colors">

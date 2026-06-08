@@ -47,6 +47,7 @@ export default function PowerStation() {
             muted
             playsInline
             preload="metadata"
+            poster={sitePath("/image/volkswagen-tiguan-r-line-2020-5k-8k-9500x6333-1639.jpeg")}
             disablePictureInPicture
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.015]"
             onEnded={() => setIsPlaying(false)}

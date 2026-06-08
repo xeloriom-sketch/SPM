@@ -167,12 +167,12 @@ export default function AProposContent() {
                 SPM Taxi est votre partenaire de mobilité de confiance dans l&apos;Ain et au-delà.
               </p>
             </motion.div>
-            <div className="lg:col-span-2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#f8f9fa]">
+            <div className="lg:col-span-2 relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
-                src={sitePath("/image/tiguan-side.png")}
-                alt="Volkswagen Tiguan SPM"
+                src={sitePath("/image/volkswagen-tiguan-r-line-2020-5k-8k-9500x6333-1639.jpeg")}
+                alt="Volkswagen Tiguan R-Line — SPM Taxi"
                 fill
-                className="object-contain object-center p-4"
+                className="object-cover object-center"
               />
             </div>
           </div>

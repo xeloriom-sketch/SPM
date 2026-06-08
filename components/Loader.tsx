@@ -48,7 +48,7 @@ export default function Loader() {
               animate={{ y: 0 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.28 }}
             >
-              Taxi Conventionné · Tignieu-Jameyzieu
+              Taxi Conventionné · Villebois · Ain
             </motion.p>
           </div>
 

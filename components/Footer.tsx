@@ -32,14 +32,14 @@ export default function Footer() {
                 </svg>
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-sm font-medium tracking-widest uppercase">Taxi Tignieu</span>
+                <span className="text-sm font-medium tracking-widest uppercase">Taxi SPM</span>
                 <span className="text-[9px] tracking-wider uppercase text-white/40">CPAM</span>
               </div>
             </a>
 
             {/* Coordonnées / Réseaux à Droite (Comme les icônes de l'image_49bac8.png) */}
             <div className="flex items-center gap-6 text-white/60">
-              <a href="tel:0600000000" className="hover:text-white transition-colors" title="Téléphone">
+              <a href="tel:0767751898" className="hover:text-white transition-colors" title="Téléphone">
                 <Phone className="h-4 w-4 stroke-[1.5]" />
               </a>
               <a href="mailto:contact@taxi-tignieu.fr" className="hover:text-white transition-colors" title="Email">
@@ -93,16 +93,16 @@ export default function Footer() {
 
           {/* ── LIGNE DE COPYRIGHT INFÉRIEURE ── */}
           <div className="flex flex-col sm:flex-row items-center justify-between border-t border-white/5 pt-6 text-[11px] text-white/30 font-light tracking-wide">
-            <p>© 2026 Taxi Tignieu. All rights reserved.</p>
+            <p>© 2026 Taxi SPM. Tous droits réservés.</p>
             <p className="flex items-center gap-1">
-              <MapPin className="h-3 w-3 stroke-[1.5]" /> Tignieu-Jameyzieu · Rhône-Alpes
+              <MapPin className="h-3 w-3 stroke-[1.5]" /> Villebois · Ain (01)
             </p>
           </div>
 
           {/* ── MOT GEANT EN ARRIÈRE-PLAN (Fidèle à l'effet EMPOWER de l'image_49bac8.png) ── */}
           <div className="absolute inset-x-0 bottom-0 flex justify-center pointer-events-none select-none z-0 translate-y-6 sm:translate-y-12 lg:translate-y-16">
           <span className="text-[16vw] font-black tracking-widest text-white/[0.025] leading-none uppercase font-sans">
-            Tignieu
+            Villebois
           </span>
           </div>
 

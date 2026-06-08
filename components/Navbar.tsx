@@ -98,7 +98,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="tel:0600000000"
+              href="tel:0767751898"
               className={`ml-4 flex items-center gap-2 rounded-full border px-5 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase transition-all duration-300 ${
                 isLight
                   ? "border-black/22 text-black hover:bg-black hover:text-white"
@@ -112,7 +112,7 @@ export default function Navbar() {
           {/* Mobile */}
           <div className="flex items-center gap-2.5 md:hidden">
             <a
-              href="tel:0600000000"
+              href="tel:0767751898"
               className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-300 ${
                 isLight ? "border-black/18 text-black" : "border-white/20 text-white"
               }`}
@@ -181,7 +181,7 @@ export default function Navbar() {
                   transition={{ delay: 0.28, duration: 0.3 }}
                 >
                   <a
-                    href="tel:0600000000"
+                    href="tel:0767751898"
                     className="flex items-center gap-3 rounded-2xl bg-black px-5 py-4 text-[13px] font-semibold text-white active:bg-black/80"
                     onClick={() => setMenuOpen(false)}
                   >

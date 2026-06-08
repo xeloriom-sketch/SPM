@@ -4,18 +4,18 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.spm-taxi.fr"),
   title: {
-    default: "SPM — Taxi Conventionné Tignieu-Jameyzieu | Lyon · Ain · Isère",
-    template: "%s | SPM Taxi",
+    default: "Taxi SPM — Conventionné CPAM · Villebois · Lyon · Ain · Isère",
+    template: "%s | Taxi SPM",
   },
   description:
-    "SPM, taxi conventionné CPAM basé à Tignieu-Jameyzieu. Volkswagen Tiguan 7 places. Transferts aéroport Lyon Saint-Exupéry, gares TGV, transport médical, colis urgents, remorque. Disponible 7j/7 24h/24. Devis gratuit sous 2h.",
+    "Taxi SPM, taxi conventionné CPAM basé à Villebois (Ain 01). Volkswagen Tiguan 7 places. Transferts aéroport Lyon Saint-Exupéry, gares TGV, transport médical, colis urgents, remorque. Disponible 7j/7 24h/24. Devis gratuit. 07 67 75 18 98.",
   keywords: [
-    "SPM taxi", "taxi conventionné CPAM", "taxi Tignieu-Jameyzieu",
-    "taxi Lyon", "taxi Ain", "taxi Isère", "transfert aéroport Lyon",
-    "transfert Lyon Saint-Exupéry", "transport médical taxi",
+    "taxi SPM", "taxi conventionné CPAM", "taxi Villebois",
+    "taxi Ain 01", "taxi Lyon", "taxi Isère", "transfert aéroport Lyon",
+    "transfert Lyon Saint-Exupéry", "transport médical taxi Ain",
     "taxi 7 places", "Volkswagen Tiguan taxi", "colis urgent taxi",
     "taxi avec remorque", "taxi Ambérieu-en-Bugey", "taxi Bourgoin-Jallieu",
-    "taxi longue distance France", "taxi conventionné Ain",
+    "taxi longue distance France", "taxi conventionné Ain", "CPAM taxi 01150",
   ],
   authors: [{ name: "SPM Taxi" }],
   creator: "SPM Taxi",

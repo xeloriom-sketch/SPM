@@ -5,16 +5,29 @@ import { motion, useInView } from "framer-motion";
 import SplitText from "@/components/ui/SplitText";
 
 const testimonials = [
-  { name: "Marie-Claire D.", city: "Lyon 6e", service: "Aéroport", text: "Ponctuel, professionnel et très agréable. Le Tiguan est spacieux et confortable. Je ne changerais pour rien au monde." },
-  { name: "Éric B.", city: "Bourg-en-Bresse", service: "Transport médical", text: "Toujours à l'heure, patient et attentionné. Le véhicule est impeccable. Parfait pour mes soins réguliers." },
-  { name: "Sophie & Julien", city: "Grenoble", service: "Longue distance", text: "Lyon-Paris pour un voyage d'affaires. Prix transparent, voiture grande, on a pu travailler pendant le trajet." },
-  { name: "Thomas R.", city: "Tignieu-Jameyzieu", service: "Colis urgent", text: "Service rapide, efficace. Le colis est arrivé en parfait état. Je ferai de nouveau appel sans hésiter." },
-  { name: "Nathalie P.", city: "Ambérieu", service: "Gare", text: "Super service pour mes trajets Part-Dieu. Le chauffeur s'adapte aux retards de train. Très appréciable." },
-  { name: "Marc-Antoine L.", city: "Bourgoin-Jallieu", service: "Remorque", text: "J'avais besoin de transporter du matériel. La remorque disponible était parfaite. Service unique dans la région." },
+  { name: "F.I TAXI",                stars: 5, date: "il y a 6 mois",  text: "Excellent collaborateur. Toujours ponctuel, sérieux et respectueux des clients. Travail de qualité, je recommande sans hésiter." },
+  { name: "sabrina selini",           stars: 5, date: "il y a 10 mois", text: "Sérieux, ponctuel, disponible. Trajet très agréable. Conventionné pour tous les trajets médicaux. Je recommande vivement." },
+  { name: "Kãte Dbno",               stars: 4, date: "il y a 6 mois",  text: "Taxi très sérieux, trajet agréable même pour un enfant 😊 Chauffeur à l'écoute.. je recommande." },
+  { name: "Chloé Burguiere",         stars: 5, date: "il y a 9 mois",  text: "Taxi très accueillant, accepte les personnes en situation de handicap. Je recommande." },
+  { name: "SOSO 01",                 stars: 5, date: "il y a 11 mois", text: "Taxi très sérieux et ponctuel, à l'écoute de ses clients. Vous pouvez y aller les yeux fermés." },
+  { name: "Khalid El ouazzani",      stars: 5, date: "il y a 11 mois", text: "Société professionnelle, chauffeur ponctuel. Trajet agréable. Je recommande vivement." },
+  { name: "Ibrahim za",              stars: 5, date: "il y a 11 mois", text: "Taxi sérieux, gentil, à l'heure. Je recommande 👍🏾" },
+  { name: "ALHAMBRA WEB",            stars: 5, date: "il y a 3 jours", text: "Personne très agréable." },
+  { name: "z",                       stars: 5, date: "il y a 8 mois",  text: "Très réactif." },
 ];
 
 const row1 = [...testimonials, ...testimonials];
 const row2 = [...testimonials, ...testimonials].reverse();
+
+function Stars({ count }: { count: number }) {
+  return (
+    <div className="flex gap-0.5">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <span key={i} className={`text-[11px] ${i <= count ? "text-black" : "text-black/20"}`}>★</span>
+      ))}
+    </div>
+  );
+}
 
 export default function Testimonials() {
   const ref = useRef<HTMLDivElement>(null);
@@ -23,7 +36,6 @@ export default function Testimonials() {
   return (
     <section className="w-full overflow-hidden bg-white py-20 md:py-28 font-sans">
 
-      {/* Header */}
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 mb-14">
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4">
@@ -33,20 +45,20 @@ export default function Testimonials() {
             className="flex items-center justify-center gap-2"
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
           >
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
                 <span key={i} className="text-sm text-black">★</span>
               ))}
             </div>
-            <span className="text-sm font-semibold text-black">5.0</span>
-            <span className="text-xs text-[#888888]">· 47 avis Google</span>
+            <span className="text-sm font-semibold text-black">4,9</span>
+            <span className="text-xs text-[#888888]">· 9 avis Google vérifiés</span>
           </motion.div>
         </div>
       </div>
 
-      {/* Marquee row 1 */}
+      {/* Row 1 */}
       <div className="relative mb-3">
         <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-12 sm:w-24 bg-gradient-to-r from-white to-transparent" />
         <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-12 sm:w-24 bg-gradient-to-l from-white to-transparent" />
@@ -54,26 +66,21 @@ export default function Testimonials() {
           <motion.div
             className="flex min-w-max gap-3"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 34, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
           >
             {row1.map((t, i) => (
-              <div
-                key={i}
-                className="w-[260px] sm:w-[280px] shrink-0 rounded-[18px] border border-black/[0.06] bg-[#f8f9fa] p-4 sm:p-5"
-              >
+              <div key={i} className="w-[260px] sm:w-[290px] shrink-0 rounded-[18px] border border-black/[0.06] bg-[#f8f9fa] p-4 sm:p-5">
                 <div className="mb-3 flex items-center gap-2.5">
                   <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-black text-[11px] font-bold text-white">
-                    {t.name.charAt(0)}
+                    {t.name.charAt(0).toUpperCase()}
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-black">{t.name}</p>
-                    <p className="text-[10px] text-[#888888]">{t.city} · {t.service}</p>
+                    <p className="text-[10px] text-[#888888]">{t.date}</p>
                   </div>
                 </div>
-                <div className="mb-2.5 flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-[10px] text-black">★</span>
-                  ))}
+                <div className="mb-2.5">
+                  <Stars count={t.stars} />
                 </div>
                 <p className="text-xs leading-relaxed text-[#555555]">{t.text}</p>
               </div>
@@ -82,7 +89,7 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Marquee row 2 */}
+      {/* Row 2 */}
       <div className="relative">
         <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-12 sm:w-24 bg-gradient-to-r from-white to-transparent" />
         <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-12 sm:w-24 bg-gradient-to-l from-white to-transparent" />
@@ -90,26 +97,21 @@ export default function Testimonials() {
           <motion.div
             className="flex min-w-max gap-3"
             animate={{ x: ["-50%", "0%"] }}
-            transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
           >
             {row2.map((t, i) => (
-              <div
-                key={i}
-                className="w-[260px] sm:w-[280px] shrink-0 rounded-[18px] border border-black/[0.04] bg-[#f8f9fa] p-4 sm:p-5"
-              >
+              <div key={i} className="w-[260px] sm:w-[290px] shrink-0 rounded-[18px] border border-black/[0.04] bg-[#f8f9fa] p-4 sm:p-5">
                 <div className="mb-3 flex items-center gap-2.5">
                   <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-black/10 text-[11px] font-bold text-black/50">
-                    {t.name.charAt(0)}
+                    {t.name.charAt(0).toUpperCase()}
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-black">{t.name}</p>
-                    <p className="text-[10px] text-[#888888]">{t.city} · {t.service}</p>
+                    <p className="text-[10px] text-[#888888]">{t.date}</p>
                   </div>
                 </div>
-                <div className="mb-2.5 flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-[10px] text-black/30">★</span>
-                  ))}
+                <div className="mb-2.5">
+                  <Stars count={t.stars} />
                 </div>
                 <p className="text-xs leading-relaxed text-[#555555]">{t.text}</p>
               </div>

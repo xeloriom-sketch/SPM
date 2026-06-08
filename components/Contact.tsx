@@ -61,7 +61,7 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <a
-              href="tel:0600000000"
+              href="tel:0767751898"
               className="group flex items-center gap-4 rounded-[20px] border border-black/[0.06] bg-[#f8f9fa] p-5 transition-all hover:border-black/15 hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
             >
               <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-black">
@@ -69,7 +69,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-xs font-bold text-black tracking-tight">Appel direct</p>
-                <p className="text-[11px] text-[#888888]">06 XX XX XX XX — Disponible maintenant</p>
+                <p className="text-[11px] text-[#888888]">07 67 75 18 98 — Disponible maintenant</p>
               </div>
               <ArrowRight className="ml-auto h-4 w-4 text-black/20 group-hover:text-black transition-colors" />
             </a>
@@ -94,7 +94,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-xs font-bold text-black tracking-tight">Localisation</p>
-                <p className="text-[11px] text-[#888888]">Tignieu-Jameyzieu, Ain (01)</p>
+                <p className="text-[11px] text-[#888888]">951 route des hauts fourneaux, 01150 Villebois</p>
               </div>
             </div>
 
@@ -139,7 +139,7 @@ export default function Contact() {
                   <label className="mb-1.5 block text-[10px] font-bold tracking-wider uppercase text-black/40" htmlFor="phone">
                     Téléphone *
                   </label>
-                  <input id="phone" name="phone" type="tel" required placeholder="06 XX XX XX XX" className={inputClass} />
+                  <input id="phone" name="phone" type="tel" required placeholder="07 67 75 18 98" className={inputClass} />
                 </div>
               </div>
 

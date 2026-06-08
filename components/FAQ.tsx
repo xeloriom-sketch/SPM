@@ -8,7 +8,7 @@ import SplitText from "@/components/ui/SplitText";
 const faqs = [
   { q: "Qu'est-ce qu'un taxi conventionné ?", a: "Un taxi conventionné est agréé par la CPAM pour les transports médicaux. Les trajets peuvent être pris en charge partiellement ou totalement par l'Assurance Maladie sur prescription médicale." },
   { q: "Comment obtenir un devis ?", a: "Remplissez le formulaire de contact ou appelez directement. Je réponds sous 2h avec une estimation de prix. Devis gratuits et sans engagement." },
-  { q: "Quelles zones couvrez-vous ?", a: "Je suis basé à Tignieu-Jameyzieu et j'interviens dans l'Ain, à Lyon et en Isère. Pour les longues distances, je me déplace partout en France sur devis." },
+  { q: "Quelles zones couvrez-vous ?", a: "Je suis basé à Villebois et j'interviens dans l'Ain, à Lyon et en Isère. Pour les longues distances, je me déplace partout en France sur devis." },
   { q: "Puis-je transporter des animaux ?", a: "Oui, dans une caisse de transport adaptée ou avec un harnais de sécurité. Merci de le signaler à la réservation." },
   { q: "Puis-je réserver à l'avance ?", a: "Absolument — je vous encourage même à réserver tôt pour les aéroports et rendez-vous médicaux. Les réservations de dernière minute sont aussi acceptées selon disponibilité." },
   { q: "Quels modes de paiement acceptez-vous ?", a: "Espèces, carte bancaire (CB, Visa, Mastercard) et chèque. Pour les transports médicaux, la prise en charge CPAM est gérée directement." },

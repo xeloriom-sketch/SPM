@@ -140,7 +140,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: LOADER_OUT + 0.42 }}
           >
-            SPM · Tignieu-Jameyzieu · Lyon · Ain · Isère
+            SPM · Villebois · Lyon · Ain · Isère
           </motion.p>
         </div>
 

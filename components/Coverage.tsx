@@ -38,7 +38,7 @@ export default function Coverage() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.25 }}
             >
-              Basé à Tignieu-Jameyzieu, notre service se déploie à l'échelle régionale
+              Basé à Villebois, notre service se déploie à l'échelle régionale
               et nationale pour garantir un confort optimal à chaque trajet.
             </motion.p>
           </div>
@@ -92,8 +92,8 @@ export default function Coverage() {
                 transition={{ duration: 0.8, delay: 0.3 }}
             >
               <iframe
-                  title="Tignieu-Jameyzieu"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22315.2!2d5.17!3d45.72!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f46e6c8c8c8c8c%3A0x0!2sTignieu-Jameyzieu!5e0!3m2!1sfr!2sfr!4v1700000000000"
+                  title="Villebois"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22315.2!2d5.17!3d45.72!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f46e6c8c8c8c8c%3A0x0!2sVillebois!5e0!3m2!1sfr!2sfr!4v1700000000000"
                   className="absolute inset-0 w-full h-full object-cover"
                   style={{ border: 0, filter: "grayscale(100%) contrast(1.1) brightness(0.95)" }}
                   allowFullScreen
@@ -104,7 +104,7 @@ export default function Coverage() {
               <div className="absolute bottom-5 inset-x-5 bg-white/80 backdrop-blur-md rounded-xl p-4 flex justify-between items-center border border-white/20 shadow-sm">
                 <div>
                   <p className="text-[11px] font-bold text-black tracking-wide uppercase">Ancrage Local</p>
-                  <p className="text-[10px] text-[#555555]">Tignieu-Jameyzieu · France</p>
+                  <p className="text-[10px] text-[#555555]">Villebois · France</p>
                 </div>
                 <span className="text-[10px] font-semibold text-black/40">01 / 38 / 69</span>
               </div>

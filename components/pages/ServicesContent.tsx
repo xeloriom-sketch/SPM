@@ -64,56 +64,104 @@ export default function ServicesContent() {
   return (
     <>
       {/* ── HERO ── */}
-      <section ref={heroRef} className="relative w-full bg-black overflow-hidden" style={{ minHeight: "56vh" }}>
-        {/* Vidéo 1080p en fond */}
-        <div className="absolute inset-0">
-          <VideoPlayer src={sitePath("/videos/7440442-hd_1920_1080_25fps.mp4")} />
+      <section ref={heroRef} className="relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
+        {/* Vidéo fond */}
+        <div className="absolute inset-0 z-0">
+          <VideoPlayer src={sitePath("/videos/7440442-web.mp4")} />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col justify-end px-4 sm:px-10 lg:px-20 pb-14 md:pb-20 pt-32">
-          <div className="max-w-2xl">
+        {/* Overlays */}
+        <div className="pointer-events-none absolute inset-0 z-[5]">
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/55 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-[65%] bg-gradient-to-t from-black/92 via-black/45 to-transparent" />
+        </div>
+
+        {/* Grain cinématique */}
+        <div
+          className="pointer-events-none absolute inset-0 z-[6] opacity-[0.032]"
+          style={{
+            backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+            backgroundSize: "160px",
+          }}
+        />
+
+        {/* Contenu */}
+        <div className="relative z-[10] w-full mt-auto">
+          <div className="px-6 pb-5 sm:px-10 sm:pb-6 md:px-14">
             <motion.span
               initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/35 mb-4 block"
+              className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/35 mb-5 block"
             >
               Nos services
             </motion.span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-tight mb-5">
-              <SplitText text="Tout ce dont vous" mode="word" />
-              <br />
-              <span className="text-white/30">
-                <SplitText text="avez besoin" mode="word" delay={0.14} />
-              </span>
-            </h1>
-            <motion.p
-              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.52, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm sm:text-base text-white/55 leading-relaxed mb-8 max-w-lg"
-            >
-              5 services distincts, un seul engagement : ponctualité, confort et tarif fixe garanti.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.68, type: "spring", stiffness: 340, damping: 24 }}
-              className="flex flex-wrap gap-3"
-            >
-              <motion.a
-                href="tel:+33767751898"
-                className="inline-flex items-center gap-2 rounded-full bg-white text-black px-6 py-2.5 text-sm font-semibold"
-                whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={spring}
+
+            <div className="overflow-hidden">
+              <motion.span
+                className="block font-sans font-semibold text-white leading-[1.05] tracking-[-0.025em]"
+                style={{ fontSize: "clamp(2rem, 5.5vw, 5.2rem)" }}
+                initial={{ y: "110%" }} animate={{ y: 0 }}
+                transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.15 }}
               >
-                <Phone className="h-4 w-4" /> 07 67 75 18 98
-              </motion.a>
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.95 }} transition={spring}>
-                <Link href="/tarifs" className="inline-flex items-center gap-2 rounded-full border border-white/25 text-white px-6 py-2.5 text-sm font-semibold hover:border-white/55 transition-colors">
-                  Voir les tarifs <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-              </motion.div>
+                Tout ce dont
+              </motion.span>
+            </div>
+            <div className="overflow-hidden">
+              <motion.span
+                className="block font-sans font-semibold leading-[1.05] tracking-[-0.025em] text-white/35 font-light italic"
+                style={{ fontSize: "clamp(2rem, 5.5vw, 5.2rem)" }}
+                initial={{ y: "110%" }} animate={{ y: 0 }}
+                transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.22 }}
+              >
+                vous avez besoin.
+              </motion.span>
+            </div>
+
+            <motion.div
+              className="mt-6 flex flex-wrap items-center gap-3"
+              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.42 }}
+            >
+              <a
+                href="tel:+33767751898"
+                className="inline-flex items-center gap-2.5 rounded-full bg-white text-black pl-4 pr-5 py-2.5 text-[11px] font-semibold tracking-wide hover:bg-white/90 transition-colors"
+              >
+                <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
+                07 67 75 18 98
+              </a>
+              <Link
+                href="/tarifs"
+                className="group inline-flex items-center gap-3 rounded-full border border-white/25 text-white pl-4 pr-1.5 py-1.5 text-[11px] font-semibold tracking-wide hover:border-white/50 transition-colors"
+              >
+                <span>Voir les tarifs</span>
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15 transition-transform duration-300 group-hover:translate-x-0.5">
+                  <ArrowRight className="h-3 w-3" strokeWidth={2.5} />
+                </div>
+              </Link>
             </motion.div>
+          </div>
+
+          {/* Barre specs */}
+          <div
+            className="grid grid-cols-2 gap-y-5 border-t border-white/10 px-6 pt-5 text-white sm:px-10 md:grid-cols-4 md:px-14"
+            style={{ paddingBottom: "max(3.5rem, env(safe-area-inset-bottom, 3.5rem))" }}
+          >
+            {[
+              { label: "Services distincts", value: "5 spécialités" },
+              { label: "Disponibilité",      value: "24h/24 · 7j/7" },
+              { label: "Tarification",       value: "Prix fixe garanti" },
+              { label: "Devis",              value: "Gratuit sous 2h" },
+            ].map((s, i) => (
+              <motion.div
+                key={i}
+                className={`flex flex-col ${i !== 0 ? "md:pl-8 md:border-l md:border-white/10" : ""}`}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.55 + i * 0.07 }}
+              >
+                <span className="mb-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] uppercase text-white/30">{s.label}</span>
+                <span className="text-sm sm:text-base font-semibold tracking-tight text-white">{s.value}</span>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

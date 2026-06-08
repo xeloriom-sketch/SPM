@@ -30,7 +30,7 @@ export default function Hero() {
     >
       {/* VIDEO — composant dédié avec useEffect agressif (fix Safari autoplay) */}
       <div className="absolute inset-0 z-0">
-        <HeroVideo src={sitePath("/videos/hero.mp4")} scrollFactor={1.6} />
+        <HeroVideo src={sitePath("/videos/hero-web.mp4")} scrollFactor={1.6} />
       </div>
 
       {/* OVERLAYS */}

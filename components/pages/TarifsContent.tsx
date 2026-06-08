@@ -76,58 +76,115 @@ export default function TarifsContent() {
   return (
     <>
       {/* ── HERO ── */}
-      <section ref={heroRef} className="relative w-full bg-black overflow-hidden" style={{ minHeight: "48vh" }}>
-        {/* Vidéo 4K UHD en fond */}
-        <div className="absolute inset-0">
-          <VideoPlayer src={sitePath("/videos/11661703-uhd_3840_2160_24fps.mp4")} />
+      <section ref={heroRef} className="relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
+        {/* Vidéo fond */}
+        <div className="absolute inset-0 z-0">
+          <VideoPlayer src={sitePath("/videos/11661703-web.mp4")} />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
 
-        <div className="relative z-10 flex flex-col justify-end px-4 sm:px-10 lg:px-20 pb-14 md:pb-20 pt-32">
-          <div className="max-w-2xl">
+        {/* Overlays */}
+        <div className="pointer-events-none absolute inset-0 z-[5]">
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/55 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-[65%] bg-gradient-to-t from-black/92 via-black/45 to-transparent" />
+        </div>
+
+        {/* Grain cinématique */}
+        <div
+          className="pointer-events-none absolute inset-0 z-[6] opacity-[0.032]"
+          style={{
+            backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+            backgroundSize: "160px",
+          }}
+        />
+
+        {/* Contenu */}
+        <div className="relative z-[10] w-full mt-auto">
+          <div className="px-6 pb-5 sm:px-10 sm:pb-6 md:px-14">
             <motion.span
               initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/35 mb-4 block"
+              className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/35 mb-5 block"
             >
               Tarifs
             </motion.span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-tight mb-5">
-              <SplitText text="Estimations" mode="word" />
-              <br />
-              <span className="text-white/30">
-                <SplitText text="& Devis gratuit" mode="word" delay={0.12} />
-              </span>
-            </h1>
+
+            <div className="overflow-hidden">
+              <motion.span
+                className="block font-sans font-semibold text-white leading-[1.05] tracking-[-0.025em]"
+                style={{ fontSize: "clamp(2rem, 5.5vw, 5.2rem)" }}
+                initial={{ y: "110%" }} animate={{ y: 0 }}
+                transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.15 }}
+              >
+                Estimations
+              </motion.span>
+            </div>
+            <div className="overflow-hidden">
+              <motion.span
+                className="block font-sans font-semibold leading-[1.05] tracking-[-0.025em] text-white/35 font-light italic"
+                style={{ fontSize: "clamp(2rem, 5.5vw, 5.2rem)" }}
+                initial={{ y: "110%" }} animate={{ y: 0 }}
+                transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.22 }}
+              >
+                &amp; devis gratuit.
+              </motion.span>
+            </div>
+
             <motion.div
               initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.52, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-start gap-3 bg-white/10 border border-white/20 rounded-2xl px-4 py-3 mb-7 max-w-lg backdrop-blur-sm"
+              transition={{ delay: 0.38, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-start gap-3 bg-white/10 border border-white/20 rounded-2xl px-4 py-3 mt-5 mb-6 max-w-lg backdrop-blur-sm"
             >
               <Info className="h-4 w-4 text-white/60 shrink-0 mt-0.5" />
               <p className="text-sm text-white/65 leading-relaxed">
                 Prix <strong className="text-white/90">indicatifs</strong>. Contactez-moi pour un devis gratuit personnalisé sous 2h.
               </p>
             </motion.div>
+
             <motion.div
-              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.68, type: "spring", stiffness: 340, damping: 24 }}
-              className="flex flex-wrap gap-3"
+              className="flex flex-wrap items-center gap-3"
+              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.55 }}
             >
-              <motion.a
+              <a
                 href="tel:+33767751898"
-                className="inline-flex items-center gap-2 rounded-full bg-white text-black px-6 py-2.5 text-sm font-semibold"
-                whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={spring}
+                className="inline-flex items-center gap-2.5 rounded-full bg-white text-black pl-4 pr-5 py-2.5 text-[11px] font-semibold tracking-wide hover:bg-white/90 transition-colors"
               >
-                <Phone className="h-4 w-4" /> Devis immédiat
-              </motion.a>
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.95 }} transition={spring}>
-                <Link href="/#contact" className="inline-flex items-center gap-2 rounded-full border border-white/25 text-white px-6 py-2.5 text-sm font-semibold hover:border-white/55 transition-colors">
-                  Formulaire en ligne <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-              </motion.div>
+                <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
+                Devis immédiat
+              </a>
+              <Link
+                href="/#contact"
+                className="group inline-flex items-center gap-3 rounded-full border border-white/25 text-white pl-4 pr-1.5 py-1.5 text-[11px] font-semibold tracking-wide hover:border-white/50 transition-colors"
+              >
+                <span>Formulaire en ligne</span>
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15 transition-transform duration-300 group-hover:translate-x-0.5">
+                  <ArrowRight className="h-3 w-3" strokeWidth={2.5} />
+                </div>
+              </Link>
             </motion.div>
+          </div>
+
+          {/* Barre specs */}
+          <div
+            className="grid grid-cols-2 gap-y-5 border-t border-white/10 px-6 pt-5 text-white sm:px-10 md:grid-cols-4 md:px-14"
+            style={{ paddingBottom: "max(3.5rem, env(safe-area-inset-bottom, 3.5rem))" }}
+          >
+            {[
+              { label: "Devis",          value: "Gratuit sous 2h" },
+              { label: "Tarification",   value: "Prix fixe bloqué" },
+              { label: "Engagement",     value: "Zéro surprise" },
+              { label: "Paiement",       value: "CB · Espèces · Chèque" },
+            ].map((s, i) => (
+              <motion.div
+                key={i}
+                className={`flex flex-col ${i !== 0 ? "md:pl-8 md:border-l md:border-white/10" : ""}`}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.7 + i * 0.07 }}
+              >
+                <span className="mb-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] uppercase text-white/30">{s.label}</span>
+                <span className="text-sm sm:text-base font-semibold tracking-tight text-white">{s.value}</span>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

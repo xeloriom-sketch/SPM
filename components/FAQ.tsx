@@ -5,20 +5,22 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import SplitText from "@/components/ui/SplitText";
 import { spring, springFast, revealVariants, revealSubtle } from "@/lib/motion";
-
-const faqs = [
-  { q: "Qu'est-ce qu'un taxi conventionné ?", a: "Un taxi conventionné est agréé par la CPAM pour les transports médicaux. Les trajets peuvent être pris en charge partiellement ou totalement par l'Assurance Maladie sur prescription médicale." },
-  { q: "Comment obtenir un devis ?", a: "Remplissez le formulaire de contact ou appelez directement. Je réponds sous 2h avec une estimation de prix. Devis gratuits et sans engagement." },
-  { q: "Quelles zones couvrez-vous ?", a: "Je suis basé à Villebois et j'interviens dans l'Ain, à Lyon et en Isère. Pour les longues distances, je me déplace partout en France sur devis." },
-  { q: "Puis-je transporter des animaux ?", a: "Oui, dans une caisse de transport adaptée ou avec un harnais de sécurité. Merci de le signaler à la réservation." },
-  { q: "Puis-je réserver à l'avance ?", a: "Absolument — je vous encourage même à réserver tôt pour les aéroports et rendez-vous médicaux. Les réservations de dernière minute sont aussi acceptées selon disponibilité." },
-  { q: "Quels modes de paiement acceptez-vous ?", a: "Espèces, carte bancaire (CB, Visa, Mastercard) et chèque. Pour les transports médicaux, la prise en charge CPAM est gérée directement." },
-];
+import { useSettings } from "@/lib/settings-context";
 
 export default function FAQ() {
+  const s = useSettings();
   const [open, setOpen] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const faqs = [
+    { q: s.faq1_q, a: s.faq1_a },
+    { q: s.faq2_q, a: s.faq2_a },
+    { q: s.faq3_q, a: s.faq3_a },
+    { q: s.faq4_q, a: s.faq4_a },
+    { q: s.faq5_q, a: s.faq5_a },
+    { q: s.faq6_q, a: s.faq6_a },
+  ];
 
   return (
     <section id="faq" className="w-full bg-[#f8f9fa] py-20 md:py-28 font-sans">

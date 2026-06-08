@@ -6,6 +6,7 @@ import { Phone, Mail, MapPin, AlertCircle, ArrowRight, CheckCircle } from "lucid
 import SplitText from "@/components/ui/SplitText";
 import { getSupabase } from "@/lib/supabase-browser";
 import { spring, springFast, revealVariants, revealSubtle } from "@/lib/motion";
+import { useSettings } from "@/lib/settings-context";
 
 const serviceOptions = [
   "Transfert aéroport / gare",
@@ -19,28 +20,29 @@ const serviceOptions = [
 const inputClass =
   "w-full rounded-[12px] border border-black/[0.08] bg-[#f8f9fa] px-4 py-3 text-xs text-black outline-none transition placeholder:text-black/25 focus:border-black/25 focus:bg-white focus:ring-2 focus:ring-black/5";
 
-const infoCards = [
-  {
-    href: "tel:0767751898",
-    icon: Phone,
-    solid: true,
-    title: "Appel direct",
-    sub: "07 67 75 18 98 — Disponible maintenant",
-  },
-  {
-    href: "mailto:contact@spm-taxi.fr",
-    icon: Mail,
-    solid: false,
-    title: "Email",
-    sub: "contact@spm-taxi.fr",
-  },
-];
-
 export default function Contact() {
+  const s = useSettings();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+
+  const infoCards = [
+    {
+      href: `tel:${s.contact_phone.replace(/[\s.-]/g, "")}`,
+      icon: Phone,
+      solid: true,
+      title: "Appel direct",
+      sub: `${s.contact_phone} — Disponible maintenant`,
+    },
+    {
+      href: `mailto:${s.contact_email}`,
+      icon: Mail,
+      solid: false,
+      title: "Email",
+      sub: s.contact_email,
+    },
+  ];
 
   return (
     <section id="contact" className="w-full bg-white py-16 sm:py-20 md:py-28 font-sans">
@@ -101,7 +103,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-xs font-bold text-black tracking-tight">Localisation</p>
-                <p className="text-[11px] text-[#888888]">951 route des hauts fourneaux, 01150 Villebois</p>
+                <p className="text-[11px] text-[#888888]">{s.contact_address}</p>
               </div>
             </motion.div>
 

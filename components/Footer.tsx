@@ -1,6 +1,7 @@
 "use client";
 
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+import { useSettings } from "@/lib/settings-context";
 
 const navLinks = [
   { label: "Accueil", href: "#accueil" },
@@ -31,6 +32,8 @@ const legalLinks = [
 ];
 
 export default function Footer() {
+  const s = useSettings();
+
   return (
       <footer className="w-full bg-black text-white pt-14 sm:pt-20 pb-6 overflow-hidden font-sans relative">
         <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
@@ -52,10 +55,10 @@ export default function Footer() {
 
             {/* Coordonnées / Réseaux à Droite (Comme les icônes de l'image_49bac8.png) */}
             <div className="flex items-center gap-6 text-white/60">
-              <a href="tel:0767751898" className="hover:text-white transition-colors" title="Téléphone">
+              <a href={`tel:${s.contact_phone.replace(/[\s.-]/g, "")}`} className="hover:text-white transition-colors" title="Téléphone">
                 <Phone className="h-4 w-4 stroke-[1.5]" />
               </a>
-              <a href="mailto:contact@taxi-tignieu.fr" className="hover:text-white transition-colors" title="Email">
+              <a href={`mailto:${s.contact_email}`} className="hover:text-white transition-colors" title="Email">
                 <Mail className="h-4 w-4 stroke-[1.5]" />
               </a>
               <a href="#" className="hover:text-white transition-colors">

@@ -4,21 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import SplitText from "@/components/ui/SplitText";
 import { spring, revealSubtle } from "@/lib/motion";
-
-const testimonials = [
-  { name: "F.I TAXI",           stars: 5, date: "il y a 6 mois",  text: "Excellent collaborateur. Toujours ponctuel, sérieux et respectueux des clients. Travail de qualité, je recommande sans hésiter." },
-  { name: "sabrina selini",     stars: 5, date: "il y a 10 mois", text: "Sérieux, ponctuel, disponible. Trajet très agréable. Conventionné pour tous les trajets médicaux. Je recommande vivement." },
-  { name: "Kãte Dbno",         stars: 4, date: "il y a 6 mois",  text: "Taxi très sérieux, trajet agréable même pour un enfant 😊 Chauffeur à l'écoute.. je recommande." },
-  { name: "Chloé Burguiere",   stars: 5, date: "il y a 9 mois",  text: "Taxi très accueillant, accepte les personnes en situation de handicap. Je recommande." },
-  { name: "SOSO 01",           stars: 5, date: "il y a 11 mois", text: "Taxi très sérieux et ponctuel, à l'écoute de ses clients. Vous pouvez y aller les yeux fermés." },
-  { name: "Khalid El ouazzani",stars: 5, date: "il y a 11 mois", text: "Société professionnelle, chauffeur ponctuel. Trajet agréable. Je recommande vivement." },
-  { name: "Ibrahim za",        stars: 5, date: "il y a 11 mois", text: "Taxi sérieux, gentil, à l'heure. Je recommande 👍🏾" },
-  { name: "ALHAMBRA WEB",      stars: 5, date: "il y a 3 jours", text: "Personne très agréable." },
-  { name: "z",                 stars: 5, date: "il y a 8 mois",  text: "Très réactif." },
-];
-
-const row1 = [...testimonials, ...testimonials];
-const row2 = [...testimonials, ...testimonials].reverse();
+import { useSettings } from "@/lib/settings-context";
 
 function Stars({ count }: { count: number }) {
   return (
@@ -30,7 +16,7 @@ function Stars({ count }: { count: number }) {
   );
 }
 
-function TestimonialCard({ t, variant = "light" }: { t: typeof testimonials[0]; variant?: "light" | "gray" }) {
+function TestimonialCard({ t, variant = "light" }: { t: { name: string; stars: number; date: string; text: string }; variant?: "light" | "gray" }) {
   return (
     <motion.div
       className={`w-[260px] sm:w-[290px] shrink-0 rounded-[18px] border p-4 sm:p-5 cursor-default ${
@@ -61,8 +47,24 @@ function TestimonialCard({ t, variant = "light" }: { t: typeof testimonials[0]; 
 }
 
 export default function Testimonials() {
+  const s = useSettings();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  const testimonials = [
+    { name: s.testimonial1_name, stars: parseInt(s.testimonial1_stars), date: s.testimonial1_date, text: s.testimonial1_text },
+    { name: s.testimonial2_name, stars: parseInt(s.testimonial2_stars), date: s.testimonial2_date, text: s.testimonial2_text },
+    { name: s.testimonial3_name, stars: parseInt(s.testimonial3_stars), date: s.testimonial3_date, text: s.testimonial3_text },
+    { name: s.testimonial4_name, stars: parseInt(s.testimonial4_stars), date: s.testimonial4_date, text: s.testimonial4_text },
+    { name: s.testimonial5_name, stars: parseInt(s.testimonial5_stars), date: s.testimonial5_date, text: s.testimonial5_text },
+    { name: s.testimonial6_name, stars: parseInt(s.testimonial6_stars), date: s.testimonial6_date, text: s.testimonial6_text },
+    { name: s.testimonial7_name, stars: parseInt(s.testimonial7_stars), date: s.testimonial7_date, text: s.testimonial7_text },
+    { name: s.testimonial8_name, stars: parseInt(s.testimonial8_stars), date: s.testimonial8_date, text: s.testimonial8_text },
+    { name: s.testimonial9_name, stars: parseInt(s.testimonial9_stars), date: s.testimonial9_date, text: s.testimonial9_text },
+  ];
+
+  const row1 = [...testimonials, ...testimonials];
+  const row2 = [...testimonials, ...testimonials].reverse();
 
   return (
     <section className="w-full overflow-hidden bg-white py-20 md:py-28 font-sans">
@@ -92,8 +94,8 @@ export default function Testimonials() {
                 </motion.span>
               ))}
             </div>
-            <span className="text-sm font-semibold text-black">4,9</span>
-            <span className="text-xs text-[#888888]">· 9 avis Google vérifiés</span>
+            <span className="text-sm font-semibold text-black">{s.google_rating}</span>
+            <span className="text-xs text-[#888888]">· {s.google_review_count} avis Google vérifiés</span>
           </motion.div>
         </div>
       </div>

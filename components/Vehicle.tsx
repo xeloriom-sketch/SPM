@@ -6,21 +6,13 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import SplitText from "@/components/ui/SplitText";
 import { spring, springFast, revealVariants, revealSubtle } from "@/lib/motion";
+import { useSettings } from "@/lib/settings-context";
 
 const specs = [
   { label: "Capacité",      value: "7 Sièges" },
   { label: "Disponibilité", value: "24H/24" },
   { label: "Équipement",    value: "Remorque" },
   { label: "Distance",      value: "∞ KM" },
-];
-
-const features = [
-  "Climatisation bi-zone automatique",
-  "Wi-Fi haute vitesse à bord",
-  "Attache-remorque homologuée",
-  "Chargement USB & sans fil",
-  "Assurance professionnelle taxi",
-  "Grand espace bagage coffre",
 ];
 
 const views = [
@@ -31,6 +23,17 @@ const views = [
 ];
 
 export default function Vehicle() {
+  const s = useSettings();
+
+  const features = [
+    s.vehicle_feature1,
+    s.vehicle_feature2,
+    s.vehicle_feature3,
+    s.vehicle_feature4,
+    s.vehicle_feature5,
+    s.vehicle_feature6,
+  ];
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardRef    = useRef<HTMLDivElement>(null);
   const isInView   = useInView(sectionRef, { once: true, margin: "-80px" });
@@ -91,9 +94,7 @@ export default function Vehicle() {
             animate={isInView ? "visible" : "hidden"}
             custom={0.28}
           >
-            Montez à bord du Volkswagen Tiguan Allspace 7 places. Confort premium,
-            attache-remorque homologuée, Wi-Fi à bord — chaque trajet est une
-            expérience extraordinaire.
+            {s.vehicle_intro}
           </motion.p>
         </div>
 

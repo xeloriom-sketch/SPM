@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import FloatingCallButton from "@/components/FloatingCallButton";
+import { SettingsProvider } from "@/lib/settings-context";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.spm-taxi.fr"),
@@ -93,8 +94,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="ICBM" content="45.8, 5.45" />
       </head>
       <body className="bg-white text-[#080808] overflow-x-hidden noise antialiased">
-        {children}
-        <FloatingCallButton />
+        <SettingsProvider>
+          {children}
+          <FloatingCallButton />
+        </SettingsProvider>
       </body>
     </html>
   );

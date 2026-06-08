@@ -6,18 +6,12 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import SplitText from "@/components/ui/SplitText";
 import { spring, springBouncy, springFast, revealVariants, revealSubtle } from "@/lib/motion";
+import { useSettings } from "@/lib/settings-context";
 
 const stats = [
   { value: 4,    suffix: "",    label: "Services exclusifs" },
   { value: 47,   suffix: "+",   label: "Avis 5 étoiles" },
   { value: 7,    suffix: "j/7", label: "Disponibilité" },
-];
-
-const services = [
-  { number: "01", title: "Transferts Gare & Aéroport", desc: "Lyon Saint-Exupéry, Part-Dieu, Perrache, Genève. Prise en charge à domicile, suivi des vols en temps réel." },
-  { number: "02", title: "Colis & Courriers Urgents", desc: "Livraison rapide et sécurisée de colis et lettres urgentes. Traçabilité garantie partout en France." },
-  { number: "03", title: "Remorque à Disposition", desc: "Attache-remorque homologuée. Transport de matériel lourd, véhicules en panne, déménagements." },
-  { number: "04", title: "Déplacements France Entière", desc: "De Lyon à Paris, Marseille, Bordeaux, Genève. Longue distance sur devis, confort absolu." },
 ];
 
 function Counter({ value, suffix, isInView }: { value: number; suffix: string; isInView: boolean }) {
@@ -39,8 +33,16 @@ function Counter({ value, suffix, isInView }: { value: number; suffix: string; i
 }
 
 export default function Services() {
+  const s = useSettings();
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
+
+  const services = [
+    { number: "01", title: s.service1_title, desc: s.service1_desc },
+    { number: "02", title: s.service2_title, desc: s.service2_desc },
+    { number: "03", title: s.service3_title, desc: s.service3_desc },
+    { number: "04", title: s.service4_title, desc: s.service4_desc },
+  ];
 
   return (
     <section ref={containerRef} id="services" className="w-full overflow-hidden bg-[#f8f9fa] py-20 md:py-36 font-sans">
@@ -52,10 +54,10 @@ export default function Services() {
           <div className="lg:col-span-5 flex flex-col justify-center z-10">
             <div className="mb-7">
               <h2 className="font-sans font-medium text-black tracking-tight leading-tight text-4xl sm:text-5xl lg:text-[3.4rem]">
-                <SplitText text="SPM — Taxi" delay={0} />
+                <SplitText text={s.services_title_line1} delay={0} />
                 <br />
                 <span className="text-black/30">
-                  <SplitText text="Conventionné" delay={0.1} />
+                  <SplitText text={s.services_title_line2} delay={0.1} />
                 </span>
               </h2>
             </div>
@@ -67,9 +69,7 @@ export default function Services() {
               animate={isInView ? "visible" : "hidden"}
               custom={0.28}
             >
-              Volkswagen Tiguan 7 places, conventionné CPAM. Disponible 7j/7 pour vos
-              transferts aéroport, transports médicaux, colis urgents et déplacements
-              longue distance dans toute la France.
+              {s.services_intro}
             </motion.p>
 
             {/* Stats */}
@@ -142,9 +142,9 @@ export default function Services() {
 
         {/* Service cards */}
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((s, i) => (
+          {services.map((svc, i) => (
             <motion.a
-              key={s.number}
+              key={svc.number}
               href="#contact"
               className="group flex flex-col justify-between rounded-[22px] border border-black/[0.06] bg-white p-7"
               variants={revealVariants}
@@ -157,12 +157,12 @@ export default function Services() {
             >
               <div>
                 <span className="mb-5 block text-[10px] font-bold tracking-[0.25em] text-black/22 uppercase">
-                  {s.number}
+                  {svc.number}
                 </span>
                 <h3 className="font-sans text-base font-semibold tracking-tight text-black leading-snug mb-3">
-                  {s.title}
+                  {svc.title}
                 </h3>
-                <p className="text-xs leading-relaxed text-[#777]">{s.desc}</p>
+                <p className="text-xs leading-relaxed text-[#777]">{svc.desc}</p>
               </div>
               <div className="mt-7 flex h-8 w-8 items-center justify-center rounded-full border border-black/10 text-black/28 transition-all duration-300 group-hover:border-black group-hover:bg-black group-hover:text-white">
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -175,4 +175,3 @@ export default function Services() {
     </section>
   );
 }
-

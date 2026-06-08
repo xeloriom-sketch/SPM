@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ChevronDown, Phone, ArrowRight } from "lucide-react";
 import { sitePath } from "@/lib/site-path";
 import HeroVideo from "@/components/HeroVideo";
+import { useSettings } from "@/lib/settings-context";
 
 const LOADER_OUT = 3.0;
 
@@ -22,6 +23,8 @@ const specs = [
 ];
 
 export default function Hero() {
+  const s = useSettings();
+
   return (
     <div id="accueil" style={{ height: "160vh" }}>
     <section
@@ -63,7 +66,7 @@ export default function Hero() {
               animate={{ y: 0 }}
               transition={{ ...spring, delay: LOADER_OUT }}
             >
-              Nous allons
+              {s.hero_line1}
             </motion.span>
           </div>
 
@@ -76,8 +79,7 @@ export default function Hero() {
               animate={{ y: 0 }}
               transition={{ ...spring, delay: LOADER_OUT + 0.07 }}
             >
-              où vous{" "}
-              <span className="font-light italic text-white/40">voulez.</span>
+              {s.hero_line2}
             </motion.span>
           </div>
 
@@ -88,7 +90,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...spring, delay: LOADER_OUT + 0.22 }}
           >
-            SPM · Villebois · Lyon · Ain · Isère
+            {s.hero_subtitle}
           </motion.p>
 
           {/* CTAs */}
@@ -99,11 +101,11 @@ export default function Hero() {
             transition={{ ...spring, delay: LOADER_OUT + 0.35 }}
           >
             <a
-              href="tel:+33767751898"
+              href={`tel:${s.contact_phone.replace(/[\s.-]/g, "")}`}
               className="inline-flex items-center gap-2.5 rounded-full bg-white text-black pl-4 pr-5 py-2.5 text-[11px] font-semibold tracking-wide hover:bg-white/90 transition-colors"
             >
               <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
-              07 67 75 18 98
+              {s.contact_phone}
             </a>
             <a
               href="#contact"
@@ -122,7 +124,7 @@ export default function Hero() {
           className="grid grid-cols-2 gap-y-5 border-t border-white/10 px-6 pt-5 text-white sm:px-10 md:grid-cols-4 md:px-14"
           style={{ paddingBottom: "max(3.5rem, env(safe-area-inset-bottom, 3.5rem))" }}
         >
-          {specs.map((s, i) => (
+          {specs.map((spec, i) => (
             <motion.div
               key={i}
               className={`flex flex-col ${i !== 0 ? "md:pl-8 md:border-l md:border-white/10" : ""}`}
@@ -131,10 +133,10 @@ export default function Hero() {
               transition={{ ...spring, delay: LOADER_OUT + 0.45 + i * 0.07 }}
             >
               <span className="mb-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] uppercase text-white/30">
-                {s.label}
+                {spec.label}
               </span>
               <span className="text-sm sm:text-base font-semibold tracking-tight text-white">
-                {s.value}
+                {spec.value}
               </span>
             </motion.div>
           ))}

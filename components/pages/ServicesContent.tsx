@@ -8,6 +8,7 @@ import HeroVideo from "@/components/HeroVideo";
 import SplitText from "@/components/ui/SplitText";
 import { revealVariants, revealSubtle, spring } from "@/lib/motion";
 import { sitePath } from "@/lib/site-path";
+import { useSettings } from "@/lib/settings-context";
 
 const services = [
   {
@@ -53,6 +54,8 @@ const services = [
 ];
 
 export default function ServicesContent() {
+  const s = useSettings();
+
   const heroRef  = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const ctaRef   = useRef<HTMLElement>(null);
@@ -124,11 +127,11 @@ export default function ServicesContent() {
               transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.42 }}
             >
               <a
-                href="tel:+33767751898"
+                href={`tel:${s.contact_phone.replace(/[\s.-]/g, "")}`}
                 className="inline-flex items-center gap-2.5 rounded-full bg-white text-black pl-4 pr-5 py-2.5 text-[11px] font-semibold tracking-wide hover:bg-white/90 transition-colors"
               >
                 <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
-                07 67 75 18 98
+                {s.contact_phone}
               </a>
               <Link
                 href="/tarifs"
@@ -152,15 +155,15 @@ export default function ServicesContent() {
               { label: "Disponibilité",      value: "24h/24 · 7j/7" },
               { label: "Tarification",       value: "Prix fixe garanti" },
               { label: "Devis",              value: "Gratuit sous 2h" },
-            ].map((s, i) => (
+            ].map((item, i) => (
               <motion.div
                 key={i}
                 className={`flex flex-col ${i !== 0 ? "md:pl-8 md:border-l md:border-white/10" : ""}`}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.55 + i * 0.07 }}
               >
-                <span className="mb-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] uppercase text-white/30">{s.label}</span>
-                <span className="text-sm sm:text-base font-semibold tracking-tight text-white">{s.value}</span>
+                <span className="mb-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] uppercase text-white/30">{item.label}</span>
+                <span className="text-sm sm:text-base font-semibold tracking-tight text-white">{item.value}</span>
               </motion.div>
             ))}
           </div>
@@ -171,36 +174,36 @@ export default function ServicesContent() {
       {/* ── SERVICE CARDS ── */}
       <section className="bg-white py-14 md:py-20">
         <div ref={cardsRef} className="max-w-5xl mx-auto px-4 sm:px-8 lg:px-12 space-y-4">
-          {services.map((s, i) => (
+          {services.map((svc, i) => (
             <motion.div
-              key={s.title}
+              key={svc.title}
               variants={revealVariants} initial="hidden" animate={cardsIn ? "visible" : "hidden"} custom={i * 0.07}
               whileHover={{ y: -4, scale: 1.003, boxShadow: "0 16px 48px rgba(0,0,0,0.1)" }}
               whileTap={{ scale: 0.998 }}
               transition={spring}
-              className={`rounded-[24px] overflow-hidden border border-black/[0.06] group ${s.dark ? "bg-black text-white" : "bg-[#f8f9fa] text-black"}`}
+              className={`rounded-[24px] overflow-hidden border border-black/[0.06] group ${svc.dark ? "bg-black text-white" : "bg-[#f8f9fa] text-black"}`}
             >
               <div className="p-6 sm:p-8">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-5 mb-5">
                   <div className="flex items-center gap-4">
                     <motion.div
-                      className={`grid h-12 w-12 shrink-0 place-items-center rounded-full ${s.dark ? "bg-white/10" : "bg-black"}`}
+                      className={`grid h-12 w-12 shrink-0 place-items-center rounded-full ${svc.dark ? "bg-white/10" : "bg-black"}`}
                       whileHover={{ scale: 1.15, rotate: 6 }} transition={spring}
                     >
-                      <s.icon className="h-5 w-5 text-white" strokeWidth={1.8} />
+                      <svc.icon className="h-5 w-5 text-white" strokeWidth={1.8} />
                     </motion.div>
                     <div>
-                      <span className={`text-[10px] font-bold tracking-[0.25em] uppercase ${s.dark ? "text-white/30" : "text-black/30"}`}>
+                      <span className={`text-[10px] font-bold tracking-[0.25em] uppercase ${svc.dark ? "text-white/30" : "text-black/30"}`}>
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <h2 className="text-lg font-semibold tracking-tight">{s.title}</h2>
+                      <h2 className="text-lg font-semibold tracking-tight">{svc.title}</h2>
                     </div>
                   </div>
                   <motion.div whileHover={{ x: 3 }} transition={spring} className="sm:shrink-0">
                     <Link
-                      href={s.href}
+                      href={svc.href}
                       className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] font-semibold tracking-wide border transition-colors ${
-                        s.dark
+                        svc.dark
                           ? "border-white/20 text-white hover:bg-white hover:text-black"
                           : "border-black/15 text-black hover:bg-black hover:text-white"
                       }`}
@@ -210,17 +213,17 @@ export default function ServicesContent() {
                   </motion.div>
                 </div>
 
-                <p className={`text-sm leading-relaxed mb-5 ${s.dark ? "text-white/60" : "text-[#555]"}`}>{s.desc}</p>
+                <p className={`text-sm leading-relaxed mb-5 ${svc.dark ? "text-white/60" : "text-[#555]"}`}>{svc.desc}</p>
 
                 <div className="flex flex-wrap gap-2">
-                  {s.features.map((f, fi) => (
+                  {svc.features.map((f, fi) => (
                     <motion.span
                       key={f}
                       initial={{ opacity: 0, scale: 0.8, y: 6 }}
                       animate={cardsIn ? { opacity: 1, scale: 1, y: 0 } : {}}
                       transition={{ delay: i * 0.07 + fi * 0.04 + 0.16, type: "spring", stiffness: 360, damping: 22 }}
                       className={`text-[11px] font-medium px-3 py-1.5 rounded-full ${
-                        s.dark ? "bg-white/10 text-white/70" : "bg-black/[0.05] text-black/60"
+                        svc.dark ? "bg-white/10 text-white/70" : "bg-black/[0.05] text-black/60"
                       }`}
                     >
                       {f}
@@ -242,11 +245,11 @@ export default function ServicesContent() {
           <p className="text-white/45 text-sm mb-10">Contactez-moi, je m&apos;adapte à toutes les situations.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <motion.a
-              href="tel:+33767751898"
+              href={`tel:${s.contact_phone.replace(/[\s.-]/g, "")}`}
               className="inline-flex items-center gap-2 rounded-full bg-white text-black px-7 py-3 text-sm font-semibold"
               whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={spring}
             >
-              <Phone className="h-4 w-4" /> 07 67 75 18 98
+              <Phone className="h-4 w-4" /> {s.contact_phone}
             </motion.a>
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.95 }} transition={spring}>
               <Link href="/#contact" className="inline-flex items-center gap-2 rounded-full border border-white/25 text-white px-7 py-3 text-sm font-semibold hover:border-white/55 transition-colors">

@@ -6,13 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Star, Award, Clock, MapPin, ArrowRight } from "lucide-react";
 import { revealVariants, revealSubtle, spring } from "@/lib/motion";
-
-const values = [
-  { icon: Clock,  title: "Ponctualité",      desc: "Je suis toujours à l'heure. Chaque trajet est préparé à l'avance pour anticiper trafic et imprévus." },
-  { icon: Star,   title: "Excellence",        desc: "4,9/5 sur Google. Chaque client mérite le meilleur service, du premier appel à la destination finale." },
-  { icon: Award,  title: "Professionnalisme", desc: "Carte professionnelle, assurance taxi, agrément CPAM. Toutes les certifications pour votre sécurité." },
-  { icon: MapPin, title: "Ancrage local",     desc: "Né et basé dans l'Ain, je connais chaque route, chaque raccourci, chaque particularité du territoire." },
-];
+import { useSettings } from "@/lib/settings-context";
 
 const certifications = [
   "Carte professionnelle de taxi",
@@ -42,13 +36,6 @@ const idealFor = [
   "Transferts VIP et entreprises",
 ];
 
-const stats = [
-  { value: "4,9★", label: "Note Google",   sub: "9 avis vérifiés" },
-  { value: "7j/7", label: "Disponibilité", sub: "Y compris jours fériés" },
-  { value: "01150", label: "Code postal",  sub: "Villebois, Ain" },
-  { value: "100%", label: "CPAM",          sub: "Agrément Assurance Maladie" },
-];
-
 const zones = [
   { region: "Ain (01)", cities: "Villebois, Ambérieu-en-Bugey, Bourg-en-Bresse, Belley, Montluel, Meximieux, Pérouges" },
   { region: "Rhône (69)", cities: "Lyon, Villeurbanne, Bron, Décines, Meyzieu, Saint-Priest, Vaulx-en-Velin" },
@@ -56,6 +43,22 @@ const zones = [
 ];
 
 export default function AProposContent() {
+  const s = useSettings();
+
+  const values = [
+    { icon: Clock,  title: "Ponctualité",      desc: "Je suis toujours à l'heure. Chaque trajet est préparé à l'avance pour anticiper trafic et imprévus." },
+    { icon: Star,   title: "Excellence",        desc: `${s.google_rating}/5 sur Google. Chaque client mérite le meilleur service, du premier appel à la destination finale.` },
+    { icon: Award,  title: "Professionnalisme", desc: "Carte professionnelle, assurance taxi, agrément CPAM. Toutes les certifications pour votre sécurité." },
+    { icon: MapPin, title: "Ancrage local",     desc: "Né et basé dans l'Ain, je connais chaque route, chaque raccourci, chaque particularité du territoire." },
+  ];
+
+  const stats = [
+    { value: `${s.google_rating}★`, label: "Note Google",   sub: `${s.google_review_count} avis vérifiés` },
+    { value: "7j/7", label: "Disponibilité", sub: "Y compris jours fériés" },
+    { value: "01150", label: "Code postal",  sub: "Villebois, Ain" },
+    { value: "100%", label: "CPAM",          sub: "Agrément Assurance Maladie" },
+  ];
+
   const valRef  = useRef<HTMLElement>(null);
   const carRef  = useRef<HTMLElement>(null);
   const certRef = useRef<HTMLElement>(null);
@@ -142,11 +145,11 @@ export default function AProposContent() {
               transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.42 }}
             >
               <a
-                href="tel:+33767751898"
+                href={`tel:${s.contact_phone.replace(/[\s.-]/g, "")}`}
                 className="inline-flex items-center gap-2.5 rounded-full bg-white text-black pl-4 pr-5 py-2.5 text-[11px] font-semibold tracking-wide hover:bg-white/90 transition-colors"
               >
                 <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
-                07 67 75 18 98
+                {s.contact_phone}
               </a>
               <Link
                 href="/#contact"
@@ -166,19 +169,19 @@ export default function AProposContent() {
             style={{ paddingBottom: "max(3.5rem, env(safe-area-inset-bottom, 3.5rem))" }}
           >
             {[
-              { label: "Note Google",    value: "4,9★ · 9 avis" },
+              { label: "Note Google",    value: `${s.google_rating}★ · ${s.google_review_count} avis` },
               { label: "Disponibilité",  value: "7j/7 — 24h/24" },
               { label: "Localisation",   value: "Villebois (01)" },
               { label: "Agrément",       value: "CPAM 100%" },
-            ].map((s, i) => (
+            ].map((item, i) => (
               <motion.div
                 key={i}
                 className={`flex flex-col ${i !== 0 ? "md:pl-8 md:border-l md:border-white/10" : ""}`}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ type: "spring", stiffness: 280, damping: 22, mass: 0.75, delay: 0.55 + i * 0.07 }}
               >
-                <span className="mb-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] uppercase text-white/30">{s.label}</span>
-                <span className="text-sm sm:text-base font-semibold tracking-tight text-white">{s.value}</span>
+                <span className="mb-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] uppercase text-white/30">{item.label}</span>
+                <span className="text-sm sm:text-base font-semibold tracking-tight text-white">{item.value}</span>
               </motion.div>
             ))}
           </div>
@@ -190,17 +193,17 @@ export default function AProposContent() {
       <section className="bg-black border-t border-white/[0.06]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/[0.07]">
-            {stats.map((s, i) => (
+            {stats.map((stat, i) => (
               <motion.div
-                key={s.label}
+                key={stat.label}
                 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + i * 0.08, type: "spring", stiffness: 360, damping: 24 }}
                 className="flex flex-col items-center justify-center py-8 px-4 text-center"
                 whileHover={{ backgroundColor: "rgba(255,255,255,0.04)" }}
               >
-                <span className="text-3xl sm:text-4xl font-black tracking-tight text-white mb-1">{s.value}</span>
-                <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/35">{s.label}</span>
-                <span className="text-[10px] text-white/20 mt-0.5">{s.sub}</span>
+                <span className="text-3xl sm:text-4xl font-black tracking-tight text-white mb-1">{stat.value}</span>
+                <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/35">{stat.label}</span>
+                <span className="text-[10px] text-white/20 mt-0.5">{stat.sub}</span>
               </motion.div>
             ))}
           </div>
@@ -217,17 +220,13 @@ export default function AProposContent() {
               transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <p className="text-base text-[#444] leading-relaxed mb-5">
-                Bienvenue chez <strong>SPM Taxi</strong>, taxi conventionné basé à <strong>Villebois (Ain 01)</strong>.
-                Je propose un service de transport professionnel, ponctuel et confortable dans toute la région
-                Auvergne-Rhône-Alpes et partout en France sur devis.
+                {s.about_bio_1}
               </p>
               <p className="text-base text-[#444] leading-relaxed mb-5">
-                Mon Volkswagen Tiguan Allspace 7 places est équipé pour tous vos besoins : transferts aéroport,
-                transports médicaux conventionnés CPAM, colis urgents ou déplacements longue distance.
+                {s.about_bio_2}
               </p>
               <p className="text-base text-[#444] leading-relaxed">
-                Avec <strong>4,9/5 sur Google</strong> et une disponibilité 7j/7 — y compris les jours fériés et la nuit —
-                SPM Taxi est votre partenaire de mobilité de confiance dans l&apos;Ain et au-delà.
+                {s.about_bio_3}
               </p>
             </motion.div>
             <div className="lg:col-span-2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#f8f9fa]">
@@ -392,14 +391,14 @@ export default function AProposContent() {
           variants={revealVariants} initial="hidden" animate={ctaIn ? "visible" : "hidden"} custom={0}
         >
           <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-3">Prêt à voyager avec SPM ?</h2>
-          <p className="text-sm text-[#555] mb-10">Disponible maintenant · Réponse sous 2h · 4,9★ Google</p>
+          <p className="text-sm text-[#555] mb-10">Disponible maintenant · Réponse sous 2h · {s.google_rating}★ Google</p>
           <div className="flex flex-wrap justify-center gap-4">
             <motion.a
-              href="tel:+33767751898"
+              href={`tel:${s.contact_phone.replace(/[\s.-]/g, "")}`}
               className="inline-flex items-center gap-2 rounded-full bg-black text-white px-7 py-3 text-sm font-semibold"
               whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={spring}
             >
-              <Phone className="h-4 w-4" /> 07 67 75 18 98
+              <Phone className="h-4 w-4" /> {s.contact_phone}
             </motion.a>
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.95 }} transition={spring}>
               <Link href="/#contact" className="inline-flex items-center gap-2 rounded-full border border-black/15 text-black px-7 py-3 text-sm font-semibold hover:border-black/30 transition-colors">

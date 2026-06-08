@@ -153,7 +153,7 @@ export default function Services() {
                 alt="SPM Volkswagen Tiguan Allspace 7 places"
                 fill
                 priority
-                quality={95}
+                unoptimized
                 sizes="(max-width: 1024px) 100vw, 55vw"
                 className="object-contain object-right"
                 style={{

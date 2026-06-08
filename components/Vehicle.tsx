@@ -149,7 +149,7 @@ export default function Vehicle() {
               alt="SPM Volkswagen Tiguan Allspace 7 places taxi"
               fill
               priority
-              quality={95}
+              unoptimized
               className="object-contain object-center"
               style={{ filter: "drop-shadow(0 28px 45px rgba(0,0,0,0.12))" }}
             />

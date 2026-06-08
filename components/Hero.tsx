@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { sitePath } from "@/lib/site-path";
 
@@ -40,8 +40,7 @@ const specs = [
 ];
 
 export default function Hero() {
-  const containerRef = useRef<HTMLElement>(null);
-  const videoRef     = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   /* ── Safari autoplay fix ── */
   useEffect(() => {
@@ -77,27 +76,14 @@ export default function Hero() {
     };
   }, []);
 
-  /* ── Parallax scroll ── */
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const rawScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const videoScale = useSpring(rawScale, { stiffness: 32, damping: 14 });
-
   return (
     <section
-      ref={containerRef}
       id="accueil"
       className="relative w-full overflow-hidden bg-black flex flex-col select-none"
       style={{ height: "100svh" }}
     >
-      {/* ── VIDEO ── */}
-      <motion.div
-        className="absolute inset-0 z-0 will-change-transform"
-        style={{ scale: videoScale }}
-      >
+      {/* ── VIDEO — statique, aucun transform pour 60fps ── */}
+      <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
           className="h-full w-full object-cover"
@@ -110,7 +96,7 @@ export default function Hero() {
           disablePictureInPicture
           style={{ pointerEvents: "none" }}
         />
-      </motion.div>
+      </div>
 
       {/* ── OVERLAYS ── */}
       <div className="pointer-events-none absolute inset-0 z-[5]">

@@ -87,8 +87,8 @@ export default function AProposContent() {
 
         {/* Overlays */}
         <div className="pointer-events-none absolute inset-0 z-[5]">
-          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/55 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 h-[65%] bg-gradient-to-t from-black/92 via-black/45 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/75 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-[65%] bg-gradient-to-t from-black via-black/75 to-transparent" />
         </div>
 
         {/* Grain cinématique */}

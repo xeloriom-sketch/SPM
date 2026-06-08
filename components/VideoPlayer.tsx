@@ -9,7 +9,6 @@ export default function VideoPlayer({ src }: { src: string }) {
     const v = ref.current;
     if (!v) return;
 
-    // Force muted (React ne sérialise pas l'attribut muted en SSR → navigateur bloque)
     v.muted = true;
     v.defaultMuted = true;
 
@@ -18,29 +17,24 @@ export default function VideoPlayer({ src }: { src: string }) {
       v.play().catch(() => {});
     };
 
-    // Tentative immédiate
     tryPlay();
+    v.addEventListener("canplay",      tryPlay, { once: true });
+    v.addEventListener("loadeddata",   tryPlay, { once: true });
+    v.addEventListener("loadedmetadata", tryPlay, { once: true });
 
-    // Tentative dès que les données vidéo sont prêtes
-    v.addEventListener("canplay",    tryPlay, { once: true });
-    v.addEventListener("loadeddata", tryPlay, { once: true });
+    const observer = new IntersectionObserver(
+      (entries) => { if (entries[0].isIntersecting) tryPlay(); },
+      { threshold: 0.01 }
+    );
+    observer.observe(v);
 
-    // Tentative après la fin du loader (~3.4s) — timing critique pour iOS Safari
-    const t1 = setTimeout(tryPlay, 2500);
-    const t2 = setTimeout(tryPlay, 3600);
-
-    // Fallback : premier geste utilisateur (scroll, tap, clic)
-    const onInteract = () => tryPlay();
-    window.addEventListener("scroll",     onInteract, { once: true, passive: true });
-    window.addEventListener("touchstart", onInteract, { once: true, passive: true });
-    window.addEventListener("click",      onInteract, { once: true });
+    const t1 = setTimeout(tryPlay, 800);
+    const t2 = setTimeout(tryPlay, 2000);
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
-      window.removeEventListener("scroll",     onInteract);
-      window.removeEventListener("touchstart", onInteract);
-      window.removeEventListener("click",      onInteract);
+      observer.disconnect();
     };
   }, [src]);
 

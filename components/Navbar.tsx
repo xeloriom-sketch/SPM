@@ -17,23 +17,18 @@ export default function Navbar() {
   const pathname  = usePathname();
   const isHome    = pathname === "/";
 
-  const [onHero,   setOnHero]   = useState(isHome);
+  const [onHero,   setOnHero]   = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close menu on navigation
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
-
-  // Sync onHero state when page changes (client-side nav)
+  // Reset state on navigation (client-side nav resets scroll to 0)
   useEffect(() => {
-    if (!isHome) {
-      setOnHero(false);
-    } else {
-      const y = window.scrollY;
-      setOnHero(y < window.innerHeight * 0.85);
-    }
-  }, [isHome]);
+    const y = window.scrollY;
+    setOnHero(y < window.innerHeight * 0.85);
+    setScrolled(y > 24);
+    setMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const handle = () => {
@@ -41,16 +36,16 @@ export default function Navbar() {
       const y    = window.scrollY;
       const docH = document.documentElement.scrollHeight - vh;
       setProgress(docH > 0 ? (y / docH) * 100 : 0);
-      if (isHome) setOnHero(y < vh * 0.85);
+      setOnHero(y < vh * 0.85);
       setScrolled(y > 24);
     };
     handle();
     window.addEventListener("scroll", handle, { passive: true });
     return () => window.removeEventListener("scroll", handle);
-  }, [isHome]);
+  }, []);
 
-  const isLight = !isHome || !onHero;
-  const showBg  = scrolled || !isHome;
+  const isLight = !onHero;
+  const showBg  = scrolled;
 
   const linkCls = (href: string) => {
     const active = !href.startsWith("/#") && pathname === href;

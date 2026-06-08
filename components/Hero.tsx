@@ -1,18 +1,12 @@
 "use client";
 
-import { useCallback, useRef } from "react";
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Phone, ArrowRight } from "lucide-react";
 import { sitePath } from "@/lib/site-path";
+import HeroVideo from "@/components/HeroVideo";
 
 const LOADER_OUT = 3.0;
 
-/* Clips vidéo — ajouter d'autres fichiers dans /public/videos/ */
-const CLIPS = [
-  sitePath("/videos/hero.mp4"),
-];
-
-/* Spring iOS — overshoot léger puis stabilisation */
 const spring = {
   type: "spring" as const,
   stiffness: 280,
@@ -28,62 +22,24 @@ const specs = [
 ];
 
 export default function Hero() {
-  /* ── Ref callback : muted + play AVANT hydration React (fix Safari) ── */
-  const videoRef = useCallback((node: HTMLVideoElement | null) => {
-    if (!node) return;
-    node.muted        = true;
-    node.defaultMuted = true;
-    node.setAttribute("muted", "");
-    node.setAttribute("playsinline", "");
-    node.setAttribute("webkit-playsinline", "");
-    node.setAttribute("x-webkit-airplay", "allow");
-
-    const tryPlay = () => node.play().catch(() => {});
-
-    if (node.readyState >= 2) {
-      tryPlay();
-    } else {
-      node.addEventListener("loadedmetadata", tryPlay, { once: true });
-    }
-
-    /* Fallback si l'utilisateur n'a pas encore interagi */
-    const onTouch = () => tryPlay();
-    document.addEventListener("touchstart",  onTouch, { once: true, passive: true });
-    document.addEventListener("pointerdown", onTouch, { once: true });
-  }, []);
-
   return (
+    <div id="accueil" style={{ height: "160vh" }}>
     <section
-      id="accueil"
-      className="relative w-full overflow-hidden bg-black flex flex-col select-none"
+      className="sticky top-0 relative w-full overflow-hidden bg-black flex flex-col select-none"
       style={{ height: "100svh" }}
     >
-      {/* ── VIDÉO — statique, aucun transform pour 60 fps ── */}
+      {/* VIDEO — composant dédié avec useEffect agressif (fix Safari autoplay) */}
       <div className="absolute inset-0 z-0">
-        <video
-          ref={videoRef}
-          className="h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          disablePictureInPicture
-          style={{ pointerEvents: "none" }}
-        >
-          {CLIPS.map((src) => (
-            <source key={src} src={src} type="video/mp4" />
-          ))}
-        </video>
+        <HeroVideo src={sitePath("/videos/hero.mp4")} scrollFactor={1.6} />
       </div>
 
-      {/* ── OVERLAYS ── */}
+      {/* OVERLAYS */}
       <div className="pointer-events-none absolute inset-0 z-[5]">
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/45 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
       </div>
 
-      {/* ── GRAIN cinématique ── */}
+      {/* GRAIN cinématique */}
       <div
         className="pointer-events-none absolute inset-0 z-[6] opacity-[0.032]"
         style={{
@@ -93,10 +49,9 @@ export default function Hero() {
         }}
       />
 
-      {/* ── CONTENU ── */}
+      {/* CONTENU */}
       <div className="relative z-[10] w-full mt-auto">
 
-        {/* Titre — style Apple : poids moyen, taille raffinée */}
         <div className="px-6 pb-5 sm:px-10 sm:pb-6 md:px-14">
 
           {/* Ligne 1 */}
@@ -112,7 +67,7 @@ export default function Hero() {
             </motion.span>
           </div>
 
-          {/* Ligne 2 — "voulez." en light italic */}
+          {/* Ligne 2 */}
           <div className="overflow-hidden">
             <motion.span
               className="block font-sans font-semibold text-white leading-[1.05] tracking-[-0.025em]"
@@ -135,6 +90,31 @@ export default function Hero() {
           >
             SPM · Villebois · Lyon · Ain · Isère
           </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            className="mt-6 flex flex-wrap items-center gap-3"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...spring, delay: LOADER_OUT + 0.35 }}
+          >
+            <a
+              href="tel:+33767751898"
+              className="inline-flex items-center gap-2.5 rounded-full bg-white text-black pl-4 pr-5 py-2.5 text-[11px] font-semibold tracking-wide hover:bg-white/90 transition-colors"
+            >
+              <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
+              07 67 75 18 98
+            </a>
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-3 rounded-full border border-white/25 text-white pl-4 pr-1.5 py-1.5 text-[11px] font-semibold tracking-wide hover:border-white/50 transition-colors"
+            >
+              <span>Demander un devis</span>
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15 transition-transform duration-300 group-hover:translate-x-0.5">
+                <ArrowRight className="h-3 w-3" strokeWidth={2.5} />
+              </div>
+            </a>
+          </motion.div>
         </div>
 
         {/* Barre specs */}
@@ -148,7 +128,7 @@ export default function Hero() {
               className={`flex flex-col ${i !== 0 ? "md:pl-8 md:border-l md:border-white/10" : ""}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ ...spring, delay: LOADER_OUT + 0.32 + i * 0.07 }}
+              transition={{ ...spring, delay: LOADER_OUT + 0.45 + i * 0.07 }}
             >
               <span className="mb-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.22em] uppercase text-white/30">
                 {s.label}
@@ -183,5 +163,6 @@ export default function Hero() {
         </div>
       </div>
     </section>
+    </div>
   );
 }

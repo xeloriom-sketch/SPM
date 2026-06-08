@@ -22,9 +22,8 @@ export default function SplitText({
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once, margin: "-40px" });
 
-  const defaultStagger = mode === "char" ? 0.022 : 0.07;
+  const defaultStagger = mode === "char" ? 0.018 : 0.065;
   const s = stagger ?? defaultStagger;
-
   const items = mode === "word" ? text.split(" ") : text.split("");
 
   return (
@@ -37,13 +36,13 @@ export default function SplitText({
         >
           <motion.span
             className="inline-block"
-            initial={{ y: "115%", opacity: 0 }}
-            animate={isInView ? { y: 0, opacity: 1 } : {}}
+            initial={{ y: "115%", opacity: 0, rotate: 2 }}
+            animate={isInView ? { y: 0, opacity: 1, rotate: 0 } : {}}
             transition={{
               type: "spring",
-              stiffness: 260,
-              damping: 20,
-              mass: 0.7,
+              stiffness: 440,
+              damping: 24,
+              mass: 0.75,
               delay: delay + i * s,
             }}
           >

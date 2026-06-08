@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import SplitText from "@/components/ui/SplitText";
+import { spring, springFast, revealVariants, revealSubtle } from "@/lib/motion";
 
 const faqs = [
   { q: "Qu'est-ce qu'un taxi conventionné ?", a: "Un taxi conventionné est agréé par la CPAM pour les transports médicaux. Les trajets peuvent être pris en charge partiellement ou totalement par l'Assurance Maladie sur prescription médicale." },
@@ -23,34 +24,36 @@ export default function FAQ() {
     <section id="faq" className="w-full bg-[#f8f9fa] py-20 md:py-28 font-sans">
       <div ref={ref} className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-20">
 
-        {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-black mb-4">
             <SplitText text="Questions fréquentes" mode="word" />
           </h2>
           <motion.p
             className="text-xs sm:text-sm text-[#555555] leading-relaxed font-normal"
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.25 }}
+            variants={revealSubtle}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            custom={0.2}
           >
             Vous avez une autre question ? Contactez-moi directement, je réponds sous 2h.
           </motion.p>
         </div>
 
-        {/* Grid 2 colonnes */}
         <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-4">
           {faqs.map((f, i) => (
             <motion.div
               key={i}
-              className={`rounded-[20px] border overflow-hidden transition-all duration-300 ${
+              className={`rounded-[20px] border overflow-hidden ${
                 open === i
                   ? "border-black/15 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
-                  : "border-black/[0.06] bg-white hover:border-black/12"
+                  : "border-black/[0.06] bg-white"
               }`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+              variants={revealVariants}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              custom={0.08 + i * 0.09}
+              whileHover={open !== i ? { y: -3, scale: 1.01 } : {}}
+              transition={spring}
             >
               <button
                 className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
@@ -58,14 +61,15 @@ export default function FAQ() {
               >
                 <span className="text-sm font-medium text-black tracking-tight">{f.q}</span>
                 <motion.div
-                  className="shrink-0 grid h-6 w-6 place-items-center rounded-full border border-black/10 text-black/30 text-xs transition-colors"
+                  className="shrink-0 grid h-6 w-6 place-items-center rounded-full border border-black/10 text-black/30 text-xs"
                   animate={{
                     rotate: open === i ? 45 : 0,
                     backgroundColor: open === i ? "#000" : "transparent",
                     color: open === i ? "#fff" : undefined,
                     borderColor: open === i ? "#000" : undefined,
+                    scale: open === i ? 1.1 : 1,
                   }}
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  transition={{ type: "spring", stiffness: 420, damping: 24 }}
                 >
                   +
                 </motion.div>
@@ -73,10 +77,10 @@ export default function FAQ() {
               <AnimatePresence initial={false}>
                 {open === i && (
                   <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    initial={{ height: 0, opacity: 0, y: -8 }}
+                    animate={{ height: "auto", opacity: 1, y: 0 }}
+                    exit={{ height: 0, opacity: 0, y: -8 }}
+                    transition={{ type: "spring", stiffness: 340, damping: 26, mass: 0.9 }}
                   >
                     <p className="px-6 pb-6 text-xs sm:text-sm leading-relaxed text-[#555555]">{f.a}</p>
                   </motion.div>
@@ -86,22 +90,25 @@ export default function FAQ() {
           ))}
         </div>
 
-        {/* CTA bas */}
         <motion.div
           className="mt-12 flex justify-center"
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.7 }}
+          variants={revealSubtle}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          custom={0.7}
         >
-          <a
+          <motion.a
             href="#contact"
-            className="group inline-flex items-center gap-4 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-[11px] font-medium tracking-wider text-white transition-all hover:bg-[#111111]"
+            className="group inline-flex items-center gap-4 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-[11px] font-medium tracking-wider text-white"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.96 }}
+            transition={springFast}
           >
             <span>Poser une autre question</span>
             <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:translate-x-0.5">
               <ArrowRight className="h-3.5 w-3.5 stroke-[2.5]" />
             </div>
-          </a>
+          </motion.a>
         </motion.div>
 
       </div>

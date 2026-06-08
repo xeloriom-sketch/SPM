@@ -1,45 +1,69 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import FloatingCallButton from "@/components/FloatingCallButton";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.spm-taxi.fr"),
   title: {
-    default: "Taxi SPM — Conventionné CPAM · Villebois · Lyon · Ain · Isère",
-    template: "%s | Taxi SPM",
+    default: "SPM Taxi — Taxi Conventionné CPAM | Villebois · Lyon · Ain (01)",
+    template: "%s | SPM Taxi Villebois",
   },
   description:
-    "Taxi SPM, taxi conventionné CPAM basé à Villebois (Ain 01). Volkswagen Tiguan 7 places. Transferts aéroport Lyon Saint-Exupéry, gares TGV, transport médical, colis urgents, remorque. Disponible 7j/7 24h/24. Devis gratuit. 07 67 75 18 98.",
+    "SPM Taxi, taxi conventionné CPAM basé à Villebois (Ain 01). Volkswagen Tiguan Allspace 7 places. Transferts aéroport Lyon Saint-Exupéry, gares TGV, transport médical CPAM, colis urgents, remorque. Disponible 7j/7 24h/24. Devis gratuit. ☎ 07 67 75 18 98.",
   keywords: [
-    "taxi SPM", "taxi conventionné CPAM", "taxi Villebois",
-    "taxi Ain 01", "taxi Lyon", "taxi Isère", "transfert aéroport Lyon",
-    "transfert Lyon Saint-Exupéry", "transport médical taxi Ain",
-    "taxi 7 places", "Volkswagen Tiguan taxi", "colis urgent taxi",
-    "taxi avec remorque", "taxi Ambérieu-en-Bugey", "taxi Bourgoin-Jallieu",
-    "taxi longue distance France", "taxi conventionné Ain", "CPAM taxi 01150",
+    "taxi Villebois",
+    "taxi conventionné CPAM Ain",
+    "taxi SPM",
+    "taxi Ain 01",
+    "taxi Lyon",
+    "taxi Isère",
+    "taxi Ambérieu-en-Bugey",
+    "taxi Bourg-en-Bresse",
+    "transfert aéroport Lyon Saint-Exupéry",
+    "transfert aéroport Lyon",
+    "taxi gare Lyon Part-Dieu",
+    "taxi gare Perrache",
+    "transport médical CPAM Ain",
+    "taxi conventionné Ain",
+    "taxi 7 places",
+    "Volkswagen Tiguan taxi",
+    "taxi colis urgent",
+    "taxi remorque Ain",
+    "taxi longue distance France",
+    "taxi Meximieux",
+    "taxi Montluel",
+    "taxi Bourgoin-Jallieu",
+    "taxi Grenoble",
+    "taxi Genève depuis Lyon",
+    "CPAM taxi prescription médicale",
+    "taxi 01150",
   ],
   authors: [{ name: "SPM Taxi" }],
   creator: "SPM Taxi",
+  publisher: "SPM Taxi",
   openGraph: {
     type: "website",
     locale: "fr_FR",
     url: "https://www.spm-taxi.fr",
-    siteName: "SPM — Taxi Conventionné",
-    title: "SPM — Taxi Conventionné | Lyon · Ain · Isère",
+    siteName: "SPM Taxi — Taxi Conventionné",
+    title: "SPM Taxi — Taxi Conventionné CPAM | Villebois · Lyon · Ain",
     description:
-      "Taxi conventionné CPAM à Tignieu-Jameyzieu. Volkswagen Tiguan 7 places. Disponible 7j/7. Devis gratuit.",
+      "Taxi conventionné CPAM à Villebois (Ain 01). Volkswagen Tiguan 7 places, disponible 7j/7 24h/24. Transferts aéroport, transport médical, longue distance. Devis gratuit en 2h.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80",
-        width: 1200,
-        height: 630,
-        alt: "SPM Taxi — Volkswagen Tiguan 7 places",
+        url: "/image/tiguan-front-quarter.png",
+        width: 1344,
+        height: 768,
+        alt: "SPM Taxi — Volkswagen Tiguan Allspace 7 places, Villebois Ain",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SPM — Taxi Conventionné | Lyon · Ain · Isère",
-    description: "Taxi conventionné CPAM. Tiguan 7 places. Disponible 7j/7. Devis gratuit.",
+    title: "SPM Taxi — Taxi Conventionné CPAM | Lyon · Ain · Isère",
+    description:
+      "Taxi conventionné CPAM, Tiguan 7 places, disponible 7j/7. Transferts aéroport Lyon, transport médical, longue distance. ☎ 07 67 75 18 98.",
+    images: ["/image/tiguan-front-quarter.png"],
   },
   robots: {
     index: true,
@@ -53,7 +77,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: { canonical: "https://www.spm-taxi.fr" },
-  verification: { google: "GOOGLE_VERIFICATION_CODE" },
+  category: "Transport",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -63,10 +87,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#0d0d0d" />
         <meta name="color-scheme" content="light dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <meta name="geo.region" content="FR-AIN" />
+        <meta name="geo.placename" content="Villebois, Ain, France" />
+        <meta name="geo.position" content="45.8;5.45" />
+        <meta name="ICBM" content="45.8, 5.45" />
       </head>
       <body className="bg-white text-[#080808] overflow-x-hidden noise antialiased">
         {children}
+        <FloatingCallButton />
       </body>
     </html>
   );

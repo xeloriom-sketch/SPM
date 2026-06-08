@@ -11,6 +11,19 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+const pageLinks = [
+  { label: "Nos Services",  href: "/services" },
+  { label: "Tarifs",        href: "/tarifs" },
+  { label: "À Propos",      href: "/a-propos" },
+];
+
+const seoLinks = [
+  { label: "Transfert Aéroport Lyon", href: "/transfert-aeroport-lyon" },
+  { label: "Taxi Conventionné CPAM",  href: "/taxi-conventionné-cpam" },
+  { label: "Longue Distance",         href: "/taxi-longue-distance" },
+  { label: "Remorque & Colis",        href: "/taxi-remorque-ain" },
+];
+
 const legalLinks = [
   { label: "Mentions Légales", href: "#" },
   { label: "Politique de Confidentialité", href: "#" },
@@ -68,6 +81,34 @@ export default function Footer() {
                       {link.label}
                     </a>
                   </li>
+              ))}
+            </ul>
+
+            {/* Pages */}
+            <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-3">
+              {pageLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-[12px] text-white/60 font-medium hover:text-white transition-colors tracking-wide"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            {/* Pages SEO */}
+            <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-4">
+              {seoLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-[11px] text-white/40 font-normal hover:text-white/70 transition-colors tracking-wide"
+                  >
+                    {link.label}
+                  </a>
+                </li>
               ))}
             </ul>
 

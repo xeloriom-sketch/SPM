@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Star, Award, Clock, MapPin, ArrowRight } from "lucide-react";
@@ -69,13 +69,18 @@ export default function AProposContent() {
   const zoneIn = useInView(zoneRef, { once: true, margin: "-40px" });
   const ctaIn  = useInView(ctaRef,  { once: true, margin: "-40px" });
 
+  const { scrollY } = useScroll();
+  const imgScale = useTransform(scrollY, [0, 600], [1, 1.07]);
+  const imgY     = useTransform(scrollY, [0, 600], [0, -30]);
+
 
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
+      <div style={{ height: "160vh" }}>
+      <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
         {/* Photo plein écran */}
-        <div className="absolute inset-0 z-0">
+        <motion.div className="absolute inset-0 z-0 overflow-hidden" style={{ scale: imgScale, y: imgY }}>
           <Image
             src={sitePath("/image/tiguan-hero.jpeg")}
             alt="Volkswagen Tiguan R-Line — SPM Taxi"
@@ -83,7 +88,7 @@ export default function AProposContent() {
             className="object-cover object-center"
             priority
           />
-        </div>
+        </motion.div>
 
         {/* Overlays */}
         <div className="pointer-events-none absolute inset-0 z-[5]">
@@ -180,6 +185,7 @@ export default function AProposContent() {
           </div>
         </div>
       </section>
+      </div>
 
       {/* ── STATS BAR ── */}
       <section className="bg-black border-t border-white/[0.06]">

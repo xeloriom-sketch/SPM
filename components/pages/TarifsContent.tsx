@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { Phone, CheckCircle, Info, ArrowRight } from "lucide-react";
-import VideoPlayer from "@/components/VideoPlayer";
+import HeroVideo from "@/components/HeroVideo";
 import SplitText from "@/components/ui/SplitText";
 import { revealVariants, revealSubtle, spring } from "@/lib/motion";
 import { sitePath } from "@/lib/site-path";
@@ -76,10 +76,11 @@ export default function TarifsContent() {
   return (
     <>
       {/* ── HERO ── */}
-      <section ref={heroRef} className="relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
+      <div style={{ height: "160vh" }}>
+      <section ref={heroRef} className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
         {/* Vidéo fond */}
         <div className="absolute inset-0 z-0">
-          <VideoPlayer src={sitePath("/videos/11661703-web.mp4")} />
+          <HeroVideo src={sitePath("/videos/11661703-web.mp4")} scrollFactor={1.6} />
         </div>
 
         {/* Overlays */}
@@ -188,6 +189,7 @@ export default function TarifsContent() {
           </div>
         </div>
       </section>
+      </div>
 
       {/* ── TABLES ── */}
       <section className="bg-white py-14 md:py-20">

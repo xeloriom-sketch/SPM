@@ -6,7 +6,6 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import SplitText from "@/components/ui/SplitText";
 import { spring, springFast, revealVariants, revealSubtle } from "@/lib/motion";
-import { sitePath } from "@/lib/site-path";
 
 const specs = [
   { label: "Capacité",      value: "7 Sièges" },
@@ -25,10 +24,10 @@ const features = [
 ];
 
 const views = [
-  { src: sitePath("/image/tiguan-front-quarter.png"), label: "Vue 3/4 avant", alt: "Volkswagen Tiguan Allspace — avant 3/4" },
-  { src: sitePath("/image/tiguan-side.png"),          label: "Profil",        alt: "Volkswagen Tiguan Allspace — profil" },
-  { src: sitePath("/image/tiguan-front.png"),         label: "Face avant",    alt: "Volkswagen Tiguan Allspace — face avant" },
-  { src: sitePath("/image/tiguan-rear.png"),          label: "Vue arrière",   alt: "Volkswagen Tiguan Allspace — arrière" },
+  { src: "/image/tiguan-front-quarter.png", label: "Vue 3/4 avant", alt: "Volkswagen Tiguan Allspace — avant 3/4" },
+  { src: "/image/tiguan-side.png",          label: "Profil",        alt: "Volkswagen Tiguan Allspace — profil" },
+  { src: "/image/tiguan-front.png",         label: "Face avant",    alt: "Volkswagen Tiguan Allspace — face avant" },
+  { src: "/image/tiguan-rear.png",          label: "Vue arrière",   alt: "Volkswagen Tiguan Allspace — arrière" },
 ];
 
 export default function Vehicle() {

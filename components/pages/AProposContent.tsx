@@ -6,7 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Star, Award, Clock, MapPin, ArrowRight } from "lucide-react";
 import { revealVariants, revealSubtle, spring } from "@/lib/motion";
-import { sitePath } from "@/lib/site-path";
 
 const values = [
   { icon: Clock,  title: "Ponctualité",      desc: "Je suis toujours à l'heure. Chaque trajet est préparé à l'avance pour anticiper trafic et imprévus." },
@@ -82,7 +81,7 @@ export default function AProposContent() {
         {/* Photo plein écran */}
         <motion.div className="absolute inset-0 z-0 overflow-hidden" style={{ scale: imgScale, y: imgY }}>
           <Image
-            src={sitePath("/image/tiguan-hero.jpeg")}
+            src="/image/tiguan-hero.jpeg"
             alt="Volkswagen Tiguan R-Line — SPM Taxi"
             fill
             className="object-cover object-center"
@@ -233,7 +232,7 @@ export default function AProposContent() {
             </motion.div>
             <div className="lg:col-span-2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#f8f9fa]">
               <Image
-                src={sitePath("/image/tiguan-side.png")}
+                src="/image/tiguan-side.png"
                 alt="Volkswagen Tiguan Allspace — SPM Taxi"
                 fill
                 className="object-contain object-center p-4"

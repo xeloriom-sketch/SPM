@@ -40,9 +40,11 @@ export default function SplitText({
             initial={{ y: "115%", opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{
-              duration: 0.65,
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+              mass: 0.7,
               delay: delay + i * s,
-              ease: [0.16, 1, 0.3, 1],
             }}
           >
             {item}

@@ -1,32 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Eye, EyeOff, LogIn } from "lucide-react";
 import { Suspense } from "react";
 import { sitePath } from "@/lib/site-path";
+import { getSupabase } from "@/lib/supabase-browser";
 
 function LoginForm() {
   const router = useRouter();
-  const params = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(params?.get("error") ? "Identifiants incorrects." : "");
+  const [error, setError] = useState("");
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setLoading(true);
-    const res = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
+    const { error } = await getSupabase().auth.signInWithPassword({ email, password });
     setLoading(false);
-    if (res?.error) {
+    if (error) {
       setError("Email ou mot de passe incorrect.");
     } else {
       router.push("/admin/dashboard");
@@ -48,7 +43,7 @@ function LoginForm() {
 
         <div className="rounded-3xl border border-black/[0.07] bg-white p-7 shadow-sm">
           <h1 className="text-xl font-semibold tracking-tight text-black mb-1">Connexion</h1>
-          <p className="text-sm text-black/40 mb-6">Accès réservé à l'administrateur.</p>
+          <p className="text-sm text-black/40 mb-6">Accès réservé à l&apos;administrateur.</p>
 
           <form onSubmit={onSubmit} className="flex flex-col gap-4">
             <div>

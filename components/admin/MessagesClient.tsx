@@ -1,15 +1,15 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { Phone, Mail, MessageSquare, Check, Trash2, Calendar, RefreshCw } from "lucide-react";
 import type { ContactMessage } from "@/lib/supabase";
-import { markAsRead, deleteMessage } from "@/app/actions/messages";
+import { getSupabase } from "@/lib/supabase-browser";
 
 export default function MessagesClient({ messages: initial }: { messages: ContactMessage[] }) {
   const [messages, setMessages] = useState(initial);
   const [selected, setSelected] = useState<ContactMessage | null>(null);
   const [filter, setFilter] = useState<"all" | "unread" | "read">("all");
-  const [pending, startTransition] = useTransition();
+  const [deleting, setDeleting] = useState(false);
 
   const filtered = messages.filter((m) => {
     if (filter === "unread") return !m.read;
@@ -21,14 +21,18 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
     setSelected(m);
     if (!m.read) {
       setMessages((prev) => prev.map((msg) => msg.id === m.id ? { ...msg, read: true } : msg));
-      markAsRead(m.id).catch(() => {});
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (getSupabase() as any).from("contact_messages").update({ read: true }).eq("id", m.id).then(() => {});
     }
   }
 
   async function handleDelete(id: string) {
+    setDeleting(true);
     setMessages((prev) => prev.filter((m) => m.id !== id));
     if (selected?.id === id) setSelected(null);
-    await deleteMessage(id).catch(() => {});
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await (getSupabase() as any).from("contact_messages").delete().eq("id", id);
+    setDeleting(false);
   }
 
   const unread = messages.filter((m) => !m.read).length;
@@ -108,7 +112,7 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
               </div>
               <button
                 onClick={() => handleDelete(selected.id)}
-                disabled={pending}
+                disabled={deleting}
                 className="grid h-9 w-9 place-items-center rounded-xl border border-borderc text-mutedc hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-400 transition-all"
               >
                 <Trash2 className="h-4 w-4" />

@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Phone, Mail, MapPin, AlertCircle, ArrowRight, CheckCircle } from "lucide-react";
 import SplitText from "@/components/ui/SplitText";
-import { submitContact } from "@/app/actions/contact";
+import { getSupabase } from "@/lib/supabase-browser";
 import { spring, springFast, revealVariants, revealSubtle } from "@/lib/motion";
 
 const serviceOptions = [
@@ -151,7 +151,17 @@ export default function Contact() {
                 setErrorMsg("");
                 try {
                   const formData = new FormData(e.currentTarget);
-                  await submitContact(formData);
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  const { error } = await (getSupabase() as any).from("contact_messages").insert({
+                    name: formData.get("name") as string,
+                    phone: formData.get("phone") as string,
+                    email: formData.get("email") as string,
+                    service: formData.get("service") as string,
+                    date: (formData.get("date") as string) || null,
+                    message: (formData.get("message") as string) || null,
+                    read: false,
+                  });
+                  if (error) throw new Error("Erreur lors de l'envoi.");
                   setStatus("success");
                   (e.target as HTMLFormElement).reset();
                 } catch (err) {

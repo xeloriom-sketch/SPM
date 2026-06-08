@@ -1,41 +1,40 @@
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import { authOptions } from "@/lib/auth";
-import { supabase } from "@/lib/supabase";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { getSupabase } from "@/lib/supabase-browser";
 import AdminShell from "@/components/admin/AdminShell";
 import MessagesClient from "@/components/admin/MessagesClient";
 import type { ContactMessage } from "@/lib/supabase";
 
-export default async function MessagesPage() {
-  if (process.env.NEXT_PUBLIC_STATIC === "1") {
-    return (
-      <AdminShell unread={0}>
-        <div className="p-6 max-w-3xl mx-auto">
-          <div className="rounded-2xl border border-borderc bg-surface p-6">
-            <h1 className="font-display text-2xl font-bold">Messages</h1>
-            <p className="mt-2 text-sm text-mutedc">
-              Les messages entrants ne sont pas disponibles sur la version statique GitHub Pages.
-            </p>
-          </div>
-        </div>
-      </AdminShell>
-    );
-  }
+export default function MessagesPage() {
+  const router = useRouter();
+  const [messages, setMessages] = useState<ContactMessage[] | null>(null);
 
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/admin/login");
+  useEffect(() => {
+    async function load() {
+      const { data: { session } } = await getSupabase().auth.getSession();
+      if (!session) { router.push("/admin/login"); return; }
 
-  const { data } = await supabase
-    .from("contact_messages")
-    .select("*")
-    .order("created_at", { ascending: false });
+      const { data } = await getSupabase()
+        .from("contact_messages")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-  const messages: ContactMessage[] = data ?? [];
-  const unread = messages.filter((m) => !m.read).length;
+      setMessages(data ?? []);
+    }
+    load();
+  }, [router]);
+
+  const unread = (messages ?? []).filter((m) => !m.read).length;
 
   return (
     <AdminShell unread={unread}>
-      <MessagesClient messages={messages} />
+      {messages === null ? (
+        <div className="flex items-center justify-center py-20 text-sm text-mutedc">Chargement…</div>
+      ) : (
+        <MessagesClient messages={messages} />
+      )}
     </AdminShell>
   );
 }

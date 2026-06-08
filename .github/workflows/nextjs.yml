@@ -1,8 +1,4 @@
-# Deploy Next.js (frontend only) to GitHub Pages
-# Note: Admin panel and contact form server actions are Vercel-only features.
-# GitHub Pages hosts the static frontend preview.
-
-name: Deploy static preview to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -21,8 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      NEXT_PUBLIC_STATIC: "1"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,10 +46,8 @@ jobs:
         run: npx next build
         env:
           NEXT_PUBLIC_STATIC: "1"
-          NEXTAUTH_SECRET: "static-build-placeholder"
-          NEXTAUTH_URL: "http://localhost:3000"
-          SUPABASE_URL: "https://placeholder.supabase.co"
-          SUPABASE_ANON_KEY: "placeholder"
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

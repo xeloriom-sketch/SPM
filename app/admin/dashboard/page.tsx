@@ -1,61 +1,63 @@
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import { authOptions } from "@/lib/auth";
-import { supabase } from "@/lib/supabase";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { getSupabase } from "@/lib/supabase-browser";
 import AdminShell from "@/components/admin/AdminShell";
 import { sitePath } from "@/lib/site-path";
 import { MessageSquare, CheckCircle2, Clock, Mail } from "lucide-react";
 
-export default async function DashboardPage() {
-  if (process.env.NEXT_PUBLIC_STATIC === "1") {
-    return (
-      <AdminShell unread={0}>
-        <div className="p-6 max-w-3xl mx-auto">
-          <div className="rounded-2xl border border-borderc bg-surface p-6">
-            <h1 className="font-display text-2xl font-bold">Tableau de bord</h1>
-            <p className="mt-2 text-sm text-mutedc">
-              L'espace administration n'est pas disponible sur la version GitHub Pages.
-            </p>
-            <p className="mt-4 text-sm text-mutedc">
-              Déployez sur un hébergement server-side pour activer l'authentification et les données live.
-            </p>
-          </div>
-        </div>
-      </AdminShell>
-    );
-  }
+type MsgRow = { id: string; name: string; service: string; phone: string; read: boolean; created_at: string };
 
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/admin/login");
+type DashData = {
+  total: number;
+  unread: number;
+  today: number;
+  recent: MsgRow[];
+  byService: Record<string, number>;
+};
 
-  const { data: all } = await supabase.from("contact_messages").select("id, read, created_at, service");
-  const messages = all ?? [];
+export default function DashboardPage() {
+  const router = useRouter();
+  const [data, setData] = useState<DashData | null>(null);
 
-  const total = messages.length;
-  const unread = messages.filter((m) => !m.read).length;
-  const today = messages.filter((m) => {
-    const d = new Date(m.created_at);
-    const n = new Date();
-    return d.toDateString() === n.toDateString();
-  }).length;
+  useEffect(() => {
+    async function load() {
+      const { data: { session } } = await getSupabase().auth.getSession();
+      if (!session) { router.push("/admin/login"); return; }
 
-  const byService = messages.reduce<Record<string, number>>((acc, m) => {
-    acc[m.service] = (acc[m.service] ?? 0) + 1;
-    return acc;
-  }, {});
+      const { data: all } = await getSupabase()
+        .from("contact_messages")
+        .select("id, name, service, phone, read, created_at")
+        .order("created_at", { ascending: false });
 
-  const { data: recent } = await supabase
-    .from("contact_messages")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(5);
+      const messages: MsgRow[] = all ?? [];
+      const today = new Date().toDateString();
 
-  const stats = [
-    { icon: MessageSquare, label: "Total messages", value: total, color: "text-black" },
-    { icon: Mail, label: "Non lus", value: unread, color: "text-black" },
-    { icon: Clock, label: "Aujourd'hui", value: today, color: "text-black" },
-    { icon: CheckCircle2, label: "Lus", value: total - unread, color: "text-mutedc" },
-  ];
+      const byService = messages.reduce<Record<string, number>>((acc, m) => {
+        acc[m.service] = (acc[m.service] ?? 0) + 1;
+        return acc;
+      }, {});
+
+      setData({
+        total: messages.length,
+        unread: messages.filter((m) => !m.read).length,
+        today: messages.filter((m) => new Date(m.created_at).toDateString() === today).length,
+        recent: messages.slice(0, 5),
+        byService,
+      });
+    }
+    load();
+  }, [router]);
+
+  const unread = data?.unread ?? 0;
+
+  const stats = data ? [
+    { icon: MessageSquare, label: "Total messages", value: data.total, color: "text-black" },
+    { icon: Mail, label: "Non lus", value: data.unread, color: "text-black" },
+    { icon: Clock, label: "Aujourd'hui", value: data.today, color: "text-black" },
+    { icon: CheckCircle2, label: "Lus", value: data.total - data.unread, color: "text-mutedc" },
+  ] : [];
 
   return (
     <AdminShell unread={unread}>
@@ -65,82 +67,86 @@ export default async function DashboardPage() {
           <p className="text-sm text-mutedc mt-1">Bienvenue dans votre espace administration.</p>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 mb-8">
-          {stats.map(({ icon: Icon, label, value, color }) => (
-            <div key={label} className="rounded-2xl border border-borderc bg-surface p-5">
-              <div className={`mb-3 ${color}`}>
-                <Icon className="h-5 w-5" />
-              </div>
-              <p className="font-display text-3xl font-bold">{value}</p>
-              <p className="text-xs text-mutedc mt-1">{label}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_0.6fr]">
-          {/* Recent messages */}
-          <div className="rounded-2xl border border-borderc bg-surface p-5">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-semibold">Derniers messages</h2>
-              <a href={sitePath("/admin/messages")} className="text-xs text-black hover:underline">Voir tout →</a>
-            </div>
-            <div className="flex flex-col gap-3">
-              {(recent ?? []).length === 0 && (
-                <p className="text-sm text-mutedc text-center py-6">Aucun message pour le moment.</p>
-              )}
-              {(recent ?? []).map((m: { id: string; name: string; service: string; phone: string; read: boolean; created_at: string }) => (
-                <a
-                  key={m.id}
-                  href={sitePath("/admin/messages")}
-                  className="flex items-center gap-3 rounded-xl border border-borderc/50 bg-surface2 px-4 py-3 transition-colors hover:border-borderc"
-                >
-                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-black text-xs font-bold text-white">
-                    {m.name.charAt(0)}
+        {!data ? (
+          <div className="flex items-center justify-center py-20 text-sm text-mutedc">Chargement…</div>
+        ) : (
+          <>
+            {/* Stats */}
+            <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 mb-8">
+              {stats.map(({ icon: Icon, label, value, color }) => (
+                <div key={label} className="rounded-2xl border border-borderc bg-surface p-5">
+                  <div className={`mb-3 ${color}`}>
+                    <Icon className="h-5 w-5" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">{m.name}</p>
-                    <p className="text-xs text-mutedc truncate">{m.service}</p>
-                  </div>
-                  <div className="flex flex-col items-end gap-1">
-                    <p className="text-xs text-mutedc">
-                      {new Date(m.created_at).toLocaleDateString("fr-FR")}
-                    </p>
-                    {!m.read && (
-                      <span className="h-2 w-2 rounded-full bg-black" />
-                    )}
-                  </div>
-                </a>
+                  <p className="font-display text-3xl font-bold">{value}</p>
+                  <p className="text-xs text-mutedc mt-1">{label}</p>
+                </div>
               ))}
             </div>
-          </div>
 
-          {/* Services breakdown */}
-          <div className="rounded-2xl border border-borderc bg-surface p-5">
-            <h2 className="text-sm font-semibold mb-4">Services demandés</h2>
-            <div className="flex flex-col gap-3">
-              {Object.entries(byService)
-                .sort(([, a], [, b]) => b - a)
-                .map(([service, count]) => (
-                  <div key={service}>
-                    <div className="flex items-center justify-between mb-1">
-                      <p className="text-xs text-mutedc truncate max-w-[160px]">{service}</p>
-                      <p className="text-xs font-semibold">{count}</p>
-                    </div>
-                    <div className="h-1.5 rounded-full bg-borderc overflow-hidden">
-                      <div
-                        className="h-full rounded-full bg-black"
-                        style={{ width: `${Math.round((count / total) * 100)}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              {Object.keys(byService).length === 0 && (
-                <p className="text-sm text-mutedc text-center py-4">Aucune donnée</p>
-              )}
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_0.6fr]">
+              {/* Recent messages */}
+              <div className="rounded-2xl border border-borderc bg-surface p-5">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-sm font-semibold">Derniers messages</h2>
+                  <a href={sitePath("/admin/messages")} className="text-xs text-black hover:underline">Voir tout →</a>
+                </div>
+                <div className="flex flex-col gap-3">
+                  {data.recent.length === 0 && (
+                    <p className="text-sm text-mutedc text-center py-6">Aucun message pour le moment.</p>
+                  )}
+                  {data.recent.map((m) => (
+                    <a
+                      key={m.id}
+                      href={sitePath("/admin/messages")}
+                      className="flex items-center gap-3 rounded-xl border border-borderc/50 bg-surface2 px-4 py-3 transition-colors hover:border-borderc"
+                    >
+                      <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-black text-xs font-bold text-white">
+                        {m.name.charAt(0)}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{m.name}</p>
+                        <p className="text-xs text-mutedc truncate">{m.service}</p>
+                      </div>
+                      <div className="flex flex-col items-end gap-1">
+                        <p className="text-xs text-mutedc">
+                          {new Date(m.created_at).toLocaleDateString("fr-FR")}
+                        </p>
+                        {!m.read && <span className="h-2 w-2 rounded-full bg-black" />}
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Services breakdown */}
+              <div className="rounded-2xl border border-borderc bg-surface p-5">
+                <h2 className="text-sm font-semibold mb-4">Services demandés</h2>
+                <div className="flex flex-col gap-3">
+                  {Object.entries(data.byService)
+                    .sort(([, a], [, b]) => b - a)
+                    .map(([service, count]) => (
+                      <div key={service}>
+                        <div className="flex items-center justify-between mb-1">
+                          <p className="text-xs text-mutedc truncate max-w-[160px]">{service}</p>
+                          <p className="text-xs font-semibold">{count}</p>
+                        </div>
+                        <div className="h-1.5 rounded-full bg-borderc overflow-hidden">
+                          <div
+                            className="h-full rounded-full bg-black"
+                            style={{ width: `${Math.round((count / data.total) * 100)}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  {Object.keys(data.byService).length === 0 && (
+                    <p className="text-sm text-mutedc text-center py-4">Aucune donnée</p>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </AdminShell>
   );

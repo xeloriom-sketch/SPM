@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { Save, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
-import { saveSetting } from "@/app/actions/settings";
+import { getSupabase } from "@/lib/supabase-browser";
 
 type Field = { key: string; label: string; placeholder: string; type?: "text" | "textarea" };
 
@@ -49,8 +49,6 @@ type FieldStatus = "idle" | "saving" | "saved" | "error";
 export default function ContentEditor({ settings }: { settings: Record<string, string> }) {
   const [values, setValues] = useState<Record<string, string>>(settings);
   const [statuses, setStatuses] = useState<Record<string, FieldStatus>>({});
-  const [, startTransition] = useTransition();
-
   function setStatus(key: string, s: FieldStatus) {
     setStatuses((prev) => ({ ...prev, [key]: s }));
   }
@@ -62,13 +60,16 @@ export default function ContentEditor({ settings }: { settings: Record<string, s
 
   async function handleSave(key: string) {
     setStatus(key, "saving");
-    try {
-      await saveSetting(key, values[key] ?? "");
-      setStatus(key, "saved");
-      setTimeout(() => setStatus(key, "idle"), 2500);
-    } catch {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (getSupabase() as any)
+      .from("settings")
+      .upsert({ key, value: values[key] ?? "" }, { onConflict: "key" });
+    if (error) {
       setStatus(key, "error");
       setTimeout(() => setStatus(key, "idle"), 3000);
+    } else {
+      setStatus(key, "saved");
+      setTimeout(() => setStatus(key, "idle"), 2500);
     }
   }
 

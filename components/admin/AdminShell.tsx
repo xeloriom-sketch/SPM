@@ -1,6 +1,5 @@
 "use client";
 
-import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -11,6 +10,13 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { sitePath } from "@/lib/site-path";
+import { getSupabase } from "@/lib/supabase-browser";
+
+function handleSignOut() {
+  getSupabase().auth.signOut().then(() => {
+    window.location.href = sitePath("/admin/login");
+  });
+}
 
 const navItems = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Tableau de bord" },
@@ -79,7 +85,7 @@ export default function AdminShell({
             Voir le site
           </a>
           <button
-            onClick={() => signOut({ callbackUrl: sitePath("/admin/login") })}
+            onClick={handleSignOut}
             className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-mutedc hover:bg-black/5 hover:text-black transition-all"
           >
             <LogOut className="h-4 w-4 shrink-0" />
@@ -111,7 +117,7 @@ export default function AdminShell({
           );
         })}
         <button
-          onClick={() => signOut({ callbackUrl: sitePath("/admin/login") })}
+          onClick={handleSignOut}
           className="flex flex-col items-center gap-1 px-4 py-2 rounded-xl text-mutedc transition-colors"
         >
           <div className="grid h-8 w-8 place-items-center rounded-xl">

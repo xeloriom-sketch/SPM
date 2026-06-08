@@ -6,7 +6,6 @@ import { useScroll, useSpring } from "framer-motion";
 export default function HeroVideo({ src, scrollFactor = 1 }: { src: string; scrollFactor?: number }) {
   const ref = useRef<HTMLVideoElement>(null);
   const { scrollY } = useScroll();
-  // Spring smoothing = silky scrubbing like Apple
   const smooth = useSpring(scrollY, { stiffness: 52, damping: 15, mass: 1 });
 
   useEffect(() => {
@@ -16,33 +15,43 @@ export default function HeroVideo({ src, scrollFactor = 1 }: { src: string; scro
     v.muted = true;
     v.defaultMuted = true;
 
-    // Freeze at frame 0 — no autoplay
-    const freeze = () => {
-      v.pause();
-      v.currentTime = 0;
+    // iOS Safari ignores preload="auto" — force a brief play/pause to trigger buffering
+    const forceBuffer = () => {
+      v.muted = true;
+      v.play()
+        .then(() => {
+          // Let iOS buffer ~100ms then freeze at frame 0
+          setTimeout(() => {
+            v.pause();
+            if (smooth.get() < 1) v.currentTime = 0;
+          }, 100);
+        })
+        .catch(() => {});
     };
-    v.addEventListener("loadedmetadata", freeze, { once: true });
-    v.addEventListener("canplay", freeze, { once: true });
-    // Prevent any browser-triggered autoplay
+
+    v.addEventListener("loadedmetadata", forceBuffer, { once: true });
+
+    // Prevent any subsequent browser-triggered autoplay (after the forced buffer)
     const stopAutoplay = (e: Event) => {
       const target = e.target as HTMLVideoElement;
-      if (smooth.get() === 0) target.pause();
+      // Only stop if not triggered by our own forceBuffer (give it 300ms grace)
+      setTimeout(() => { if (smooth.get() < 1) target.pause(); }, 300);
     };
     v.addEventListener("play", stopAutoplay);
 
-    // Scroll → video time
+    // Scroll → video currentTime
     const unsub = smooth.on("change", (y) => {
-      if (!v.duration || v.readyState < 2) return;
+      if (!v.duration || v.readyState < 1) return;
       const progress = Math.max(0, Math.min(1, y / (window.innerHeight * scrollFactor)));
       v.currentTime = progress * v.duration;
     });
 
     return () => {
-      v.removeEventListener("loadedmetadata", freeze);
+      v.removeEventListener("loadedmetadata", forceBuffer);
       v.removeEventListener("play", stopAutoplay);
       unsub();
     };
-  }, [smooth]);
+  }, [smooth, scrollFactor]);
 
   return (
     <video

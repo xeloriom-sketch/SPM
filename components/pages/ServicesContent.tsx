@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import { Phone, Plane, Heart, Package, Map, Truck, ArrowRight } from "lucide-react";
+import VideoPlayer from "@/components/VideoPlayer";
 import SplitText from "@/components/ui/SplitText";
 import { revealVariants, revealSubtle, spring } from "@/lib/motion";
 import { sitePath } from "@/lib/site-path";
@@ -60,35 +60,20 @@ export default function ServicesContent() {
   const cardsIn = useInView(cardsRef, { once: true, margin: "-60px" });
   const ctaIn   = useInView(ctaRef,   { once: true, margin: "-40px" });
 
-  // Scroll-driven parallax on the hero car image
-  const { scrollY } = useScroll();
-  const rawCarY  = useTransform(scrollY, [0, 600], [0, -80]);
-  const carY     = useSpring(rawCarY, { stiffness: 70, damping: 20 });
-  const rawTextY = useTransform(scrollY, [0, 400], [0, -30]);
-  const textY    = useSpring(rawTextY, { stiffness: 70, damping: 20 });
 
   return (
     <>
       {/* ── HERO ── */}
       <section ref={heroRef} className="relative w-full bg-black overflow-hidden" style={{ minHeight: "56vh" }}>
-        {/* Photo plein écran avec parallax */}
-        <motion.div className="absolute inset-0" style={{ y: carY }}>
-          <Image
-            src={sitePath("/image/volkswagen-tiguan-r-line-2020-5k-8k-9500x6333-1639.jpeg")}
-            alt="Volkswagen Tiguan R-Line — SPM Taxi Services"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+        {/* Vidéo 1080p en fond */}
+        <div className="absolute inset-0">
+          <VideoPlayer src={sitePath("/videos/7440442-hd_1920_1080_25fps.mp4")} />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
 
         {/* Content */}
-        <motion.div
-          className="relative z-10 flex flex-col justify-end px-4 sm:px-10 lg:px-20 pb-14 md:pb-20 pt-32"
-          style={{ y: textY }}
-        >
+        <div className="relative z-10 flex flex-col justify-end px-4 sm:px-10 lg:px-20 pb-14 md:pb-20 pt-32">
           <div className="max-w-2xl">
             <motion.span
               initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
@@ -130,7 +115,7 @@ export default function ServicesContent() {
               </motion.div>
             </motion.div>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* ── SERVICE CARDS ── */}

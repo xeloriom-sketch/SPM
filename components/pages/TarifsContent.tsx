@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import { Phone, CheckCircle, Info, ArrowRight } from "lucide-react";
+import VideoPlayer from "@/components/VideoPlayer";
 import SplitText from "@/components/ui/SplitText";
 import { revealVariants, revealSubtle, spring } from "@/lib/motion";
 import { sitePath } from "@/lib/site-path";
@@ -72,27 +72,17 @@ export default function TarifsContent() {
   const paiIn    = useInView(paiRef,    { once: true, margin: "-40px" });
   const ctaIn    = useInView(ctaRef,    { once: true, margin: "-40px" });
 
-  // Scroll-driven parallax on hero car
-  const { scrollY } = useScroll();
-  const rawCarY = useTransform(scrollY, [0, 500], [0, -70]);
-  const carY    = useSpring(rawCarY, { stiffness: 70, damping: 20 });
 
   return (
     <>
       {/* ── HERO ── */}
       <section ref={heroRef} className="relative w-full bg-black overflow-hidden" style={{ minHeight: "48vh" }}>
-        {/* Photo plein écran avec parallax */}
-        <motion.div className="absolute inset-0" style={{ y: carY }}>
-          <Image
-            src={sitePath("/image/volkswagen-tiguan-r-line-2020-5k-8k-9500x6333-1639.jpeg")}
-            alt="Volkswagen Tiguan R-Line — SPM Taxi Tarifs"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+        {/* Vidéo 4K UHD en fond */}
+        <div className="absolute inset-0">
+          <VideoPlayer src={sitePath("/videos/11661703-uhd_3840_2160_24fps.mp4")} />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
 
         <div className="relative z-10 flex flex-col justify-end px-4 sm:px-10 lg:px-20 pb-14 md:pb-20 pt-32">
           <div className="max-w-2xl">

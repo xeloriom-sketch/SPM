@@ -71,26 +71,18 @@ export default function ServicesContent() {
     <>
       {/* ── HERO ── */}
       <section ref={heroRef} className="relative w-full bg-black overflow-hidden" style={{ minHeight: "56vh" }}>
-        {/* Car image — scroll-driven parallax */}
-        <motion.div
-          className="absolute right-0 bottom-0 w-[55%] sm:w-[48%] lg:w-[42%] pointer-events-none select-none"
-          style={{ y: carY }}
-        >
+        {/* Photo plein écran avec parallax */}
+        <motion.div className="absolute inset-0" style={{ y: carY }}>
           <Image
-            src={sitePath("/image/tiguan-side.png")}
-            alt="Volkswagen Tiguan Allspace — SPM Taxi"
-            width={1344}
-            height={768}
-            className="w-full h-auto"
-            style={{ filter: "drop-shadow(-20px 0 60px rgba(0,0,0,0.7))" }}
+            src={sitePath("/image/volkswagen-tiguan-r-line-2020-5k-8k-9500x6333-1639.jpeg")}
+            alt="Volkswagen Tiguan R-Line — SPM Taxi Services"
+            fill
+            className="object-cover object-center"
             priority
           />
         </motion.div>
-
-        {/* Left gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent" />
-        {/* Bottom gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
 
         {/* Content */}
         <motion.div

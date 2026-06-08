@@ -81,24 +81,18 @@ export default function TarifsContent() {
     <>
       {/* ── HERO ── */}
       <section ref={heroRef} className="relative w-full bg-black overflow-hidden" style={{ minHeight: "48vh" }}>
-        {/* Car image parallax */}
-        <motion.div
-          className="absolute right-0 bottom-0 w-[55%] sm:w-[46%] lg:w-[40%] pointer-events-none select-none"
-          style={{ y: carY }}
-        >
+        {/* Photo plein écran avec parallax */}
+        <motion.div className="absolute inset-0" style={{ y: carY }}>
           <Image
-            src={sitePath("/image/tiguan-front-quarter.png")}
-            alt="Volkswagen Tiguan — SPM Taxi Tarifs"
-            width={1344}
-            height={768}
-            className="w-full h-auto"
-            style={{ filter: "drop-shadow(-24px 0 64px rgba(0,0,0,0.75))" }}
+            src={sitePath("/image/volkswagen-tiguan-r-line-2020-5k-8k-9500x6333-1639.jpeg")}
+            alt="Volkswagen Tiguan R-Line — SPM Taxi Tarifs"
+            fill
+            className="object-cover object-center"
             priority
           />
         </motion.div>
-
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/88 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
 
         <div className="relative z-10 flex flex-col justify-end px-4 sm:px-10 lg:px-20 pb-14 md:pb-20 pt-32">
           <div className="max-w-2xl">

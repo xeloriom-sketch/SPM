@@ -51,9 +51,9 @@ export default async function DashboardPage() {
     .limit(5);
 
   const stats = [
-    { icon: MessageSquare, label: "Total messages", value: total, color: "text-blue-400" },
-    { icon: Mail, label: "Non lus", value: unread, color: "text-lime" },
-    { icon: Clock, label: "Aujourd'hui", value: today, color: "text-orange-400" },
+    { icon: MessageSquare, label: "Total messages", value: total, color: "text-black" },
+    { icon: Mail, label: "Non lus", value: unread, color: "text-black" },
+    { icon: Clock, label: "Aujourd'hui", value: today, color: "text-black" },
     { icon: CheckCircle2, label: "Lus", value: total - unread, color: "text-mutedc" },
   ];
 
@@ -83,7 +83,7 @@ export default async function DashboardPage() {
           <div className="rounded-2xl border border-borderc bg-surface p-5">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-sm font-semibold">Derniers messages</h2>
-              <a href={sitePath("/admin/messages")} className="text-xs text-lime hover:underline">Voir tout →</a>
+              <a href={sitePath("/admin/messages")} className="text-xs text-black hover:underline">Voir tout →</a>
             </div>
             <div className="flex flex-col gap-3">
               {(recent ?? []).length === 0 && (
@@ -95,7 +95,7 @@ export default async function DashboardPage() {
                   href={sitePath("/admin/messages")}
                   className="flex items-center gap-3 rounded-xl border border-borderc/50 bg-surface2 px-4 py-3 transition-colors hover:border-borderc"
                 >
-                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-lime text-xs font-bold text-black">
+                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-black text-xs font-bold text-white">
                     {m.name.charAt(0)}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -107,7 +107,7 @@ export default async function DashboardPage() {
                       {new Date(m.created_at).toLocaleDateString("fr-FR")}
                     </p>
                     {!m.read && (
-                      <span className="h-2 w-2 rounded-full bg-lime" />
+                      <span className="h-2 w-2 rounded-full bg-black" />
                     )}
                   </div>
                 </a>
@@ -129,7 +129,7 @@ export default async function DashboardPage() {
                     </div>
                     <div className="h-1.5 rounded-full bg-borderc overflow-hidden">
                       <div
-                        className="h-full rounded-full bg-lime"
+                        className="h-full rounded-full bg-black"
                         style={{ width: `${Math.round((count / total) * 100)}%` }}
                       />
                     </div>

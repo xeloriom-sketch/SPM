@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Eye, EyeOff, LogIn, Loader2 } from "lucide-react";
+import { Eye, EyeOff, LogIn } from "lucide-react";
 import { Suspense } from "react";
 import { sitePath } from "@/lib/site-path";
 
@@ -34,84 +34,62 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#f8f9fa] flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        {/* Logo */}
-        <div className="flex items-center gap-2.5 mb-10">
-          <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none">
-            <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="#b6f000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-            <circle cx="7" cy="16" r="1" fill="#b6f000"/><circle cx="17" cy="16" r="1" fill="#b6f000"/>
-          </svg>
-          <div>
-            <p className="font-display text-base font-bold">Taxi Tignieu</p>
-            <p className="text-[10px] text-mutedc">Espace Administration</p>
+        {/* Wordmark */}
+        <div className="flex flex-col items-center mb-10">
+          <div className="flex flex-col items-center gap-[3px] mb-3">
+            <div className="h-[11px] w-[22px] rounded-t-full border-t-[2px] border-x-[2px] border-black/70" />
+            <div className="h-[11px] w-[22px] rounded-b-full border-b-[2px] border-x-[2px] border-black/70" />
+            <span className="text-[7px] font-black tracking-[0.35em] uppercase text-black/55">SPM</span>
           </div>
+          <p className="text-xs text-black/35 tracking-[0.2em] uppercase font-medium">Espace Administration</p>
         </div>
 
-        <div className="rounded-3xl border border-borderc bg-surface p-7">
-          <h1 className="font-display text-xl font-bold mb-1">Connexion</h1>
-          <p className="text-sm text-mutedc mb-6">Accès réservé à l'administrateur.</p>
+        <div className="rounded-3xl border border-black/[0.07] bg-white p-7 shadow-sm">
+          <h1 className="text-xl font-semibold tracking-tight text-black mb-1">Connexion</h1>
+          <p className="text-sm text-black/40 mb-6">Accès réservé à l'administrateur.</p>
 
           <form onSubmit={onSubmit} className="flex flex-col gap-4">
             <div>
-              <label className="mb-1.5 block text-xs font-medium text-mutedc" htmlFor="email">
-                Email
-              </label>
+              <label className="mb-1.5 block text-[10px] font-bold tracking-wider uppercase text-black/35" htmlFor="email">Email</label>
               <input
-                id="email"
-                type="email"
-                required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@taxi-tignieu.fr"
-                className="w-full rounded-xl border border-borderc bg-surface2 px-4 py-2.5 text-sm outline-none focus:border-lime/50 focus:ring-1 focus:ring-lime/20 transition"
+                id="email" type="email" required autoComplete="email"
+                value={email} onChange={(e) => setEmail(e.target.value)}
+                placeholder="admin@spm-taxi.fr"
+                className="w-full rounded-xl border border-black/[0.08] bg-[#f8f9fa] px-4 py-2.5 text-sm outline-none transition placeholder:text-black/20 focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5"
               />
             </div>
 
             <div>
-              <label className="mb-1.5 block text-xs font-medium text-mutedc" htmlFor="password">
-                Mot de passe
-              </label>
+              <label className="mb-1.5 block text-[10px] font-bold tracking-wider uppercase text-black/35" htmlFor="password">Mot de passe</label>
               <div className="relative">
                 <input
-                  id="password"
-                  type={showPw ? "text" : "password"}
-                  required
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  id="password" type={showPw ? "text" : "password"} required autoComplete="current-password"
+                  value={password} onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full rounded-xl border border-borderc bg-surface2 px-4 py-2.5 pr-10 text-sm outline-none focus:border-lime/50 focus:ring-1 focus:ring-lime/20 transition"
+                  className="w-full rounded-xl border border-black/[0.08] bg-[#f8f9fa] px-4 py-2.5 pr-10 text-sm outline-none transition placeholder:text-black/20 focus:border-black/30 focus:bg-white focus:ring-2 focus:ring-black/5"
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPw(!showPw)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-mutedc hover:text-foreground transition-colors"
-                >
+                <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-1/2 -translate-y-1/2 text-black/30 hover:text-black transition-colors">
                   {showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
             </div>
 
             {error && (
-              <p className="rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-2.5 text-sm text-red-400">
-                {error}
-              </p>
+              <p className="rounded-xl bg-red-50 border border-red-100 px-4 py-2.5 text-sm text-red-600">{error}</p>
             )}
 
             <button
-              type="submit"
-              disabled={loading}
-              className="flex items-center justify-center gap-2 rounded-full bg-lime py-2.5 text-sm font-semibold text-black transition-all hover:brightness-105 disabled:opacity-60 mt-1"
+              type="submit" disabled={loading}
+              className="flex items-center justify-center gap-2 rounded-full bg-black py-2.5 text-sm font-semibold text-white transition hover:bg-black/85 disabled:opacity-60 mt-1"
             >
-              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogIn className="h-4 w-4" />}
-              {loading ? "Connexion…" : "Se connecter"}
+              {loading ? <><svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="30 70" strokeLinecap="round"/></svg>Connexion…</> : <><LogIn className="h-4 w-4" />Se connecter</>}
             </button>
           </form>
         </div>
 
-        <a href={sitePath("/")} className="mt-6 block text-center text-xs text-mutedc hover:text-foreground transition-colors">
+        <a href={sitePath("/")} className="mt-6 block text-center text-xs text-black/30 hover:text-black transition-colors">
           ← Retour au site
         </a>
       </div>

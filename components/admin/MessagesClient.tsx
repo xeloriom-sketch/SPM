@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { Phone, Mail, MessageSquare, Check, Trash2, Calendar, RefreshCw } from "lucide-react";
 import type { ContactMessage } from "@/lib/supabase";
+import { markAsRead, deleteMessage } from "@/app/actions/messages";
 
 export default function MessagesClient({ messages: initial }: { messages: ContactMessage[] }) {
   const [messages, setMessages] = useState(initial);
@@ -19,17 +20,15 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
   function handleSelect(m: ContactMessage) {
     setSelected(m);
     if (!m.read) {
-      startTransition(() => {
-        setMessages((prev) => prev.map((msg) => msg.id === m.id ? { ...msg, read: true } : msg));
-      });
+      setMessages((prev) => prev.map((msg) => msg.id === m.id ? { ...msg, read: true } : msg));
+      markAsRead(m.id).catch(() => {});
     }
   }
 
-  function handleDelete(id: string) {
-    startTransition(() => {
-      setMessages((prev) => prev.filter((m) => m.id !== id));
-      if (selected?.id === id) setSelected(null);
-    });
+  async function handleDelete(id: string) {
+    setMessages((prev) => prev.filter((m) => m.id !== id));
+    if (selected?.id === id) setSelected(null);
+    await deleteMessage(id).catch(() => {});
   }
 
   const unread = messages.filter((m) => !m.read).length;
@@ -42,7 +41,7 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
           <div className="flex items-center justify-between mb-3">
             <h1 className="font-display text-lg font-bold">Messages</h1>
             {unread > 0 && (
-              <span className="rounded-full bg-lime px-2 py-0.5 text-[10px] font-bold text-black">
+              <span className="rounded-full bg-black px-2 py-0.5 text-[10px] font-bold text-white">
                 {unread} non lus
               </span>
             )}
@@ -52,7 +51,7 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`flex-1 rounded-lg py-1.5 text-xs font-medium transition-colors ${filter === f ? "bg-lime/10 text-lime" : "text-mutedc hover:text-foreground"}`}
+                className={`flex-1 rounded-lg py-1.5 text-xs font-medium transition-colors ${filter === f ? "bg-black/[0.07] text-black" : "text-mutedc hover:text-foreground"}`}
               >
                 {f === "all" ? "Tous" : f === "unread" ? "Non lus" : "Lus"}
               </button>
@@ -70,13 +69,13 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
               onClick={() => handleSelect(m)}
               className={`w-full flex items-start gap-3 p-4 text-left border-b border-borderc/50 transition-colors hover:bg-surface ${selected?.id === m.id ? "bg-surface" : ""}`}
             >
-              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-lime text-sm font-bold text-black">
+              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-black text-sm font-bold text-white">
                 {m.name.charAt(0)}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-medium truncate">{m.name}</p>
-                  {!m.read && <span className="h-2 w-2 shrink-0 rounded-full bg-lime" />}
+                  {!m.read && <span className="h-2 w-2 shrink-0 rounded-full bg-black" />}
                 </div>
                 <p className="text-xs text-mutedc truncate">{m.service}</p>
                 <p className="text-xs text-mutedc mt-0.5">
@@ -99,12 +98,12 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
           <div className="flex flex-col h-full overflow-y-auto p-6">
             <div className="flex items-start justify-between gap-4 mb-6">
               <div className="flex items-center gap-4">
-                <div className="grid h-12 w-12 place-items-center rounded-full bg-lime text-lg font-bold text-black">
+                <div className="grid h-12 w-12 place-items-center rounded-full bg-black text-lg font-bold text-white">
                   {selected.name.charAt(0)}
                 </div>
                 <div>
                   <h2 className="font-display text-xl font-bold">{selected.name}</h2>
-                  <p className="text-sm text-lime">{selected.service}</p>
+                  <p className="text-sm text-black/50">{selected.service}</p>
                 </div>
               </div>
               <button
@@ -119,9 +118,9 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mb-6">
               <a
                 href={`tel:${selected.phone}`}
-                className="flex items-center gap-3 rounded-xl border border-borderc bg-surface2 px-4 py-3 hover:border-lime/30 transition-colors"
+                className="flex items-center gap-3 rounded-xl border border-borderc bg-surface2 px-4 py-3 hover:border-black/20 transition-colors"
               >
-                <Phone className="h-4 w-4 text-lime shrink-0" />
+                <Phone className="h-4 w-4 text-black/50 shrink-0" />
                 <div>
                   <p className="text-[10px] text-mutedc">Téléphone</p>
                   <p className="text-sm font-semibold">{selected.phone}</p>
@@ -129,9 +128,9 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
               </a>
               <a
                 href={`mailto:${selected.email}`}
-                className="flex items-center gap-3 rounded-xl border border-borderc bg-surface2 px-4 py-3 hover:border-lime/30 transition-colors"
+                className="flex items-center gap-3 rounded-xl border border-borderc bg-surface2 px-4 py-3 hover:border-black/20 transition-colors"
               >
-                <Mail className="h-4 w-4 text-lime shrink-0" />
+                <Mail className="h-4 w-4 text-black/50 shrink-0" />
                 <div>
                   <p className="text-[10px] text-mutedc">Email</p>
                   <p className="text-sm font-semibold truncate">{selected.email}</p>
@@ -139,7 +138,7 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
               </a>
               {selected.date && (
                 <div className="flex items-center gap-3 rounded-xl border border-borderc bg-surface2 px-4 py-3">
-                  <Calendar className="h-4 w-4 text-lime shrink-0" />
+                  <Calendar className="h-4 w-4 text-black/50 shrink-0" />
                   <div>
                     <p className="text-[10px] text-mutedc">Date souhaitée</p>
                     <p className="text-sm font-semibold">
@@ -169,14 +168,14 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
             <div className="mt-4 flex gap-3">
               <a
                 href={`tel:${selected.phone}`}
-                className="flex flex-1 items-center justify-center gap-2 rounded-full bg-lime py-2.5 text-sm font-semibold text-black transition-all hover:-translate-y-0.5 hover:brightness-105"
+                className="flex flex-1 items-center justify-center gap-2 rounded-full bg-black py-2.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:brightness-105"
               >
                 <Phone className="h-4 w-4" />
                 Appeler
               </a>
               <a
                 href={`mailto:${selected.email}?subject=Re: Demande de devis — ${selected.service}`}
-                className="flex flex-1 items-center justify-center gap-2 rounded-full border border-borderc py-2.5 text-sm font-semibold text-foreground transition-all hover:border-lime/30 hover:bg-lime/5"
+                className="flex flex-1 items-center justify-center gap-2 rounded-full border border-borderc py-2.5 text-sm font-semibold text-foreground transition-all hover:border-black/20 hover:bg-black/[0.03]"
               >
                 <Mail className="h-4 w-4" />
                 Répondre par email

@@ -2,8 +2,9 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Phone, Mail, MapPin, AlertCircle, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, AlertCircle, ArrowRight, CheckCircle } from "lucide-react";
 import SplitText from "@/components/ui/SplitText";
+import { submitContact } from "@/app/actions/contact";
 import { spring, springFast, revealVariants, revealSubtle } from "@/lib/motion";
 
 const serviceOptions = [
@@ -38,7 +39,8 @@ const infoCards = [
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   return (
     <section id="contact" className="w-full bg-white py-16 sm:py-20 md:py-28 font-sans">
@@ -143,9 +145,19 @@ export default function Contact() {
           >
             <form
               className="flex flex-col gap-4"
-              onSubmit={(e) => {
+              onSubmit={async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
                 e.preventDefault();
-                setMessage("Sur cette version statique, utilisez le téléphone ou l'email ci-contre.");
+                setStatus("loading");
+                setErrorMsg("");
+                try {
+                  const formData = new FormData(e.currentTarget);
+                  await submitContact(formData);
+                  setStatus("success");
+                  (e.target as HTMLFormElement).reset();
+                } catch (err) {
+                  setStatus("error");
+                  setErrorMsg(err instanceof Error ? err.message : "Erreur lors de l'envoi.");
+                }
               }}
             >
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -203,24 +215,55 @@ export default function Contact() {
                 />
               </div>
 
-              {message && (
+              {status === "error" && (
                 <div className="flex items-center gap-2 rounded-[12px] border border-red-100 bg-red-50 px-4 py-3 text-xs text-red-600">
                   <AlertCircle className="h-3.5 w-3.5 shrink-0" />
-                  {message}
+                  {errorMsg}
+                </div>
+              )}
+              {status === "success" && (
+                <div className="flex items-center gap-2 rounded-[12px] border border-green-100 bg-green-50 px-4 py-3 text-xs text-green-700">
+                  <CheckCircle className="h-3.5 w-3.5 shrink-0" />
+                  Message envoyé ! Je vous réponds sous 2h.
                 </div>
               )}
 
               <motion.button
                 type="submit"
-                className="group inline-flex w-full items-center justify-center gap-4 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-[11px] font-medium tracking-wider text-white"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.97 }}
+                disabled={status === "loading" || status === "success"}
+                className={`group inline-flex w-full items-center justify-center gap-4 rounded-full pl-5 pr-1.5 py-1.5 text-[11px] font-medium tracking-wider transition-all disabled:opacity-70 ${
+                  status === "success"
+                    ? "bg-green-600 text-white"
+                    : "bg-black text-white"
+                }`}
+                whileHover={status === "idle" ? { scale: 1.02, y: -2 } : {}}
+                whileTap={status === "idle" ? { scale: 0.97 } : {}}
                 transition={springFast}
               >
-                <span>Envoyer ma demande</span>
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:translate-x-0.5">
-                  <ArrowRight className="h-3.5 w-3.5 stroke-[2.5]" />
-                </div>
+                {status === "loading" ? (
+                  <>
+                    <span>Envoi en cours…</span>
+                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20">
+                      <svg className="h-3.5 w-3.5 animate-spin" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="30 70" strokeLinecap="round"/>
+                      </svg>
+                    </div>
+                  </>
+                ) : status === "success" ? (
+                  <>
+                    <span>Message envoyé ✓</span>
+                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20">
+                      <CheckCircle className="h-3.5 w-3.5 stroke-[2.5]" />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <span>Envoyer ma demande</span>
+                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:translate-x-0.5">
+                      <ArrowRight className="h-3.5 w-3.5 stroke-[2.5]" />
+                    </div>
+                  </>
+                )}
               </motion.button>
             </form>
           </motion.div>

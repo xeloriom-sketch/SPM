@@ -34,8 +34,8 @@ export default function AdminShell({
         <div className="p-5 border-b border-borderc">
           <div className="flex items-center gap-2.5">
             <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none">
-              <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="#b6f000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              <circle cx="7" cy="16" r="1" fill="#b6f000"/><circle cx="17" cy="16" r="1" fill="#b6f000"/>
+              <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="7" cy="16" r="1" fill="currentColor"/><circle cx="17" cy="16" r="1" fill="currentColor"/>
             </svg>
             <div>
               <p className="text-sm font-bold font-display">Taxi Tignieu</p>
@@ -53,14 +53,14 @@ export default function AdminShell({
                 href={href}
                 className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-all ${
                   active
-                    ? "bg-lime/10 text-lime font-medium"
+                    ? "bg-black text-white font-medium"
                     : "text-mutedc hover:bg-surface2 hover:text-foreground"
                 }`}
               >
                 <Icon className="h-4 w-4 shrink-0" />
                 {label}
                 {label === "Messages" && unread > 0 && (
-                  <span className="ml-auto rounded-full bg-lime px-2 py-0.5 text-[10px] font-bold text-black">
+                  <span className="ml-auto rounded-full bg-black text-white px-2 py-0.5 text-[10px] font-bold">
                     {unread}
                   </span>
                 )}
@@ -80,7 +80,7 @@ export default function AdminShell({
           </a>
           <button
             onClick={() => signOut({ callbackUrl: sitePath("/admin/login") })}
-            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-mutedc hover:bg-red-500/10 hover:text-red-400 transition-all"
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-mutedc hover:bg-black/5 hover:text-black transition-all"
           >
             <LogOut className="h-4 w-4 shrink-0" />
             Déconnexion
@@ -88,36 +88,41 @@ export default function AdminShell({
         </div>
       </aside>
 
-      {/* Mobile top bar */}
-      <div className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between border-b border-borderc bg-surface px-4 py-3 lg:hidden">
-        <div className="flex items-center gap-2">
-          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-            <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="#b6f000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-            <circle cx="7" cy="16" r="1" fill="#b6f000"/><circle cx="17" cy="16" r="1" fill="#b6f000"/>
-          </svg>
-          <span className="text-sm font-bold">Admin</span>
-        </div>
-        <div className="flex items-center gap-2">
-          {navItems.map(({ href, icon: Icon }) => (
+      {/* Mobile bottom nav */}
+      <nav className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-around border-t border-borderc bg-white px-2 pb-safe lg:hidden" style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}>
+        {navItems.map(({ href, icon: Icon, label }) => {
+          const active = pathname?.startsWith(href) ?? false;
+          return (
             <Link
               key={href}
               href={href}
-              className={`grid h-8 w-8 place-items-center rounded-lg transition-colors ${pathname?.startsWith(href) ?? false ? "bg-lime/10 text-lime" : "text-mutedc"}`}
+              className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-colors ${active ? "text-black" : "text-mutedc"}`}
             >
-              <Icon className="h-4 w-4" />
+              <div className={`relative grid h-8 w-8 place-items-center rounded-xl transition-colors ${active ? "bg-black/[0.07]" : ""}`}>
+                <Icon className="h-4 w-4" />
+                {label === "Messages" && unread > 0 && (
+                  <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-black text-white text-[9px] font-bold grid place-items-center">
+                    {unread > 9 ? "9+" : unread}
+                  </span>
+                )}
+              </div>
+              <span className="text-[10px] font-medium">{label.split(" ")[0]}</span>
             </Link>
-          ))}
-          <button
-            onClick={() => signOut({ callbackUrl: sitePath("/admin/login") })}
-            className="grid h-8 w-8 place-items-center rounded-lg text-mutedc hover:text-red-400 transition-colors"
-          >
+          );
+        })}
+        <button
+          onClick={() => signOut({ callbackUrl: sitePath("/admin/login") })}
+          className="flex flex-col items-center gap-1 px-4 py-2 rounded-xl text-mutedc transition-colors"
+        >
+          <div className="grid h-8 w-8 place-items-center rounded-xl">
             <LogOut className="h-4 w-4" />
-          </button>
-        </div>
-      </div>
+          </div>
+          <span className="text-[10px] font-medium">Quitter</span>
+        </button>
+      </nav>
 
       {/* Main */}
-      <main className="flex-1 overflow-y-auto pt-14 lg:pt-0">
+      <main className="flex-1 overflow-y-auto pb-20 lg:pb-0">
         {children}
       </main>
     </div>

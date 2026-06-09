@@ -8,10 +8,10 @@ import { Phone, Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
 
 const navLinks = [
-  { label: "Services",  href: "/services" },
-  { label: "Tarifs",    href: "/tarifs" },
-  { label: "À propos",  href: "/a-propos" },
-  { label: "Contact",   href: "/#contact" },
+  { label: "Services",  href: "/services",  title: "Nos services taxi — Aéroport, CPAM, Colis, Remorque" },
+  { label: "Tarifs",    href: "/tarifs",    title: "Tarifs taxi SPM — Devis gratuit" },
+  { label: "À propos",  href: "/a-propos",  title: "À propos de SPM Taxi — Chauffeur conventionné CPAM" },
+  { label: "Contact",   href: "/#contact",  title: "Contacter SPM Taxi — Demander un devis" },
 ];
 
 export default function Navbar() {
@@ -85,7 +85,7 @@ export default function Navbar() {
           {/* Left links */}
           <div className="hidden items-center justify-end gap-10 md:flex md:flex-1 md:pr-10">
             {navLinks.slice(0, 2).map((l) => (
-              <Link key={l.href} href={l.href} className={linkCls(l.href)}>
+              <Link key={l.href} href={l.href} className={linkCls(l.href)} title={l.title}>
                 {l.label}
               </Link>
             ))}
@@ -99,12 +99,13 @@ export default function Navbar() {
           {/* Right links */}
           <div className="hidden items-center justify-start gap-10 md:flex md:flex-1 md:pl-10">
             {navLinks.slice(2).map((l) => (
-              <Link key={l.href} href={l.href} className={linkCls(l.href)}>
+              <Link key={l.href} href={l.href} className={linkCls(l.href)} title={l.title}>
                 {l.label}
               </Link>
             ))}
             <motion.a
               href="tel:+33767751898"
+              title="Appeler SPM Taxi"
               className={`ml-4 flex items-center gap-2 rounded-full border px-5 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors duration-300 ${
                 isLight
                   ? "border-black/22 text-black hover:bg-black hover:text-white"
@@ -122,6 +123,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2.5 md:hidden">
             <motion.a
               href="tel:+33767751898"
+              title="Appeler SPM Taxi"
               className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-300 ${
                 isLight ? "border-black/18 text-black" : "border-white/20 text-white"
               }`}
@@ -175,6 +177,7 @@ export default function Navbar() {
                     >
                       <Link
                         href={l.href}
+                        title={l.title}
                         className={`flex items-center justify-between rounded-2xl px-5 py-4 text-[13px] font-medium tracking-wide transition-colors ${
                           isLight
                             ? `text-black/70 hover:bg-black/[0.04] hover:text-black${active ? " bg-black/[0.06] text-black" : ""}`
@@ -198,6 +201,7 @@ export default function Navbar() {
                 >
                   <a
                     href="tel:+33767751898"
+                    title="Appeler SPM Taxi"
                     className="flex items-center gap-3 rounded-2xl bg-black px-5 py-4 text-[13px] font-semibold text-white active:bg-black/80"
                     onClick={() => setMenuOpen(false)}
                   >

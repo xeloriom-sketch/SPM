@@ -6,7 +6,7 @@ import { sitePath } from "@/lib/site-path";
 import HeroVideo from "@/components/HeroVideo";
 import { useSettings } from "@/lib/settings-context";
 
-const LOADER_OUT = 3.0;
+const LOADER_OUT = 1.6;
 
 const spring = {
   type: "spring" as const,
@@ -57,31 +57,32 @@ export default function Hero() {
 
         <div className="px-6 pb-5 sm:px-10 sm:pb-6 md:px-14">
 
-          {/* Ligne 1 */}
-          <div className="overflow-hidden">
-            <motion.span
-              className="block font-sans font-semibold text-white leading-[1.05] tracking-[-0.025em]"
-              style={{ fontSize: "clamp(2rem, 5.5vw, 5.2rem)" }}
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ ...spring, delay: LOADER_OUT }}
-            >
-              {s.hero_line1}
-            </motion.span>
-          </div>
-
-          {/* Ligne 2 */}
-          <div className="overflow-hidden">
-            <motion.span
-              className="block font-sans font-semibold text-white leading-[1.05] tracking-[-0.025em]"
-              style={{ fontSize: "clamp(2rem, 5.5vw, 5.2rem)" }}
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ ...spring, delay: LOADER_OUT + 0.07 }}
-            >
-              {s.hero_line2}
-            </motion.span>
-          </div>
+          {/* H1 principal — SEO + accessibilité */}
+          <h1
+            className="font-sans font-semibold text-white leading-[1.05] tracking-[-0.025em]"
+            style={{ fontSize: "clamp(2rem, 5.5vw, 5.2rem)" }}
+          >
+            <div className="overflow-hidden">
+              <motion.span
+                className="block"
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{ ...spring, delay: LOADER_OUT }}
+              >
+                {s.hero_line1}
+              </motion.span>
+            </div>
+            <div className="overflow-hidden">
+              <motion.span
+                className="block"
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{ ...spring, delay: LOADER_OUT + 0.07 }}
+              >
+                {s.hero_line2}
+              </motion.span>
+            </div>
+          </h1>
 
           {/* Sous-titre */}
           <motion.p
@@ -102,6 +103,7 @@ export default function Hero() {
           >
             <a
               href={`tel:${s.contact_phone.replace(/[\s.-]/g, "")}`}
+              title="Appeler SPM Taxi maintenant"
               className="inline-flex items-center gap-2.5 rounded-full bg-white text-black pl-4 pr-5 py-2.5 text-[11px] font-semibold tracking-wide hover:bg-white/90 transition-colors"
             >
               <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
@@ -109,6 +111,7 @@ export default function Hero() {
             </a>
             <a
               href="#contact"
+              title="Demander un devis gratuit à SPM Taxi"
               className="group inline-flex items-center gap-3 rounded-full border border-white/25 text-white pl-4 pr-1.5 py-1.5 text-[11px] font-semibold tracking-wide hover:border-white/50 transition-colors"
             >
               <span>Demander un devis</span>
@@ -157,6 +160,7 @@ export default function Hero() {
           >
             <a
               href="#services"
+              title="Voir nos services"
               className="flex h-16 w-16 items-center justify-center rounded-full bg-[#111] text-white shadow-xl"
             >
               <ChevronDown className="h-7 w-7" strokeWidth={2.5} />

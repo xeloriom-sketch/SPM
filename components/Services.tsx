@@ -105,6 +105,7 @@ export default function Services() {
             >
               <motion.a
                 href="#contact"
+                title="Demander un devis — SPM Taxi"
                 className="group inline-flex items-center gap-4 rounded-full bg-black pl-6 pr-1.5 py-1.5 text-[11px] font-semibold tracking-[0.2em] uppercase text-white"
                 whileHover={{ scale: 1.04, y: -2 }}
                 whileTap={{ scale: 0.96 }}
@@ -146,6 +147,7 @@ export default function Services() {
             <motion.a
               key={svc.number}
               href="#contact"
+              title={`${svc.number} — Demander un devis`}
               className="group flex flex-col justify-between rounded-[22px] border border-black/[0.06] bg-white p-7"
               variants={revealVariants}
               initial="hidden"

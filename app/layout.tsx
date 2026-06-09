@@ -6,11 +6,11 @@ import { SettingsProvider } from "@/lib/settings-context";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.spm-taxi.fr"),
   title: {
-    default: "SPM Taxi — Taxi Conventionné CPAM Villebois | Lyon · Ain (01) · Isère",
-    template: "%s | SPM Taxi — Villebois (Ain 01)",
+    default: "SPM Taxi — Conventionné CPAM | Villebois · Lyon · Ain (01)",
+    template: "%s | SPM Taxi Villebois (Ain 01)",
   },
   description:
-    "SPM Taxi, taxi conventionné CPAM basé à Villebois (Ain 01). Volkswagen Tiguan Allspace 7 places. Transferts aéroport Lyon Saint-Exupéry, gares TGV, transport médical CPAM remboursé, colis urgents, remorque, longue distance France entière. Disponible 7j/7 24h/24. Devis gratuit sous 2h. ☎ 07 67 75 18 98.",
+    "Taxi conventionné CPAM Villebois (Ain 01) · Tiguan 7 places. Aéroport Lyon, médical CPAM remboursé, longue distance. 7j/7 24h/24. Devis gratuit sous 2h. ☎ 07 67 75 18 98.",
   keywords: [
     // Local primaires
     "taxi Villebois", "taxi Tignieu-Jameyzieu", "taxi Ain 01", "taxi conventionné Ain",
@@ -86,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="color-scheme" content="light dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         {/* Favicon */}
+        <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.svg" sizes="any" />
         {/* Géolocalisation */}

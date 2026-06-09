@@ -18,6 +18,7 @@ export default function FloatingCallButton() {
       {visible && (
         <motion.a
           href="tel:+33767751898"
+          title="Appeler SPM Taxi"
           className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 rounded-full bg-black text-white shadow-[0_8px_32px_rgba(0,0,0,0.28)] px-5 py-3.5 md:hidden"
           initial={{ scale: 0, opacity: 0, y: 16 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}

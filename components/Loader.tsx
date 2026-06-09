@@ -7,7 +7,7 @@ export default function Loader() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setVisible(false), 2400);
+    const t = setTimeout(() => setVisible(false), 1400);
     return () => clearTimeout(t);
   }, []);
 
@@ -19,7 +19,7 @@ export default function Loader() {
           className="fixed inset-0 z-[300] flex flex-col items-center justify-center overflow-hidden bg-[#0d0d0d]"
           initial={{ y: "0%" }}
           exit={{ y: "-100%" }}
-          transition={{ duration: 0.95, ease: [0.76, 0, 0.24, 1], delay: 0.05 }}
+          transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1], delay: 0.05 }}
         >
           {/* Lignes d'ambiance */}
           <motion.div

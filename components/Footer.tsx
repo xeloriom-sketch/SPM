@@ -5,25 +5,25 @@ import { useSettings } from "@/lib/settings-context";
 import Logo from "@/components/Logo";
 
 const navLinks = [
-  { label: "Accueil", href: "#accueil" },
-  { label: "Services", href: "#services" },
-  { label: "Véhicule", href: "#vehicule" },
-  { label: "Zone", href: "#zone" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Accueil",   href: "#accueil",  title: "Retour en haut de page — SPM Taxi" },
+  { label: "Services",  href: "#services", title: "Services SPM Taxi — Aéroport, CPAM, Colis, Remorque" },
+  { label: "Véhicule",  href: "#vehicule", title: "Notre véhicule — Volkswagen Tiguan 7 places" },
+  { label: "Zone",      href: "#zone",     title: "Zone de couverture — Ain, Lyon, Isère, France" },
+  { label: "FAQ",       href: "#faq",      title: "Questions fréquentes — SPM Taxi" },
+  { label: "Contact",   href: "#contact",  title: "Contacter SPM Taxi — Demander un devis" },
 ];
 
 const pageLinks = [
-  { label: "Nos Services",  href: "/services" },
-  { label: "Tarifs",        href: "/tarifs" },
-  { label: "À Propos",      href: "/a-propos" },
+  { label: "Nos Services",  href: "/services",  title: "Services taxi SPM — Aéroport, CPAM, Colis, Remorque" },
+  { label: "Tarifs",        href: "/tarifs",    title: "Tarifs taxi SPM — Devis gratuit" },
+  { label: "À Propos",      href: "/a-propos",  title: "À propos de SPM Taxi — Chauffeur conventionné Villebois" },
 ];
 
 const seoLinks = [
-  { label: "Transfert Aéroport Lyon", href: "/transfert-aeroport-lyon" },
-  { label: "Taxi Conventionné CPAM",  href: "/taxi-conventionné-cpam" },
-  { label: "Longue Distance",         href: "/taxi-longue-distance" },
-  { label: "Remorque & Colis",        href: "/taxi-remorque-ain" },
+  { label: "Transfert Aéroport Lyon", href: "/transfert-aeroport-lyon",    title: "Transfert taxi aéroport Lyon Saint-Exupéry depuis l'Ain" },
+  { label: "Taxi Conventionné CPAM",  href: "/taxi-conventionné-cpam",     title: "Taxi conventionné CPAM — Transport médical remboursé Ain" },
+  { label: "Longue Distance",         href: "/taxi-longue-distance",       title: "Taxi longue distance France entière — SPM Ain" },
+  { label: "Remorque & Colis",        href: "/taxi-remorque-ain",          title: "Taxi avec remorque et transport colis urgent — Ain" },
 ];
 
 const legalLinks = [
@@ -42,7 +42,7 @@ export default function Footer() {
           {/* ── LIGNE SUPÉRIEURE : MARQUE & ACTIONS DISCRÈTES ── */}
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between border-b border-white/10 pb-12">
             {/* Logo et Identité à Gauche */}
-            <a href="#accueil" className="group">
+            <a href="#accueil" title="SPM Taxi — Retour en haut" className="group">
               <Logo variant="dark" size="md" />
             </a>
 
@@ -54,10 +54,10 @@ export default function Footer() {
               <a href={`mailto:${s.contact_email}`} className="hover:text-white transition-colors" title="Email">
                 <Mail className="h-4 w-4 stroke-[1.5]" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="#" title="SPM Taxi sur Facebook" className="hover:text-white transition-colors">
                 <Facebook className="h-4 w-4 stroke-[1.5]" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="#" title="SPM Taxi sur Instagram" className="hover:text-white transition-colors">
                 <Instagram className="h-4 w-4 stroke-[1.5]" />
               </a>
             </div>
@@ -72,6 +72,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <a
                         href={link.href}
+                        title={link.title}
                         className="text-sm sm:text-base text-white/80 font-normal hover:text-white transition-colors tracking-wide"
                     >
                       {link.label}
@@ -86,6 +87,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
+                    title={link.title}
                     className="text-[12px] text-white/60 font-medium hover:text-white transition-colors tracking-wide"
                   >
                     {link.label}
@@ -100,6 +102,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
+                    title={link.title}
                     className="text-[11px] text-white/40 font-normal hover:text-white/70 transition-colors tracking-wide"
                   >
                     {link.label}

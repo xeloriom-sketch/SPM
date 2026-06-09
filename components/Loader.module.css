@@ -1,0 +1,187 @@
+.road {
+  position: relative;
+  width: min(700px, 88vw);
+  height: 130px;
+  background: #222;
+  border-radius: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.road::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #fff 0%, #fff 50%, transparent 50%, transparent 100%);
+  background-size: 50px 4px;
+  animation: animate_road 0.125s linear infinite;
+  border-radius: 2px;
+  opacity: 0.18;
+}
+
+@keyframes animate_road {
+  0%   { background-position: 50px 0; }
+  100% { background-position: 0 0; }
+}
+
+.taxi {
+  position: absolute;
+  width: 180px;
+  height: 72px;
+  background: #f4b603;
+  border-radius: 10px;
+  box-shadow: -8px 8px rgba(0,0,0,0.35);
+  transform-style: preserve-3d;
+  perspective: 800px;
+  animation: animate_taxi 2s linear infinite;
+  z-index: 10;
+}
+
+@keyframes animate_taxi {
+  0%   { transform: translateX(-20px) translateY(0px); }
+  5%   { transform: translateX(-10px) translateY(0px); }
+  50%  { transform: translateX(20px)  translateY(0px); }
+  75%  { transform: translateX(-10px) translateY(0px); }
+  100% { transform: translateX(20px)  translateY(0px); }
+}
+
+.taxi::before {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 2px;
+  border-radius: 2px;
+  width: 5px;
+  height: 14px;
+  background: #fc3c25;
+  box-shadow: 0 38px #fc3c25;
+}
+
+.taxi::after {
+  content: '';
+  position: absolute;
+  top: 9px;
+  right: 2px;
+  background: #fff;
+  box-shadow: 0 40px #fff;
+  width: 6px;
+  height: 15px;
+}
+
+.taxiInner {
+  position: absolute;
+  inset: 5px 10px;
+  background: #fdd206;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.taxiInner::before {
+  content: 'taxi';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  background: #fff;
+  padding: 2px 3px;
+  font-size: 0.65em;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+  z-index: 10;
+  color: #111;
+}
+
+.taxiBody {
+  position: absolute;
+  inset: 0 30px;
+  background: #111;
+  border-radius: 10px;
+}
+
+.taxiBody::before {
+  content: '';
+  position: absolute;
+  inset: 5px 22px;
+  background: #fdd206;
+  border-radius: 5px;
+}
+
+.taxiBody::after {
+  content: '';
+  position: absolute;
+  inset: 0 52px;
+  background: #fdd206;
+}
+
+.taxiWindows {
+  position: absolute;
+  inset: 0;
+}
+
+.taxiWindows::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 18px;
+  width: 36px;
+  height: 5px;
+  background: #fdd206;
+  transform: rotate(15deg);
+  transform-origin: right;
+  box-shadow: 90px 30px #fdd206;
+}
+
+.taxiWindows::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 18px;
+  width: 36px;
+  height: 5px;
+  background: #fdd206;
+  transform-origin: right;
+  transform: rotate(-15deg);
+  box-shadow: 90px -30px #fdd206;
+}
+
+.lightBeam {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  height: 62px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 15px;
+  transform-style: preserve-3d;
+}
+
+.lightBeam::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 130px;
+  height: 14px;
+  background: linear-gradient(90deg, rgba(255,255,200,0.85), transparent);
+  transform-origin: left;
+  transform: rotateY(-50deg) perspective(500px);
+  border-radius: 4px;
+}
+
+.lightBeam::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 130px;
+  height: 14px;
+  background: linear-gradient(90deg, rgba(255,255,200,0.85), transparent);
+  transform-origin: left;
+  transform: rotateY(-50deg) perspective(500px);
+  border-radius: 4px;
+}

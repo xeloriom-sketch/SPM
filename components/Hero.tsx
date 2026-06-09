@@ -86,7 +86,7 @@ export default function Hero() {
 
           {/* Sous-titre */}
           <motion.p
-            className="mt-3 text-[10px] sm:text-[11px] font-light text-white/38 tracking-[0.22em] uppercase"
+            className="mt-3 text-[10px] sm:text-[11px] font-light text-white/65 tracking-[0.22em] uppercase"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...spring, delay: LOADER_OUT + 0.22 }}

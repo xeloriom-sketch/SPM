@@ -1,0 +1,150 @@
+# ================================================
+# SPM Taxi — Configuration Apache
+# spm-taxi.fr · Villebois (Ain 01)
+# ================================================
+
+Options -Indexes
+Options +FollowSymLinks
+AddDefaultCharset UTF-8
+
+# ── Réécriture d'URL ────────────────────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. Force non-WWW (www.spm-taxi.fr → spm-taxi.fr)
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # 3. Servir les fichiers et dossiers existants directement
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 4. Fallback : fichier .html correspondant (build sans trailingSlash)
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+
+</IfModule>
+
+# ── Pages d'erreur personnalisées ───────────────
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+ErrorDocument 403 /404.html
+
+# ── En-têtes de sécurité ────────────────────────
+<IfModule mod_headers.c>
+  # Empêche le clickjacking
+  Header always set X-Frame-Options "SAMEORIGIN"
+  # Empêche le MIME sniffing
+  Header always set X-Content-Type-Options "nosniff"
+  # Protection XSS navigateur
+  Header always set X-XSS-Protection "1; mode=block"
+  # Référent
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Permissions API
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  # HSTS (1 an, sous-domaines, preload)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  # Masquer infos serveur
+  Header unset Server
+  Header unset X-Powered-By
+
+  # Cache — Assets Next.js (noms hashés) : 1 an immuable
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Cache — Images, fonts, vidéos : 1 an
+  <FilesMatch "\.(jpg|jpeg|png|webp|gif|svg|ico|mp4|woff2|woff|ttf|otf)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+  # Cache — HTML : toujours vérifier
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  # Cache — JSON/XML/txt : pas de cache
+  <FilesMatch "\.(json|xml|txt)$">
+    Header set Cache-Control "no-store"
+  </FilesMatch>
+</IfModule>
+
+# ── Compression Gzip / Brotli ───────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE font/woff2 font/woff application/font-woff2
+  AddOutputFilterByType DEFLATE text/plain
+</IfModule>
+
+# ── Durée de cache navigateur (Expires) ─────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+
+  # HTML — aucun cache
+  ExpiresByType text/html                  "access plus 0 seconds"
+
+  # CSS et JS — 1 an (fichiers hashés)
+  ExpiresByType text/css                   "access plus 1 year"
+  ExpiresByType application/javascript     "access plus 1 year"
+  ExpiresByType application/x-javascript  "access plus 1 year"
+
+  # Images — 1 an
+  ExpiresByType image/jpeg                 "access plus 1 year"
+  ExpiresByType image/png                  "access plus 1 year"
+  ExpiresByType image/webp                 "access plus 1 year"
+  ExpiresByType image/svg+xml              "access plus 1 year"
+  ExpiresByType image/gif                  "access plus 1 year"
+  ExpiresByType image/x-icon               "access plus 1 year"
+
+  # Polices — 1 an
+  ExpiresByType font/woff2                 "access plus 1 year"
+  ExpiresByType font/woff                  "access plus 1 year"
+  ExpiresByType application/font-woff2     "access plus 1 year"
+
+  # Vidéos — 1 mois
+  ExpiresByType video/mp4                  "access plus 1 month"
+
+  # JSON / XML / TXT — aucun cache
+  ExpiresByType application/json           "access plus 0 seconds"
+  ExpiresByType text/xml                   "access plus 0 seconds"
+  ExpiresByType text/plain                 "access plus 0 seconds"
+</IfModule>
+
+# ── Types MIME ──────────────────────────────────
+<IfModule mod_mime.c>
+  AddType font/woff2                       .woff2
+  AddType font/woff                        .woff
+  AddType image/webp                       .webp
+  AddType video/mp4                        .mp4
+  AddType application/javascript           .js
+  AddType text/css                         .css
+  AddType image/svg+xml                    .svg
+</IfModule>
+
+# ── Supprimer ETag (redondant avec Cache-Control) ──
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+FileETag None
+
+# ── Bloquer les fichiers sensibles ──────────────
+<FilesMatch "(\.env|\.git|composer\.json|package\.json|package-lock\.json|tsconfig\.json)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# ── Index de répertoire ─────────────────────────
+DirectoryIndex index.html

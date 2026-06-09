@@ -16,9 +16,10 @@ if (process.env.NEXT_PUBLIC_STATIC === "1") {
   nextConfig.assetPrefix = "/SPM";
   nextConfig.images      = { unoptimized: true };
 } else if (process.env.NEXT_PUBLIC_STATIC === "prod") {
-  // Production FTP build — no basePath
-  nextConfig.output = "export";
-  nextConfig.images = { unoptimized: true };
+  // Production FTP build — no basePath, trailing slash for Apache directory routing
+  nextConfig.output        = "export";
+  nextConfig.trailingSlash = true;
+  nextConfig.images        = { unoptimized: true };
 }
 
 export default nextConfig;

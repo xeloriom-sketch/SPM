@@ -13,24 +13,26 @@ export default function HeroVideo({ src }: { src: string; scrollFactor?: number 
     v.muted = true;
     v.defaultMuted = true;
 
-    const onCanPlay = () => {
-      setReady(true);
-      v.play().catch(() => {});
-    };
+    const show = () => { setReady(true); };
 
-    // Try to play immediately
+    // Already buffered (cached page, fast connection)
+    if (v.readyState >= 3) {
+      setReady(true);
+    }
+
+    v.addEventListener("canplay",    show, { once: true });
+    v.addEventListener("loadeddata", show, { once: true });
+    v.addEventListener("playing",    show, { once: true });
+
     v.play().catch(() => {});
 
-    v.addEventListener("canplay",      onCanPlay, { once: true });
-    v.addEventListener("loadeddata",   onCanPlay, { once: true });
-
-    // iOS Safari: needs a user interaction hint
     const onTouch = () => { v.play().catch(() => {}); };
     document.addEventListener("touchstart", onTouch, { once: true, passive: true });
 
     return () => {
-      v.removeEventListener("canplay",    onCanPlay);
-      v.removeEventListener("loadeddata", onCanPlay);
+      v.removeEventListener("canplay",    show);
+      v.removeEventListener("loadeddata", show);
+      v.removeEventListener("playing",    show);
       document.removeEventListener("touchstart", onTouch);
     };
   }, [src]);

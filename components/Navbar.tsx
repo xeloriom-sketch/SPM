@@ -18,23 +18,11 @@ export default function Navbar() {
   const pathname  = usePathname();
   const isHome    = pathname === "/";
 
-  const [progress, setProgress] = useState(0);
-  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
-
-  useEffect(() => {
-    const handle = () => {
-      const y    = window.scrollY;
-      const docH = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(docH > 0 ? (y / docH) * 100 : 0);
-    };
-    handle();
-    window.addEventListener("scroll", handle, { passive: true });
-    return () => window.removeEventListener("scroll", handle);
-  }, []);
 
   const linkCls = (href: string) => {
     const active = !href.startsWith("/#") && pathname === href;
@@ -48,12 +36,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Scroll progress bar — lime accent */}
-      <div
-        className="fixed left-0 top-0 z-[70] h-[2px] bg-[#b6f000] transition-[width] duration-75"
-        style={{ width: `${progress}%` }}
-      />
-
       <motion.header
         className="fixed left-0 right-0 top-0 z-50 w-full"
         initial={{ y: -80 }}

@@ -58,7 +58,8 @@ export default function HeroVideo({ src, scrollFactor = 1 }: { src: string; scro
       ref={ref}
       muted
       playsInline
-      preload="auto"
+      preload="metadata"
+      poster="/image/tiguan-hero.jpeg"
       disablePictureInPicture
       className="h-full w-full object-cover"
       style={{ pointerEvents: "none" }}

@@ -91,6 +91,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon.svg" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
+        {/* Préconnexion Supabase */}
+        <link rel="preconnect" href="https://dqbbaflumzssjndgxtrg.supabase.co" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://dqbbaflumzssjndgxtrg.supabase.co" />
         {/* Géolocalisation */}
         <meta name="geo.region" content="FR-01" />
         <meta name="geo.placename" content="Villebois, Ain, Auvergne-Rhône-Alpes, France" />

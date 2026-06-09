@@ -45,7 +45,7 @@ export default function VideoPlayer({ src }: { src: string }) {
       muted
       loop
       playsInline
-      preload="auto"
+      preload="none"
       disablePictureInPicture
       className="h-full w-full object-cover"
       style={{ pointerEvents: "none" }}

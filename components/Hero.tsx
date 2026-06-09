@@ -6,7 +6,7 @@ import { sitePath } from "@/lib/site-path";
 import HeroVideo from "@/components/HeroVideo";
 import { useSettings } from "@/lib/settings-context";
 
-const LOADER_OUT = 1.6;
+const LOADER_OUT = 0.1;
 
 const spring = {
   type: "spring" as const,

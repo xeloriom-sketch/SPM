@@ -2,7 +2,7 @@
 import { useRef, useEffect, useState } from "react";
 import { type MotionValue, useMotionValueEvent, motionValue } from "framer-motion";
 
-const NOOP = motionValue(0); // static value used when no scroll scrubbing
+const NOOP = motionValue(0);
 
 interface HeroVideoProps {
   src: string;
@@ -10,24 +10,44 @@ interface HeroVideoProps {
 }
 
 export default function HeroVideo({ src, scrollYProgress }: HeroVideoProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef   = useRef<HTMLVideoElement>(null);
+  const targetRef  = useRef(0);      // latest desired time, always up-to-date
+  const seekingRef = useRef(false);  // true while a browser seek is in flight
   const [ready, setReady] = useState(false);
   const scrubMode = !!scrollYProgress;
 
-  // Framer Motion fires on every animation frame when scroll changes.
-  // Handles desktop, iOS momentum scrolling, and reverse scroll with zero glitches.
+  // Flush: send one seek to the browser. Only called when browser is free.
+  const flush = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    seekingRef.current = true;
+    v.currentTime = targetRef.current; // precise seeking (no fastSeek — keyframe-snapping is visually choppy)
+  };
+
+  // Called every Framer Motion animation frame while scrollYProgress changes.
+  // Stores desired time then flushes only when the browser is not already seeking.
   useMotionValueEvent(scrollYProgress ?? NOOP, "change", (latest) => {
     const v = videoRef.current;
     if (!v?.duration) return;
-    const t = Math.max(0, Math.min(v.duration, latest * v.duration));
-    const el = v as HTMLVideoElement & { fastSeek?: (t: number) => void };
-    if (typeof el.fastSeek === "function") el.fastSeek(t);
-    else el.currentTime = t;
+    targetRef.current = Math.max(0, Math.min(v.duration, latest * v.duration));
+    if (!seekingRef.current) flush();
   });
 
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
+
+    // When a seek completes, check if we still need to catch up to targetRef.
+    // This drains any backlog without ever queuing multiple seeks.
+    const onSeeked = () => {
+      if (Math.abs(v.currentTime - targetRef.current) > 0.016) {
+        flush(); // still behind the scroll position — seek once more
+      } else {
+        seekingRef.current = false; // in sync, idle
+      }
+    };
+    v.addEventListener("seeked", onSeeked);
+
     v.muted = true;
     v.defaultMuted = true;
     v.playsInline = true;
@@ -40,14 +60,20 @@ export default function HeroVideo({ src, scrollYProgress }: HeroVideoProps) {
       if (scrubMode) { v.pause(); v.playbackRate = 0; }
       else v.play().catch(() => {});
     };
-    if (v.readyState >= 2) { setReady(true); if (scrubMode) { v.pause(); v.playbackRate = 0; } else v.play().catch(() => {}); }
-    else v.addEventListener("loadeddata", onReady, { once: true });
 
-    // iOS: trigger buffering on first touch interaction
+    if (v.readyState >= 2) {
+      setReady(true);
+      if (scrubMode) { v.pause(); v.playbackRate = 0; }
+      else v.play().catch(() => {});
+    } else {
+      v.addEventListener("loadeddata", onReady, { once: true });
+    }
+
     const onTouch = () => v.load();
     document.addEventListener("touchstart", onTouch, { once: true, passive: true });
 
     return () => {
+      v.removeEventListener("seeked", onSeeked);
       v.removeEventListener("loadeddata", onReady);
       document.removeEventListener("touchstart", onTouch);
     };

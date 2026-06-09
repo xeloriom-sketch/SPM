@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Plane, Heart, Package, Map, Truck, ArrowRight } from "lucide-react";
 import HeroVideo from "@/components/HeroVideo";
 import SplitText from "@/components/ui/SplitText";
@@ -17,6 +18,8 @@ const services = [
     desc: "Prise en charge à domicile, suivi des vols en temps réel, aide aux bagages. Lyon Saint-Exupéry, Part-Dieu, Perrache, Genève-Cointrin et toutes gares TGV.",
     features: ["Suivi vol en temps réel", "Aide bagages incluse", "Attente 10 min offerte", "Disponible 24h/24"],
     href: "/transfert-aeroport-lyon",
+    image: "/image/airport-terminal.webp",
+    imageAlt: "Terminal aéroport Lyon Saint-Exupéry",
     dark: true,
   },
   {
@@ -25,6 +28,8 @@ const services = [
     desc: "Agréé par l'Assurance Maladie pour les transports médicaux sur prescription. Chimiothérapie, dialyse, hospitalisation — prise en charge directe.",
     features: ["Agrément CPAM officiel", "Zéro avance de frais", "Prescription acceptée", "Destinations hospitalières"],
     href: "/taxi-conventionné-cpam",
+    image: "/image/medical-transport.webp",
+    imageAlt: "Transport médical CPAM conventionné",
     dark: false,
   },
   {
@@ -33,6 +38,8 @@ const services = [
     desc: "Livraison express de colis, lettres recommandées, pièces détachées et documents urgents. Porte à porte avec confirmation de remise.",
     features: ["Livraison express", "Confirmation de remise", "Colis fragiles acceptés", "Inter-entreprises B2B"],
     href: "/taxi-remorque-ain",
+    image: "/image/tiguan-front-quarter.webp",
+    imageAlt: "Volkswagen Tiguan Allspace — transport colis",
     dark: false,
   },
   {
@@ -41,6 +48,8 @@ const services = [
     desc: "Attache-remorque homologuée sur le Tiguan Allspace. Transport de matériel lourd, véhicules en panne, déménagements partiels, animaux.",
     features: ["Attache-remorque homologuée", "Matériel lourd", "Véhicule en panne", "Déménagement partiel"],
     href: "/taxi-remorque-ain",
+    image: "/image/volkswagen-tiguan-r-line.webp",
+    imageAlt: "Volkswagen Tiguan Allspace R-Line avec attache-remorque",
     dark: false,
   },
   {
@@ -49,6 +58,8 @@ const services = [
     desc: "Paris, Marseille, Bordeaux, Nice, Strasbourg, Genève... Devis personnalisé, tarif fixe, arrêts possibles en route. Aller simple ou aller-retour.",
     features: ["Tarif fixe sur devis", "Arrêts possibles", "Aller-retour disponible", "Toute la France"],
     href: "/taxi-longue-distance",
+    image: "/image/road-highway.webp",
+    imageAlt: "Autoroute France — longue distance",
     dark: false,
   },
 ];
@@ -183,6 +194,16 @@ export default function ServicesContent() {
               transition={spring}
               className={`rounded-[24px] overflow-hidden border border-black/[0.06] group ${svc.dark ? "bg-black text-white" : "bg-[#f8f9fa] text-black"}`}
             >
+              {/* Image service */}
+              <div className="relative w-full aspect-[21/9] overflow-hidden">
+                <Image
+                  src={svc.image}
+                  alt={svc.imageAlt}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className={`absolute inset-0 ${svc.dark ? "bg-black/30" : "bg-black/20"}`} />
+              </div>
               <div className="p-6 sm:p-8">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-5 mb-5">
                   <div className="flex items-center gap-4">

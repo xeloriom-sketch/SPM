@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, CheckCircle, Info, ArrowRight } from "lucide-react";
 import HeroVideo from "@/components/HeroVideo";
 import SplitText from "@/components/ui/SplitText";
@@ -221,6 +222,46 @@ export default function TarifsContent() {
               </div>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* ── TIGUAN SHOWCASE ── */}
+      <section className="relative w-full aspect-[21/8] overflow-hidden">
+        <Image
+          src="/image/volkswagen-tiguan-r-line.webp"
+          alt="Volkswagen Tiguan Allspace R-Line — SPM Taxi"
+          fill
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/40 mb-4"
+          >
+            Le véhicule
+          </motion.p>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+            className="text-3xl md:text-4xl font-semibold text-white tracking-tight mb-4"
+          >
+            Volkswagen Tiguan Allspace<br/>7 places, SUV premium
+          </motion.h3>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="text-sm text-white/55 max-w-md"
+          >
+            Wi-Fi · Climatisation bi-zone · Attache-remorque · Chargeur USB
+          </motion.p>
         </div>
       </section>
 

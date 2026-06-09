@@ -173,22 +173,22 @@ export default function AProposContent() {
               <p className="text-base text-[#444] leading-relaxed mb-5">{s.about_bio_2}</p>
               <p className="text-base text-[#444] leading-relaxed">{s.about_bio_3}</p>
             </motion.div>
-            {/* Photo chauffeur — image sans fond, grande */}
+            {/* Tiguan — image grande */}
             <motion.div
               initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden"
+              className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden"
             >
               <Image
-                src="/image/driver-professional.webp"
-                alt="Chauffeur professionnel SPM Taxi"
+                src="/image/volkswagen-tiguan-r-line.webp"
+                alt="Volkswagen Tiguan Allspace R-Line — SPM Taxi"
                 fill
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
-                <p className="text-white font-semibold text-sm">SPM — Taxi Conventionné</p>
-                <p className="text-white/60 text-xs mt-1">Villebois · Ain (01) · Disponible 7j/7</p>
+                <p className="text-white font-semibold text-sm">Volkswagen Tiguan Allspace R-Line</p>
+                <p className="text-white/60 text-xs mt-1">7 places · SUV Confort · Attache-remorque homologuée</p>
               </div>
             </motion.div>
           </div>

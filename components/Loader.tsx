@@ -8,8 +8,40 @@ export default function Loader() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setVisible(false), 2000);
-    return () => clearTimeout(t);
+    let pageReady = false;
+    let minTimePassed = false;
+
+    const tryHide = () => {
+      if (pageReady && minTimePassed) setVisible(false);
+    };
+
+    // Minimum 2s so the taxi animation completes at least one cycle
+    const minTimer = setTimeout(() => {
+      minTimePassed = true;
+      tryHide();
+    }, 2000);
+
+    // Wait for ALL resources (images, video poster, fonts) to be loaded
+    const onLoad = () => {
+      pageReady = true;
+      tryHide();
+    };
+
+    if (document.readyState === "complete") {
+      pageReady = true;
+      tryHide();
+    } else {
+      window.addEventListener("load", onLoad);
+    }
+
+    // Safety cap: never block more than 6s regardless
+    const maxTimer = setTimeout(() => setVisible(false), 6000);
+
+    return () => {
+      clearTimeout(minTimer);
+      clearTimeout(maxTimer);
+      window.removeEventListener("load", onLoad);
+    };
   }, []);
 
   return (

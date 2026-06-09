@@ -52,15 +52,15 @@ export default function Testimonials() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const testimonials = [
-    { name: s.testimonial1_name, stars: parseInt(s.testimonial1_stars), date: s.testimonial1_date, text: s.testimonial1_text },
-    { name: s.testimonial2_name, stars: parseInt(s.testimonial2_stars), date: s.testimonial2_date, text: s.testimonial2_text },
-    { name: s.testimonial3_name, stars: parseInt(s.testimonial3_stars), date: s.testimonial3_date, text: s.testimonial3_text },
-    { name: s.testimonial4_name, stars: parseInt(s.testimonial4_stars), date: s.testimonial4_date, text: s.testimonial4_text },
-    { name: s.testimonial5_name, stars: parseInt(s.testimonial5_stars), date: s.testimonial5_date, text: s.testimonial5_text },
-    { name: s.testimonial6_name, stars: parseInt(s.testimonial6_stars), date: s.testimonial6_date, text: s.testimonial6_text },
-    { name: s.testimonial7_name, stars: parseInt(s.testimonial7_stars), date: s.testimonial7_date, text: s.testimonial7_text },
-    { name: s.testimonial8_name, stars: parseInt(s.testimonial8_stars), date: s.testimonial8_date, text: s.testimonial8_text },
-    { name: s.testimonial9_name, stars: parseInt(s.testimonial9_stars), date: s.testimonial9_date, text: s.testimonial9_text },
+    { name: s.testimonial1_name, stars: parseInt(s.testimonial1_stars, 10), date: s.testimonial1_date, text: s.testimonial1_text },
+    { name: s.testimonial2_name, stars: parseInt(s.testimonial2_stars, 10), date: s.testimonial2_date, text: s.testimonial2_text },
+    { name: s.testimonial3_name, stars: parseInt(s.testimonial3_stars, 10), date: s.testimonial3_date, text: s.testimonial3_text },
+    { name: s.testimonial4_name, stars: parseInt(s.testimonial4_stars, 10), date: s.testimonial4_date, text: s.testimonial4_text },
+    { name: s.testimonial5_name, stars: parseInt(s.testimonial5_stars, 10), date: s.testimonial5_date, text: s.testimonial5_text },
+    { name: s.testimonial6_name, stars: parseInt(s.testimonial6_stars, 10), date: s.testimonial6_date, text: s.testimonial6_text },
+    { name: s.testimonial7_name, stars: parseInt(s.testimonial7_stars, 10), date: s.testimonial7_date, text: s.testimonial7_text },
+    { name: s.testimonial8_name, stars: parseInt(s.testimonial8_stars, 10), date: s.testimonial8_date, text: s.testimonial8_text },
+    { name: s.testimonial9_name, stars: parseInt(s.testimonial9_stars, 10), date: s.testimonial9_date, text: s.testimonial9_text },
   ];
 
   const row1 = [...testimonials, ...testimonials];

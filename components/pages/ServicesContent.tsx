@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, useScroll } from "framer-motion";
+import { useIsMobile } from "@/lib/use-is-mobile";
 import Link from "next/link";
 import { Phone, ArrowRight } from "lucide-react";
 import HeroVideo from "@/components/HeroVideo";
@@ -486,6 +487,7 @@ function ServiceCard({ svc, index }: { svc: typeof services[0]; index: number })
 
 export default function ServicesContent() {
   const s      = useSettings();
+  const isMobile = useIsMobile();
   const heroContainerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroContainerRef,
@@ -501,7 +503,7 @@ export default function ServicesContent() {
       <div ref={heroContainerRef} style={{ height: "130vh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
           <div className="absolute inset-0 z-0">
-            <HeroVideo src={sitePath("/videos/7440442-web.mp4")} scrollYProgress={heroProgress} />
+            <HeroVideo src={sitePath("/videos/7440442-web.mp4")} scrollYProgress={isMobile ? undefined : heroProgress} />
           </div>
           <div className="pointer-events-none absolute inset-0 z-[5]">
             <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/75 to-transparent" />

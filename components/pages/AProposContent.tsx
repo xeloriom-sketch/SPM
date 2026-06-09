@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { useIsMobile } from "@/lib/use-is-mobile";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Star, Award, Clock, MapPin, ArrowRight, CheckCircle } from "lucide-react";
@@ -35,6 +36,7 @@ export default function AProposContent() {
     { icon: MapPin, title: "Ancrage local",     desc: "Basé à Villebois, je connais chaque route de l'Ain, Lyon et l'Isère. Aucune surprise, aucun détour inutile." },
   ];
 
+  const isMobile = useIsMobile();
   const heroContainerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroContainerRef,
@@ -59,7 +61,7 @@ export default function AProposContent() {
       <div ref={heroContainerRef} style={{ height: "130vh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
           <div className="absolute inset-0 z-0">
-            <HeroVideo src={sitePath("/videos/hero-web.mp4")} scrollYProgress={heroProgress} />
+            <HeroVideo src={sitePath("/videos/hero-web.mp4")} scrollYProgress={isMobile ? undefined : heroProgress} />
           </div>
           <div className="pointer-events-none absolute inset-0 z-[5]">
             <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/55 to-transparent" />

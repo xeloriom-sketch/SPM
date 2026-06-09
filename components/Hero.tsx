@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
+import { useIsMobile } from "@/lib/use-is-mobile";
 import { ChevronDown, Phone, ArrowRight } from "lucide-react";
 import { sitePath } from "@/lib/site-path";
 import HeroVideo from "@/components/HeroVideo";
@@ -25,6 +26,7 @@ const specs = [
 
 export default function Hero() {
   const s = useSettings();
+  const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -39,7 +41,7 @@ export default function Hero() {
     >
       {/* VIDEO — composant dédié avec useEffect agressif (fix Safari autoplay) */}
       <div className="absolute inset-0 z-0">
-        <HeroVideo src={sitePath("/videos/hero-web.mp4")} scrollYProgress={scrollYProgress} />
+        <HeroVideo src={sitePath("/videos/hero-web.mp4")} scrollYProgress={isMobile ? undefined : scrollYProgress} />
       </div>
 
       {/* OVERLAYS */}

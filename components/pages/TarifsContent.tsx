@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, useScroll } from "framer-motion";
+import { useIsMobile } from "@/lib/use-is-mobile";
 import Link from "next/link";
 import { Phone, CheckCircle, Info, ArrowRight } from "lucide-react";
 import HeroVideo from "@/components/HeroVideo";
@@ -144,6 +145,7 @@ export default function TarifsContent() {
     },
   ];
 
+  const isMobile = useIsMobile();
   const heroContainerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroContainerRef,
@@ -169,7 +171,7 @@ export default function TarifsContent() {
       <section ref={heroRef} className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
         {/* Vidéo fond */}
         <div className="absolute inset-0 z-0">
-          <HeroVideo src={sitePath("/videos/11661703-web.mp4")} scrollYProgress={heroProgress} />
+          <HeroVideo src={sitePath("/videos/11661703-web.mp4")} scrollYProgress={isMobile ? undefined : heroProgress} />
         </div>
 
         {/* Overlays */}

@@ -216,20 +216,113 @@ export default function AProposContent() {
             />
           </motion.div>
 
-          {/* 4 angles — grille sans fond */}
+          {/* 4 specs animées */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {[
-              { src: "/image/tiguan-front.webp",  label: "Face avant" },
-              { src: "/image/tiguan-side.webp",   label: "Profil" },
-              { src: "/image/tiguan-rear.webp",   label: "Vue arrière" },
-              { src: "/image/tiguan-grid.webp",   label: "Toutes les vues" },
-            ].map((v, i) => (
-              <motion.div key={v.label}
+              {
+                value: "7",
+                unit: "places",
+                label: "Passagers",
+                icon: (go: boolean) => (
+                  <svg viewBox="0 0 48 28" fill="none" className="w-12 h-7">
+                    {[0,1,2,3,4,5,6].map(i => (
+                      <motion.g key={i}
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={go ? { opacity: 1, y: 0 } : {}}
+                        transition={{ delay: i * 0.07, type: "spring", stiffness: 400, damping: 18 }}
+                      >
+                        <circle cx={4 + i*6.5} cy="10" r="3.5" fill="white" opacity="0.85" />
+                        <rect x={1.5 + i*6.5} y="15" width="5" height="7" rx="2.5" fill="white" opacity="0.85" />
+                      </motion.g>
+                    ))}
+                  </svg>
+                ),
+              },
+              {
+                value: "AC",
+                unit: "bi-zone",
+                label: "Climatisation",
+                icon: (go: boolean) => (
+                  <svg viewBox="0 0 48 28" fill="none" className="w-12 h-7">
+                    <motion.g initial={{ opacity: 0 }} animate={go ? { opacity: 1 } : {}} transition={{ delay: 0.2 }}>
+                      <line x1="24" y1="2" x2="24" y2="26" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.85" />
+                      <line x1="10" y1="14" x2="38" y2="14" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.85" />
+                      <line x1="14" y1="6" x2="34" y2="22" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.85" />
+                      <line x1="34" y1="6" x2="14" y2="22" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.85" />
+                    </motion.g>
+                    {[1,2,3].map(i => (
+                      <motion.circle key={i} cx="24" cy="14" r={i*6}
+                        stroke="#b6f000" strokeWidth="1" fill="none"
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={go ? { scale: 1, opacity: 0.3 } : {}}
+                        transition={{ delay: 0.3 + i * 0.1, type: "spring", stiffness: 300, damping: 16 }}
+                        style={{ transformOrigin: "24px 14px" }}
+                      />
+                    ))}
+                  </svg>
+                ),
+              },
+              {
+                value: "Wi-Fi",
+                unit: "inclus",
+                label: "Connexion",
+                icon: (go: boolean) => (
+                  <svg viewBox="0 0 48 28" fill="none" className="w-12 h-7">
+                    {[16, 22, 30].map((r, i) => (
+                      <motion.path key={i}
+                        d={`M${24-r*0.6} ${20-r*0.3} Q24 ${14-r*0.4} ${24+r*0.6} ${20-r*0.3}`}
+                        stroke="white" strokeWidth="2" strokeLinecap="round" fill="none"
+                        opacity={0.85 - i*0.2}
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={go ? { pathLength: 1, opacity: 0.85 - i*0.2 } : {}}
+                        transition={{ delay: 0.15 + i * 0.12, duration: 0.4, ease: "easeOut" }}
+                      />
+                    ))}
+                    <motion.circle cx="24" cy="23" r="2.5" fill="white"
+                      initial={{ scale: 0 }} animate={go ? { scale: 1 } : {}}
+                      transition={{ delay: 0.6, type: "spring", stiffness: 400, damping: 14 }}
+                      style={{ transformOrigin: "24px 23px" }}
+                    />
+                  </svg>
+                ),
+              },
+              {
+                value: "🔗",
+                unit: "homologuée",
+                label: "Remorque",
+                icon: (go: boolean) => (
+                  <svg viewBox="0 0 48 28" fill="none" className="w-12 h-7">
+                    <motion.rect x="4" y="8" width="16" height="12" rx="3" fill="white" opacity="0.85"
+                      initial={{ x: -10, opacity: 0 }} animate={go ? { x: 4, opacity: 0.85 } : {}}
+                      transition={{ duration: 0.5, ease: [0.16,1,0.3,1], delay: 0.1 }}
+                    />
+                    <motion.rect x="28" y="8" width="16" height="12" rx="3" fill="white" opacity="0.65"
+                      initial={{ x: 54, opacity: 0 }} animate={go ? { x: 28, opacity: 0.65 } : {}}
+                      transition={{ duration: 0.5, ease: [0.16,1,0.3,1], delay: 0.2 }}
+                    />
+                    <motion.line x1="20" y1="14" x2="28" y2="14" stroke="#b6f000" strokeWidth="2.5" strokeLinecap="round"
+                      initial={{ scaleX: 0 }} animate={go ? { scaleX: 1 } : {}}
+                      transition={{ delay: 0.6, duration: 0.3 }}
+                      style={{ transformOrigin: "24px 14px" }}
+                    />
+                    <motion.circle cx="24" cy="14" r="3" fill="#b6f000"
+                      initial={{ scale: 0 }} animate={go ? { scale: 1 } : {}}
+                      transition={{ delay: 0.65, type: "spring", stiffness: 500, damping: 14 }}
+                      style={{ transformOrigin: "24px 14px" }}
+                    />
+                  </svg>
+                ),
+              },
+            ].map((spec, i) => (
+              <motion.div key={spec.label}
                 variants={revealVariants} initial="hidden" animate={carIn ? "visible" : "hidden"} custom={0.15 + i * 0.07}
-                className="relative aspect-[4/3]"
+                className="flex flex-col items-center gap-3 bg-[#0d0d0d] rounded-2xl py-6 px-4 text-center"
               >
-                <Image src={v.src} alt={v.label} fill className="object-contain object-center" />
-                <p className="absolute bottom-0 left-0 right-0 text-center text-[9px] font-semibold tracking-wider uppercase text-black/30 pb-1">{v.label}</p>
+                {spec.icon(carIn)}
+                <div>
+                  <p className="text-lg font-black text-white tracking-tight">{spec.value} <span className="text-xs font-semibold text-white/40">{spec.unit}</span></p>
+                  <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/30 mt-0.5">{spec.label}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -355,12 +448,18 @@ export default function AProposContent() {
         </div>
       </section>
 
-      {/* ── ZONE — photo route ── */}
+      {/* ── ZONE ── */}
       <section ref={zoneRef} className="bg-black py-14 md:py-20 relative overflow-hidden">
-        {/* Photo route en fond */}
-        <div className="absolute inset-0 z-0 opacity-20">
-          <Image src="/image/road-highway.webp" alt="Route France" fill className="object-cover object-center" />
-        </div>
+        {/* Grille de points décorative */}
+        <div className="pointer-events-none absolute inset-0 z-0"
+          style={{
+            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+        <div className="pointer-events-none absolute inset-0 z-0"
+          style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 30%, #000 90%)" }}
+        />
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 lg:px-12">
           <motion.div variants={revealSubtle} initial="hidden" animate={zoneIn ? "visible" : "hidden"} custom={0}>
             <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/35 mb-3 block">Couverture</span>

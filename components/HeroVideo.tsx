@@ -1,9 +1,8 @@
 "use client";
-
 import { useRef, useEffect, useState } from "react";
 
 export default function HeroVideo({ src }: { src: string; scrollFactor?: number }) {
-  const ref   = useRef<HTMLVideoElement>(null);
+  const ref = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -12,41 +11,45 @@ export default function HeroVideo({ src }: { src: string; scrollFactor?: number 
 
     v.muted = true;
     v.defaultMuted = true;
+    v.playsInline = true;
     v.preload = "auto";
+    v.load(); // force iOS to start buffering
 
-    // Find the sticky section ancestor, then its outer scroll container
-    let sticky: HTMLElement | null = v.parentElement;
-    while (sticky && getComputedStyle(sticky).position !== "sticky") {
-      sticky = sticky.parentElement;
+    // Find outer scroll container: first ancestor taller than viewport
+    let outer: HTMLElement | null = v.parentElement;
+    while (outer) {
+      if (outer.offsetHeight > window.innerHeight * 1.05) break;
+      outer = outer.parentElement;
     }
-    const outer = sticky?.parentElement ?? null;
 
     const scrub = () => {
       if (!outer || !v.duration) return;
-      const docTop = outer.getBoundingClientRect().top + window.scrollY;
-      const range  = outer.offsetHeight - window.innerHeight;
+      const rect = outer.getBoundingClientRect();
+      const range = outer.offsetHeight - window.innerHeight;
       if (range <= 0) return;
-      const progress = Math.max(0, Math.min(1, (window.scrollY - docTop) / range));
-      v.currentTime = progress * v.duration;
+      const progress = Math.max(0, Math.min(1, -rect.top / range));
+      if (isFinite(progress)) v.currentTime = progress * v.duration;
     };
 
-    const onReady = () => {
-      setReady(true);
-      scrub();
-    };
+    const onMeta = () => scrub();
+    const onData = () => { setReady(true); scrub(); };
 
-    if (v.readyState >= 2) {
-      setReady(true);
-      scrub();
-    } else {
-      v.addEventListener("loadeddata", onReady, { once: true });
-    }
+    if (v.readyState >= 2) { setReady(true); scrub(); }
+    else if (v.readyState >= 1) { onMeta(); }
 
+    v.addEventListener("loadedmetadata", onMeta, { once: true });
+    v.addEventListener("loadeddata", onData, { once: true });
     window.addEventListener("scroll", scrub, { passive: true });
+
+    // iOS: reveal video on first touch even without full buffer
+    const onTouch = () => { if (!ready) { v.load(); } };
+    document.addEventListener("touchstart", onTouch, { once: true, passive: true });
 
     return () => {
       window.removeEventListener("scroll", scrub);
-      v.removeEventListener("loadeddata", onReady);
+      v.removeEventListener("loadedmetadata", onMeta);
+      v.removeEventListener("loadeddata", onData);
+      document.removeEventListener("touchstart", onTouch);
     };
   }, [src]);
 

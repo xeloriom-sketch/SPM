@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import { Phone, CheckCircle, Info, ArrowRight } from "lucide-react";
 import HeroVideo from "@/components/HeroVideo";
 import SplitText from "@/components/ui/SplitText";
@@ -25,6 +24,86 @@ const paiements = [
   { label: "Carte bancaire",   detail: "CB, Visa, Mastercard" },
   { label: "American Express", detail: "Carte Amex acceptée" },
 ];
+
+function TiguanIllustration() {
+  const ref = useRef<SVGSVGElement>(null);
+  const inView = useInView(ref as any, { once: true, amount: 0.3 });
+  return (
+    <svg ref={ref} viewBox="0 0 500 200" fill="none" className="w-full max-w-lg mx-auto h-auto" aria-hidden>
+      {/* Road */}
+      <motion.rect x="0" y="164" width="500" height="8" rx="4" fill="white" opacity="0"
+        animate={inView ? { opacity: 0.06 } : {}} transition={{ duration: 0.5, delay: 0.1 }} />
+      {/* Road dashes */}
+      {[0,1,2,3,4].map(i => (
+        <motion.rect key={i} x={30+i*86} y="166" width="46" height="4" rx="2" fill="#b6f000"
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={inView ? { scaleX: 1, opacity: 0.45 } : {}}
+          transition={{ duration: 0.25, delay: 0.15 + i*0.07 }}
+          style={{ transformOrigin: `${30+i*86}px 168px` }}
+        />
+      ))}
+      {/* SUV body — slides in */}
+      <motion.g initial={{ x: -180, opacity: 0 }} animate={inView ? { x: 0, opacity: 1 } : {}}
+        transition={{ duration: 1.1, ease: [0.16,1,0.3,1], delay: 0.2 }}>
+        {/* Main body */}
+        <rect x="60" y="110" width="380" height="54" rx="6" fill="white" opacity="0.9" />
+        {/* Roof */}
+        <path d="M130 110 L160 68 L340 68 L370 110 Z" fill="white" opacity="0.85" />
+        {/* Windshield front */}
+        <path d="M340 110 L366 74 L340 74 Z" fill="#111" opacity="0.4" />
+        {/* Windshield rear */}
+        <path d="M160 110 L136 74 L164 74 Z" fill="#111" opacity="0.4" />
+        {/* Side windows */}
+        <rect x="170" y="72" width="60" height="34" rx="3" fill="#111" opacity="0.35" />
+        <rect x="238" y="72" width="60" height="34" rx="3" fill="#111" opacity="0.35" />
+        {/* Door lines */}
+        <line x1="236" y1="110" x2="236" y2="164" stroke="#bbb" strokeWidth="1" opacity="0.2" />
+        <line x1="302" y1="110" x2="302" y2="164" stroke="#bbb" strokeWidth="1" opacity="0.2" />
+        {/* Grill lines */}
+        {[0,1,2].map(i => (
+          <line key={i} x1="368" y1={120+i*10} x2="436" y2={120+i*10}
+            stroke="#b6f000" strokeWidth="1.5" opacity="0.55" strokeLinecap="round" />
+        ))}
+        {/* Headlight */}
+        <motion.path d="M370 112 L434 108 L434 126 L372 130 Z" fill="#b6f000" opacity="0"
+          animate={inView ? { opacity: [0, 0.5, 0.3] } : {}}
+          transition={{ duration: 0.8, delay: 1.0 }}
+        />
+        {/* Rear light */}
+        <rect x="60" y="115" width="12" height="22" rx="3" fill="#b6f000" opacity="0"
+          style={{ transformOrigin: "66px 126px" }}
+        />
+        <motion.rect x="60" y="115" width="12" height="22" rx="3" fill="#b6f000"
+          animate={inView ? { opacity: [0, 0.6, 0.4] } : { opacity: 0 }}
+          transition={{ duration: 0.8, delay: 1.1 }}
+        />
+        {/* Wheels */}
+        {[132, 368].map(cx => (
+          <g key={cx}>
+            <circle cx={cx} cy="164" r="26" fill="#111" stroke="white" strokeWidth="2.5" />
+            <circle cx={cx} cy="164" r="12" fill="#222" />
+            <motion.line x1={cx} y1="138" x2={cx} y2="190" stroke="white" strokeWidth="1.5" opacity="0.25"
+              animate={inView ? { rotate: 360 } : {}}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 0.8 }}
+              style={{ transformOrigin: `${cx}px 164px` }}
+            />
+            <motion.line x1={cx-26} y1="164" x2={cx+26} y2="164" stroke="white" strokeWidth="1.5" opacity="0.25"
+              animate={inView ? { rotate: 360 } : {}}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 0.8 }}
+              style={{ transformOrigin: `${cx}px 164px` }}
+            />
+          </g>
+        ))}
+        {/* Lime accent stripe */}
+        <motion.rect x="60" y="138" width="380" height="4" rx="2" fill="#b6f000"
+          initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
+          transition={{ delay: 0.9, duration: 0.6, ease: [0.16,1,0.3,1] }}
+          style={{ transformOrigin: "60px 140px" }}
+        />
+      </motion.g>
+    </svg>
+  );
+}
 
 export default function TarifsContent() {
   const s = useSettings();
@@ -225,43 +304,50 @@ export default function TarifsContent() {
         </div>
       </section>
 
-      {/* ── TIGUAN SHOWCASE ── */}
-      <section className="relative w-full aspect-[21/8] overflow-hidden">
-        <Image
-          src="/image/volkswagen-tiguan-r-line.webp"
-          alt="Volkswagen Tiguan Allspace R-Line — SPM Taxi"
-          fill
-          className="object-cover object-center"
+      {/* ── TIGUAN SHOWCASE ANIMÉ ── */}
+      <section className="bg-[#0d0d0d] py-16 md:py-20 relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
         />
-        <div className="absolute inset-0 bg-black/55" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+        <div className="pointer-events-none absolute inset-0"
+          style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 40%, #0d0d0d 100%)" }}
+        />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-8 text-center">
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/40 mb-4"
-          >
-            Le véhicule
-          </motion.p>
+            initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5 }}
+            className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-4"
+          >Le véhicule</motion.p>
           <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
-            className="text-3xl md:text-4xl font-semibold text-white tracking-tight mb-4"
-          >
-            Volkswagen Tiguan Allspace<br/>7 places, SUV premium
-          </motion.h3>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-sm text-white/55 max-w-md"
-          >
-            Wi-Fi · Climatisation bi-zone · Attache-remorque · Chargeur USB
-          </motion.p>
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.08 }}
+            className="text-2xl md:text-3xl font-semibold text-white tracking-tight mb-10"
+          >Volkswagen Tiguan Allspace — 7 places</motion.h3>
+
+          {/* Illustration SVG voiture de côté */}
+          <TiguanIllustration />
+
+          {/* Specs grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10">
+            {[
+              { value: "7", label: "Places assises" },
+              { value: "SUV", label: "Confort premium" },
+              { value: "Wi-Fi", label: "À bord inclus" },
+              { value: "⚓", label: "Attache-remorque" },
+            ].map((s, i) => (
+              <motion.div key={s.label}
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: 0.5 + i * 0.08, duration: 0.5, ease: [0.16,1,0.3,1] }}
+                className="rounded-2xl border border-white/[0.07] bg-white/[0.03] py-5 px-3"
+              >
+                <p className="text-2xl font-black text-white mb-1">{s.value}</p>
+                <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/35">{s.label}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -129,7 +129,7 @@ export default function Services() {
             custom={0.18}
           >
             <Image
-              src="/image/tiguan-front-quarter.png"
+              src="/image/tiguan-front-quarter.webp"
               alt="SPM Volkswagen Tiguan Allspace 7 places"
               fill
               priority

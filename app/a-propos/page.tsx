@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "À Propos SPM Taxi — Chauffeur Conventionné CPAM | Villebois Ain",
     description: "Chauffeur professionnel conventionné CPAM, Tiguan 7 places, note 4,9/5 Google. SPM Taxi — Villebois (Ain 01). 7j/7 24h/24.",
     url: "https://taxispm.fr/a-propos",
-    images: [{ url: "/image/tiguan-front-quarter.png", alt: "SPM Taxi — Chauffeur Villebois Ain" }],
+    images: [{ url: "/image/tiguan-front-quarter.webp", alt: "SPM Taxi — Chauffeur Villebois Ain" }],
   },
   alternates: { canonical: "https://taxispm.fr/a-propos" },
 };

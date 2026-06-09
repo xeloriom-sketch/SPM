@@ -84,7 +84,7 @@ export default function AProposContent() {
         {/* Photo plein écran */}
         <motion.div className="absolute inset-0 z-0 overflow-hidden" style={{ scale: imgScale, y: imgY }}>
           <Image
-            src="/image/tiguan-hero.jpeg"
+            src="/image/tiguan-hero.webp"
             alt="Volkswagen Tiguan R-Line — SPM Taxi"
             fill
             className="object-cover object-center"
@@ -231,7 +231,7 @@ export default function AProposContent() {
             </motion.div>
             <div className="lg:col-span-2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#f8f9fa]">
               <Image
-                src="/image/tiguan-side.png"
+                src="/image/tiguan-side.webp"
                 alt="Volkswagen Tiguan Allspace — SPM Taxi"
                 fill
                 className="object-contain object-center p-4"

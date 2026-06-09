@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: "https://taxispm.fr/transfert-aeroport-lyon",
     type: "website",
     locale: "fr_FR",
-    images: [{ url: "/image/tiguan-front-quarter.png", alt: "Taxi SPM transfert aéroport Lyon Saint-Exupéry Ain" }],
+    images: [{ url: "/image/tiguan-front-quarter.webp", alt: "Taxi SPM transfert aéroport Lyon Saint-Exupéry Ain" }],
   },
 };
 

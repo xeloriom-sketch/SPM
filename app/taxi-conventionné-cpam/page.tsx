@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: "https://taxispm.fr/taxi-conventionné-cpam",
     type: "website",
     locale: "fr_FR",
-    images: [{ url: "/image/tiguan-front-quarter.png", alt: "Taxi conventionné CPAM transport médical Ain SPM" }],
+    images: [{ url: "/image/tiguan-front-quarter.webp", alt: "Taxi conventionné CPAM transport médical Ain SPM" }],
   },
 };
 

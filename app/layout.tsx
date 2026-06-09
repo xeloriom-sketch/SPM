@@ -46,9 +46,9 @@ export const metadata: Metadata = {
       "Taxi conventionné CPAM à Villebois (Ain 01). Volkswagen Tiguan 7 places, disponible 7j/7 24h/24. Transferts aéroport Lyon Saint-Exupéry, transport médical remboursé CPAM, longue distance. Devis gratuit en 2h. ☎ 07 67 75 18 98.",
     images: [
       {
-        url: "/image/tiguan-hero.jpeg",
-        width: 9500,
-        height: 6333,
+        url: "/og-image.jpeg",
+        width: 1200,
+        height: 630,
         alt: "SPM Taxi — Volkswagen Tiguan Allspace R-Line 7 places, Taxi Conventionné Villebois Ain",
       },
     ],
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     title: "SPM Taxi — Taxi Conventionné CPAM | Lyon · Ain · Isère",
     description:
       "Taxi conventionné CPAM 4,9★ Google, Tiguan 7 places, disponible 7j/7. Transferts aéroport Lyon, transport médical CPAM, longue distance. ☎ 07 67 75 18 98.",
-    images: ["/image/tiguan-hero.jpeg"],
+    images: ["/og-image.jpeg"],
   },
   robots: {
     index: true,
@@ -86,10 +86,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="color-scheme" content="light dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         {/* Favicon & PWA */}
-        <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon.svg" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
+        <link rel="shortcut icon" href="/favicon.svg" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         {/* Préconnexion Supabase */}
         <link rel="preconnect" href="https://dqbbaflumzssjndgxtrg.supabase.co" crossOrigin="anonymous" />

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: "https://taxispm.fr/taxi-remorque-ain",
     type: "website",
     locale: "fr_FR",
-    images: [{ url: "/image/tiguan-front-quarter.png", alt: "Taxi avec remorque colis urgent SPM Ain" }],
+    images: [{ url: "/image/tiguan-front-quarter.webp", alt: "Taxi avec remorque colis urgent SPM Ain" }],
   },
 };
 

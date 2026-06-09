@@ -16,10 +16,10 @@ const specs = [
 ];
 
 const views = [
-  { src: "/image/tiguan-front-quarter.png", label: "Vue 3/4 avant", alt: "Volkswagen Tiguan Allspace — avant 3/4" },
-  { src: "/image/tiguan-side.png",          label: "Profil",        alt: "Volkswagen Tiguan Allspace — profil" },
-  { src: "/image/tiguan-front.png",         label: "Face avant",    alt: "Volkswagen Tiguan Allspace — face avant" },
-  { src: "/image/tiguan-rear.png",          label: "Vue arrière",   alt: "Volkswagen Tiguan Allspace — arrière" },
+  { src: "/image/tiguan-front-quarter.webp", label: "Vue 3/4 avant", alt: "Volkswagen Tiguan Allspace — avant 3/4" },
+  { src: "/image/tiguan-side.webp",          label: "Profil",        alt: "Volkswagen Tiguan Allspace — profil" },
+  { src: "/image/tiguan-front.webp",         label: "Face avant",    alt: "Volkswagen Tiguan Allspace — face avant" },
+  { src: "/image/tiguan-rear.webp",          label: "Vue arrière",   alt: "Volkswagen Tiguan Allspace — arrière" },
 ];
 
 export default function Vehicle() {

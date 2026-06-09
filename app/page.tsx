@@ -154,8 +154,8 @@ const jsonLd = {
         { "@type": "Review", author: { "@type": "Person", name: "SOSO 01" }, reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" }, reviewBody: "Taxi très sérieux et ponctuel, à l'écoute de ses clients. Vous pouvez y aller les yeux fermés.", datePublished: "2025-07-01" },
       ],
       image: [
-        { "@type": "ImageObject", url: "https://taxispm.fr/image/tiguan-hero.jpeg", caption: "SPM Taxi — Volkswagen Tiguan R-Line Allspace", width: 9500, height: 6333 },
-        { "@type": "ImageObject", url: "https://taxispm.fr/image/tiguan-front-quarter.png", caption: "Volkswagen Tiguan Allspace 7 places — SPM Taxi Villebois" },
+        { "@type": "ImageObject", url: "https://taxispm.fr/image/tiguan-hero.webp", caption: "SPM Taxi — Volkswagen Tiguan R-Line Allspace", width: 9500, height: 6333 },
+        { "@type": "ImageObject", url: "https://taxispm.fr/image/tiguan-front-quarter.webp", caption: "Volkswagen Tiguan Allspace 7 places — SPM Taxi Villebois" },
       ],
       sameAs: [
         "https://www.google.com/maps/search/SPM+Taxi+Villebois",

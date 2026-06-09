@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: "https://taxispm.fr/taxi-longue-distance",
     type: "website",
     locale: "fr_FR",
-    images: [{ url: "/image/tiguan-front-quarter.png", alt: "Taxi longue distance France SPM Ain Villebois" }],
+    images: [{ url: "/image/tiguan-front-quarter.webp", alt: "Taxi longue distance France SPM Ain Villebois" }],
   },
 };
 

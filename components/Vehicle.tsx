@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -47,6 +47,22 @@ export default function Vehicle() {
   };
   const prev = () => go((current - 1 + views.length) % views.length);
   const next = () => go((current + 1) % views.length);
+
+  // Touch swipe
+  const touchStartX = useRef<number | null>(null);
+  const onTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  }, []);
+  const onTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(delta) < 40) return;
+    const n = delta < 0
+      ? (current + 1) % views.length
+      : (current - 1 + views.length) % views.length;
+    go(n);
+  }, [current]);
 
   const { scrollYProgress } = useScroll({ target: cardRef, offset: ["start end", "end start"] });
   const rawWatermarkY = useTransform(scrollYProgress, [0, 1], [16, -16]);
@@ -178,26 +194,30 @@ export default function Vehicle() {
 
           {/* Nav arrows */}
           <motion.button
-            className="absolute left-4 sm:left-6 top-[44%] -translate-y-1/2 h-11 w-11 bg-white rounded-full flex items-center justify-center text-black/40 shadow-sm z-10"
+            className="absolute left-3 sm:left-6 top-[44%] -translate-y-1/2 h-12 w-12 bg-white rounded-full flex items-center justify-center text-black/40 shadow-md z-20 touch-manipulation"
             onClick={prev}
             whileHover={{ scale: 1.1, x: -2 }}
-            whileTap={{ scale: 0.92 }}
+            whileTap={{ scale: 0.88 }}
             transition={springFast}
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-5 w-5" />
           </motion.button>
           <motion.button
-            className="absolute right-4 sm:right-6 top-[44%] -translate-y-1/2 h-11 w-11 bg-white rounded-full flex items-center justify-center text-black/40 shadow-sm z-10"
+            className="absolute right-3 sm:right-6 top-[44%] -translate-y-1/2 h-12 w-12 bg-white rounded-full flex items-center justify-center text-black/40 shadow-md z-20 touch-manipulation"
             onClick={next}
             whileHover={{ scale: 1.1, x: 2 }}
-            whileTap={{ scale: 0.92 }}
+            whileTap={{ scale: 0.88 }}
             transition={springFast}
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-5 w-5" />
           </motion.button>
 
-          {/* Car image carousel */}
-          <div className="relative w-full max-w-[1000px] z-10 overflow-hidden aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]">
+          {/* Car image carousel — touch swipe on mobile */}
+          <div
+            className="relative w-full max-w-[1000px] z-10 overflow-hidden aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]"
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
             <AnimatePresence custom={direction} mode="popLayout">
               <motion.div
                 key={current}

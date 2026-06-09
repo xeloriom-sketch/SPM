@@ -48,16 +48,12 @@ jobs:
 
       - name: Deploy via SFTP (lftp mirror)
         run: |
-          lftp -u "$FTP_USER","$FTP_PASSWORD" sftp://"$FTP_HOST":"$FTP_PORT" << 'LFTP'
-            set sftp:auto-confirm yes
-            set net:max-retries 3
-            # 1. Upload _next/ assets first (JS/CSS with hashed names)
-            #    so they exist before the HTML files that reference them
-            mirror --reverse --verbose ./out/_next/ public_html/_next/
-            # 2. Then upload everything else (HTML pages, images, videos, etc.)
-            mirror --reverse --verbose --exclude=^_next/ ./out/ public_html/
-            bye
-          LFTP
+          # Step 1 — upload _next/ assets (hashed JS/CSS) FIRST
+          lftp -u "$FTP_USER","$FTP_PASSWORD" sftp://"$FTP_HOST":"$FTP_PORT" \
+            -e "set sftp:auto-confirm yes; set net:max-retries 3; mirror --reverse --verbose ./out/_next/ public_html/_next/; bye"
+          # Step 2 — upload HTML pages and public assets (now CSS already exists)
+          lftp -u "$FTP_USER","$FTP_PASSWORD" sftp://"$FTP_HOST":"$FTP_PORT" \
+            -e "set sftp:auto-confirm yes; set net:max-retries 3; mirror --reverse --verbose --exclude _next ./out/ public_html/; bye"
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USER: ${{ secrets.FTP_USER }}

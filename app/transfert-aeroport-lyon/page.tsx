@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     "navette Lyon Saint-Exupéry Ain 01", "taxi privé aéroport Lyon Ain",
     "prix taxi aéroport Lyon Ain", "réserver taxi aéroport Lyon Ain",
   ],
-  alternates: { canonical: "https://www.spm-taxi.fr/transfert-aeroport-lyon" },
+  alternates: { canonical: "https://taxispm.fr/transfert-aeroport-lyon" },
   openGraph: {
     title: "Transfert Aéroport Lyon Saint-Exupéry — SPM Taxi Ain | À partir de 65 €",
     description: "Taxi SPM : transfert Lyon Saint-Exupéry depuis l'Ain (Villebois, Ambérieu, Bourg-en-Bresse). À partir de 65 €. Suivi des vols en temps réel. 07 67 75 18 98.",
-    url: "https://www.spm-taxi.fr/transfert-aeroport-lyon",
+    url: "https://taxispm.fr/transfert-aeroport-lyon",
     type: "website",
     locale: "fr_FR",
     images: [{ url: "/image/tiguan-front-quarter.png", alt: "Taxi SPM transfert aéroport Lyon Saint-Exupéry Ain" }],

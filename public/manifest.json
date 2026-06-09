@@ -1,0 +1,26 @@
+{
+  "name": "SPM Taxi — Conventionné CPAM Villebois Ain",
+  "short_name": "SPM Taxi",
+  "description": "Taxi conventionné CPAM à Villebois (Ain 01). Volkswagen Tiguan 7 places. Disponible 7j/7 24h/24.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
+  "lang": "fr",
+  "orientation": "portrait-primary",
+  "categories": ["transport", "travel"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "any"
+    }
+  ]
+}

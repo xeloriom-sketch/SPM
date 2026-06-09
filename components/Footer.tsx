@@ -134,9 +134,20 @@ export default function Footer() {
           {/* ── LIGNE DE COPYRIGHT INFÉRIEURE ── */}
           <div className="flex flex-col sm:flex-row items-center justify-between border-t border-white/5 pt-6 text-[11px] text-white/30 font-light tracking-wide">
             <p>© 2026 Taxi SPM. Tous droits réservés.</p>
-            <p className="flex items-center gap-1">
-              <MapPin className="h-3 w-3 stroke-[1.5]" /> Villebois · Ain (01)
-            </p>
+            <div className="flex items-center gap-4">
+              <p className="flex items-center gap-1">
+                <MapPin className="h-3 w-3 stroke-[1.5]" /> Villebois · Ain (01)
+              </p>
+              <a
+                href="https://www.alhambra-web.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Site créé par Alhambra Web — Agence web"
+                className="hover:text-white/60 transition-colors"
+              >
+                Créé par Alhambra Web
+              </a>
+            </div>
           </div>
 
           {/* ── MOT GEANT EN ARRIÈRE-PLAN (Fidèle à l'effet EMPOWER de l'image_49bac8.png) ── */}

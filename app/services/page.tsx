@@ -16,10 +16,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Services Taxi SPM — Aéroport, CPAM, Colis, Remorque | Ain (01)",
     description: "5 services professionnels : transferts aéroport, transport médical CPAM remboursé, colis urgents, remorque, longue distance. Villebois Ain. 7j/7 24h/24.",
-    url: "https://www.spm-taxi.fr/services",
+    url: "https://taxispm.fr/services",
     images: [{ url: "/image/tiguan-front-quarter.png", alt: "SPM Taxi — Services Ain" }],
   },
-  alternates: { canonical: "https://www.spm-taxi.fr/services" },
+  alternates: { canonical: "https://taxispm.fr/services" },
 };
 
 export default function ServicesPage() {

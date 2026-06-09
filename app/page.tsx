@@ -23,18 +23,18 @@ const jsonLd = {
     // ── WebSite ────────────────────────────────────────────────────────────
     {
       "@type": "WebSite",
-      "@id": "https://www.spm-taxi.fr/#website",
-      url: "https://www.spm-taxi.fr",
+      "@id": "https://taxispm.fr/#website",
+      url: "https://taxispm.fr",
       name: "SPM Taxi — Taxi Conventionné Villebois",
       description: "Taxi conventionné CPAM basé à Villebois (Ain 01). Volkswagen Tiguan 7 places. Disponible 7j/7 24h/24.",
       inLanguage: "fr-FR",
-      publisher: { "@id": "https://www.spm-taxi.fr/#business" },
+      publisher: { "@id": "https://taxispm.fr/#business" },
     },
 
     // ── LocalBusiness + TaxiService ────────────────────────────────────────
     {
       "@type": ["LocalBusiness", "TaxiService", "ProfessionalService"],
-      "@id": "https://www.spm-taxi.fr/#business",
+      "@id": "https://taxispm.fr/#business",
       name: "SPM Taxi",
       legalName: "SPM Taxi",
       alternateName: [
@@ -43,7 +43,7 @@ const jsonLd = {
       ],
       description:
         "SPM Taxi est un taxi conventionné CPAM basé à Villebois dans l'Ain (01150). Chauffeur professionnel avec carte professionnelle de taxi, agrément CPAM et assurance responsabilité civile professionnelle. Volkswagen Tiguan Allspace 7 places. Note Google 4,9/5. Disponible 7j/7 24h/24 pour transferts aéroport Lyon Saint-Exupéry, transport médical conventionné CPAM remboursé, transport de colis urgent, déplacements avec remorque et longue distance partout en France.",
-      url: "https://www.spm-taxi.fr",
+      url: "https://taxispm.fr",
       telephone: "+33767751898",
       email: "contact@spm-taxi.fr",
       priceRange: "€€",
@@ -111,13 +111,13 @@ const jsonLd = {
             "@type": "Offer",
             name: "Transfert aéroport et gare",
             description: "Prise en charge à domicile, suivi des vols en temps réel. Lyon Saint-Exupéry, Part-Dieu, Perrache, Genève-Cointrin.",
-            itemOffered: { "@type": "Service", name: "Transfert aéroport Lyon Saint-Exupéry depuis Ain", url: "https://www.spm-taxi.fr/transfert-aeroport-lyon" },
+            itemOffered: { "@type": "Service", name: "Transfert aéroport Lyon Saint-Exupéry depuis Ain", url: "https://taxispm.fr/transfert-aeroport-lyon" },
           },
           {
             "@type": "Offer",
             name: "Transport médical conventionné CPAM",
             description: "Agréé par l'Assurance Maladie. Chimiothérapie, dialyse, hospitalisation. Zéro avance de frais.",
-            itemOffered: { "@type": "Service", name: "Taxi conventionné CPAM Ain", url: "https://www.spm-taxi.fr/taxi-conventionné-cpam" },
+            itemOffered: { "@type": "Service", name: "Taxi conventionné CPAM Ain", url: "https://taxispm.fr/taxi-conventionné-cpam" },
           },
           {
             "@type": "Offer",
@@ -129,13 +129,13 @@ const jsonLd = {
             "@type": "Offer",
             name: "Taxi avec remorque",
             description: "Attache-remorque homologuée. Transport matériel lourd, véhicules en panne.",
-            itemOffered: { "@type": "Service", name: "Taxi remorque Ain", url: "https://www.spm-taxi.fr/taxi-remorque-ain" },
+            itemOffered: { "@type": "Service", name: "Taxi remorque Ain", url: "https://taxispm.fr/taxi-remorque-ain" },
           },
           {
             "@type": "Offer",
             name: "Longue distance France entière",
             description: "Paris, Marseille, Bordeaux, Nice, Strasbourg, Genève. Tarif fixe sur devis.",
-            itemOffered: { "@type": "Service", name: "Taxi longue distance Lyon Ain", url: "https://www.spm-taxi.fr/taxi-longue-distance" },
+            itemOffered: { "@type": "Service", name: "Taxi longue distance Lyon Ain", url: "https://taxispm.fr/taxi-longue-distance" },
           },
         ],
       },
@@ -154,8 +154,8 @@ const jsonLd = {
         { "@type": "Review", author: { "@type": "Person", name: "SOSO 01" }, reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" }, reviewBody: "Taxi très sérieux et ponctuel, à l'écoute de ses clients. Vous pouvez y aller les yeux fermés.", datePublished: "2025-07-01" },
       ],
       image: [
-        { "@type": "ImageObject", url: "https://www.spm-taxi.fr/image/tiguan-hero.jpeg", caption: "SPM Taxi — Volkswagen Tiguan R-Line Allspace", width: 9500, height: 6333 },
-        { "@type": "ImageObject", url: "https://www.spm-taxi.fr/image/tiguan-front-quarter.png", caption: "Volkswagen Tiguan Allspace 7 places — SPM Taxi Villebois" },
+        { "@type": "ImageObject", url: "https://taxispm.fr/image/tiguan-hero.jpeg", caption: "SPM Taxi — Volkswagen Tiguan R-Line Allspace", width: 9500, height: 6333 },
+        { "@type": "ImageObject", url: "https://taxispm.fr/image/tiguan-front-quarter.png", caption: "Volkswagen Tiguan Allspace 7 places — SPM Taxi Villebois" },
       ],
       sameAs: [
         "https://www.google.com/maps/search/SPM+Taxi+Villebois",
@@ -166,7 +166,7 @@ const jsonLd = {
     // ── FAQPage ────────────────────────────────────────────────────────────
     {
       "@type": "FAQPage",
-      "@id": "https://www.spm-taxi.fr/#faq",
+      "@id": "https://taxispm.fr/#faq",
       mainEntity: [
         {
           "@type": "Question",
@@ -204,9 +204,9 @@ const jsonLd = {
     // ── BreadcrumbList homepage ─────────────────────────────────────────────
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.spm-taxi.fr/#breadcrumb",
+      "@id": "https://taxispm.fr/#breadcrumb",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.spm-taxi.fr" },
+        { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
       ],
     },
   ],

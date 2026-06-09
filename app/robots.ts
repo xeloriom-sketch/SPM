@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin/", "/api/"],
       },
     ],
-    sitemap: "https://www.spm-taxi.fr/sitemap.xml",
+    sitemap: "https://taxispm.fr/sitemap.xml",
   };
 }

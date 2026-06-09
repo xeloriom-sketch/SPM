@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     "taxi Lyon Bordeaux Ain", "taxi Lyon Nice Ain",
     "taxi aller retour France Ain", "tarif fixe taxi longue distance Ain",
   ],
-  alternates: { canonical: "https://www.spm-taxi.fr/taxi-longue-distance" },
+  alternates: { canonical: "https://taxispm.fr/taxi-longue-distance" },
   openGraph: {
     title: "Taxi Longue Distance France Entière — SPM Ain | Tarif Fixe Devis Gratuit",
     description: "Paris, Marseille, Genève, Bordeaux depuis l'Ain — tarif fixe sur devis. Volkswagen Tiguan 7 places, confort SUV. SPM Taxi Villebois (Ain 01). 07 67 75 18 98.",
-    url: "https://www.spm-taxi.fr/taxi-longue-distance",
+    url: "https://taxispm.fr/taxi-longue-distance",
     type: "website",
     locale: "fr_FR",
     images: [{ url: "/image/tiguan-front-quarter.png", alt: "Taxi longue distance France SPM Ain Villebois" }],

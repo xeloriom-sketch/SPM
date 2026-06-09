@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     "livraison urgente 24h Ain", "taxi véhicule panne remorque Ain",
     "taxi remorque Tignieu Ain", "transport rapide colis Ain 01",
   ],
-  alternates: { canonical: "https://www.spm-taxi.fr/taxi-remorque-ain" },
+  alternates: { canonical: "https://taxispm.fr/taxi-remorque-ain" },
   openGraph: {
     title: "Taxi avec Remorque & Colis Urgent — SPM Ain (01) | 24h/24 7j/7",
     description: "Remorque homologuée + livraison colis express porte-à-porte dans l'Ain, Lyon, Isère. Urgences acceptées 24h/24. SPM Taxi Villebois. 07 67 75 18 98.",
-    url: "https://www.spm-taxi.fr/taxi-remorque-ain",
+    url: "https://taxispm.fr/taxi-remorque-ain",
     type: "website",
     locale: "fr_FR",
     images: [{ url: "/image/tiguan-front-quarter.png", alt: "Taxi avec remorque colis urgent SPM Ain" }],

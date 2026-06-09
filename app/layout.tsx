@@ -4,7 +4,7 @@ import FloatingCallButton from "@/components/FloatingCallButton";
 import { SettingsProvider } from "@/lib/settings-context";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.spm-taxi.fr"),
+  metadataBase: new URL("https://taxispm.fr"),
   title: {
     default: "SPM Taxi — Conventionné CPAM | Villebois · Lyon · Ain (01)",
     template: "%s | SPM Taxi Villebois (Ain 01)",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://www.spm-taxi.fr",
+    url: "https://taxispm.fr",
     siteName: "SPM Taxi — Taxi Conventionné Villebois",
     title: "SPM Taxi — Taxi Conventionné CPAM | Villebois · Lyon · Ain (01)",
     description:
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   verification: {
     // google: "VOTRE_CODE_GOOGLE_SEARCH_CONSOLE", // À activer après vérification
   },
-  alternates: { canonical: "https://www.spm-taxi.fr" },
+  alternates: { canonical: "https://taxispm.fr" },
   category: "Transport",
 };
 
@@ -85,10 +85,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#0d0d0d" />
         <meta name="color-scheme" content="light dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        {/* Favicon */}
+        {/* Favicon & PWA */}
         <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.svg" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
         {/* Géolocalisation */}
         <meta name="geo.region" content="FR-01" />
         <meta name="geo.placename" content="Villebois, Ain, Auvergne-Rhône-Alpes, France" />

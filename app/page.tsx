@@ -196,7 +196,7 @@ const jsonLd = {
         {
           "@type": "Question",
           name: "Quels modes de paiement accepte SPM Taxi ?",
-          acceptedAnswer: { "@type": "Answer", text: "SPM Taxi accepte les espèces, la carte bancaire (CB, Visa, Mastercard) et les chèques. Pour les transports médicaux CPAM, la facturation est gérée directement avec l'Assurance Maladie, sans avance de frais pour le patient." },
+          acceptedAnswer: { "@type": "Answer", text: "SPM Taxi accepte les espèces et la carte bancaire (CB, Visa, Mastercard, American Express). Pour les transports médicaux CPAM, la facturation est gérée directement avec l'Assurance Maladie, sans avance de frais pour le patient." },
         },
       ],
     },

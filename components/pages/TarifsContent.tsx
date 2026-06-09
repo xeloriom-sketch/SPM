@@ -20,9 +20,9 @@ const inclus = [
 ];
 
 const paiements = [
-  { label: "Espèces",        detail: "Paiement à la fin du trajet" },
-  { label: "Carte bancaire", detail: "CB, Visa, Mastercard" },
-  { label: "Chèque",         detail: "À l'ordre de SPM Taxi" },
+  { label: "Espèces",          detail: "Paiement à la fin du trajet" },
+  { label: "Carte bancaire",   detail: "CB, Visa, Mastercard" },
+  { label: "American Express", detail: "Carte Amex acceptée" },
 ];
 
 export default function TarifsContent() {
@@ -177,7 +177,7 @@ export default function TarifsContent() {
               { label: "Devis",          value: "Gratuit sous 2h" },
               { label: "Tarification",   value: "Prix fixe bloqué" },
               { label: "Engagement",     value: "Zéro surprise" },
-              { label: "Paiement",       value: "CB · Espèces · Chèque" },
+              { label: "Paiement",       value: "CB · Espèces · Amex" },
             ].map((item, i) => (
               <motion.div
                 key={i}

@@ -88,7 +88,7 @@ export const defaults: Settings = {
   faq5_q: "Puis-je réserver à l'avance ?",
   faq5_a: "Absolument — je vous encourage même à réserver tôt pour les aéroports et rendez-vous médicaux. Les réservations de dernière minute sont aussi acceptées selon disponibilité.",
   faq6_q: "Quels modes de paiement acceptez-vous ?",
-  faq6_a: "Espèces, carte bancaire (CB, Visa, Mastercard) et chèque. Pour les transports médicaux, la prise en charge CPAM est gérée directement.",
+  faq6_a: "Espèces, carte bancaire (CB, Visa, Mastercard, American Express). Pour les transports médicaux, la prise en charge CPAM est gérée directement.",
 
   // ── About page bio ────────────────────────────────────────────────────
   about_bio_1: "Bienvenue chez SPM Taxi, taxi conventionné basé à Villebois (Ain 01). Je propose un service de transport professionnel, ponctuel et confortable dans toute la région Auvergne-Rhône-Alpes et partout en France sur devis.",

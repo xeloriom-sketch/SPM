@@ -11,7 +11,7 @@ const commitments = [
   { icon: Shield,     title: "Conventionné CPAM",         desc: "Agréé Assurance Maladie. Vos transports médicaux sur prescription peuvent être intégralement pris en charge." },
   { icon: Star,       title: "4,9 / 5 sur Google",       desc: "9 avis vérifiés, tous positifs. La satisfaction client est au cœur de chaque trajet, sans exception." },
   { icon: MapPin,     title: "Ancré localement",          desc: "Basé à Villebois, je connais chaque route de l'Ain, Lyon et l'Isère. Aucune surprise, aucun détour inutile." },
-  { icon: CreditCard, title: "Tarifs transparents",       desc: "Devis gratuit, prix fixe confirmé avant le trajet. CB, espèces ou chèque — vous choisissez votre mode de paiement." },
+  { icon: CreditCard, title: "Tarifs transparents",       desc: "Devis gratuit, prix fixe confirmé avant le trajet. CB, Amex, espèces — vous choisissez votre mode de paiement." },
   { icon: Heart,      title: "Accessibilité & bienveillance", desc: "Personnes en situation de handicap, enfants, animaux acceptés. Chaque passager est accueilli avec soin." },
 ];
 

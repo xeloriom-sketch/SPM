@@ -9,7 +9,7 @@ out/
 
 # Environment variables — NE JAMAIS COMMITTER
 .env
-.env*.local
+.env
 
 # Prisma
 /app/generated/prisma

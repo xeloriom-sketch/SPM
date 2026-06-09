@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll } from "framer-motion";
 import { ChevronDown, Phone, ArrowRight } from "lucide-react";
 import { sitePath } from "@/lib/site-path";
 import HeroVideo from "@/components/HeroVideo";
@@ -24,16 +25,21 @@ const specs = [
 
 export default function Hero() {
   const s = useSettings();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
 
   return (
-    <div id="accueil" style={{ height: "160vh" }}>
+    <div ref={containerRef} id="accueil" style={{ height: "130vh" }}>
     <section
       className="sticky top-0 relative w-full overflow-hidden bg-black flex flex-col select-none"
       style={{ height: "100svh" }}
     >
       {/* VIDEO — composant dédié avec useEffect agressif (fix Safari autoplay) */}
       <div className="absolute inset-0 z-0">
-        <HeroVideo src={sitePath("/videos/hero-web.mp4")} scrollFactor={1.6} />
+        <HeroVideo src={sitePath("/videos/hero-web.mp4")} scrollYProgress={scrollYProgress} />
       </div>
 
       {/* OVERLAYS */}

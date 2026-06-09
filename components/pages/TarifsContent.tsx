@@ -163,7 +163,7 @@ export default function TarifsContent() {
       <section ref={heroRef} className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
         {/* Vidéo fond */}
         <div className="absolute inset-0 z-0">
-          <HeroVideo src={sitePath("/videos/11661703-web.mp4")} scrollFactor={1.6} />
+          <HeroVideo src={sitePath("/videos/11661703-web.mp4")} />
         </div>
 
         {/* Overlays */}

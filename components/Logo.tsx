@@ -18,7 +18,7 @@ export default function Logo({ variant = "dark", size = "md", showWordmark = tru
   return (
     <div className={`flex items-center ${gap} ${className}`}>
       <svg width={dim} height={dim} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="24" cy="24" r="24" fill={isDark ? "#0d0d0d" : "#ffffff"} />
+        <circle cx="24" cy="24" r="23" fill={isDark ? "#161616" : "#f5f5f5"} stroke={isDark ? "rgba(255,255,255,0.13)" : "rgba(0,0,0,0.1)"} strokeWidth="1" />
         <rect x="16" y="8" width="16" height="7" rx="2.5" fill="#b6f000" />
         <text x="24" y="14.5" textAnchor="middle" fontFamily="Arial Black, sans-serif" fontSize="5" fontWeight="900" fill="#0d0d0d">TAXI</text>
         <path d="M13 22 Q14.5 15 20.5 15 L27.5 15 Q33.5 15 35 22 Z" fill={isDark ? "white" : "#0d0d0d"} />

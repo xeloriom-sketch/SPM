@@ -1,14 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="13" fill="#0d0d0d"/>
-  <!-- Accent bar top -->
-  <rect x="22" y="9" width="20" height="5" rx="2.5" fill="#b6f000"/>
-  <!-- Roofline -->
-  <path d="M16 29 Q19 19 27 19 L37 19 Q45 19 48 29 Z" fill="#f0f0f0"/>
-  <!-- Body -->
-  <rect x="10" y="29" width="44" height="17" rx="5" fill="#f0f0f0"/>
-  <!-- Wheel wells -->
-  <circle cx="21" cy="46" r="8" fill="#0d0d0d"/>
-  <circle cx="21" cy="46" r="4.5" fill="#2a2a2a"/>
-  <circle cx="43" cy="46" r="8" fill="#0d0d0d"/>
-  <circle cx="43" cy="46" r="4.5" fill="#2a2a2a"/>
+  <rect width="64" height="64" rx="14" fill="#0d0d0d"/>
+  <rect x="20" y="6" width="24" height="8" rx="4" fill="#b6f000"/>
+  <path d="M8 34 Q11 20 20 20 L44 20 Q53 20 56 34 Z" fill="#ffffff"/>
+  <rect x="6" y="34" width="52" height="19" rx="6" fill="#ffffff"/>
+  <circle cx="18" cy="53" r="8" fill="#0d0d0d"/>
+  <circle cx="18" cy="53" r="4" fill="#333"/>
+  <circle cx="46" cy="53" r="8" fill="#0d0d0d"/>
+  <circle cx="46" cy="53" r="4" fill="#333"/>
 </svg>

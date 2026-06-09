@@ -18,8 +18,7 @@ export default function Navbar() {
   const pathname  = usePathname();
   const isHome    = pathname === "/";
 
-  const [scrolled,  setScrolled]  = useState(false);
-  const [progress,  setProgress]  = useState(0);
+  const [progress, setProgress] = useState(0);
   const [menuOpen,  setMenuOpen]  = useState(false);
 
   useEffect(() => {
@@ -31,7 +30,6 @@ export default function Navbar() {
       const y    = window.scrollY;
       const docH = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(docH > 0 ? (y / docH) * 100 : 0);
-      setScrolled(y > 24);
     };
     handle();
     window.addEventListener("scroll", handle, { passive: true });
@@ -62,11 +60,7 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.85, delay: isHome ? 2.6 : 0.15, ease: [0.16, 1, 0.3, 1] }}
       >
-        <nav className={`flex items-center px-6 py-4 transition-all duration-400 md:px-12 ${
-          scrolled
-            ? "border-b border-white/[0.07] bg-black/88 backdrop-blur-xl"
-            : "bg-transparent"
-        }`}>
+        <nav className="flex items-center px-6 py-4 md:px-12 border-b border-white/[0.07] bg-black/90 backdrop-blur-xl">
 
           {/* Left links */}
           <div className="hidden items-center justify-end gap-10 md:flex md:flex-1 md:pr-10">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll } from "framer-motion";
 import Link from "next/link";
 import { Phone, CheckCircle, Info, ArrowRight } from "lucide-react";
 import HeroVideo from "@/components/HeroVideo";
@@ -144,6 +144,12 @@ export default function TarifsContent() {
     },
   ];
 
+  const heroContainerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroContainerRef,
+    offset: ["start start", "end end"],
+  });
+
   const heroRef   = useRef<HTMLElement>(null);
   const tablesRef = useRef<HTMLDivElement>(null);
   const inclusRef = useRef<HTMLElement>(null);
@@ -159,11 +165,11 @@ export default function TarifsContent() {
   return (
     <>
       {/* ── HERO ── */}
-      <div style={{ height: "160vh" }}>
+      <div ref={heroContainerRef} style={{ height: "130vh" }}>
       <section ref={heroRef} className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
         {/* Vidéo fond */}
         <div className="absolute inset-0 z-0">
-          <HeroVideo src={sitePath("/videos/11661703-web.mp4")} />
+          <HeroVideo src={sitePath("/videos/11661703-web.mp4")} scrollYProgress={heroProgress} />
         </div>
 
         {/* Overlays */}

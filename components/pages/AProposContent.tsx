@@ -35,6 +35,12 @@ export default function AProposContent() {
     { icon: MapPin, title: "Ancrage local",     desc: "Basé à Villebois, je connais chaque route de l'Ain, Lyon et l'Isère. Aucune surprise, aucun détour inutile." },
   ];
 
+  const heroContainerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroContainerRef,
+    offset: ["start start", "end end"],
+  });
+
   const valRef  = useRef<HTMLElement>(null);
   const carRef  = useRef<HTMLElement>(null);
   const certRef = useRef<HTMLElement>(null);
@@ -50,10 +56,10 @@ export default function AProposContent() {
   return (
     <>
       {/* ── HERO VIDÉO ── */}
-      <div style={{ height: "160vh" }}>
+      <div ref={heroContainerRef} style={{ height: "130vh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
           <div className="absolute inset-0 z-0">
-            <HeroVideo src={sitePath("/videos/hero-web.mp4")} />
+            <HeroVideo src={sitePath("/videos/hero-web.mp4")} scrollYProgress={heroProgress} />
           </div>
           <div className="pointer-events-none absolute inset-0 z-[5]">
             <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/55 to-transparent" />

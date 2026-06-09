@@ -35,14 +35,23 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
-      - name: Deploy via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT }}
-          protocol: sftp
-          local-dir: ./out/
-          server-dir: ./public_html/
-          dangerous-clean-slate: false
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
+      - name: Accept SFTP host key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "$FTP_PORT" "$FTP_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+
+      - name: Deploy via SFTP (lftp mirror)
+        run: |
+          lftp -u "$FTP_USER","$FTP_PASSWORD" sftp://"$FTP_HOST":"$FTP_PORT" \
+            -e "set sftp:auto-confirm yes; set net:max-retries 3; mirror --reverse --verbose ./out/ public_html/; bye"
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}

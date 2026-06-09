@@ -13,8 +13,8 @@ export default function ContentPage() {
 
   useEffect(() => {
     async function load() {
-      const { data: { session } } = await getSupabase().auth.getSession();
-      if (!session) { router.push("/admin/login"); return; }
+      const { data: { user } } = await getSupabase().auth.getUser();
+      if (!user) { router.push("/admin/login"); return; }
 
       const [{ data: settingsArr }, { data: msgs }] = await Promise.all([
         getSupabase().from("settings").select("*"),

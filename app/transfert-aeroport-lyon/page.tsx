@@ -3,26 +3,25 @@ import Link from "next/link";
 import { ArrowLeft, Phone, Clock, MapPin, CheckCircle, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Transfert Aéroport Lyon Saint-Exupéry — Taxi SPM Villebois",
+  title: "Transfert Aéroport Lyon Saint-Exupéry (LYS) — Taxi SPM Villebois Ain (01)",
   description:
-    "Taxi conventionné pour transfert aéroport Lyon Saint-Exupéry (LYS). Prise en charge à domicile dans l'Ain, Lyon et Isère. Suivi des vols en temps réel. Disponible 7j/7 24h/24. ☎ 07 67 75 18 98.",
+    "Taxi SPM : transfert aéroport Lyon Saint-Exupéry (LYS) depuis l'Ain, Villebois, Ambérieu, Bourg-en-Bresse. À partir de 65 €. Suivi des vols en temps réel, aucun frais pour retard. Volkswagen Tiguan 7 places. 7j/7 24h/24. ☎ 07 67 75 18 98.",
   keywords: [
-    "taxi aéroport Lyon Saint-Exupéry",
-    "transfert aéroport Lyon",
-    "taxi LYS",
-    "taxi aéroport Ain",
-    "transfert aéroport Villebois",
-    "taxi aéroport 24h24",
-    "navette aéroport Lyon Ain",
-    "taxi Saint-Exupéry Ain 01",
+    "taxi aéroport Lyon Saint-Exupéry Ain", "transfert aéroport LYS Ain",
+    "taxi Lyon Saint-Exupéry Villebois", "navette aéroport Lyon Ain 01",
+    "taxi LYS depuis Ain", "transfert aéroport Lyon Villebois", "taxi aéroport 24h24 Ain",
+    "taxi aéroport Ambérieu Lyon", "taxi aéroport Bourg-en-Bresse Lyon",
+    "navette Lyon Saint-Exupéry Ain 01", "taxi privé aéroport Lyon Ain",
+    "prix taxi aéroport Lyon Ain", "réserver taxi aéroport Lyon Ain",
   ],
   alternates: { canonical: "https://www.spm-taxi.fr/transfert-aeroport-lyon" },
   openGraph: {
-    title: "Transfert Aéroport Lyon Saint-Exupéry — Taxi SPM",
-    description: "Taxi privé pour l'aéroport de Lyon Saint-Exupéry depuis l'Ain, Lyon et Isère. Suivi des vols, ponctualité garantie. 07 67 75 18 98.",
+    title: "Transfert Aéroport Lyon Saint-Exupéry — SPM Taxi Ain | À partir de 65 €",
+    description: "Taxi SPM : transfert Lyon Saint-Exupéry depuis l'Ain (Villebois, Ambérieu, Bourg-en-Bresse). À partir de 65 €. Suivi des vols en temps réel. 07 67 75 18 98.",
     url: "https://www.spm-taxi.fr/transfert-aeroport-lyon",
     type: "website",
     locale: "fr_FR",
+    images: [{ url: "/image/tiguan-front-quarter.png", alt: "Taxi SPM transfert aéroport Lyon Saint-Exupéry Ain" }],
   },
 };
 

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Menu, X } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const navLinks = [
   { label: "Services",  href: "/services" },
@@ -91,18 +92,8 @@ export default function Navbar() {
           </div>
 
           {/* Logo */}
-          <Link href="/" className="flex shrink-0 flex-col items-center gap-[3px] mx-auto md:mx-0">
-            <div className={`h-[11px] w-[22px] rounded-t-full border-t-[2px] border-x-[2px] transition-colors duration-300 ${
-              isLight ? "border-black/70" : "border-white/80"
-            }`} />
-            <div className={`h-[11px] w-[22px] rounded-b-full border-b-[2px] border-x-[2px] transition-colors duration-300 ${
-              isLight ? "border-black/70" : "border-white/80"
-            }`} />
-            <span className={`text-[7px] font-black tracking-[0.35em] uppercase transition-colors duration-300 ${
-              isLight ? "text-black/55" : "text-white/60"
-            }`}>
-              SPM
-            </span>
+          <Link href="/" className="shrink-0 mx-auto md:mx-0" aria-label="SPM Taxi — Accueil">
+            <Logo variant={isLight ? "light" : "dark"} size="sm" />
           </Link>
 
           {/* Right links */}

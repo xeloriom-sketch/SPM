@@ -3,27 +3,26 @@ import Link from "next/link";
 import { ArrowLeft, Phone, MapPin, Clock, CheckCircle, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi Longue Distance France Entière — SPM Villebois Ain",
+  title: "Taxi Longue Distance France Entière — SPM Villebois Ain (01) | Tarif Fixe",
   description:
-    "Taxi SPM pour déplacements longue distance partout en France. Lyon → Paris, Marseille, Bordeaux, Genève... Volkswagen Tiguan 7 places, confort SUV. Devis gratuit. ☎ 07 67 75 18 98.",
+    "Taxi SPM : déplacements longue distance partout en France depuis l'Ain, Lyon, Isère. Paris, Marseille, Bordeaux, Genève, Nice, Strasbourg. Volkswagen Tiguan 7 places. Tarif fixe sur devis gratuit. ☎ 07 67 75 18 98.",
   keywords: [
-    "taxi longue distance France",
-    "taxi Lyon Paris",
-    "taxi Lyon Marseille",
-    "taxi Lyon Genève",
-    "taxi longue distance Ain",
-    "taxi grande distance Villebois",
-    "taxi privé France entière",
-    "chauffeur privé longue distance",
-    "taxi interurbain Lyon",
+    "taxi longue distance France depuis Ain", "taxi Lyon Paris Ain",
+    "taxi Lyon Marseille Ain", "taxi Lyon Genève depuis Ain",
+    "taxi longue distance Villebois", "chauffeur privé longue distance Ain",
+    "taxi France entière depuis Lyon", "taxi Paris depuis Ain 01",
+    "taxi interurbain Lyon Ain", "taxi grande distance Ain 01",
+    "taxi Lyon Bordeaux Ain", "taxi Lyon Nice Ain",
+    "taxi aller retour France Ain", "tarif fixe taxi longue distance Ain",
   ],
   alternates: { canonical: "https://www.spm-taxi.fr/taxi-longue-distance" },
   openGraph: {
-    title: "Taxi Longue Distance France Entière — SPM",
-    description: "Déplacements longue distance dans toute la France au départ de Lyon, l'Ain et l'Isère. Volkswagen Tiguan 7 places. Devis gratuit. 07 67 75 18 98.",
+    title: "Taxi Longue Distance France Entière — SPM Ain | Tarif Fixe Devis Gratuit",
+    description: "Paris, Marseille, Genève, Bordeaux depuis l'Ain — tarif fixe sur devis. Volkswagen Tiguan 7 places, confort SUV. SPM Taxi Villebois (Ain 01). 07 67 75 18 98.",
     url: "https://www.spm-taxi.fr/taxi-longue-distance",
     type: "website",
     locale: "fr_FR",
+    images: [{ url: "/image/tiguan-front-quarter.png", alt: "Taxi longue distance France SPM Ain Villebois" }],
   },
 };
 

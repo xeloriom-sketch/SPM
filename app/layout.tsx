@@ -6,38 +6,32 @@ import { SettingsProvider } from "@/lib/settings-context";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.spm-taxi.fr"),
   title: {
-    default: "SPM Taxi — Taxi Conventionné CPAM | Villebois · Lyon · Ain (01)",
-    template: "%s | SPM Taxi Villebois",
+    default: "SPM Taxi — Taxi Conventionné CPAM Villebois | Lyon · Ain (01) · Isère",
+    template: "%s | SPM Taxi — Villebois (Ain 01)",
   },
   description:
-    "SPM Taxi, taxi conventionné CPAM basé à Villebois (Ain 01). Volkswagen Tiguan Allspace 7 places. Transferts aéroport Lyon Saint-Exupéry, gares TGV, transport médical CPAM, colis urgents, remorque. Disponible 7j/7 24h/24. Devis gratuit. ☎ 07 67 75 18 98.",
+    "SPM Taxi, taxi conventionné CPAM basé à Villebois (Ain 01). Volkswagen Tiguan Allspace 7 places. Transferts aéroport Lyon Saint-Exupéry, gares TGV, transport médical CPAM remboursé, colis urgents, remorque, longue distance France entière. Disponible 7j/7 24h/24. Devis gratuit sous 2h. ☎ 07 67 75 18 98.",
   keywords: [
-    "taxi Villebois",
-    "taxi conventionné CPAM Ain",
-    "taxi SPM",
-    "taxi Ain 01",
-    "taxi Lyon",
-    "taxi Isère",
-    "taxi Ambérieu-en-Bugey",
-    "taxi Bourg-en-Bresse",
-    "transfert aéroport Lyon Saint-Exupéry",
-    "transfert aéroport Lyon",
-    "taxi gare Lyon Part-Dieu",
-    "taxi gare Perrache",
-    "transport médical CPAM Ain",
-    "taxi conventionné Ain",
-    "taxi 7 places",
-    "Volkswagen Tiguan taxi",
-    "taxi colis urgent",
-    "taxi remorque Ain",
-    "taxi longue distance France",
-    "taxi Meximieux",
-    "taxi Montluel",
-    "taxi Bourgoin-Jallieu",
-    "taxi Grenoble",
-    "taxi Genève depuis Lyon",
-    "CPAM taxi prescription médicale",
-    "taxi 01150",
+    // Local primaires
+    "taxi Villebois", "taxi Tignieu-Jameyzieu", "taxi Ain 01", "taxi conventionné Ain",
+    "taxi conventionné CPAM Ain", "taxi SPM Villebois", "taxi 01150",
+    // Transport médical
+    "transport médical CPAM Ain", "taxi médical conventionné", "taxi prescription médicale",
+    "taxi chimiothérapie Ain", "taxi dialyse Ain", "transport sanitaire Ain",
+    // Aéroport & gare
+    "transfert aéroport Lyon Saint-Exupéry Ain", "taxi aéroport Lyon depuis Ain",
+    "taxi gare Lyon Part-Dieu Ain", "taxi gare Perrache Ain", "taxi gare TGV Ain",
+    "VTC Lyon aéroport Ain", "transfert aéroport Ain",
+    // Villes
+    "taxi Ambérieu-en-Bugey", "taxi Bourg-en-Bresse", "taxi Meximieux", "taxi Montluel",
+    "taxi Pérouges", "taxi Belley", "taxi Lyon depuis Ain", "taxi Isère",
+    "taxi Bourgoin-Jallieu", "taxi Grenoble", "taxi Genève depuis Ain",
+    // Services spéciaux
+    "taxi 7 places Ain", "Volkswagen Tiguan taxi", "taxi colis urgent Ain",
+    "taxi remorque Ain", "taxi longue distance France", "taxi conventionné remboursé",
+    // IA search
+    "meilleur taxi conventionné Ain", "taxi 4,9 étoiles Google Ain",
+    "taxi disponible 24h24 7j7 Ain", "taxi fiable ponctuel Ain",
   ],
   authors: [{ name: "SPM Taxi" }],
   creator: "SPM Taxi",
@@ -46,16 +40,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: "https://www.spm-taxi.fr",
-    siteName: "SPM Taxi — Taxi Conventionné",
-    title: "SPM Taxi — Taxi Conventionné CPAM | Villebois · Lyon · Ain",
+    siteName: "SPM Taxi — Taxi Conventionné Villebois",
+    title: "SPM Taxi — Taxi Conventionné CPAM | Villebois · Lyon · Ain (01)",
     description:
-      "Taxi conventionné CPAM à Villebois (Ain 01). Volkswagen Tiguan 7 places, disponible 7j/7 24h/24. Transferts aéroport, transport médical, longue distance. Devis gratuit en 2h.",
+      "Taxi conventionné CPAM à Villebois (Ain 01). Volkswagen Tiguan 7 places, disponible 7j/7 24h/24. Transferts aéroport Lyon Saint-Exupéry, transport médical remboursé CPAM, longue distance. Devis gratuit en 2h. ☎ 07 67 75 18 98.",
     images: [
       {
-        url: "/image/tiguan-front-quarter.png",
-        width: 1344,
-        height: 768,
-        alt: "SPM Taxi — Volkswagen Tiguan Allspace 7 places, Villebois Ain",
+        url: "/image/tiguan-hero.jpeg",
+        width: 9500,
+        height: 6333,
+        alt: "SPM Taxi — Volkswagen Tiguan Allspace R-Line 7 places, Taxi Conventionné Villebois Ain",
       },
     ],
   },
@@ -63,8 +57,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SPM Taxi — Taxi Conventionné CPAM | Lyon · Ain · Isère",
     description:
-      "Taxi conventionné CPAM, Tiguan 7 places, disponible 7j/7. Transferts aéroport Lyon, transport médical, longue distance. ☎ 07 67 75 18 98.",
-    images: ["/image/tiguan-front-quarter.png"],
+      "Taxi conventionné CPAM 4,9★ Google, Tiguan 7 places, disponible 7j/7. Transferts aéroport Lyon, transport médical CPAM, longue distance. ☎ 07 67 75 18 98.",
+    images: ["/image/tiguan-hero.jpeg"],
   },
   robots: {
     index: true,
@@ -77,6 +71,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  verification: {
+    // google: "VOTRE_CODE_GOOGLE_SEARCH_CONSOLE", // À activer après vérification
+  },
   alternates: { canonical: "https://www.spm-taxi.fr" },
   category: "Transport",
 };
@@ -88,10 +85,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#0d0d0d" />
         <meta name="color-scheme" content="light dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="geo.region" content="FR-AIN" />
-        <meta name="geo.placename" content="Villebois, Ain, France" />
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.svg" sizes="any" />
+        {/* Géolocalisation */}
+        <meta name="geo.region" content="FR-01" />
+        <meta name="geo.placename" content="Villebois, Ain, Auvergne-Rhône-Alpes, France" />
         <meta name="geo.position" content="45.8;5.45" />
         <meta name="ICBM" content="45.8, 5.45" />
+        {/* Business info pour IA */}
+        <meta name="business:contact_data:phone_number" content="+33767751898" />
+        <meta name="business:contact_data:email" content="contact@spm-taxi.fr" />
+        <meta name="business:contact_data:locality" content="Villebois" />
+        <meta name="business:contact_data:region" content="Ain" />
+        <meta name="business:contact_data:country_name" content="France" />
+        {/* Classification */}
+        <meta name="classification" content="Transport, Taxi, Véhicule de tourisme avec chauffeur" />
+        <meta name="coverage" content="Lyon, Ain, Isère, France" />
+        <meta name="rating" content="4.9/5" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="language" content="French" />
       </head>
       <body className="bg-white text-[#080808] overflow-x-hidden noise antialiased">
         <SettingsProvider>

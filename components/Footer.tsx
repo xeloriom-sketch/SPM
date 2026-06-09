@@ -2,6 +2,7 @@
 
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useSettings } from "@/lib/settings-context";
+import Logo from "@/components/Logo";
 
 const navLinks = [
   { label: "Accueil", href: "#accueil" },
@@ -41,16 +42,8 @@ export default function Footer() {
           {/* ── LIGNE SUPÉRIEURE : MARQUE & ACTIONS DISCRÈTES ── */}
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between border-b border-white/10 pb-12">
             {/* Logo et Identité à Gauche */}
-            <a href="#accueil" className="flex items-center gap-3 group">
-              <div className="grid h-7 w-7 place-items-center rounded-full bg-white text-black transition-transform duration-300 group-hover:scale-105">
-                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                  <path d="M3 13.5L5.2 6.8C5.5 5.7 6.5 5 7.6 5h8.8c1.1 0 2.1.7 2.4 1.8L21 13.5M3 13.5h18M3 13.5v4.5c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-1.5h10V18c0 .6.4 1 1 1h2c.6 0 1-.4 1-1v-4.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-sm font-medium tracking-widest uppercase">Taxi SPM</span>
-                <span className="text-[9px] tracking-wider uppercase text-white/40">CPAM</span>
-              </div>
+            <a href="#accueil" className="group">
+              <Logo variant="dark" size="md" />
             </a>
 
             {/* Coordonnées / Réseaux à Droite (Comme les icônes de l'image_49bac8.png) */}

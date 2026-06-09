@@ -3,27 +3,26 @@ import Link from "next/link";
 import { ArrowLeft, Phone, Shield, FileText, CheckCircle, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi Conventionné CPAM — Transport Médical Ain 01 · SPM",
+  title: "Taxi Conventionné CPAM — Transport Médical Remboursé Ain (01) | SPM Villebois",
   description:
-    "Taxi SPM conventionné CPAM pour transport médical dans l'Ain (01). Prise en charge Assurance Maladie sur prescription médicale. Villebois, Ambérieu, Bourg-en-Bresse. ☎ 07 67 75 18 98.",
+    "SPM Taxi conventionné CPAM à Villebois (Ain 01). Transport médical sur prescription médicale pris en charge par l'Assurance Maladie. Zéro avance de frais. Chimiothérapie, dialyse, hospitalisation, ALD. ☎ 07 67 75 18 98.",
   keywords: [
-    "taxi conventionné CPAM",
-    "transport médical Ain 01",
-    "taxi médical Villebois",
-    "taxi conventionné Ain",
-    "transport CPAM 01150",
-    "taxi médical conventionné Lyon",
-    "transport médical Ambérieu",
-    "taxi remboursé sécurité sociale",
-    "VSL taxi Ain",
+    "taxi conventionné CPAM Ain 01", "transport médical conventionné Ain",
+    "taxi médical Villebois CPAM", "taxi remboursé sécurité sociale Ain",
+    "transport CPAM 01150 Villebois", "taxi chimiothérapie Ain",
+    "taxi dialyse Ain 01", "taxi ALD Assurance Maladie Ain",
+    "taxi conventionné prescription médicale Ain", "VSL taxi conventionné Ain",
+    "taxi médical Ambérieu CPAM", "transport médical Bourg-en-Bresse taxi",
+    "zéro avance frais taxi médical Ain", "taxi hospitalisé Ain",
   ],
   alternates: { canonical: "https://www.spm-taxi.fr/taxi-conventionné-cpam" },
   openGraph: {
-    title: "Taxi Conventionné CPAM — Transport Médical Ain · SPM",
-    description: "Transport médical pris en charge par l'Assurance Maladie. Taxi conventionné CPAM basé à Villebois (Ain). 07 67 75 18 98.",
+    title: "Taxi Conventionné CPAM — Transport Médical Remboursé | SPM Ain (01)",
+    description: "Transport médical 100% pris en charge CPAM sur prescription. Chimiothérapie, dialyse, ALD — zéro avance de frais. SPM Taxi Villebois (Ain 01). 07 67 75 18 98.",
     url: "https://www.spm-taxi.fr/taxi-conventionné-cpam",
     type: "website",
     locale: "fr_FR",
+    images: [{ url: "/image/tiguan-front-quarter.png", alt: "Taxi conventionné CPAM transport médical Ain SPM" }],
   },
 };
 

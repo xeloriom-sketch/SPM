@@ -3,27 +3,26 @@ import Link from "next/link";
 import { ArrowLeft, Phone, CheckCircle, ArrowRight, Package } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi avec Remorque & Transport Colis Urgent — SPM Ain 01",
+  title: "Taxi avec Remorque Homologuée & Colis Urgent — SPM Ain (01) | Villebois",
   description:
-    "Taxi SPM avec attache-remorque homologuée. Transport de matériel lourd, colis urgents, déménagements partiels. Aussi livraison de lettres urgentes. Ain, Lyon, Isère. ☎ 07 67 75 18 98.",
+    "SPM Taxi dispose d'une attache-remorque homologuée sur Volkswagen Tiguan. Transport matériel lourd, colis urgents porte-à-porte, véhicule en panne, déménagement partiel. Ain, Lyon, Isère et France entière sur devis. ☎ 07 67 75 18 98.",
   keywords: [
-    "taxi avec remorque Ain",
-    "taxi remorque Lyon",
-    "transport colis urgent taxi",
-    "livraison urgent Ain 01",
-    "taxi attache remorque",
-    "transport matériel lourd taxi",
-    "taxi déménagement Ain",
-    "coursier urgent Ain Lyon",
-    "transport express Lyon Ain",
+    "taxi avec remorque Ain 01", "taxi remorque homologuée Ain",
+    "transport colis urgent Ain", "livraison express Ain Lyon",
+    "taxi attache remorque Villebois", "transport matériel lourd taxi Ain",
+    "taxi déménagement partiel Ain", "coursier urgent Ain Lyon Isère",
+    "transport express Lyon Ain", "taxi colis porte à porte Ain",
+    "livraison urgente 24h Ain", "taxi véhicule panne remorque Ain",
+    "taxi remorque Tignieu Ain", "transport rapide colis Ain 01",
   ],
   alternates: { canonical: "https://www.spm-taxi.fr/taxi-remorque-ain" },
   openGraph: {
-    title: "Taxi avec Remorque & Colis Urgent — SPM Ain",
-    description: "Taxi SPM avec remorque homologuée pour transport de matériel et colis urgents dans l'Ain, Lyon et Isère. 07 67 75 18 98.",
+    title: "Taxi avec Remorque & Colis Urgent — SPM Ain (01) | 24h/24 7j/7",
+    description: "Remorque homologuée + livraison colis express porte-à-porte dans l'Ain, Lyon, Isère. Urgences acceptées 24h/24. SPM Taxi Villebois. 07 67 75 18 98.",
     url: "https://www.spm-taxi.fr/taxi-remorque-ain",
     type: "website",
     locale: "fr_FR",
+    images: [{ url: "/image/tiguan-front-quarter.png", alt: "Taxi avec remorque colis urgent SPM Ain" }],
   },
 };
 

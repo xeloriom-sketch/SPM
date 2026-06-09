@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 
 export default function HeroVideo({ src }: { src: string; scrollFactor?: number }) {
-  const ref = useRef<HTMLVideoElement>(null);
+  const ref   = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -12,40 +12,50 @@ export default function HeroVideo({ src }: { src: string; scrollFactor?: number 
 
     v.muted = true;
     v.defaultMuted = true;
+    v.preload = "auto";
 
-    const show = () => { setReady(true); };
+    // Find the sticky section ancestor, then its outer scroll container
+    let sticky: HTMLElement | null = v.parentElement;
+    while (sticky && getComputedStyle(sticky).position !== "sticky") {
+      sticky = sticky.parentElement;
+    }
+    const outer = sticky?.parentElement ?? null;
 
-    // Already buffered (cached page, fast connection)
-    if (v.readyState >= 3) {
+    const scrub = () => {
+      if (!outer || !v.duration) return;
+      const docTop = outer.getBoundingClientRect().top + window.scrollY;
+      const range  = outer.offsetHeight - window.innerHeight;
+      if (range <= 0) return;
+      const progress = Math.max(0, Math.min(1, (window.scrollY - docTop) / range));
+      v.currentTime = progress * v.duration;
+    };
+
+    const onReady = () => {
       setReady(true);
+      scrub();
+    };
+
+    if (v.readyState >= 2) {
+      setReady(true);
+      scrub();
+    } else {
+      v.addEventListener("loadeddata", onReady, { once: true });
     }
 
-    v.addEventListener("canplay",    show, { once: true });
-    v.addEventListener("loadeddata", show, { once: true });
-    v.addEventListener("playing",    show, { once: true });
-
-    v.play().catch(() => {});
-
-    const onTouch = () => { v.play().catch(() => {}); };
-    document.addEventListener("touchstart", onTouch, { once: true, passive: true });
+    window.addEventListener("scroll", scrub, { passive: true });
 
     return () => {
-      v.removeEventListener("canplay",    show);
-      v.removeEventListener("loadeddata", show);
-      v.removeEventListener("playing",    show);
-      document.removeEventListener("touchstart", onTouch);
+      window.removeEventListener("scroll", scrub);
+      v.removeEventListener("loadeddata", onReady);
     };
   }, [src]);
 
   return (
     <>
-      {/* Fond noir solide pendant le chargement — pas de poster, pas de flash */}
       <div className="absolute inset-0 bg-black" />
       <video
         ref={ref}
-        autoPlay
         muted
-        loop
         playsInline
         preload="auto"
         disablePictureInPicture

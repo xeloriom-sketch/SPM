@@ -18,7 +18,15 @@ export default function Navbar() {
   const pathname  = usePathname();
   const isHome    = pathname === "/";
 
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
+
+  useEffect(() => {
+    const handle = () => setScrolled(window.scrollY > 30);
+    handle();
+    window.addEventListener("scroll", handle, { passive: true });
+    return () => window.removeEventListener("scroll", handle);
+  }, []);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -42,7 +50,11 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.85, delay: isHome ? 2.6 : 0.15, ease: [0.16, 1, 0.3, 1] }}
       >
-        <nav className="flex items-center px-6 py-4 md:px-12 border-b border-white/[0.07] bg-black/90 backdrop-blur-xl">
+        <nav className={`flex items-center px-6 py-4 md:px-12 border-b transition-all duration-500 ${
+          scrolled
+            ? "border-white/[0.07] bg-black/90 backdrop-blur-xl"
+            : "border-transparent bg-transparent"
+        }`}>
 
           {/* Left links */}
           <div className="hidden items-center justify-end gap-10 md:flex md:flex-1 md:pr-10">

@@ -10,10 +10,15 @@ const nextConfig = {
 };
 
 if (process.env.NEXT_PUBLIC_STATIC === "1") {
+  // GitHub Pages build — basePath /SPM
   nextConfig.output      = "export";
   nextConfig.basePath    = "/SPM";
   nextConfig.assetPrefix = "/SPM";
   nextConfig.images      = { unoptimized: true };
+} else if (process.env.NEXT_PUBLIC_STATIC === "prod") {
+  // Production FTP build — no basePath
+  nextConfig.output = "export";
+  nextConfig.images = { unoptimized: true };
 }
 
 export default nextConfig;

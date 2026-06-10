@@ -499,6 +499,7 @@ export default function ServicesContent() {
 
   return (
     <>
+      <h1 className="sr-only">Services SPM Taxi — Aéroport, CPAM, Remorque | Ain &amp; Isère</h1>
       {/* ── HERO ── */}
       <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "130vh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>

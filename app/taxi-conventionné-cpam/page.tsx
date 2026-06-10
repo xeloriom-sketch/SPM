@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, Shield, FileText, CheckCircle, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi Conventionné CPAM — Transport Médical Remboursé Ain (01) | SPM Villebois",
+  title: "Taxi Conventionné CPAM | Transport Médical Remboursé Ain",
   description:
     "SPM Taxi conventionné CPAM à Villebois (Ain 01). Transport médical sur prescription médicale pris en charge par l'Assurance Maladie. Zéro avance de frais. Chimiothérapie, dialyse, hospitalisation, ALD. ☎ 07 67 75 18 98.",
   keywords: [

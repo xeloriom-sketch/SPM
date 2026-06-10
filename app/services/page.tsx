@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import ServicesContent from "@/components/pages/ServicesContent";
 
 export const metadata: Metadata = {
-  title: "Services — Taxi Conventionné SPM | Aéroport, CPAM, Colis, Remorque | Ain (01)",
+  title: "Services SPM Taxi — Aéroport, CPAM, Remorque | Ain (01)",
   description:
     "SPM Taxi propose 5 services : transferts aéroport Lyon Saint-Exupéry & gares TGV, transport médical conventionné CPAM (zéro avance de frais), colis urgents porte-à-porte, taxi avec remorque homologuée, déplacements longue distance France entière. Villebois, Ain 01. ☎ 07 67 75 18 98. Devis gratuit sous 2h.",
   keywords: [

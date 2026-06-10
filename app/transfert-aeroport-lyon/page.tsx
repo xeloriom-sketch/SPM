@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, Clock, MapPin, CheckCircle, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Transfert Aéroport Lyon Saint-Exupéry (LYS) — Taxi SPM Villebois Ain (01)",
+  title: "Transfert Aéroport Lyon Saint-Exupéry | SPM Taxi Ain",
   description:
     "Taxi SPM : transfert aéroport Lyon Saint-Exupéry (LYS) depuis l'Ain, Villebois, Ambérieu, Bourg-en-Bresse. À partir de 65 €. Suivi des vols en temps réel, aucun frais pour retard. Volkswagen Tiguan 7 places. 7j/7 24h/24. ☎ 07 67 75 18 98.",
   keywords: [

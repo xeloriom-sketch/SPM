@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import AProposContent from "@/components/pages/AProposContent";
 
 export const metadata: Metadata = {
-  title: "À Propos — SPM Taxi | Chauffeur Conventionné CPAM Villebois Ain (01)",
+  title: "À Propos — SPM Taxi Conventionné CPAM | Villebois Ain",
   description:
     "SPM Taxi : chauffeur professionnel conventionné CPAM basé à Villebois (Ain 01). Carte professionnelle, agrément Assurance Maladie, assurance RC pro. Volkswagen Tiguan 7 places. Note Google 4,9/5 sur 9 avis. Disponible 7j/7 24h/24. ☎ 07 67 75 18 98.",
   keywords: [

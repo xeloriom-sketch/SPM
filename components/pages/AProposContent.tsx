@@ -57,6 +57,7 @@ export default function AProposContent() {
 
   return (
     <>
+      <h1 className="sr-only">À Propos — SPM Taxi Conventionné CPAM | Villebois Ain</h1>
       {/* ── HERO VIDÉO ── */}
       <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "130vh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>

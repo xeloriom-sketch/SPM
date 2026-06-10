@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, CheckCircle, ArrowRight, Package } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi avec Remorque Homologuée & Colis Urgent — SPM Ain (01) | Villebois",
+  title: "Taxi avec Remorque & Colis Urgent | SPM Taxi Ain (01)",
   description:
     "SPM Taxi dispose d'une attache-remorque homologuée sur Volkswagen Tiguan. Transport matériel lourd, colis urgents porte-à-porte, véhicule en panne, déménagement partiel. Ain, Lyon, Isère et France entière sur devis. ☎ 07 67 75 18 98.",
   keywords: [

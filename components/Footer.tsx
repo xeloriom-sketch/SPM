@@ -20,10 +20,11 @@ const mainLinks = [
 ];
 
 const serviceLinks = [
-  { label: "Transfert Aéroport Lyon", href: "/transfert-aeroport-lyon",  title: "Transfert taxi aéroport Lyon Saint-Exupéry" },
-  { label: "Taxi Conventionné CPAM",  href: "/taxi-conventionné-cpam",   title: "Taxi conventionné CPAM — Transport médical remboursé" },
-  { label: "Longue Distance",         href: "/taxi-longue-distance",     title: "Taxi longue distance France entière" },
-  { label: "Taxi avec Remorque",      href: "/taxi-remorque-ain",        title: "Taxi avec remorque et transport colis urgent" },
+  { label: "Transfert Aéroport Lyon", href: "/transfert-aeroport-lyon",    title: "Transfert taxi aéroport Lyon Saint-Exupéry" },
+  { label: "Taxi Conventionné CPAM",  href: "/taxi-conventionné-cpam",     title: "Taxi conventionné CPAM — Transport médical remboursé" },
+  { label: "Longue Distance",         href: "/taxi-longue-distance",       title: "Taxi longue distance France entière" },
+  { label: "Taxi avec Remorque",      href: "/taxi-remorque-ain",          title: "Taxi avec remorque et transport colis urgent" },
+  { label: "Taxi Tignieu-Jameyzieu",  href: "/taxi-tignieu-jameyzieu",     title: "Taxi à Tignieu-Jameyzieu — SPM Taxi" },
 ];
 
 export default function Footer() {

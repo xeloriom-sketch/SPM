@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import TarifsContent from "@/components/pages/TarifsContent";
 
 export const metadata: Metadata = {
-  title: "Tarifs Taxi SPM — Prix Aéroport, CPAM, Longue Distance | Villebois Ain (01)",
+  title: "Tarifs SPM Taxi — Aéroport, CPAM, Longue Distance | Ain",
   description:
     "Tarifs taxi SPM Villebois (Ain 01) : transfert Lyon Saint-Exupéry à partir de 65 €, transport médical CPAM remboursé, longue distance tarif fixe sur devis. Aucune surprise. Devis gratuit sous 2h. ☎ 07 67 75 18 98.",
   keywords: [

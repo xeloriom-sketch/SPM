@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, MapPin, Clock, CheckCircle, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi Longue Distance France Entière — SPM Villebois Ain (01) | Tarif Fixe",
+  title: "Taxi Longue Distance France | SPM Taxi Ain — Tarif Fixe",
   description:
     "Taxi SPM : déplacements longue distance partout en France depuis l'Ain, Lyon, Isère. Paris, Marseille, Bordeaux, Genève, Nice, Strasbourg. Volkswagen Tiguan 7 places. Tarif fixe sur devis gratuit. ☎ 07 67 75 18 98.",
   keywords: [

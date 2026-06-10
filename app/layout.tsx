@@ -24,9 +24,13 @@ export const metadata: Metadata = {
     "transfert aéroport Lyon Saint-Exupéry Ain", "taxi aéroport Lyon depuis Ain",
     "taxi gare Lyon Part-Dieu Ain", "taxi gare Perrache Ain", "taxi gare TGV Ain",
     "VTC Lyon aéroport Ain", "transfert aéroport Ain",
+    // Lyon — mots-clés à fort volume
+    "taxi Lyon", "taxis Lyon", "taxi lyonnais", "lyon taxi", "taxi Lyon pas cher",
+    "taxi Lyon aéroport", "taxi Lyon conventionné", "taxi Lyon 7 places",
+    "chauffeur taxi Lyon", "taxi Lyon depuis Ain", "taxi Lyon depuis Isère",
     // Villes
     "taxi Ambérieu-en-Bugey", "taxi Bourg-en-Bresse", "taxi Meximieux", "taxi Montluel",
-    "taxi Pérouges", "taxi Belley", "taxi Lyon depuis Ain", "taxi Isère",
+    "taxi Pérouges", "taxi Belley", "taxi Isère",
     "taxi Bourgoin-Jallieu", "taxi Grenoble", "taxi Genève depuis Ain",
     // Services spéciaux
     "taxi 7 places Ain", "Volkswagen Tiguan taxi", "taxi colis urgent Ain",

@@ -25,6 +25,7 @@ const serviceLinks = [
   { label: "Longue Distance",         href: "/taxi-longue-distance",       title: "Taxi longue distance France entière" },
   { label: "Taxi avec Remorque",      href: "/taxi-remorque-ain",          title: "Taxi avec remorque et transport colis urgent" },
   { label: "Taxi Tignieu-Jameyzieu",  href: "/taxi-tignieu-jameyzieu",     title: "Taxi à Tignieu-Jameyzieu — SPM Taxi" },
+  { label: "Taxi Lyon",               href: "/taxi-lyon",                  title: "Taxi Lyon depuis l'Ain et l'Isère — SPM Taxi" },
 ];
 
 export default function Footer() {

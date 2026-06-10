@@ -100,7 +100,7 @@ const jsonLd = {
         { "@type": "City", name: "Montluel" },
         { "@type": "City", name: "Pérouges" },
         { "@type": "City", name: "Belley" },
-        { "@type": "City", name: "Lyon" },
+        { "@type": "City", name: "Lyon", sameAs: "https://www.wikidata.org/wiki/Q456" },
         { "@type": "City", name: "Grenoble" },
         { "@type": "City", name: "Bourgoin-Jallieu" },
         { "@type": "City", name: "Vienne" },

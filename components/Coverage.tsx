@@ -88,6 +88,7 @@ export default function Coverage() {
             >
               <motion.a
                 href="#contact"
+                title="Demander un devis SPM Taxi"
                 className="group inline-flex items-center gap-4 rounded-full bg-black pl-5 pr-1.5 py-1.5 text-[11px] font-medium tracking-wider text-white"
                 whileHover={{ scale: 1.04, y: -2 }}
                 whileTap={{ scale: 0.96 }}

@@ -6,15 +6,17 @@ import { SettingsProvider } from "@/lib/settings-context";
 export const metadata: Metadata = {
   metadataBase: new URL("https://taxispm.fr"),
   title: {
-    default: "SPM Taxi — Conventionné CPAM | Villebois · Lyon · Ain (01)",
-    template: "%s | SPM Taxi Villebois (Ain 01)",
+    default: "SPM Taxi — Conventionné CPAM | Tignieu-Jameyzieu · Villebois · Lyon",
+    template: "%s | SPM Taxi — Ain & Isère",
   },
   description:
-    "Taxi conventionné CPAM Villebois (Ain 01) · Tiguan 7 places. Aéroport Lyon, médical CPAM remboursé, longue distance. 7j/7 24h/24. Devis gratuit sous 2h. ☎ 07 67 75 18 98.",
+    "Taxi conventionné CPAM à Tignieu-Jameyzieu (38) et Villebois (Ain 01). Tiguan 7 places. Aéroport Lyon Saint-Exupéry, transport médical CPAM remboursé, longue distance. 7j/7 24h/24. ☎ 07 67 75 18 98.",
   keywords: [
     // Local primaires
-    "taxi Villebois", "taxi Tignieu-Jameyzieu", "taxi Ain 01", "taxi conventionné Ain",
+    "taxi Tignieu-Jameyzieu", "taxi Tignieu", "taxi Villebois",
+    "taxi Ain 01", "taxi conventionné Ain", "taxi Isère 38",
     "taxi conventionné CPAM Ain", "taxi SPM Villebois", "taxi 01150",
+    "taxi 38230", "taxi Tignieu CPAM", "taxi Tignieu aéroport Lyon",
     // Transport médical
     "transport médical CPAM Ain", "taxi médical conventionné", "taxi prescription médicale",
     "taxi chimiothérapie Ain", "taxi dialyse Ain", "transport sanitaire Ain",
@@ -40,10 +42,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: "https://taxispm.fr",
-    siteName: "SPM Taxi — Taxi Conventionné Villebois",
-    title: "SPM Taxi — Taxi Conventionné CPAM | Villebois · Lyon · Ain (01)",
+    siteName: "SPM Taxi — Taxi Conventionné Ain & Isère",
+    title: "SPM Taxi — Taxi Conventionné CPAM | Tignieu-Jameyzieu · Villebois · Lyon",
     description:
-      "Taxi conventionné CPAM à Villebois (Ain 01). Volkswagen Tiguan 7 places, disponible 7j/7 24h/24. Transferts aéroport Lyon Saint-Exupéry, transport médical remboursé CPAM, longue distance. Devis gratuit en 2h. ☎ 07 67 75 18 98.",
+      "Taxi conventionné CPAM à Tignieu-Jameyzieu (38) et Villebois (Ain 01). Volkswagen Tiguan 7 places, disponible 7j/7 24h/24. Transferts aéroport Lyon Saint-Exupéry, transport médical remboursé CPAM, longue distance. Devis gratuit en 2h. ☎ 07 67 75 18 98.",
     images: [
       {
         url: "/og-image.jpeg",
@@ -98,8 +100,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Géolocalisation */}
         <meta name="geo.region" content="FR-01" />
         <meta name="geo.placename" content="Villebois, Ain, Auvergne-Rhône-Alpes, France" />
-        <meta name="geo.position" content="45.8;5.45" />
-        <meta name="ICBM" content="45.8, 5.45" />
+        <meta name="geo.position" content="45.808;5.452" />
+        <meta name="ICBM" content="45.808, 5.452" />
         {/* Business info pour IA */}
         <meta name="business:contact_data:phone_number" content="+33767751898" />
         <meta name="business:contact_data:email" content="contact@spm-taxi.fr" />

@@ -170,6 +170,7 @@ export default function CPAMGuide() {
             </p>
             <motion.a
               href="tel:+33767751898"
+              title="Réserver un transport médical — SPM Taxi conventionné CPAM"
               className="group inline-flex items-center gap-3 rounded-full bg-black pl-4 pr-1.5 py-1.5 text-[11px] font-medium tracking-wide text-white self-start sm:self-auto"
               whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} transition={spring}
             >

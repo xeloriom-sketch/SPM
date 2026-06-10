@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, Mail, MessageSquare, Check, Trash2, Calendar, RefreshCw } from "lucide-react";
+import { Phone, Mail, MessageSquare, Trash2, Calendar, RefreshCw, ArrowLeft } from "lucide-react";
 import type { ContactMessage } from "@/lib/supabase";
 import { getSupabase } from "@/lib/supabase-browser";
 
@@ -10,6 +10,7 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
   const [selected, setSelected] = useState<ContactMessage | null>(null);
   const [filter, setFilter] = useState<"all" | "unread" | "read">("all");
   const [deleting, setDeleting] = useState(false);
+  const [mobileView, setMobileView] = useState<"list" | "detail">("list");
 
   const filtered = messages.filter((m) => {
     if (filter === "unread") return !m.read;
@@ -19,6 +20,7 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
 
   function handleSelect(m: ContactMessage) {
     setSelected(m);
+    setMobileView("detail");
     if (!m.read) {
       setMessages((prev) => prev.map((msg) => msg.id === m.id ? { ...msg, read: true } : msg));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,7 +42,7 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
   return (
     <div className="flex h-[calc(100vh-56px)] lg:h-screen overflow-hidden">
       {/* Left: list */}
-      <div className="flex w-full flex-col border-r border-borderc lg:w-80 shrink-0">
+      <div className={`flex-col border-r border-borderc lg:w-80 shrink-0 ${mobileView === "detail" ? "hidden lg:flex" : "flex w-full"}`}>
         <div className="p-4 border-b border-borderc">
           <div className="flex items-center justify-between mb-3">
             <h1 className="font-display text-lg font-bold">Messages</h1>
@@ -92,14 +94,44 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
       </div>
 
       {/* Right: detail */}
-      <div className="hidden flex-1 flex-col lg:flex">
+      <div className={`flex-1 flex-col ${mobileView === "detail" ? "flex" : "hidden lg:flex"}`}>
         {!selected ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 text-mutedc">
             <MessageSquare className="h-10 w-10 opacity-30" />
             <p className="text-sm">Sélectionnez un message</p>
           </div>
         ) : (
-          <div className="flex flex-col h-full overflow-y-auto p-6">
+          <div className="flex flex-col h-full overflow-y-auto">
+            {/* Mobile back button */}
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-borderc lg:hidden">
+              <button
+                onClick={() => setMobileView("list")}
+                className="flex items-center gap-2 text-sm text-mutedc hover:text-foreground transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Messages
+              </button>
+            </div>
+
+            {/* Mobile quick actions — visible instantly */}
+            <div className="flex gap-3 p-4 border-b border-borderc lg:hidden">
+              <a
+                href={`tel:${selected.phone}`}
+                className="flex flex-1 items-center justify-center gap-2 rounded-full bg-black py-3 text-sm font-semibold text-white"
+              >
+                <Phone className="h-4 w-4" />
+                Appeler
+              </a>
+              <a
+                href={`mailto:${selected.email}?subject=Re: Demande de devis — ${selected.service}`}
+                className="flex flex-1 items-center justify-center gap-2 rounded-full border border-borderc py-3 text-sm font-semibold text-foreground"
+              >
+                <Mail className="h-4 w-4" />
+                Email
+              </a>
+            </div>
+
+            <div className="flex flex-col flex-1 overflow-y-auto p-4 lg:p-6">
             <div className="flex items-start justify-between gap-4 mb-6">
               <div className="flex items-center gap-4">
                 <div className="grid h-12 w-12 place-items-center rounded-full bg-black text-lg font-bold text-white">
@@ -169,7 +201,7 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
               </div>
             )}
 
-            <div className="mt-4 flex gap-3">
+            <div className="mt-4 hidden lg:flex gap-3">
               <a
                 href={`tel:${selected.phone}`}
                 className="flex flex-1 items-center justify-center gap-2 rounded-full bg-black py-2.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:brightness-105"
@@ -184,6 +216,7 @@ export default function MessagesClient({ messages: initial }: { messages: Contac
                 <Mail className="h-4 w-4" />
                 Répondre par email
               </a>
+            </div>
             </div>
           </div>
         )}

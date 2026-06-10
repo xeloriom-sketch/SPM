@@ -58,7 +58,7 @@ export default function AProposContent() {
   return (
     <>
       {/* ── HERO VIDÉO ── */}
-      <div ref={heroContainerRef} style={{ height: "130vh" }}>
+      <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "130vh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
           <div className="absolute inset-0 z-0">
             <HeroVideo src={sitePath("/videos/hero-web.mp4")} scrollYProgress={isMobile ? undefined : heroProgress} />

@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/taxi-conventionné-cpam`,              lastModified: NOW, changeFrequency: "monthly", priority: 0.9  },
     { url: `${BASE}/taxi-longue-distance`,                lastModified: NOW, changeFrequency: "monthly", priority: 0.8  },
     { url: `${BASE}/taxi-remorque-ain`,                   lastModified: NOW, changeFrequency: "monthly", priority: 0.8  },
+    { url: `${BASE}/taxi-tignieu-jameyzieu`,              lastModified: NOW, changeFrequency: "monthly", priority: 0.9  },
     { url: `${BASE}/a-propos`,                            lastModified: NOW, changeFrequency: "monthly", priority: 0.7  },
   ];
 }

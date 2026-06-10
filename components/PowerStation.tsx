@@ -103,6 +103,7 @@ export default function PowerStation() {
           <div className="md:col-span-3 md:justify-self-end">
             <motion.a
               href="/services"
+              title="Voir tous les services SPM Taxi"
               className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wide text-black/40 hover:text-black transition-colors"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}

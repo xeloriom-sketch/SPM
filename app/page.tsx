@@ -37,9 +37,11 @@ const jsonLd = {
       "@id": "https://taxispm.fr/#business",
       name: "SPM Taxi",
       legalName: "SPM Taxi",
+      slogan: "Taxi conventionné CPAM — Ain & Isère — 7j/7 24h/24",
       alternateName: [
         "SPM Taxi Villebois", "Taxi SPM Ain", "Taxi Conventionné SPM",
         "SPM — Taxi Conventionné", "Taxi Villebois Ain",
+        "Taxi Tignieu-Jameyzieu", "Taxi Tignieu", "SPM Taxi Tignieu",
       ],
       description:
         "SPM Taxi est un taxi conventionné CPAM basé à Villebois dans l'Ain (01150). Chauffeur professionnel avec carte professionnelle de taxi, agrément CPAM et assurance responsabilité civile professionnelle. Volkswagen Tiguan Allspace 7 places. Note Google 4,9/5. Disponible 7j/7 24h/24 pour transferts aéroport Lyon Saint-Exupéry, transport médical conventionné CPAM remboursé, transport de colis urgent, déplacements avec remorque et longue distance partout en France.",
@@ -60,10 +62,27 @@ const jsonLd = {
       },
       geo: {
         "@type": "GeoCoordinates",
-        latitude: 45.8,
-        longitude: 5.45,
+        latitude: 45.808,
+        longitude: 5.452,
       },
       hasMap: "https://maps.google.com/?q=Villebois+Ain+01150+France",
+      serviceArea: {
+        "@type": "GeoCircle",
+        geoMidpoint: { "@type": "GeoCoordinates", latitude: 45.808, longitude: 5.452 },
+        geoRadius: "80000",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+33767751898",
+        contactType: "reservations",
+        availableLanguage: "French",
+        hoursAvailable: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+          opens: "00:00",
+          closes: "23:59",
+        },
+      },
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
@@ -74,7 +93,7 @@ const jsonLd = {
       ],
       areaServed: [
         { "@type": "City", name: "Villebois", containedInPlace: { "@type": "AdministrativeArea", name: "Ain" } },
-        { "@type": "City", name: "Tignieu-Jameyzieu" },
+        { "@type": "City", name: "Tignieu-Jameyzieu", containedInPlace: { "@type": "AdministrativeArea", name: "Isère" } },
         { "@type": "City", name: "Ambérieu-en-Bugey" },
         { "@type": "City", name: "Bourg-en-Bresse" },
         { "@type": "City", name: "Meximieux" },
@@ -159,6 +178,8 @@ const jsonLd = {
       ],
       sameAs: [
         "https://www.google.com/maps/search/SPM+Taxi+Villebois",
+        "https://www.pagesjaunes.fr/pros/recherche?quoiqui=SPM+Taxi&ou=Villebois+01150",
+        "https://taxispm.fr",
       ],
       knowsLanguage: "fr",
     },
@@ -197,6 +218,21 @@ const jsonLd = {
           "@type": "Question",
           name: "Quels modes de paiement accepte SPM Taxi ?",
           acceptedAnswer: { "@type": "Answer", text: "SPM Taxi accepte les espèces et la carte bancaire (CB, Visa, Mastercard, American Express). Pour les transports médicaux CPAM, la facturation est gérée directement avec l'Assurance Maladie, sans avance de frais pour le patient." },
+        },
+        {
+          "@type": "Question",
+          name: "SPM Taxi intervient-il à Tignieu-Jameyzieu ?",
+          acceptedAnswer: { "@type": "Answer", text: "Oui, SPM Taxi intervient à Tignieu-Jameyzieu (Isère 38) et dans tout le secteur Ain — Isère. Le chauffeur prend en charge les clients à Tignieu pour les transferts aéroport Lyon Saint-Exupéry, transport médical CPAM, déplacements longue distance et toutes autres courses. Disponible 7j/7, 24h/24. Réservation au 07 67 75 18 98." },
+        },
+        {
+          "@type": "Question",
+          name: "Combien coûte un taxi de Tignieu-Jameyzieu à l'aéroport de Lyon ?",
+          acceptedAnswer: { "@type": "Answer", text: "Depuis Tignieu-Jameyzieu, le transfert vers l'aéroport Lyon Saint-Exupéry est à partir de 55 €. Tarif fixe, sans surprise. Demandez un devis gratuit au 07 67 75 18 98 ou via le formulaire en ligne." },
+        },
+        {
+          "@type": "Question",
+          name: "Quel est le délai pour réserver un taxi à Villebois ou Tignieu-Jameyzieu ?",
+          acceptedAnswer: { "@type": "Answer", text: "SPM Taxi répond à toute demande sous 2h. La réservation à l'avance est recommandée pour les vols tôt le matin ou les rendez-vous médicaux planifiés. Les courses de dernière minute sont également acceptées selon disponibilité." },
         },
       ],
     },

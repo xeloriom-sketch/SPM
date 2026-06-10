@@ -68,6 +68,7 @@ export default function CommunityCTA() {
             >
               <a
                 href="tel:+33767751898"
+                title="Appeler SPM Taxi"
                 className="group inline-flex items-center gap-3 rounded-full bg-white pl-5 pr-1.5 py-1.5 text-[11px] font-semibold tracking-wider text-black transition-all duration-300 hover:bg-white/90"
               >
                 <Phone className="h-3.5 w-3.5 stroke-[2.5]" />
@@ -78,6 +79,7 @@ export default function CommunityCTA() {
               </a>
               <a
                 href="#contact"
+                title="Demander un devis gratuit"
                 className="inline-flex items-center gap-2 rounded-full border border-white/25 text-white px-5 py-2 text-[11px] font-semibold tracking-wider hover:border-white/50 transition-colors"
               >
                 Devis gratuit

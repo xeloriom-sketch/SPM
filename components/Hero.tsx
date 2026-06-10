@@ -34,7 +34,7 @@ export default function Hero() {
   });
 
   return (
-    <div ref={containerRef} id="accueil" style={{ height: "130vh" }}>
+    <div ref={containerRef} id="accueil" style={{ height: isMobile ? "100svh" : "130vh" }}>
     <section
       className="sticky top-0 relative w-full overflow-hidden bg-black flex flex-col select-none"
       style={{ height: "100svh" }}

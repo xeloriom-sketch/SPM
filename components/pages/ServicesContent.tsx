@@ -500,7 +500,7 @@ export default function ServicesContent() {
   return (
     <>
       {/* ── HERO ── */}
-      <div ref={heroContainerRef} style={{ height: "130vh" }}>
+      <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "130vh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
           <div className="absolute inset-0 z-0">
             <HeroVideo src={sitePath("/videos/7440442-web.mp4")} scrollYProgress={isMobile ? undefined : heroProgress} />
@@ -540,6 +540,7 @@ export default function ServicesContent() {
                   className="inline-flex items-center gap-2.5 rounded-full bg-white text-black pl-4 pr-5 py-2.5 text-[11px] font-semibold tracking-wide hover:bg-white/90 transition-colors"
                 ><Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />{s.contact_phone}</a>
                 <Link href="/tarifs"
+                  title="Consulter les tarifs SPM Taxi"
                   className="group inline-flex items-center gap-3 rounded-full border border-white/25 text-white pl-4 pr-1.5 py-1.5 text-[11px] font-semibold tracking-wide hover:border-white/50 transition-colors"
                 >
                   <span>Voir les tarifs</span>

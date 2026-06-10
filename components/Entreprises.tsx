@@ -65,6 +65,7 @@ export default function Entreprises() {
             <div className="flex flex-wrap gap-3 mt-1">
               <motion.a
                 href="tel:+33767751898"
+                title="Discuter d'un partenariat avec SPM Taxi"
                 className="group inline-flex items-center gap-3 rounded-full bg-black pl-4 pr-1.5 py-1.5 text-[11px] font-semibold tracking-wide text-white"
                 whileHover={{ scale: 1.04, y: -1 }} whileTap={{ scale: 0.96 }} transition={spring}
               >
@@ -76,6 +77,7 @@ export default function Entreprises() {
               </motion.a>
               <a
                 href="mailto:contact@spm-taxi.fr"
+                title="Envoyer un email à SPM Taxi"
                 className="inline-flex items-center gap-2 rounded-full border border-black/15 text-black/70 px-5 py-2 text-[11px] font-semibold hover:border-black/35 hover:text-black transition-all"
               >
                 contact@spm-taxi.fr

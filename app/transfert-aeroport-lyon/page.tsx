@@ -27,27 +27,45 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Transfert Taxi Aéroport Lyon Saint-Exupéry",
-  provider: {
-    "@type": "TaxiService",
-    name: "SPM — Taxi Conventionné",
-    telephone: "+33767751898",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "951 route des hauts fourneaux",
-      addressLocality: "Villebois",
-      postalCode: "01150",
-      addressCountry: "FR",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "TaxiService"],
+      "@id": "https://taxispm.fr/#business",
+      name: "SPM Taxi — Transfert Aéroport Lyon Saint-Exupéry",
+      telephone: "+33767751898",
+      url: "https://taxispm.fr/transfert-aeroport-lyon",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "951 route des hauts fourneaux",
+        addressLocality: "Villebois",
+        postalCode: "01150",
+        addressRegion: "Auvergne-Rhône-Alpes",
+        addressCountry: "FR",
+      },
+      areaServed: [
+        { "@type": "City", name: "Lyon" },
+        { "@type": "AdministrativeArea", name: "Ain" },
+        { "@type": "AdministrativeArea", name: "Isère" },
+        { "@type": "Airport", name: "Aéroport Lyon Saint-Exupéry", iataCode: "LYS" },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Transferts aéroport et gare",
+        itemListElement: [
+          { "@type": "Offer", name: "Transfert aéroport Lyon Saint-Exupéry depuis Ain", itemOffered: { "@type": "Service", name: "Taxi aéroport Lyon Saint-Exupéry" } },
+          { "@type": "Offer", name: "Transfert gare Part-Dieu et Perrache", itemOffered: { "@type": "Service", name: "Taxi gare Lyon" } },
+        ],
+      },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.9, reviewCount: 9, bestRating: 5, worstRating: 1 },
     },
-  },
-  areaServed: [
-    { "@type": "City", name: "Lyon" },
-    { "@type": "AdministrativeArea", name: "Ain" },
-    { "@type": "AdministrativeArea", name: "Isère" },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
+        { "@type": "ListItem", position: 2, name: "Transfert Aéroport Lyon", item: "https://taxispm.fr/transfert-aeroport-lyon" },
+      ],
+    },
   ],
-  serviceType: "Transfert aéroport",
-  description: "Transport privé vers et depuis l'aéroport international de Lyon Saint-Exupéry depuis l'Ain, Lyon et l'Isère.",
 };
 
 const features = [

@@ -50,7 +50,7 @@ const jsonLd = {
       email: "contact@spm-taxi.fr",
       priceRange: "€€",
       currenciesAccepted: "EUR",
-      paymentAccepted: "Cash, Credit Card, Check, CPAM",
+      paymentAccepted: "Cash, Credit Card, Check",
       address: {
         "@type": "PostalAddress",
         streetAddress: "951 route des hauts fourneaux",
@@ -160,10 +160,10 @@ const jsonLd = {
       },
       aggregateRating: {
         "@type": "AggregateRating",
-        ratingValue: "4.9",
-        reviewCount: "9",
-        bestRating: "5",
-        worstRating: "1",
+        ratingValue: 4.9,
+        reviewCount: 9,
+        bestRating: 5,
+        worstRating: 1,
       },
       review: [
         { "@type": "Review", author: { "@type": "Person", name: "F.I TAXI" }, reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" }, reviewBody: "Excellent collaborateur. Toujours ponctuel, sérieux et respectueux des clients. Travail de qualité, je recommande sans hésiter.", datePublished: "2025-12-01" },
@@ -177,9 +177,10 @@ const jsonLd = {
         { "@type": "ImageObject", url: "https://taxispm.fr/image/tiguan-front-quarter.webp", caption: "Volkswagen Tiguan Allspace 7 places — SPM Taxi Villebois" },
       ],
       sameAs: [
-        "https://www.google.com/maps/search/SPM+Taxi+Villebois",
-        "https://www.pagesjaunes.fr/pros/recherche?quoiqui=SPM+Taxi&ou=Villebois+01150",
-        "https://taxispm.fr",
+        // Ajouter ici les URLs exactes une fois créées :
+        // "https://www.facebook.com/SPMTaxi",
+        // "https://www.instagram.com/SPMTaxi",
+        // "https://maps.google.com/?cid=VOTRE_CID_GOOGLE_BUSINESS",
       ],
       knowsLanguage: "fr",
     },

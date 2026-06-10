@@ -28,22 +28,45 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
-  name: "SPM — Taxi Conventionné CPAM",
-  description: "Transport médical conventionné CPAM. Prise en charge Assurance Maladie sur prescription médicale dans l'Ain, Lyon et Isère.",
-  telephone: "+33767751898",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "951 route des hauts fourneaux",
-    addressLocality: "Villebois",
-    postalCode: "01150",
-    addressCountry: "FR",
-  },
-  areaServed: { "@type": "AdministrativeArea", name: "Ain" },
-  availableService: {
-    "@type": "MedicalTherapy",
-    name: "Transport médical taxi conventionné CPAM",
-  },
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "TaxiService"],
+      "@id": "https://taxispm.fr/#business",
+      name: "SPM — Taxi Conventionné CPAM",
+      description: "Taxi conventionné CPAM agréé par l'Assurance Maladie. Transport médical sur prescription médicale dans l'Ain, Lyon et Isère. Zéro avance de frais.",
+      telephone: "+33767751898",
+      url: "https://taxispm.fr/taxi-conventionné-cpam",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "951 route des hauts fourneaux",
+        addressLocality: "Villebois",
+        postalCode: "01150",
+        addressRegion: "Auvergne-Rhône-Alpes",
+        addressCountry: "FR",
+      },
+      areaServed: [
+        { "@type": "AdministrativeArea", name: "Ain", alternateName: "01" },
+        { "@type": "AdministrativeArea", name: "Isère", alternateName: "38" },
+        { "@type": "AdministrativeArea", name: "Rhône", alternateName: "69" },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Transport médical conventionné CPAM",
+        itemListElement: [
+          { "@type": "Offer", name: "Transport médical chimiothérapie", itemOffered: { "@type": "Service", name: "Taxi chimiothérapie Ain" } },
+          { "@type": "Offer", name: "Transport médical dialyse", itemOffered: { "@type": "Service", name: "Taxi dialyse Ain" } },
+          { "@type": "Offer", name: "Transport médical hospitalisation ALD", itemOffered: { "@type": "Service", name: "Taxi hospitalisation ALD Ain" } },
+        ],
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
+        { "@type": "ListItem", position: 2, name: "Taxi Conventionné CPAM", item: "https://taxispm.fr/taxi-conventionné-cpam" },
+      ],
+    },
+  ],
 };
 
 const etapes = [

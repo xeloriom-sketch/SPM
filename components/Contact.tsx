@@ -166,6 +166,15 @@ export default function Contact() {
                   if (error) throw new Error("Erreur lors de l'envoi.");
                   setStatus("success");
                   (e.target as HTMLFormElement).reset();
+                  fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/send-push`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      name: formData.get("name"),
+                      service: formData.get("service"),
+                      phone: formData.get("phone"),
+                    }),
+                  }).catch(() => {});
                 } catch (err) {
                   setStatus("error");
                   setErrorMsg(err instanceof Error ? err.message : "Erreur lors de l'envoi.");

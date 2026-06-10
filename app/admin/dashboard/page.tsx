@@ -20,28 +20,42 @@ type DashData = {
 
 function PushBanner() {
   const { status, subscribe, unsubscribe } = usePushStatus();
+
+  if (status === "loading") return (
+    <div className="mb-6 h-[72px] rounded-2xl border border-borderc bg-surface animate-pulse" />
+  );
+
   if (status === "subscribed") return (
-    <div className="mb-6 flex items-center justify-between gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3">
-      <p className="text-sm text-emerald-700 font-medium">Notifications activées — vous recevrez une alerte dès qu'un client envoie un message.</p>
+    <div className="mb-6 flex items-center justify-between gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4">
+      <p className="text-sm text-emerald-700 font-medium">Notifications activées ✓</p>
       <button onClick={unsubscribe} className="text-xs text-emerald-600 underline shrink-0">Désactiver</button>
     </div>
   );
+
   if (status === "denied") return (
-    <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3">
-      <p className="text-sm text-red-700">Notifications bloquées. Allez dans Réglages → Safari → Notifications du site web → autorisez ce site.</p>
+    <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-4">
+      <p className="text-sm font-semibold text-red-700 mb-1">Notifications bloquées</p>
+      <p className="text-xs text-red-600">Réglages iPhone → Safari → Notifications du site web → autorisez taxispm.fr</p>
     </div>
   );
-  if (status === "unsupported" || status === "loading") return null;
+
+  if (status === "unsupported") return (
+    <div className="mb-6 rounded-2xl border border-orange-200 bg-orange-50 px-4 py-4">
+      <p className="text-sm font-semibold text-orange-700 mb-1">Pour activer les notifications</p>
+      <p className="text-xs text-orange-600">Mettez à jour iOS vers la version 16.4 minimum, puis revenez sur cette page.</p>
+    </div>
+  );
+
   return (
     <button
       onClick={subscribe}
-      className="mb-6 w-full flex items-center justify-between gap-3 rounded-2xl border border-borderc bg-surface px-4 py-4 hover:border-black/20 transition-all"
+      className="mb-6 w-full flex items-center justify-between gap-3 rounded-2xl border-2 border-black bg-black px-4 py-4 active:opacity-80 transition-all"
     >
       <div className="text-left">
-        <p className="text-sm font-semibold">Activer les notifications</p>
-        <p className="text-xs text-mutedc mt-0.5">Recevez une alerte dès qu'un client vous contacte</p>
+        <p className="text-sm font-semibold text-white">Activer les notifications</p>
+        <p className="text-xs text-white/60 mt-0.5">Alerte immédiate dès qu'un client vous contacte</p>
       </div>
-      <span className="rounded-full bg-black px-4 py-2 text-xs font-semibold text-white shrink-0">Activer</span>
+      <span className="rounded-full bg-white px-4 py-2 text-xs font-bold text-black shrink-0">Activer</span>
     </button>
   );
 }

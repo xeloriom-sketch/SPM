@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { Bell, BellOff, BellRing } from "lucide-react";
+import { getSupabase } from "@/lib/supabase-browser";
 
 type Status = "unsupported" | "denied" | "default" | "subscribed" | "loading";
 
@@ -41,11 +42,13 @@ export function usePushStatus() {
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC),
       });
-      await fetch("/api/push/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(sub.toJSON()),
-      });
+      const json = sub.toJSON();
+      const keys = json.keys as { p256dh: string; auth: string };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (getSupabase() as any).from("push_subscriptions").upsert(
+        { endpoint: json.endpoint, p256dh: keys.p256dh, auth: keys.auth },
+        { onConflict: "endpoint" }
+      );
       setStatus("subscribed");
     } catch {
       setStatus(Notification.permission === "denied" ? "denied" : "default");
@@ -57,11 +60,8 @@ export function usePushStatus() {
     setStatus("loading");
     const sub = await reg.pushManager.getSubscription();
     if (sub) {
-      await fetch("/api/push/subscribe", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ endpoint: sub.endpoint }),
-      });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (getSupabase() as any).from("push_subscriptions").delete().eq("endpoint", sub.endpoint);
       await sub.unsubscribe();
     }
     setStatus("default");
@@ -82,10 +82,7 @@ export default function PushNotificationManager() {
   );
 
   if (status === "denied") return (
-    <div
-      className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-mutedc"
-      title="Notifications bloquées — autorisez dans les paramètres du navigateur"
-    >
+    <div className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-mutedc" title="Autorisez dans les paramètres du navigateur">
       <BellOff className="h-4 w-4 shrink-0 text-red-400" />
       <span className="hidden lg:inline text-xs">Notifs bloquées</span>
     </div>
@@ -95,7 +92,6 @@ export default function PushNotificationManager() {
     <button
       onClick={unsubscribe}
       className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-emerald-600 hover:bg-emerald-50 transition-all w-full text-left"
-      title="Notifications activées — cliquez pour désactiver"
     >
       <BellRing className="h-4 w-4 shrink-0" />
       <span className="hidden lg:inline">Notifs activées</span>
@@ -106,7 +102,6 @@ export default function PushNotificationManager() {
     <button
       onClick={subscribe}
       className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-mutedc hover:bg-surface2 hover:text-foreground transition-all w-full text-left"
-      title="Activer les notifications push"
     >
       <Bell className="h-4 w-4 shrink-0" />
       <span className="hidden lg:inline">Activer les notifs</span>

@@ -6,6 +6,7 @@ import { getSupabase } from "@/lib/supabase-browser";
 import AdminShell from "@/components/admin/AdminShell";
 import { sitePath } from "@/lib/site-path";
 import { MessageSquare, CheckCircle2, Clock, Mail } from "lucide-react";
+import { usePushStatus } from "@/components/admin/PushNotificationManager";
 
 type MsgRow = { id: string; name: string; service: string; phone: string; read: boolean; created_at: string };
 
@@ -16,6 +17,34 @@ type DashData = {
   recent: MsgRow[];
   byService: Record<string, number>;
 };
+
+function PushBanner() {
+  const { status, subscribe, unsubscribe } = usePushStatus();
+  if (status === "subscribed") return (
+    <div className="mb-6 flex items-center justify-between gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3">
+      <p className="text-sm text-emerald-700 font-medium">Notifications activées — vous recevrez une alerte dès qu'un client envoie un message.</p>
+      <button onClick={unsubscribe} className="text-xs text-emerald-600 underline shrink-0">Désactiver</button>
+    </div>
+  );
+  if (status === "denied") return (
+    <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3">
+      <p className="text-sm text-red-700">Notifications bloquées. Allez dans Réglages → Safari → Notifications du site web → autorisez ce site.</p>
+    </div>
+  );
+  if (status === "unsupported" || status === "loading") return null;
+  return (
+    <button
+      onClick={subscribe}
+      className="mb-6 w-full flex items-center justify-between gap-3 rounded-2xl border border-borderc bg-surface px-4 py-4 hover:border-black/20 transition-all"
+    >
+      <div className="text-left">
+        <p className="text-sm font-semibold">Activer les notifications</p>
+        <p className="text-xs text-mutedc mt-0.5">Recevez une alerte dès qu'un client vous contacte</p>
+      </div>
+      <span className="rounded-full bg-black px-4 py-2 text-xs font-semibold text-white shrink-0">Activer</span>
+    </button>
+  );
+}
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -62,10 +91,14 @@ export default function DashboardPage() {
   return (
     <AdminShell unread={unread}>
       <div className="p-6 max-w-5xl mx-auto">
-        <div className="mb-8">
+        <div className="mb-6">
           <h1 className="font-display text-2xl font-bold">Tableau de bord</h1>
           <p className="text-sm text-mutedc mt-1">Bienvenue dans votre espace administration.</p>
         </div>
+
+        <PushBanner />
+
+
 
         {!data ? (
           <div className="flex items-center justify-center py-20 text-sm text-mutedc">Chargement…</div>

@@ -2,6 +2,7 @@
 
 import { supabase } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
+import { sendPushToAll } from "@/lib/push";
 
 export async function submitContact(formData: FormData) {
   const name    = (formData.get("name")    as string)?.trim();
@@ -23,4 +24,10 @@ export async function submitContact(formData: FormData) {
 
   revalidatePath("/admin/dashboard");
   revalidatePath("/admin/messages");
+
+  sendPushToAll({
+    title: "Nouveau client 🚕",
+    body: `${name} — ${service}`,
+    url: "/admin/messages",
+  }).catch(() => {});
 }

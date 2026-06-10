@@ -8,9 +8,34 @@ import {
   Settings,
   LogOut,
   ExternalLink,
+  Bell,
+  BellRing,
+  BellOff,
 } from "lucide-react";
 import { sitePath } from "@/lib/site-path";
 import { getSupabase } from "@/lib/supabase-browser";
+import PushNotificationManager, { usePushStatus } from "./PushNotificationManager";
+
+function MobilePushButton() {
+  const { status, subscribe, unsubscribe } = usePushStatus();
+  if (status === "unsupported" || status === "loading") return null;
+
+  const subscribed = status === "subscribed";
+  const denied = status === "denied";
+
+  return (
+    <button
+      onClick={subscribed ? unsubscribe : denied ? undefined : subscribe}
+      title={subscribed ? "Notifs activées" : denied ? "Bloqué" : "Activer notifs"}
+      className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-colors ${subscribed ? "text-emerald-600" : "text-mutedc"}`}
+    >
+      <div className="grid h-8 w-8 place-items-center rounded-xl">
+        {subscribed ? <BellRing className="h-4 w-4" /> : denied ? <BellOff className="h-4 w-4 text-red-400" /> : <Bell className="h-4 w-4" />}
+      </div>
+      <span className="text-[10px] font-medium">{subscribed ? "Notifs" : "Notifs"}</span>
+    </button>
+  );
+}
 
 function handleSignOut() {
   getSupabase().auth.signOut().then(() => {
@@ -76,6 +101,7 @@ export default function AdminShell({
         </nav>
 
         <div className="p-3 border-t border-borderc flex flex-col gap-1">
+          <PushNotificationManager />
           <a
             href={sitePath("/")}
             target="_blank"
@@ -116,6 +142,7 @@ export default function AdminShell({
             </Link>
           );
         })}
+        <MobilePushButton />
         <button
           onClick={handleSignOut}
           className="flex flex-col items-center gap-1 px-4 py-2 rounded-xl text-mutedc transition-colors"

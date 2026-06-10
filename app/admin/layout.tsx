@@ -1,15 +1,12 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Administration — Taxi Tignieu",
-  robots: { index: false, follow: false },
-};
+import { useEffect } from "react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <link rel="manifest" href="/manifest-admin.json" />
-      {children}
-    </>
-  );
+  useEffect(() => {
+    const link = document.querySelector('link[rel="manifest"]') as HTMLLinkElement | null;
+    if (link) link.href = "/manifest-admin.json";
+  }, []);
+
+  return <>{children}</>;
 }

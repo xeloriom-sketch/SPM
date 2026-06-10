@@ -26,12 +26,17 @@ export function usePushStatus() {
       setStatus("unsupported");
       return;
     }
-    navigator.serviceWorker.register("/sw.js").then(async (r) => {
-      setReg(r);
-      if (Notification.permission === "denied") { setStatus("denied"); return; }
-      const existing = await r.pushManager.getSubscription();
-      setStatus(existing ? "subscribed" : "default");
-    });
+    navigator.serviceWorker.register("/sw.js")
+      .then(async (r) => {
+        setReg(r);
+        if (Notification.permission === "denied") { setStatus("denied"); return; }
+        const existing = await r.pushManager.getSubscription();
+        setStatus(existing ? "subscribed" : "default");
+      })
+      .catch(() => setStatus("default"));
+
+    const t = setTimeout(() => setStatus(s => s === "loading" ? "default" : s), 3000);
+    return () => clearTimeout(t);
   }, []);
 
   const subscribe = useCallback(async () => {

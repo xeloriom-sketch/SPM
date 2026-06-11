@@ -10,7 +10,7 @@ import type { ContactMessage } from "@/lib/supabase";
 function MessagesContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const initialId = searchParams.get("id") ?? undefined;
+  const initialId = searchParams?.get("id") ?? undefined;
   const [messages, setMessages] = useState<ContactMessage[] | null>(null);
   const [unread, setUnread] = useState(0);
 

@@ -73,7 +73,7 @@ export default function MessagesClient({
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "contact_messages" }, (payload) => {
         const msg = payload.new as ContactMessage;
         setMessages((prev) => [msg, ...prev]);
-        setNewIds((prev) => new Set([...prev, msg.id]));
+        setNewIds((prev) => new Set(prev).add(msg.id));
         setTimeout(() => {
           setNewIds((prev) => { const s = new Set(prev); s.delete(msg.id); return s; });
         }, 15000);
@@ -99,7 +99,8 @@ export default function MessagesClient({
       setMobileView("detail");
       if (!target.read) {
         setMessages((prev) => prev.map((m) => m.id === target.id ? { ...m, read: true } : m));
-        getSupabase().from("contact_messages").update({ read: true }).eq("id", target.id).then(() => {});
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (getSupabase() as any).from("contact_messages").update({ read: true }).eq("id", target.id).then(() => {});
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -115,7 +116,8 @@ export default function MessagesClient({
     setMobileView("detail");
     if (!m.read) {
       setMessages((prev) => prev.map((msg) => msg.id === m.id ? { ...msg, read: true } : msg));
-      getSupabase().from("contact_messages").update({ read: true }).eq("id", m.id).then(() => {});
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (getSupabase() as any).from("contact_messages").update({ read: true }).eq("id", m.id).then(() => {});
     }
   }
 
@@ -129,7 +131,8 @@ export default function MessagesClient({
       if (!next) setMobileView("list");
     }
     setMessages((prev) => prev.filter((m) => m.id !== id));
-    await getSupabase().from("contact_messages").delete().eq("id", id);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await (getSupabase() as any).from("contact_messages").delete().eq("id", id);
     setDeleting(false);
   }
 

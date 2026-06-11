@@ -93,8 +93,12 @@ export function usePushStatus() {
     setStatus("loading");
     const sub = await reg.pushManager.getSubscription();
     if (sub) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (getSupabase() as any).from("push_subscriptions").delete().eq("endpoint", sub.endpoint);
+      const ANON = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+      const URL  = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+      await fetch(`${URL}/rest/v1/push_subscriptions?endpoint=eq.${encodeURIComponent(sub.endpoint)}`, {
+        method: "DELETE",
+        headers: { "apikey": ANON, "Authorization": `Bearer ${ANON}` },
+      });
       await sub.unsubscribe();
     }
     setStatus("default");

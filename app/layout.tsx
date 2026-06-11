@@ -5,6 +5,7 @@ import { SettingsProvider } from "@/lib/settings-context";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://taxispm.fr"),
+  manifest: "/manifest.json",
   title: {
     default: "SPM Taxi — Conventionné CPAM | Tignieu-Jameyzieu · Villebois · Lyon",
     template: "%s | SPM Taxi — Ain & Isère",
@@ -100,7 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
         <link rel="shortcut icon" href="/favicon.svg" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
+        {/* manifest géré via metadata API pour permettre l'override par sous-layouts */}
         {/* Préconnexion Supabase */}
         <link rel="preconnect" href="https://dqbbaflumzssjndgxtrg.supabase.co" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://dqbbaflumzssjndgxtrg.supabase.co" />

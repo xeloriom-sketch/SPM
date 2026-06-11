@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Bell, BellOff, BellRing } from "lucide-react";
 
-type Status = "unsupported" | "denied" | "default" | "subscribed" | "loading";
+type Status = "unsupported" | "needs-install" | "denied" | "default" | "subscribed" | "loading";
 
 const VAPID_PUBLIC = "BNhN-0-XNO3NNeVMnBtWUofYSvWbpErTQd_su-VUBQVFhrReYU8_Sp2slEty0Zq4rg0DqKaj9PeRL1siPz70cnY";
 
@@ -22,7 +22,10 @@ export function usePushStatus() {
 
   useEffect(() => {
     if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
-      setStatus("unsupported");
+      const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      const isStandalone = ("standalone" in navigator && (navigator as { standalone?: boolean }).standalone === true)
+        || window.matchMedia("(display-mode: standalone)").matches;
+      setStatus(isIOS && !isStandalone ? "needs-install" : "unsupported");
       return;
     }
     navigator.serviceWorker.register("/sw.js")

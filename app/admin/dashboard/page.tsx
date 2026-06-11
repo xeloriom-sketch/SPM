@@ -39,10 +39,17 @@ function PushBanner() {
     </div>
   );
 
+  if (status === "needs-install") return (
+    <div className="mb-6 rounded-2xl border border-orange-200 bg-orange-50 px-4 py-4">
+      <p className="text-sm font-semibold text-orange-700 mb-1">Installez l&apos;app pour les notifications</p>
+      <p className="text-xs text-orange-600">Appuyez sur <strong>Partager</strong> → <strong>Sur l&apos;écran d&apos;accueil</strong>, puis rouvrez l&apos;app depuis votre écran d&apos;accueil.</p>
+    </div>
+  );
+
   if (status === "unsupported") return (
     <div className="mb-6 rounded-2xl border border-orange-200 bg-orange-50 px-4 py-4">
-      <p className="text-sm font-semibold text-orange-700 mb-1">Pour activer les notifications</p>
-      <p className="text-xs text-orange-600">Mettez à jour iOS vers la version 16.4 minimum, puis revenez sur cette page.</p>
+      <p className="text-sm font-semibold text-orange-700 mb-1">Navigateur non supporté</p>
+      <p className="text-xs text-orange-600">Sur iPhone/iPad, utilisez Safari et mettez à jour iOS vers la version 16.4 minimum.</p>
     </div>
   );
 

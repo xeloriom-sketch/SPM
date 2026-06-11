@@ -88,8 +88,14 @@ export default function MessagesClient({
 
   async function handleDelete(id: string) {
     setDeleting(true);
+    if (selected?.id === id) {
+      const remaining = filtered.filter((m) => m.id !== id);
+      const idx = filtered.findIndex((m) => m.id === id);
+      const next = remaining[idx] ?? remaining[idx - 1] ?? null;
+      setSelected(next);
+      if (!next) setMobileView("list");
+    }
     setMessages((prev) => prev.filter((m) => m.id !== id));
-    if (selected?.id === id) { setSelected(null); setMobileView("list"); }
     await getSupabase().from("contact_messages").delete().eq("id", id);
     setDeleting(false);
   }

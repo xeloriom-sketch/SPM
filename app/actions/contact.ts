@@ -16,9 +16,9 @@ export async function submitContact(formData: FormData) {
     throw new Error("Champs obligatoires manquants.");
   }
 
-  const { error } = await supabase.from("contact_messages").insert({
+  const { data, error } = await supabase.from("contact_messages").insert({
     name, phone, email, service, date, message, read: false,
-  });
+  }).select("id").single();
 
   if (error) throw new Error("Erreur lors de l'envoi. Veuillez réessayer.");
 
@@ -28,6 +28,6 @@ export async function submitContact(formData: FormData) {
   sendPushToAll({
     title: "Nouveau client 🚕",
     body: `${name} — ${service}`,
-    url: "/admin/messages",
+    url: `/admin/messages?id=${data?.id}`,
   }).catch(() => {});
 }

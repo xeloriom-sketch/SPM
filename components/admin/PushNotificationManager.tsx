@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { Bell, BellOff, BellRing } from "lucide-react";
-import { getSupabase } from "@/lib/supabase-browser";
 
 type Status = "unsupported" | "denied" | "default" | "subscribed" | "loading";
 
@@ -62,13 +61,29 @@ export function usePushStatus() {
       });
       const json = sub.toJSON();
       const keys = json.keys as { p256dh: string; auth: string };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (getSupabase() as any).from("push_subscriptions").upsert(
-        { endpoint: json.endpoint, p256dh: keys.p256dh, auth: keys.auth },
-        { onConflict: "endpoint" }
-      );
+
+      const ANON = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+      const URL  = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+      const res  = await fetch(`${URL}/rest/v1/push_subscriptions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": ANON,
+          "Authorization": `Bearer ${ANON}`,
+          "Prefer": "resolution=merge-duplicates",
+        },
+        body: JSON.stringify({ endpoint: json.endpoint, p256dh: keys.p256dh, auth: keys.auth }),
+      });
+
+      if (!res.ok) {
+        const err = await res.text();
+        console.error("Supabase insert error:", res.status, err);
+        throw new Error(err);
+      }
+
       setStatus("subscribed");
-    } catch {
+    } catch (e) {
+      console.error("Push subscribe error:", e);
       setStatus(Notification.permission === "denied" ? "denied" : "default");
     }
   }, [reg]);

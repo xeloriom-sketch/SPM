@@ -40,10 +40,23 @@ export function usePushStatus() {
   }, []);
 
   const subscribe = useCallback(async () => {
-    if (!reg) return;
     setStatus("loading");
     try {
-      const sub = await reg.pushManager.subscribe({
+      // Demande permission explicite (obligatoire sur Safari iOS)
+      const permission = await Notification.requestPermission();
+      if (permission !== "granted") { setStatus(permission === "denied" ? "denied" : "default"); return; }
+
+      // Enregistre le SW si pas encore fait
+      let r = reg;
+      if (!r) {
+        r = await navigator.serviceWorker.register("/sw.js");
+        setReg(r);
+      }
+
+      // Attend que le SW soit actif
+      await navigator.serviceWorker.ready;
+
+      const sub = await r.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC),
       });

@@ -30,54 +30,49 @@ function timeAgo(dateStr: string): string {
 }
 
 function PushBanner() {
-  const { status, subscribe, unsubscribe } = usePushStatus();
+  const { status, subscribe } = usePushStatus();
 
-  if (status === "loading") return (
-    <div className="mb-6 h-[68px] rounded-2xl border border-borderc bg-surface animate-pulse" />
-  );
-
-  if (status === "subscribed") return (
-    <div className="mb-6 flex items-center justify-between gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3.5">
-      <div className="flex items-center gap-2.5">
-        <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-        <p className="text-sm text-emerald-700 font-medium">Notifications activées — vous serez alerté en temps réel</p>
-      </div>
-      <button onClick={unsubscribe} className="text-xs text-emerald-600 underline shrink-0">Désactiver</button>
-    </div>
-  );
+  if (status === "loading" || status === "subscribed") return null;
 
   if (status === "denied") return (
-    <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-4">
-      <p className="text-sm font-semibold text-red-700 mb-1">Notifications bloquées</p>
-      <p className="text-xs text-red-600">Réglages iPhone → Safari → Notifications du site web → autorisez taxispm.fr</p>
+    <div className="mb-5 flex items-center gap-3 rounded-xl border border-red-100 bg-red-50/60 px-4 py-3">
+      <p className="text-xs text-red-600 flex-1">Notifications bloquées — Réglages → Safari → Notifications → autorisez taxispm.fr</p>
     </div>
   );
 
   if (status === "needs-install") return (
-    <div className="mb-6 rounded-2xl border border-orange-200 bg-orange-50 px-4 py-4">
-      <p className="text-sm font-semibold text-orange-700 mb-1">Installez l&apos;app pour les notifications</p>
-      <p className="text-xs text-orange-600">Appuyez sur <strong>Partager</strong> → <strong>Sur l&apos;écran d&apos;accueil</strong>, puis rouvrez depuis votre écran d&apos;accueil.</p>
+    <div className="mb-5 rounded-xl border border-borderc bg-surface p-4">
+      <p className="text-xs font-semibold mb-3">Installez l&apos;app pour recevoir les alertes</p>
+      <ol className="flex flex-col gap-2">
+        {[
+          ["1", "Appuyez sur l'icône Partager", "↑ en bas de Safari"],
+          ["2", 'Faites défiler et choisissez "Sur l\'écran d\'accueil"', ""],
+          ["3", "Appuyez sur Ajouter, puis rouvrez l'app", "depuis votre écran d'accueil"],
+        ].map(([n, label, sub]) => (
+          <li key={n} className="flex items-start gap-3">
+            <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-black text-[10px] font-bold text-white mt-0.5">{n}</span>
+            <div>
+              <p className="text-xs font-medium">{label}</p>
+              {sub && <p className="text-[10px] text-mutedc">{sub}</p>}
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 
-  if (status === "unsupported") return (
-    <div className="mb-6 rounded-2xl border border-orange-200 bg-orange-50 px-4 py-4">
-      <p className="text-sm font-semibold text-orange-700 mb-1">Navigateur non supporté</p>
-      <p className="text-xs text-orange-600">Sur iPhone/iPad, utilisez Safari et mettez à jour iOS vers la version 16.4 minimum.</p>
-    </div>
-  );
+  if (status === "unsupported") return null;
 
   return (
-    <button
-      onClick={subscribe}
-      className="mb-6 w-full flex items-center justify-between gap-3 rounded-2xl border-2 border-black bg-black px-5 py-4 active:opacity-80 transition-all"
-    >
-      <div className="text-left">
-        <p className="text-sm font-semibold text-white">Activer les notifications push</p>
-        <p className="text-xs text-white/50 mt-0.5">Alerte immédiate dès qu&apos;un client vous contacte</p>
-      </div>
-      <span className="rounded-full bg-white px-4 py-2 text-xs font-bold text-black shrink-0">Activer</span>
-    </button>
+    <div className="mb-5 flex items-center justify-between gap-3 rounded-xl border border-borderc bg-surface px-4 py-3">
+      <p className="text-xs text-mutedc">Activez les alertes pour être prévenu dès qu&apos;un client contacte</p>
+      <button
+        onClick={subscribe}
+        className="shrink-0 rounded-lg bg-black px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 transition-opacity"
+      >
+        Activer
+      </button>
+    </div>
   );
 }
 
@@ -88,8 +83,8 @@ export default function DashboardPage() {
 
   useEffect(() => {
     async function load() {
-      const { data: { user } } = await getSupabase().auth.getUser();
-      if (!user) { router.push("/admin/login"); return; }
+      const { data: { session } } = await getSupabase().auth.getSession();
+      if (!session) { router.push("/admin/login"); return; }
 
       const { data: all } = await getSupabase()
         .from("contact_messages")

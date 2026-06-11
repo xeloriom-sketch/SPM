@@ -1,9 +1,42 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Phone, Mail, MessageSquare, Trash2, Calendar, ArrowLeft } from "lucide-react";
+import { Phone, Mail, MessageSquare, Trash2, Calendar, ArrowLeft, MapPin } from "lucide-react";
 import type { ContactMessage } from "@/lib/supabase";
 import { getSupabase } from "@/lib/supabase-browser";
+
+const STREET_RE = /\b(\d+[\s,\-]+(?:rue|avenue|av\.?|boulevard|bd\.?|impasse|place|allée|chemin|route|voie|passage|cours|quai|square|cité|ruelle|sente|sentier|domaine|villa|clos|hameau|résidence)\s+[\w\s'\-]{2,50}(?:,?\s*\d{5}(?:\s+[\w\s\-]{2,30})?)?)/gi;
+
+function findAddresses(text: string): string[] {
+  const found: string[] = [];
+  let m: RegExpExecArray | null;
+  STREET_RE.lastIndex = 0;
+  while ((m = STREET_RE.exec(text)) !== null) {
+    const addr = m[1].trim().replace(/\s+/g, " ");
+    if (!found.includes(addr)) found.push(addr);
+  }
+  return found;
+}
+
+function MapButtons({ address }: { address: string }) {
+  const q = encodeURIComponent(address);
+  return (
+    <div className="mt-3 flex flex-wrap gap-2">
+      <a href={`https://maps.apple.com/?q=${q}`} target="_blank" rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 rounded-lg border border-borderc bg-white px-3 py-1.5 text-xs font-medium hover:bg-surface2 transition-colors">
+        <MapPin className="h-3 w-3" /> Apple Plans
+      </a>
+      <a href={`https://www.google.com/maps/search/?api=1&query=${q}`} target="_blank" rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 rounded-lg border border-borderc bg-white px-3 py-1.5 text-xs font-medium hover:bg-surface2 transition-colors">
+        <MapPin className="h-3 w-3" /> Google Maps
+      </a>
+      <a href={`https://waze.com/ul?q=${q}&navigate=yes`} target="_blank" rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 rounded-lg border border-borderc bg-white px-3 py-1.5 text-xs font-medium hover:bg-surface2 transition-colors">
+        <MapPin className="h-3 w-3" /> Waze
+      </a>
+    </div>
+  );
+}
 
 function timeAgo(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime();
@@ -290,8 +323,27 @@ export default function MessagesClient({
                 <div className="rounded-2xl border border-borderc bg-surface p-5 mb-6">
                   <p className="text-[10px] font-medium text-mutedc uppercase tracking-wide mb-3">Message</p>
                   <p className="text-sm leading-relaxed whitespace-pre-wrap">{selected.message}</p>
+                  {findAddresses(selected.message).map((addr) => (
+                    <MapButtons key={addr} address={addr} />
+                  ))}
                 </div>
               )}
+
+              {/* Adresses dans le service */}
+              {(() => {
+                const addrs = findAddresses(selected.service);
+                return addrs.length > 0 ? (
+                  <div className="rounded-2xl border border-borderc bg-surface p-5 mb-6">
+                    <p className="text-[10px] font-medium text-mutedc uppercase tracking-wide mb-1">Adresse détectée</p>
+                    {addrs.map((addr) => (
+                      <div key={addr}>
+                        <p className="text-xs text-mutedc mb-1">{addr}</p>
+                        <MapButtons address={addr} />
+                      </div>
+                    ))}
+                  </div>
+                ) : null;
+              })()}
 
               {/* Actions desktop */}
               <div className="hidden lg:flex gap-3">

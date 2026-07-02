@@ -1,21 +1,24 @@
+import dynamic from "next/dynamic";
 import Loader from "@/components/Loader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import SmoothScroll from "@/components/SmoothScroll";
 import Services from "@/components/Services";
-import HowItWorks from "@/components/HowItWorks";
-import Vehicle from "@/components/Vehicle";
-import WhyUs from "@/components/WhyUs";
-import Coverage from "@/components/Coverage";
-import Testimonials from "@/components/Testimonials";
-import FAQ from "@/components/FAQ";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import PowerStation from "@/components/PowerStation";
-import CommunityCTA from "@/components/CommunityCTA";
-import NewsUpdates from "@/components/NewsUpdates";
-import CPAMGuide from "@/components/CPAMGuide";
-import Entreprises from "@/components/Entreprises";
+
+// Below-fold: lazy loaded after initial render
+const HowItWorks   = dynamic(() => import("@/components/HowItWorks"));
+const CPAMGuide    = dynamic(() => import("@/components/CPAMGuide"));
+const Vehicle      = dynamic(() => import("@/components/Vehicle"));
+const WhyUs        = dynamic(() => import("@/components/WhyUs"));
+const Coverage     = dynamic(() => import("@/components/Coverage"));
+const Entreprises  = dynamic(() => import("@/components/Entreprises"));
+const PowerStation = dynamic(() => import("@/components/PowerStation"));
+const NewsUpdates  = dynamic(() => import("@/components/NewsUpdates"));
+const CommunityCTA = dynamic(() => import("@/components/CommunityCTA"));
+const Testimonials = dynamic(() => import("@/components/Testimonials"));
+const FAQ          = dynamic(() => import("@/components/FAQ"));
+const Contact      = dynamic(() => import("@/components/Contact"));
+const Footer       = dynamic(() => import("@/components/Footer"));
 
 const jsonLd = {
   "@context": "https://schema.org",

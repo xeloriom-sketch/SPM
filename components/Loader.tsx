@@ -15,11 +15,10 @@ export default function Loader() {
       if (pageReady && minTimePassed) setVisible(false);
     };
 
-    // Minimum 2s so the taxi animation completes at least one cycle
     const minTimer = setTimeout(() => {
       minTimePassed = true;
       tryHide();
-    }, 2000);
+    }, 900);
 
     // Wait for ALL resources (images, video poster, fonts) to be loaded
     const onLoad = () => {
@@ -34,8 +33,7 @@ export default function Loader() {
       window.addEventListener("load", onLoad);
     }
 
-    // Safety cap: never block more than 6s regardless
-    const maxTimer = setTimeout(() => setVisible(false), 6000);
+    const maxTimer = setTimeout(() => setVisible(false), 2500);
 
     return () => {
       clearTimeout(minTimer);

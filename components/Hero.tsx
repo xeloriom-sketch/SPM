@@ -34,14 +34,14 @@ export default function Hero() {
   });
 
   return (
-    <div ref={containerRef} id="accueil" style={{ height: isMobile ? "100svh" : "130vh" }}>
+    <div ref={containerRef} id="accueil" style={{ height: isMobile ? "100svh" : "280vh" }}>
     <section
       className="sticky top-0 relative w-full overflow-hidden bg-black flex flex-col select-none"
       style={{ height: "100svh" }}
     >
       {/* VIDEO — composant dédié avec useEffect agressif (fix Safari autoplay) */}
       <div className="absolute inset-0 z-0">
-        <HeroVideo src={sitePath("/videos/hero-web.mp4")} webmSrc={sitePath("/videos/hero-web.webm")} mobileSrc={sitePath("/videos/hero-mobile.mp4")} scrollYProgress={isMobile ? undefined : scrollYProgress} />
+        <HeroVideo src={sitePath("/videos/hero-web.mp4")} webmSrc={sitePath("/videos/hero-web.webm")} mobileSrc={sitePath("/videos/hero-mobile.mp4")} poster={sitePath("/hero-poster.jpg")} scrollYProgress={isMobile ? undefined : scrollYProgress} />
       </div>
 
       {/* OVERLAYS */}

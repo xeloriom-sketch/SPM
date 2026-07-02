@@ -8,10 +8,11 @@ interface HeroVideoProps {
   src: string;
   webmSrc?: string;
   mobileSrc?: string;
+  poster?: string;
   scrollYProgress?: MotionValue<number>;
 }
 
-export default function HeroVideo({ src, webmSrc, mobileSrc, scrollYProgress }: HeroVideoProps) {
+export default function HeroVideo({ src, webmSrc, mobileSrc, poster, scrollYProgress }: HeroVideoProps) {
   const videoRef   = useRef<HTMLVideoElement>(null);
   const targetRef  = useRef(0);
   const seekingRef = useRef(false);
@@ -112,10 +113,11 @@ export default function HeroVideo({ src, webmSrc, mobileSrc, scrollYProgress }: 
         muted
         playsInline
         preload={scrubMode ? "auto" : "none"}
+        poster={poster}
         loop={!scrubMode}
         disablePictureInPicture
         className="h-full w-full object-cover absolute inset-0 transition-opacity duration-700"
-        style={{ pointerEvents: "none", opacity: ready ? 1 : 0 }}
+        style={{ pointerEvents: "none", opacity: poster ? 1 : (ready ? 1 : 0) }}
       >
         {/* Mobile source served first on small screens */}
         {mobileSrc && (

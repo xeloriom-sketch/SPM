@@ -22,7 +22,7 @@ export default function CommunityCTA() {
         >
           {/* Video de fond — autoplay muet */}
           <div className="absolute inset-0">
-            <VideoPlayer src={sitePath("/videos/7440442-web.mp4")} />
+            <VideoPlayer src={sitePath("/videos/7440442-web.mp4")} webmSrc={sitePath("/videos/7440442-web.webm")} />
           </div>
 
           {/* Overlay */}

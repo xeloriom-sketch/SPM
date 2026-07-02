@@ -41,7 +41,7 @@ export default function Hero() {
     >
       {/* VIDEO — composant dédié avec useEffect agressif (fix Safari autoplay) */}
       <div className="absolute inset-0 z-0">
-        <HeroVideo src={sitePath("/videos/hero-web.mp4")} scrollYProgress={isMobile ? undefined : scrollYProgress} />
+        <HeroVideo src={sitePath("/videos/hero-web.mp4")} webmSrc={sitePath("/videos/hero-web.webm")} scrollYProgress={isMobile ? undefined : scrollYProgress} />
       </div>
 
       {/* OVERLAYS */}

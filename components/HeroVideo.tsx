@@ -6,10 +6,11 @@ const NOOP = motionValue(0);
 
 interface HeroVideoProps {
   src: string;
+  webmSrc?: string;
   scrollYProgress?: MotionValue<number>;
 }
 
-export default function HeroVideo({ src, scrollYProgress }: HeroVideoProps) {
+export default function HeroVideo({ src, webmSrc, scrollYProgress }: HeroVideoProps) {
   const videoRef   = useRef<HTMLVideoElement>(null);
   const targetRef  = useRef(0);
   const seekingRef = useRef(false);
@@ -109,6 +110,7 @@ export default function HeroVideo({ src, scrollYProgress }: HeroVideoProps) {
         className="h-full w-full object-cover absolute inset-0 transition-opacity duration-700"
         style={{ pointerEvents: "none", opacity: ready ? 1 : 0 }}
       >
+        {webmSrc && <source src={webmSrc} type="video/webm" />}
         <source src={src} type="video/mp4" />
       </video>
     </>

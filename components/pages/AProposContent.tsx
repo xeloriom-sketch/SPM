@@ -62,7 +62,7 @@ export default function AProposContent() {
       <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "130vh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
           <div className="absolute inset-0 z-0">
-            <HeroVideo src={sitePath("/videos/hero-web.mp4")} scrollYProgress={isMobile ? undefined : heroProgress} />
+            <HeroVideo src={sitePath("/videos/hero-web.mp4")} webmSrc={sitePath("/videos/hero-web.webm")} scrollYProgress={isMobile ? undefined : heroProgress} />
           </div>
           <div className="pointer-events-none absolute inset-0 z-[5]">
             <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/55 to-transparent" />

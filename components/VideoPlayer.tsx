@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-export default function VideoPlayer({ src }: { src: string }) {
+export default function VideoPlayer({ src, webmSrc }: { src: string; webmSrc?: string }) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -50,6 +50,7 @@ export default function VideoPlayer({ src }: { src: string }) {
       className="h-full w-full object-cover"
       style={{ pointerEvents: "none" }}
     >
+      {webmSrc && <source src={webmSrc} type="video/webm" />}
       <source src={src} type="video/mp4" />
     </video>
   );

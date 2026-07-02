@@ -7,10 +7,11 @@ const NOOP = motionValue(0);
 interface HeroVideoProps {
   src: string;
   webmSrc?: string;
+  mobileSrc?: string;
   scrollYProgress?: MotionValue<number>;
 }
 
-export default function HeroVideo({ src, webmSrc, scrollYProgress }: HeroVideoProps) {
+export default function HeroVideo({ src, webmSrc, mobileSrc, scrollYProgress }: HeroVideoProps) {
   const videoRef   = useRef<HTMLVideoElement>(null);
   const targetRef  = useRef(0);
   const seekingRef = useRef(false);
@@ -18,17 +19,13 @@ export default function HeroVideo({ src, webmSrc, scrollYProgress }: HeroVideoPr
   const [ready, setReady] = useState(false);
   const scrubMode = !!scrollYProgress;
 
-  // One seek at a time. Safety timeout releases the lock on mobile if `seeked` never fires.
   const flush = () => {
     const v = videoRef.current;
     if (!v) return;
     if (timerRef.current) clearTimeout(timerRef.current);
     seekingRef.current = true;
     v.currentTime = targetRef.current;
-    // iOS Safari sometimes never fires `seeked` — release lock after 300 ms so scrubbing doesn't freeze
-    timerRef.current = setTimeout(() => {
-      seekingRef.current = false;
-    }, 300);
+    timerRef.current = setTimeout(() => { seekingRef.current = false; }, 300);
   };
 
   useMotionValueEvent(scrollYProgress ?? NOOP, "change", (latest) => {
@@ -49,52 +46,62 @@ export default function HeroVideo({ src, webmSrc, scrollYProgress }: HeroVideoPr
 
     const onSeeked = () => {
       if (timerRef.current) { clearTimeout(timerRef.current); timerRef.current = null; }
-      // Still behind? Seek once more to latest position
       if (Math.abs(v.currentTime - targetRef.current) > 0.016) flush();
       else seekingRef.current = false;
     };
 
     v.addEventListener("seeked",  onSeeked);
-    v.addEventListener("stalled", releaseLock); // network stall — release so scrubbing resumes
+    v.addEventListener("stalled", releaseLock);
     v.addEventListener("error",   releaseLock);
 
     v.muted = true;
     v.defaultMuted = true;
     v.playsInline = true;
-    v.preload = "auto";
+    // Scrub mode needs full preload; autoplay mode only needs metadata
+    v.preload = scrubMode ? "auto" : "none";
     v.load();
 
     const onReady = () => {
       setReady(true);
-      // In scrub mode: pause only (no playbackRate=0 — not supported on iOS Safari)
       if (scrubMode) v.pause();
       else v.play().catch(() => {});
     };
 
-    if (v.readyState >= 2) {
-      setReady(true);
-      if (scrubMode) v.pause();
-      else v.play().catch(() => {});
+    if (scrubMode) {
+      if (v.readyState >= 2) { setReady(true); v.pause(); }
+      else v.addEventListener("loadeddata", onReady, { once: true });
+
+      const unlockIOS = () => { v.play().then(() => v.pause()).catch(() => {}); };
+      document.addEventListener("touchstart", unlockIOS, { once: true, passive: true });
+
+      return () => {
+        v.removeEventListener("seeked",  onSeeked);
+        v.removeEventListener("stalled", releaseLock);
+        v.removeEventListener("error",   releaseLock);
+        v.removeEventListener("loadeddata", onReady);
+        document.removeEventListener("touchstart", unlockIOS);
+        if (timerRef.current) clearTimeout(timerRef.current);
+      };
     } else {
-      v.addEventListener("loadeddata", onReady, { once: true });
+      // Mobile/autoplay mode: play when visible, pause when hidden
+      setReady(true);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        },
+        { threshold: 0.01 }
+      );
+      observer.observe(v);
+
+      return () => {
+        v.removeEventListener("seeked",  onSeeked);
+        v.removeEventListener("stalled", releaseLock);
+        v.removeEventListener("error",   releaseLock);
+        observer.disconnect();
+        if (timerRef.current) clearTimeout(timerRef.current);
+      };
     }
-
-    // iOS Safari requires a user-gesture play() before currentTime assignments work.
-    // On first touch, play+pause immediately to "unlock" the video element for seeking.
-    const unlockIOS = () => {
-      if (!scrubMode) return;
-      v.play().then(() => v.pause()).catch(() => {});
-    };
-    document.addEventListener("touchstart", unlockIOS, { once: true, passive: true });
-
-    return () => {
-      v.removeEventListener("seeked",  onSeeked);
-      v.removeEventListener("stalled", releaseLock);
-      v.removeEventListener("error",   releaseLock);
-      v.removeEventListener("loadeddata", onReady);
-      document.removeEventListener("touchstart", unlockIOS);
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
   }, [src, scrubMode]);
 
   return (
@@ -104,12 +111,16 @@ export default function HeroVideo({ src, webmSrc, scrollYProgress }: HeroVideoPr
         ref={videoRef}
         muted
         playsInline
-        preload="auto"
+        preload={scrubMode ? "auto" : "none"}
         loop={!scrubMode}
         disablePictureInPicture
         className="h-full w-full object-cover absolute inset-0 transition-opacity duration-700"
         style={{ pointerEvents: "none", opacity: ready ? 1 : 0 }}
       >
+        {/* Mobile source served first on small screens */}
+        {mobileSrc && (
+          <source src={mobileSrc} type="video/mp4" media="(max-width: 768px)" />
+        )}
         {webmSrc && <source src={webmSrc} type="video/webm" />}
         <source src={src} type="video/mp4" />
       </video>

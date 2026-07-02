@@ -501,7 +501,7 @@ export default function ServicesContent() {
     <>
       <h1 className="sr-only">Services SPM Taxi — Aéroport, CPAM, Remorque | Ain &amp; Isère</h1>
       {/* ── HERO ── */}
-      <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "280vh" }}>
+      <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "180vh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
           <div className="absolute inset-0 z-0">
             <HeroVideo src={sitePath("/videos/7440442-web.mp4")} webmSrc={sitePath("/videos/7440442-web.webm")} scrollYProgress={isMobile ? undefined : heroProgress} />

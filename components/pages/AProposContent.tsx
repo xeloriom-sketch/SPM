@@ -59,7 +59,7 @@ export default function AProposContent() {
     <>
       <h1 className="sr-only">À Propos — SPM Taxi Conventionné CPAM | Villebois Ain</h1>
       {/* ── HERO VIDÉO ── */}
-      <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "280vh" }}>
+      <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "180vh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
           <div className="absolute inset-0 z-0">
             <HeroVideo src={sitePath("/videos/hero-web.mp4")} webmSrc={sitePath("/videos/hero-web.webm")} mobileSrc={sitePath("/videos/hero-mobile.mp4")} poster={sitePath("/hero-poster.jpg")} scrollYProgress={isMobile ? undefined : heroProgress} />

@@ -373,7 +373,7 @@ const services = [
     title: "Transport Médical CPAM",
     desc: "Agréé par l'Assurance Maladie pour les transports médicaux sur prescription. Chimiothérapie, dialyse, hospitalisation — prise en charge directe.",
     features: ["Agrément CPAM officiel", "Zéro avance de frais", "Prescription acceptée", "Destinations hospitalières"],
-    href: "/taxi-conventionné-cpam",
+    href: "/taxi-conventionne-cpam",
     dark: false,
   },
   {

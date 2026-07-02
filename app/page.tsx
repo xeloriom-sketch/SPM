@@ -136,7 +136,7 @@ const jsonLd = {
             "@type": "Offer",
             name: "Transport médical conventionné CPAM",
             description: "Agréé par l'Assurance Maladie. Chimiothérapie, dialyse, hospitalisation. Zéro avance de frais.",
-            itemOffered: { "@type": "Service", name: "Taxi conventionné CPAM Ain", url: "https://taxispm.fr/taxi-conventionné-cpam" },
+            itemOffered: { "@type": "Service", name: "Taxi conventionné CPAM Ain", url: "https://taxispm.fr/taxi-conventionne-cpam" },
           },
           {
             "@type": "Offer",

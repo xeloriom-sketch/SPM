@@ -279,7 +279,7 @@ export default function TaxiLyonPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { href: "/transfert-aeroport-lyon", label: "Aéroport Lyon Saint-Exupéry", desc: "Tarif fixe · suivi des vols en temps réel" },
-              { href: "/taxi-conventionné-cpam", label: "Transport médical CPAM vers Lyon", desc: "Hôpitaux lyonnais · zéro avance de frais" },
+              { href: "/taxi-conventionne-cpam", label: "Transport médical CPAM vers Lyon", desc: "Hôpitaux lyonnais · zéro avance de frais" },
               { href: "/taxi-longue-distance", label: "Taxi longue distance", desc: "Lyon et toute la France · tarif fixe sur devis" },
               { href: "/taxi-tignieu-jameyzieu", label: "Taxi Tignieu-Jameyzieu", desc: "Départ depuis Tignieu vers Lyon" },
             ].map(({ href, label, desc }) => (

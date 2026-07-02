@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     "taxi médical Ambérieu CPAM", "transport médical Bourg-en-Bresse taxi",
     "zéro avance frais taxi médical Ain", "taxi hospitalisé Ain",
   ],
-  alternates: { canonical: "https://taxispm.fr/taxi-conventionné-cpam" },
+  alternates: { canonical: "https://taxispm.fr/taxi-conventionne-cpam" },
   openGraph: {
     title: "Taxi Conventionné CPAM — Transport Médical Remboursé | SPM Ain (01)",
     description: "Transport médical 100% pris en charge CPAM sur prescription. Chimiothérapie, dialyse, ALD — zéro avance de frais. SPM Taxi Villebois (Ain 01). 07 67 75 18 98.",
-    url: "https://taxispm.fr/taxi-conventionné-cpam",
+    url: "https://taxispm.fr/taxi-conventionne-cpam",
     type: "website",
     locale: "fr_FR",
     images: [{ url: "/image/tiguan-front-quarter.webp", alt: "Taxi conventionné CPAM transport médical Ain SPM" }],
@@ -35,7 +35,7 @@ const jsonLd = {
       name: "SPM — Taxi Conventionné CPAM",
       description: "Taxi conventionné CPAM agréé par l'Assurance Maladie. Transport médical sur prescription médicale dans l'Ain, Lyon et Isère. Zéro avance de frais.",
       telephone: "+33767751898",
-      url: "https://taxispm.fr/taxi-conventionné-cpam",
+      url: "https://taxispm.fr/taxi-conventionne-cpam",
       address: {
         "@type": "PostalAddress",
         streetAddress: "951 route des hauts fourneaux",
@@ -63,7 +63,7 @@ const jsonLd = {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
-        { "@type": "ListItem", position: 2, name: "Taxi Conventionné CPAM", item: "https://taxispm.fr/taxi-conventionné-cpam" },
+        { "@type": "ListItem", position: 2, name: "Taxi Conventionné CPAM", item: "https://taxispm.fr/taxi-conventionne-cpam" },
       ],
     },
   ],

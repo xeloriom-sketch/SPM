@@ -203,7 +203,7 @@ export default function TignieuPage() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { href: "/taxi-conventionné-cpam", label: "Transport médical CPAM", desc: "Zéro avance de frais, prise en charge Assurance Maladie" },
+              { href: "/taxi-conventionne-cpam", label: "Transport médical CPAM", desc: "Zéro avance de frais, prise en charge Assurance Maladie" },
               { href: "/transfert-aeroport-lyon", label: "Transfert aéroport Lyon", desc: "À partir de 65 € · suivi des vols en temps réel" },
               { href: "/taxi-longue-distance", label: "Longue distance", desc: "Partout en France · tarif fixe sur devis" },
               { href: "/taxi-remorque-ain", label: "Remorque & colis", desc: "Attache-remorque homologuée · livraison express" },

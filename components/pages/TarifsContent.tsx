@@ -168,7 +168,7 @@ export default function TarifsContent() {
     <>
       <h1 className="sr-only">Tarifs SPM Taxi — Aéroport Lyon, CPAM, Longue Distance | Ain</h1>
       {/* ── HERO ── */}
-      <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "180vh" }}>
+      <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "140vh" }}>
       <section ref={heroRef} className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
         {/* Vidéo fond */}
         <div className="absolute inset-0 z-0">

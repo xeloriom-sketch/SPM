@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import FloatingCallButton from "@/components/FloatingCallButton";
 import { SettingsProvider } from "@/lib/settings-context";
@@ -92,6 +93,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className="scroll-smooth">
       <head>
+        {/* Google Analytics GA4 */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-EQDEWKCWKW" strategy="afterInteractive" />
+        <Script id="ga4" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EQDEWKCWKW');
+        `}} />
         <meta name="theme-color" content="#0d0d0d" />
         <meta name="color-scheme" content="light dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />

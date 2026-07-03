@@ -35,7 +35,7 @@ function TestimonialCard({ t, variant = "light" }: { t: { name: string; stars: n
         </div>
         <div>
           <p className="text-xs font-semibold text-black">{t.name}</p>
-          <p className="text-[10px] text-[#767676]">{t.date}</p>
+          <p className="text-[10px] text-[#6B6B6B]">{t.date}</p>
         </div>
       </div>
       <div className="mb-2.5">
@@ -95,7 +95,7 @@ export default function Testimonials() {
               ))}
             </div>
             <span className="text-sm font-semibold text-black">{s.google_rating}</span>
-            <span className="text-xs text-[#767676]">· {s.google_review_count} avis Google vérifiés</span>
+            <span className="text-xs text-[#6B6B6B]">· {s.google_review_count} avis Google vérifiés</span>
           </motion.div>
         </div>
       </div>

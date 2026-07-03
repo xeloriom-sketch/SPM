@@ -104,7 +104,7 @@ export default function WhyUs() {
 
       {/* Scrolling marquee */}
       <div ref={bannerRef} className="mt-20 overflow-hidden border-y border-black/[0.05] py-4" aria-hidden="true">
-        <motion.div className="flex whitespace-nowrap gap-12 text-[13px] font-semibold tracking-[0.2em] uppercase text-black/20" style={{ x }}>
+        <motion.div className="flex whitespace-nowrap gap-12 text-[13px] font-semibold tracking-[0.2em] uppercase text-black/55" style={{ x }}>
           {Array(6).fill(null).map((_, i) => (
             <span key={i} className="shrink-0">
               Taxi Conventionné CPAM &nbsp;·&nbsp; Volkswagen Tiguan 7 Places &nbsp;·&nbsp; Lyon · Ain · Isère &nbsp;·&nbsp; Disponible 24h/24 &nbsp;·&nbsp; Devis Gratuit &nbsp;·&nbsp;

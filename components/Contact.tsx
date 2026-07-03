@@ -85,7 +85,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-black tracking-tight">{title}</p>
-                  <p className="text-[11px] text-[#767676]">{sub}</p>
+                  <p className="text-[11px] text-[#6B6B6B]">{sub}</p>
                 </div>
                 <ArrowRight className="ml-auto h-4 w-4 text-black/20 group-hover:text-black transition-colors" />
               </motion.a>
@@ -103,7 +103,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-xs font-bold text-black tracking-tight">Localisation</p>
-                <p className="text-[11px] text-[#767676]">{s.contact_address}</p>
+                <p className="text-[11px] text-[#6B6B6B]">{s.contact_address}</p>
               </div>
             </motion.div>
 

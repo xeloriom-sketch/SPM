@@ -7,7 +7,7 @@
 - **Localisation** : Villebois, Ain (01150), Auvergne-Rhône-Alpes, France
 - **Téléphone** : 07 67 75 18 98
 - **Site** : https://taxispm.fr
-- **Note Google** : 4,9/5 (9 avis)
+- **Note Google** : 4,9/5
 - **Disponibilité** : 7j/7, 24h/24 y compris jours fériés
 - **Véhicule** : Volkswagen Tiguan Allspace R-Line, 7 places, climatisation bi-zone
 
@@ -21,20 +21,14 @@
 
 ## Zone de couverture
 
-Ain (01), Lyon, Isère, Rhône. Villes principales : Villebois, Tignieu-Jameyzieu, Ambérieu-en-Bugey, Bourg-en-Bresse, Meximieux, Montluel, Pérouges, Belley, Bourgoin-Jallieu, Grenoble, Vienne. Longue distance dans toute la France et vers Genève.
-
-## Accréditations
-
-- Carte professionnelle de taxi (préfecture de l'Ain)
-- Convention CPAM — Assurance Maladie (transport médical remboursé)
-- Assurance responsabilité civile professionnelle
+Ain (01), Lyon, Isère, Rhône. Villes : Villebois, Tignieu-Jameyzieu, Ambérieu-en-Bugey, Bourg-en-Bresse, Meximieux, Montluel, Pérouges, Belley, Bourgoin-Jallieu, Grenoble.
 
 ## Tarifs indicatifs
 
 - Villebois → Lyon Saint-Exupéry : à partir de 65 €
 - Villebois → Lyon Centre : à partir de 45 €
-- Transport médical CPAM : pris en charge par l'Assurance Maladie
-- Longue distance : tarif fixe sur devis gratuit (réponse sous 2h)
+- Transport médical CPAM : pris en charge Assurance Maladie
+- Longue distance : tarif fixe sur devis (réponse sous 2h)
 
 ## Contact
 
@@ -44,11 +38,14 @@ Ain (01), Lyon, Isère, Rhône. Villes principales : Villebois, Tignieu-Jameyzie
 
 ## Pages du site
 
-- Accueil : https://taxispm.fr/
-- Services : https://taxispm.fr/services
-- Tarifs : https://taxispm.fr/tarifs
-- À propos : https://taxispm.fr/a-propos
-- Transfert aéroport Lyon : https://taxispm.fr/transfert-aeroport-lyon
-- Taxi conventionné CPAM : https://taxispm.fr/taxi-conventionné-cpam
-- Taxi longue distance : https://taxispm.fr/taxi-longue-distance
-- Taxi remorque Ain : https://taxispm.fr/taxi-remorque-ain
+- [Accueil](https://taxispm.fr/)
+- [Services](https://taxispm.fr/services/)
+- [Tarifs](https://taxispm.fr/tarifs/)
+- [À propos](https://taxispm.fr/a-propos/)
+- [Transfert aéroport Lyon](https://taxispm.fr/transfert-aeroport-lyon/)
+- [Taxi conventionné CPAM](https://taxispm.fr/taxi-conventionne-cpam/)
+- [Taxi longue distance](https://taxispm.fr/taxi-longue-distance/)
+- [Taxi remorque Ain](https://taxispm.fr/taxi-remorque-ain/)
+- [Taxi Ambérieu-en-Bugey](https://taxispm.fr/taxi-amberieu-en-bugey/)
+- [Taxi Meximieux](https://taxispm.fr/taxi-meximieux/)
+- [Taxi Montluel](https://taxispm.fr/taxi-montluel/)

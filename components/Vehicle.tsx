@@ -197,20 +197,22 @@ export default function Vehicle() {
           <motion.button
             className="absolute left-3 sm:left-6 top-[44%] -translate-y-1/2 h-12 w-12 bg-white rounded-full flex items-center justify-center text-black/40 shadow-md z-20 touch-manipulation"
             onClick={prev}
+            aria-label="Vue précédente"
             whileHover={{ scale: 1.1, x: -2 }}
             whileTap={{ scale: 0.88 }}
             transition={springFast}
           >
-            <ChevronLeft className="h-5 w-5" />
+            <ChevronLeft className="h-5 w-5" aria-hidden />
           </motion.button>
           <motion.button
             className="absolute right-3 sm:right-6 top-[44%] -translate-y-1/2 h-12 w-12 bg-white rounded-full flex items-center justify-center text-black/40 shadow-md z-20 touch-manipulation"
             onClick={next}
+            aria-label="Vue suivante"
             whileHover={{ scale: 1.1, x: 2 }}
             whileTap={{ scale: 0.88 }}
             transition={springFast}
           >
-            <ChevronRight className="h-5 w-5" />
+            <ChevronRight className="h-5 w-5" aria-hidden />
           </motion.button>
 
           {/* Car image carousel — touch swipe on mobile */}
@@ -249,6 +251,7 @@ export default function Vehicle() {
               <motion.button
                 key={i}
                 onClick={() => go(i)}
+                aria-label={`Vue ${i + 1}`}
                 className="relative flex flex-col items-center gap-1.5 group"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}

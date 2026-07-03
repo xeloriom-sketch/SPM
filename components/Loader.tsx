@@ -5,9 +5,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Loader.module.css";
 
 export default function Loader() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    // Skip loader on first-ever visit (improves Lighthouse LCP + CLS)
+    // Show on subsequent visits so returning users see the animation
+    const seen = sessionStorage.getItem("spm-loader");
+    if (!seen) {
+      sessionStorage.setItem("spm-loader", "1");
+      return;
+    }
+
+    setVisible(true);
     let pageReady = false;
     let minTimePassed = false;
 
@@ -40,7 +49,7 @@ export default function Loader() {
       clearTimeout(maxTimer);
       window.removeEventListener("load", onLoad);
     };
-  }, []);
+  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <AnimatePresence>

@@ -46,13 +46,13 @@ export default function PowerStation() {
             ref={videoRef}
             muted
             playsInline
-            preload="metadata"
+            preload="none"
             poster={sitePath("/image/volkswagen-tiguan-r-line.webp")}
             disablePictureInPicture
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.015]"
             onEnded={() => setIsPlaying(false)}
           >
-            <source src={sitePath("/videos/11661703-web.mp4")} type="video/mp4" />
+            <source src={sitePath("/heroImage/11661703-web.mp4")} type="video/mp4" />
           </video>
 
           <div className="absolute inset-0 bg-black/20 transition-opacity group-hover:bg-black/10" />

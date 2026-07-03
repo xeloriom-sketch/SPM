@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 import { ArrowRight, Phone } from "lucide-react";
-import VideoPlayer from "@/components/VideoPlayer";
 import { sitePath } from "@/lib/site-path";
 
 export default function CommunityCTA() {
@@ -20,9 +20,8 @@ export default function CommunityCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Video de fond — autoplay muet */}
           <div className="absolute inset-0">
-            <VideoPlayer src={sitePath("/videos/7440442-web.mp4")} webmSrc={sitePath("/videos/7440442-web.webm")} />
+            <Image src={sitePath("/heroImage/hero-services.webp")} alt="" fill className="object-cover" sizes="100vw" />
           </div>
 
           {/* Overlay */}

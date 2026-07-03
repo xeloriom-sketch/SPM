@@ -102,9 +102,10 @@ export default function NewsUpdates() {
                 </span>
                 <Link
                   href={item.href}
+                  aria-label={`En savoir plus — ${item.title ?? item.label}`}
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-black transition-all duration-300 group-hover:scale-105 group-hover:bg-white/90"
                 >
-                  <ChevronRight className="h-4 w-4 stroke-[2]" />
+                  <ChevronRight className="h-4 w-4 stroke-[2]" aria-hidden />
                 </Link>
               </div>
             </motion.div>

@@ -111,7 +111,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="shortcut icon" href="/favicon.svg" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         {/* manifest géré via metadata API pour permettre l'override par sous-layouts */}
-        {/* Préconnexion Supabase */}
+        {/* Préconnexion GA4 + Supabase */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://dqbbaflumzssjndgxtrg.supabase.co" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://dqbbaflumzssjndgxtrg.supabase.co" />
         {/* Géolocalisation */}

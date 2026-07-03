@@ -1,11 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, useScroll } from "framer-motion";
-import { useIsMobile } from "@/lib/use-is-mobile";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { Phone, CheckCircle, Info, ArrowRight } from "lucide-react";
-import HeroVideo from "@/components/HeroVideo";
+import HeroImage from "@/components/HeroImage";
 import SplitText from "@/components/ui/SplitText";
 import { revealVariants, revealSubtle, spring } from "@/lib/motion";
 import { sitePath } from "@/lib/site-path";
@@ -145,13 +144,7 @@ export default function TarifsContent() {
     },
   ];
 
-  const isMobile = useIsMobile();
   const heroContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroContainerRef,
-    offset: ["start start", "end end"],
-  });
-
   const heroRef   = useRef<HTMLElement>(null);
   const tablesRef = useRef<HTMLDivElement>(null);
   const inclusRef = useRef<HTMLElement>(null);
@@ -168,11 +161,10 @@ export default function TarifsContent() {
     <>
       <h1 className="sr-only">Tarifs SPM Taxi — Aéroport Lyon, CPAM, Longue Distance | Ain</h1>
       {/* ── HERO ── */}
-      <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "140vh" }}>
+      <div ref={heroContainerRef} style={{ height: "100svh" }}>
       <section ref={heroRef} className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
-        {/* Vidéo fond */}
         <div className="absolute inset-0 z-0">
-          <HeroVideo src={sitePath("/videos/11661703-web.mp4")} scrollYProgress={isMobile ? undefined : heroProgress} />
+          <HeroImage src={sitePath("/heroImage/hero-tarifs.webp")} alt="SPM Taxi — Intérieur Volkswagen Tiguan luxe" />
         </div>
 
         {/* Overlays */}

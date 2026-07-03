@@ -1,11 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, useScroll } from "framer-motion";
-import { useIsMobile } from "@/lib/use-is-mobile";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { Phone, ArrowRight } from "lucide-react";
-import HeroVideo from "@/components/HeroVideo";
+import HeroImage from "@/components/HeroImage";
 import { spring } from "@/lib/motion";
 import { sitePath } from "@/lib/site-path";
 import { useSettings } from "@/lib/settings-context";
@@ -486,14 +485,8 @@ function ServiceCard({ svc, index }: { svc: typeof services[0]; index: number })
 ══════════════════════════════════════════════════════════════════════ */
 
 export default function ServicesContent() {
-  const s      = useSettings();
-  const isMobile = useIsMobile();
+  const s = useSettings();
   const heroContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroContainerRef,
-    offset: ["start start", "end end"],
-  });
-
   const ctaRef = useRef<HTMLElement>(null);
   const ctaIn  = useInView(ctaRef, { once: true, margin: "-40px" });
 
@@ -501,10 +494,10 @@ export default function ServicesContent() {
     <>
       <h1 className="sr-only">Services SPM Taxi — Aéroport, CPAM, Remorque | Ain &amp; Isère</h1>
       {/* ── HERO ── */}
-      <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "140vh" }}>
+      <div ref={heroContainerRef} style={{ height: "100svh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
           <div className="absolute inset-0 z-0">
-            <HeroVideo src={sitePath("/videos/7440442-web.mp4")} webmSrc={sitePath("/videos/7440442-web.webm")} scrollYProgress={isMobile ? undefined : heroProgress} />
+            <HeroImage src={sitePath("/heroImage/hero-services.webp")} alt="SPM Taxi — Transfert aéroport Lyon" />
           </div>
           <div className="pointer-events-none absolute inset-0 z-[5]">
             <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/75 to-transparent" />

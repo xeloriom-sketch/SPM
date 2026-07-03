@@ -1,11 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
-import { useIsMobile } from "@/lib/use-is-mobile";
+import { motion } from "framer-motion";
 import { ChevronDown, Phone, ArrowRight } from "lucide-react";
 import { sitePath } from "@/lib/site-path";
-import HeroVideo from "@/components/HeroVideo";
+import HeroImage from "@/components/HeroImage";
 import { useSettings } from "@/lib/settings-context";
 
 const LOADER_OUT = 0.1;
@@ -26,22 +25,16 @@ const specs = [
 
 export default function Hero() {
   const s = useSettings();
-  const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
 
   return (
-    <div ref={containerRef} id="accueil" style={{ height: isMobile ? "100svh" : "140vh" }}>
+    <div ref={containerRef} id="accueil" style={{ height: "100svh" }}>
     <section
       className="sticky top-0 relative w-full overflow-hidden bg-black flex flex-col select-none"
       style={{ height: "100svh" }}
     >
-      {/* VIDEO — composant dédié avec useEffect agressif (fix Safari autoplay) */}
       <div className="absolute inset-0 z-0">
-        <HeroVideo src={sitePath("/videos/hero-web.mp4")} webmSrc={sitePath("/videos/hero-web.webm")} mobileSrc={sitePath("/videos/hero-mobile.mp4")} poster={sitePath("/hero-poster.jpg")} scrollYProgress={isMobile ? undefined : scrollYProgress} />
+        <HeroImage src={sitePath("/heroImage/hero-accueil.webp")} alt="SPM Taxi — Volkswagen Tiguan sur autoroute" />
       </div>
 
       {/* OVERLAYS */}

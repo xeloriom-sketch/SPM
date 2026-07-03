@@ -1,14 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { useIsMobile } from "@/lib/use-is-mobile";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Star, Award, Clock, MapPin, ArrowRight, CheckCircle } from "lucide-react";
 import { revealVariants, revealSubtle, spring } from "@/lib/motion";
 import { useSettings } from "@/lib/settings-context";
-import HeroVideo from "@/components/HeroVideo";
+import HeroImage from "@/components/HeroImage";
 import { sitePath } from "@/lib/site-path";
 
 const certifications = [
@@ -36,12 +35,7 @@ export default function AProposContent() {
     { icon: MapPin, title: "Ancrage local",     desc: "Basé à Villebois, je connais chaque route de l'Ain, Lyon et l'Isère. Aucune surprise, aucun détour inutile." },
   ];
 
-  const isMobile = useIsMobile();
   const heroContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroContainerRef,
-    offset: ["start start", "end end"],
-  });
 
   const valRef  = useRef<HTMLElement>(null);
   const carRef  = useRef<HTMLElement>(null);
@@ -58,11 +52,11 @@ export default function AProposContent() {
   return (
     <>
       <h1 className="sr-only">À Propos — SPM Taxi Conventionné CPAM | Villebois Ain</h1>
-      {/* ── HERO VIDÉO ── */}
-      <div ref={heroContainerRef} style={{ height: isMobile ? "100svh" : "140vh" }}>
+      {/* ── HERO IMAGE ── */}
+      <div ref={heroContainerRef} style={{ height: "100svh" }}>
         <section className="sticky top-0 relative w-full bg-black overflow-hidden flex flex-col select-none" style={{ height: "100svh" }}>
           <div className="absolute inset-0 z-0">
-            <HeroVideo src={sitePath("/videos/hero-web.mp4")} webmSrc={sitePath("/videos/hero-web.webm")} mobileSrc={sitePath("/videos/hero-mobile.mp4")} poster={sitePath("/hero-poster.jpg")} scrollYProgress={isMobile ? undefined : heroProgress} />
+            <HeroImage src={sitePath("/heroImage/hero-apropos.webp")} alt="SPM Taxi — Volkswagen Tiguan Allspace" />
           </div>
           <div className="pointer-events-none absolute inset-0 z-[5]">
             <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/55 to-transparent" />

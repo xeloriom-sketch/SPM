@@ -114,7 +114,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Préconnexion GA4 + Supabase */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="preconnect" href="https://dqbbaflumzssjndgxtrg.supabase.co" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://dqbbaflumzssjndgxtrg.supabase.co" />
         {/* Géolocalisation */}
         <meta name="geo.region" content="FR-01" />

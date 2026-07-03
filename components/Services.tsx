@@ -129,12 +129,11 @@ export default function Services() {
             custom={0.18}
           >
             <Image
-              src="/image/tiguan-front-quarter.webp"
+              src="/image/tiguan-front-quarter-sm.webp"
               alt="SPM Volkswagen Tiguan Allspace 7 places"
               fill
-              priority
               unoptimized
-              sizes="(max-width: 1024px) 100vw, 55vw"
+              sizes="(max-width: 1024px) 50vw, 30vw"
               className="object-contain object-right"
               style={{ objectPosition: "70% center", filter: "drop-shadow(0 6px 20px rgba(0,0,0,0.18))" }}
             />

@@ -44,14 +44,14 @@ export default function Entreprises() {
         <div className="mb-14 grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
           <div>
             <motion.span
-              className="text-[10px] font-bold tracking-[0.3em] uppercase text-black/30 mb-4 block"
+              className="text-[10px] font-bold tracking-[0.3em] uppercase text-black/60 mb-4 block"
               variants={revealSubtle} initial="hidden" animate={isInView ? "visible" : "hidden"} custom={0}
             >
               Professionnels & entreprises
             </motion.span>
             <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-black leading-tight">
               Solutions sur-mesure<br />
-              <span className="text-black/30">pour vos équipes</span>
+              <span className="text-black/55">pour vos équipes</span>
             </h2>
           </div>
           <motion.div

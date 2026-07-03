@@ -87,7 +87,7 @@ export default function Footer() {
                 <a
                   href={link.href}
                   title={link.title}
-                  className="text-[11px] text-white/40 font-normal hover:text-white/70 transition-colors tracking-wide"
+                  className="text-[11px] text-white/60 font-normal hover:text-white/80 transition-colors tracking-wide"
                 >
                   {link.label}
                 </a>
@@ -98,7 +98,7 @@ export default function Footer() {
         </div>
 
         {/* ── BAS : COPYRIGHT ── */}
-        <div className="flex flex-col sm:flex-row items-center justify-between border-t border-white/5 pt-6 text-[11px] text-white/30 font-light tracking-wide">
+        <div className="flex flex-col sm:flex-row items-center justify-between border-t border-white/5 pt-6 text-[11px] text-white/50 font-light tracking-wide">
           <p>© 2026 SPM Taxi. Tous droits réservés.</p>
           <div className="flex items-center gap-4">
             <p className="flex items-center gap-1">
@@ -120,7 +120,7 @@ export default function Footer() {
 
       {/* ── MOT GÉANT FOND ── */}
       <div className="absolute inset-x-0 bottom-0 flex justify-center pointer-events-none select-none z-0 translate-y-6 sm:translate-y-12 lg:translate-y-16">
-        <span className="text-[16vw] font-black tracking-widest text-white/[0.025] leading-none uppercase font-sans">
+        <span aria-hidden="true" className="text-[16vw] font-black tracking-widest text-white/[0.025] leading-none uppercase font-sans">
           Villebois
         </span>
       </div>

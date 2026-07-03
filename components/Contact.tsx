@@ -85,7 +85,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-black tracking-tight">{title}</p>
-                  <p className="text-[11px] text-[#888888]">{sub}</p>
+                  <p className="text-[11px] text-[#767676]">{sub}</p>
                 </div>
                 <ArrowRight className="ml-auto h-4 w-4 text-black/20 group-hover:text-black transition-colors" />
               </motion.a>
@@ -103,7 +103,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-xs font-bold text-black tracking-tight">Localisation</p>
-                <p className="text-[11px] text-[#888888]">{s.contact_address}</p>
+                <p className="text-[11px] text-[#767676]">{s.contact_address}</p>
               </div>
             </motion.div>
 
@@ -114,7 +114,7 @@ export default function Contact() {
               animate={isInView ? "visible" : "hidden"}
               custom={0.48}
             >
-              <p className="text-[10px] font-bold tracking-widest uppercase text-black/30 mb-4">Disponibilités</p>
+              <p className="text-[10px] font-bold tracking-widest uppercase text-black/60 mb-4">Disponibilités</p>
               <div className="flex flex-col gap-2.5">
                 {[
                   ["Lundi – Dimanche", "00h00 – 23h59"],

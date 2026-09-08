@@ -31,6 +31,8 @@ const serviceLinks = [
   { label: "Taxi Charvieu-Chavagneux",href: "/taxi-charvieu-chavagneux/",   title: "Taxi Charvieu-Chavagneux — Conventionné CPAM" },
   { label: "Taxi Pont-de-Chéruy",    href: "/taxi-pont-de-cheruy/",        title: "Taxi Pont-de-Chéruy — Conventionné CPAM" },
   { label: "Taxi Lagnieu",           href: "/taxi-lagnieu/",               title: "Taxi Lagnieu Ain 01 — Conventionné CPAM" },
+  { label: "Taxi Crémieu",           href: "/taxi-cremieu/",               title: "Taxi Crémieu Isère — Conventionné CPAM" },
+  { label: "Taxi Bourg-en-Bresse",   href: "/taxi-bourg-en-bresse/",       title: "Taxi Bourg-en-Bresse Ain — Conventionné CPAM" },
   { label: "Taxi Lyon",               href: "/taxi-lyon/",                  title: "Taxi Lyon depuis l'Ain et l'Isère — SPM Taxi" },
 ];
 

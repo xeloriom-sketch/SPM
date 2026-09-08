@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ── Pages SEO locales — Ain (01) — suite ─────────────────────────────
     { url: `${BASE}/taxi-lagnieu/`,               lastModified: "2026-09-08", changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/taxi-bourg-en-bresse/`,       lastModified: "2026-09-08", changeFrequency: "monthly", priority: 0.9 },
 
     // ── Pages SEO locales — Isère (38) ───────────────────────────────────
     { url: `${BASE}/taxi-tignieu-jameyzieu/`,     lastModified: "2026-08-07", changeFrequency: "monthly", priority: 0.9 },
@@ -31,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/taxi-bourgoin-jallieu/`,      lastModified: "2026-08-07", changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/taxi-la-tour-du-pin/`,        lastModified: "2026-08-07", changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/taxi-pont-de-cheruy/`,        lastModified: "2026-09-08", changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/taxi-cremieu/`,               lastModified: "2026-09-08", changeFrequency: "monthly", priority: 0.8 },
 
     // ── Pages SEO région ─────────────────────────────────────────────────
     { url: `${BASE}/taxi-lyon/`,                  lastModified: "2026-08-07", changeFrequency: "monthly", priority: 0.9 },

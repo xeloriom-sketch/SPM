@@ -7,6 +7,12 @@ const nextConfig = {
       { protocol: "https", hostname: "cdn.prod.website-files.com", pathname: "/**" },
     ],
   },
+  experimental: {
+    // Tree-shake icon/animation libs — imports only what's used
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
+  // Prevent Supabase (server-only) from leaking into client bundles
+  serverExternalPackages: ["@supabase/supabase-js"],
 };
 
 if (process.env.NEXT_PUBLIC_STATIC === "1") {

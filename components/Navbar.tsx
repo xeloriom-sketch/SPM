@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
 
@@ -28,9 +27,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handle);
   }, []);
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   const linkCls = (href: string) => {
     const active = !href.startsWith("/#") && pathname === href;
@@ -44,12 +41,7 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
-        className="fixed left-0 right-0 top-0 z-50 w-full"
-        initial={{ y: -80 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.85, delay: isHome ? 2.6 : 0.15, ease: [0.16, 1, 0.3, 1] }}
-      >
+      <header className={`fixed left-0 right-0 top-0 z-50 w-full ${isHome ? "nav-enter-home" : "nav-enter"}`}>
         <nav className={`flex items-center px-6 py-4 md:px-12 border-b transition-all duration-500 ${
           scrolled
             ? "border-white/[0.07] bg-black/90 backdrop-blur-xl"
@@ -77,105 +69,77 @@ export default function Navbar() {
                 {l.label}
               </Link>
             ))}
-            <motion.a
+            <a
               href="tel:+33767751898"
               title="Appeler SPM Taxi"
-              className="ml-4 flex items-center gap-2 rounded-full border border-white/22 text-white px-5 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors duration-300 hover:bg-white hover:text-black"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 22 }}
+              className="ml-4 flex items-center gap-2 rounded-full border border-white/22 text-white px-5 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase transition-all duration-300 hover:bg-white hover:text-black hover:scale-[1.04] active:scale-95"
             >
               <Phone className="h-3 w-3" /> Appeler
-            </motion.a>
+            </a>
           </div>
 
-          {/* Mobile */}
+          {/* Mobile buttons */}
           <div className="flex items-center gap-2.5 md:hidden">
-            <motion.a
+            <a
               href="tel:+33767751898"
               title="Appeler SPM Taxi"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/22 text-white"
-              whileTap={{ scale: 0.9 }}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/22 text-white active:scale-90 transition-transform"
             >
               <Phone className="h-3.5 w-3.5" />
-            </motion.a>
+            </a>
             <button
               className="grid h-9 w-9 place-items-center rounded-full border border-white/22 text-white"
               onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Menu"
+              aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                  key={menuOpen ? "x" : "m"}
-                  initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {menuOpen ? <X className="h-3.5 w-3.5" /> : <Menu className="h-3.5 w-3.5" />}
-                </motion.div>
-              </AnimatePresence>
+              <span className={`transition-all duration-200 ${menuOpen ? "rotate-90 scale-90" : "rotate-0 scale-100"}`}>
+                {menuOpen ? <X className="h-3.5 w-3.5" /> : <Menu className="h-3.5 w-3.5" />}
+              </span>
             </button>
           </div>
         </nav>
 
-        {/* Mobile menu — toujours sombre */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              className="border-b border-white/[0.06] bg-black/95 backdrop-blur-xl overflow-hidden md:hidden"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="flex flex-col gap-1 px-4 py-4">
-                {navLinks.map((l, i) => {
-                  const active = !l.href.startsWith("/#") && pathname === l.href;
-                  return (
-                    <motion.div
-                      key={l.href}
-                      initial={{ opacity: 0, x: -12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.06, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      <Link
-                        href={l.href}
-                        title={l.title}
-                        className={`flex items-center justify-between rounded-2xl px-5 py-4 text-[13px] font-medium tracking-wide transition-colors text-white/70 hover:bg-white/[0.05] hover:text-white${active ? " bg-white/[0.07] !text-white" : ""}`}
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        <span>{l.label}</span>
-                        <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-white/20">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-                <motion.div
-                  className="mt-2 pt-2 border-t border-white/[0.06]"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.28, duration: 0.3 }}
-                >
-                  <a
-                    href="tel:+33767751898"
-                    title="Appeler SPM Taxi"
-                    className="flex items-center gap-3 rounded-2xl bg-white px-5 py-4 text-[13px] font-semibold text-black active:bg-white/90"
+        {/* Mobile menu — CSS grid trick for height:auto animation */}
+        <div
+          className="md:hidden border-b border-white/[0.06] bg-black/95 backdrop-blur-xl overflow-hidden transition-[grid-template-rows] duration-[380ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{ display: "grid", gridTemplateRows: menuOpen ? "1fr" : "0fr" }}
+        >
+          <div className="overflow-hidden">
+            <div className="flex flex-col gap-1 px-4 py-4">
+              {navLinks.map((l, i) => {
+                const active = !l.href.startsWith("/#") && pathname === l.href;
+                return (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    title={l.title}
+                    className={`flex items-center justify-between rounded-2xl px-5 py-4 text-[13px] font-medium tracking-wide transition-colors text-white/70 hover:bg-white/[0.05] hover:text-white${active ? " bg-white/[0.07] !text-white" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    <div className="grid h-7 w-7 place-items-center rounded-full bg-black">
-                      <Phone className="h-3.5 w-3.5 text-white" />
-                    </div>
-                    <span>Appeler maintenant</span>
-                  </a>
-                </motion.div>
+                    <span>{l.label}</span>
+                    <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-white/20">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </Link>
+                );
+              })}
+              <div className="mt-2 pt-2 border-t border-white/[0.06]">
+                <a
+                  href="tel:+33767751898"
+                  title="Appeler SPM Taxi"
+                  className="flex items-center gap-3 rounded-2xl bg-white px-5 py-4 text-[13px] font-semibold text-black active:bg-white/90"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <div className="grid h-7 w-7 place-items-center rounded-full bg-black">
+                    <Phone className="h-3.5 w-3.5 text-white" />
+                  </div>
+                  <span>Appeler maintenant</span>
+                </a>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.header>
+            </div>
+          </div>
+        </div>
+      </header>
     </>
   );
 }

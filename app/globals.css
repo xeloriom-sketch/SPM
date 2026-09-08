@@ -54,6 +54,38 @@ button, a { touch-action: manipulation; }
 /* Économise une couche GPU sur mobile */
 @media (max-width: 640px) { .noise::after { display: none; } }
 
+/* ── CSS animations — remplace Framer Motion sur le chemin critique ─── */
+
+@keyframes slideUp {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.5) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes navDown {
+  from { transform: translateY(-80px); }
+  to   { transform: translateY(0); }
+}
+
+.hero-line1  { animation: slideUp .7s cubic-bezier(0.22,1,0.36,1) .1s both; }
+.hero-line2  { animation: slideUp .7s cubic-bezier(0.22,1,0.36,1) .17s both; }
+.hero-sub    { animation: fadeUp  .6s cubic-bezier(0.22,1,0.36,1) .32s both; }
+.hero-ctas   { animation: fadeUp  .6s cubic-bezier(0.22,1,0.36,1) .45s both; }
+.hero-spec-0 { animation: fadeUp  .5s cubic-bezier(0.22,1,0.36,1) .55s both; }
+.hero-spec-1 { animation: fadeUp  .5s cubic-bezier(0.22,1,0.36,1) .62s both; }
+.hero-spec-2 { animation: fadeUp  .5s cubic-bezier(0.22,1,0.36,1) .69s both; }
+.hero-spec-3 { animation: fadeUp  .5s cubic-bezier(0.22,1,0.36,1) .76s both; }
+.hero-scroll { animation: scaleIn .5s cubic-bezier(0.22,1,0.36,1) 1s both; }
+.nav-enter   { animation: navDown .85s cubic-bezier(0.16,1,0.3,1) .15s both; }
+.nav-enter-home { animation: navDown .85s cubic-bezier(0.16,1,0.3,1) 2.6s both; }
+.page-enter  { animation: fadeUp  .4s cubic-bezier(0.16,1,0.3,1) both; }
+
 /* Respect prefers-reduced-motion pour l'accessibilité */
 @media (prefers-reduced-motion: reduce) {
   *,

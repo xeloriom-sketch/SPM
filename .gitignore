@@ -19,5 +19,12 @@ prisma/dev.db-journal
 # Misc
 .DS_Store
 *.pem
+# Google service account credentials — NE JAMAIS COMMITTER
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!public/**/*.json
+!public/data/*.json
 npm-debug.log*
 .vercel

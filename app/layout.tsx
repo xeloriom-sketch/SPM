@@ -167,13 +167,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className="scroll-smooth">
       <head>
-        {/* Google Analytics GA4 */}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-EQDEWKCWKW" strategy="afterInteractive" />
-        <Script id="ga4" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `
+        {/* Google Analytics GA4 — lazyOnload pour ne pas bloquer le LCP */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-EQDEWKCWKW" strategy="lazyOnload" />
+        <Script id="ga4" strategy="lazyOnload" dangerouslySetInnerHTML={{ __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-EQDEWKCWKW');
+          gtag('config', 'G-EQDEWKCWKW', { send_page_view: true });
         `}} />
         <meta name="theme-color" content="#0d0d0d" />
         <meta name="color-scheme" content="light dark" />
@@ -187,10 +187,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* manifest géré via metadata API pour permettre l'override par sous-layouts */}
         {/* Préchargement LCP — image hero au-dessus du fold */}
         <link rel="preload" as="image" href="/heroImage/hero-accueil.webp" fetchPriority="high" />
-        {/* Préconnexion GA4 + Supabase */}
+        {/* Préconnexion GA4 uniquement */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://dqbbaflumzssjndgxtrg.supabase.co" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         {/* Géolocalisation */}
         <meta name="geo.region" content="FR-01" />
         <meta name="geo.placename" content="Villebois, Ain, Auvergne-Rhône-Alpes, France" />

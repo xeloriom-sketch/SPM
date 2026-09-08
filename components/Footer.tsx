@@ -33,7 +33,15 @@ const serviceLinks = [
   { label: "Taxi Lagnieu",           href: "/taxi-lagnieu/",               title: "Taxi Lagnieu Ain 01 — Conventionné CPAM" },
   { label: "Taxi Crémieu",           href: "/taxi-cremieu/",               title: "Taxi Crémieu Isère — Conventionné CPAM" },
   { label: "Taxi Bourg-en-Bresse",   href: "/taxi-bourg-en-bresse/",       title: "Taxi Bourg-en-Bresse Ain — Conventionné CPAM" },
-  { label: "Taxi Lyon",               href: "/taxi-lyon/",                  title: "Taxi Lyon depuis l'Ain et l'Isère — SPM Taxi" },
+  { label: "Taxi Lyon",                href: "/taxi-lyon/",                  title: "Taxi Lyon depuis l'Ain et l'Isère — SPM Taxi" },
+  { label: "Taxi Belley",              href: "/taxi-belley/",                title: "Taxi Belley Ain 01 — Conventionné CPAM" },
+  { label: "Taxi Oyonnax",             href: "/taxi-oyonnax/",               title: "Taxi Oyonnax Ain 01 — Conventionné CPAM" },
+  { label: "Taxi Miribel",             href: "/taxi-miribel/",               title: "Taxi Miribel Ain 01 — Conventionné CPAM" },
+  { label: "Taxi Villars-les-Dombes",  href: "/taxi-villars-les-dombes/",    title: "Taxi Villars-les-Dombes — Aéroport Lyon 20 min" },
+  { label: "Taxi Pérouges",            href: "/taxi-perouges/",              title: "Taxi Pérouges Ain — Conventionné CPAM" },
+  { label: "Taxi Gex",                 href: "/taxi-gex/",                   title: "Taxi Gex — Genève GVA & Lyon LYS" },
+  { label: "Taxi Vienne",              href: "/taxi-vienne/",                title: "Taxi Vienne Isère 38 — Conventionné CPAM" },
+  { label: "Taxi L'Isle-d'Abeau",      href: "/taxi-isle-d-abeau/",          title: "Taxi L'Isle-d'Abeau — Aéroport Lyon 15 min" },
 ];
 
 export default function Footer() {

@@ -1,6 +1,6 @@
 "use client";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+
+import { useRef, useEffect, useState } from "react";
 
 interface SplitTextProps {
   text: string;
@@ -8,23 +8,25 @@ interface SplitTextProps {
   delay?: number;
   stagger?: number;
   mode?: "char" | "word";
-  once?: boolean;
 }
 
-export default function SplitText({
-  text,
-  className,
-  delay = 0,
-  stagger,
-  mode = "word",
-  once = true,
-}: SplitTextProps) {
+export default function SplitText({ text, className, delay = 0, stagger, mode = "word" }: SplitTextProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once, margin: "-40px" });
-
+  const [visible, setVisible] = useState(false);
   const defaultStagger = mode === "char" ? 0.018 : 0.065;
   const s = stagger ?? defaultStagger;
   const items = mode === "word" ? text.split(" ") : text.split("");
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { rootMargin: "-40px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <span ref={ref} className={className} aria-label={text}>
@@ -34,20 +36,20 @@ export default function SplitText({
           className="inline-block overflow-hidden"
           style={{ marginRight: mode === "word" ? "0.28em" : 0 }}
         >
-          <motion.span
+          <span
             className="inline-block"
-            initial={{ y: "115%", opacity: 0, rotate: 2 }}
-            animate={isInView ? { y: 0, opacity: 1, rotate: 0 } : {}}
-            transition={{
-              type: "spring",
-              stiffness: 440,
-              damping: 24,
-              mass: 0.75,
-              delay: delay + i * s,
+            style={{
+              animationName: visible ? "slideUp" : "none",
+              animationDuration: "0.55s",
+              animationTimingFunction: "cubic-bezier(0.22,1,0.36,1)",
+              animationFillMode: "both",
+              animationDelay: `${delay + i * s}s`,
+              transform: visible ? undefined : "translateY(115%)",
+              opacity: visible ? undefined : 0,
             }}
           >
             {item}
-          </motion.span>
+          </span>
         </span>
       ))}
     </span>

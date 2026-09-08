@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { getSupabase } from "@/lib/supabase-browser";
 
 export type Settings = Record<string, string>;
 
@@ -128,16 +127,14 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
   const [settings, setSettings] = useState<Settings>(defaults);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (getSupabase() as any)
-      .from("settings")
-      .select("key, value")
-      .then(({ data }: { data: { key: string; value: string }[] | null }) => {
-        if (!data?.length) return;
-        const map: Settings = {};
-        data.forEach(({ key, value }) => { map[key] = value; });
-        setSettings((prev) => ({ ...prev, ...map }));
-      });
+    fetch('/api/settings.php')
+      .then((r) => r.ok ? r.json() : null)
+      .then((data: Settings | null) => {
+        if (data && typeof data === 'object') {
+          setSettings((prev) => ({ ...prev, ...data }));
+        }
+      })
+      .catch(() => {});
   }, []);
 
   return (

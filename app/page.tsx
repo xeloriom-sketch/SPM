@@ -1,9 +1,11 @@
 import dynamic from "next/dynamic";
-import Loader from "@/components/Loader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import SmoothScroll from "@/components/SmoothScroll";
 import Services from "@/components/Services";
+
+// Loader: animation only on 2nd+ visit — defer framer-motion out of critical path
+const Loader = dynamic(() => import("@/components/Loader"), { ssr: false });
 
 // Below-fold: lazy loaded after initial render
 const HowItWorks   = dynamic(() => import("@/components/HowItWorks"));

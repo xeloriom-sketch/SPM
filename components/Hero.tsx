@@ -18,10 +18,10 @@ export default function Hero() {
   return (
     <div id="accueil" style={{ height: "100svh" }}>
       <section
-        className="sticky top-0 relative w-full overflow-hidden bg-black flex flex-col select-none"
+        className="sticky top-0 relative w-full bg-black flex flex-col select-none"
         style={{ height: "100svh" }}
       >
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <HeroImage src={sitePath("/heroImage/hero-accueil.webp")} alt="SPM Taxi — Volkswagen Tiguan sur autoroute" />
         </div>
 

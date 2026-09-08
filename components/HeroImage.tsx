@@ -57,7 +57,6 @@ export default function HeroImage({ src, alt = "" }: HeroImageProps) {
       <div
         ref={imgWrapRef}
         className="absolute inset-0"
-        style={{ transform: "scale(1.1)" }}
       >
         <Image
           src={src}

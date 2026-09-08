@@ -12,12 +12,14 @@ interface SplitTextProps {
 
 export default function SplitText({ text, className, delay = 0, stagger, mode = "word" }: SplitTextProps) {
   const ref = useRef<HTMLSpanElement>(null);
+  const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const defaultStagger = mode === "char" ? 0.018 : 0.065;
   const s = stagger ?? defaultStagger;
   const items = mode === "word" ? text.split(" ") : text.split("");
 
   useEffect(() => {
+    setMounted(true);
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -38,7 +40,7 @@ export default function SplitText({ text, className, delay = 0, stagger, mode = 
         >
           <span
             className="inline-block"
-            style={{
+            style={mounted ? {
               animationName: visible ? "slideUp" : "none",
               animationDuration: "0.55s",
               animationTimingFunction: "cubic-bezier(0.22,1,0.36,1)",
@@ -46,7 +48,7 @@ export default function SplitText({ text, className, delay = 0, stagger, mode = 
               animationDelay: `${delay + i * s}s`,
               transform: visible ? undefined : "translateY(115%)",
               opacity: visible ? undefined : 0,
-            }}
+            } : undefined}
           >
             {item}
           </span>

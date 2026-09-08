@@ -236,7 +236,7 @@ export default function Vehicle() {
                   src={views[current].src}
                   alt={views[current].alt}
                   fill
-                  priority={current === 0}
+                  loading="lazy"
                   unoptimized
                   className="object-contain object-center"
                   style={{ filter: "drop-shadow(0 6px 18px rgba(0,0,0,0.22))" }}

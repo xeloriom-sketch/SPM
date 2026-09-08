@@ -101,7 +101,7 @@ export default function Navbar() {
 
         {/* Mobile menu — CSS grid trick for height:auto animation */}
         <div
-          className="md:hidden border-b border-white/[0.06] bg-black/95 backdrop-blur-xl overflow-hidden transition-[grid-template-rows] duration-[380ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className={`md:hidden overflow-hidden transition-[grid-template-rows] duration-[380ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${menuOpen ? "border-b border-white/[0.06] bg-black/95 backdrop-blur-xl" : ""}`}
           style={{ display: "grid", gridTemplateRows: menuOpen ? "1fr" : "0fr" }}
         >
           <div className="overflow-hidden">

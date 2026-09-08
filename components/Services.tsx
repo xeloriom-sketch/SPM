@@ -125,13 +125,13 @@ export default function Services() {
             className="lg:col-span-7 relative w-full overflow-hidden lg:-mr-20 xl:-mr-32"
             style={{ height: "clamp(280px, 48vw, 520px)", ...fadeStyle(0.18) }}
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/image/tiguan-front-quarter-sm.webp"
               alt="SPM Volkswagen Tiguan Allspace 7 places"
-              fill
-              unoptimized
-              sizes="(max-width: 1024px) 50vw, 30vw"
-              className="object-contain object-right"
+              loading="lazy"
+              decoding="async"
+              className="object-contain object-right absolute inset-0 w-full h-full"
               style={{ objectPosition: "70% center", filter: "drop-shadow(0 6px 20px rgba(0,0,0,0.18))" }}
             />
           </div>

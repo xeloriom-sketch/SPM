@@ -185,8 +185,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="shortcut icon" href="/favicon.svg" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         {/* manifest géré via metadata API pour permettre l'override par sous-layouts */}
-        {/* Préchargement LCP — image hero au-dessus du fold */}
-        <link rel="preload" as="image" href="/heroImage/hero-accueil.webp" fetchPriority="high" />
+        {/* LCP — préchargé via <Image priority> dans HeroImage.tsx */}
         {/* Préconnexion GA4 uniquement */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />

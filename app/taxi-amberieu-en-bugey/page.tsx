@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, MapPin, Clock, CheckCircle, ArrowRight, Star } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi Ambérieu-en-Bugey — SPM Taxi | Conventionné CPAM · 7j/7",
+  title: "Taxi Ambérieu-en-Bugey — Conventionné CPAM · 7j/7",
   description:
     "Taxi à Ambérieu-en-Bugey (01500). Conventionné CPAM, aéroport Lyon Saint-Exupéry, gare TGV, transport médical remboursé. Volkswagen Tiguan 7 places. Disponible 7j/7 24h/24. ☎ 07 67 75 18 98.",
   keywords: [
@@ -15,12 +15,12 @@ export const metadata: Metadata = {
     "taxi Ambérieu Lyon Saint-Exupéry", "taxi Ambérieu nuit week-end",
     "réserver taxi Ambérieu", "taxi 01500",
   ],
-  alternates: { canonical: "https://taxispm.fr/taxi-amberieu-en-bugey" },
+  alternates: { canonical: "https://taxispm.fr/taxi-amberieu-en-bugey/" },
   openGraph: {
     title: "Taxi Ambérieu-en-Bugey — SPM Taxi | Ain (01) · Conventionné CPAM",
     description:
       "Taxi à Ambérieu-en-Bugey. Transport médical CPAM, aéroport Lyon, gare TGV. Volkswagen Tiguan 7 places. 7j/7 24h/24. ☎ 07 67 75 18 98.",
-    url: "https://taxispm.fr/taxi-amberieu-en-bugey",
+    url: "https://taxispm.fr/taxi-amberieu-en-bugey/",
     type: "website",
     locale: "fr_FR",
     images: [{ url: "/image/tiguan-front-quarter.webp", alt: "Taxi Ambérieu-en-Bugey — SPM Taxi Ain" }],
@@ -35,7 +35,7 @@ const jsonLd = {
       "@id": "https://taxispm.fr/#business",
       name: "SPM Taxi — Taxi Ambérieu-en-Bugey",
       telephone: "+33767751898",
-      url: "https://taxispm.fr/taxi-amberieu-en-bugey",
+      url: "https://taxispm.fr/taxi-amberieu-en-bugey/",
       description:
         "SPM Taxi intervient à Ambérieu-en-Bugey (01500) pour vos courses locales, transferts vers l'aéroport Lyon Saint-Exupéry, la gare TGV d'Ambérieu, et les transports médicaux conventionnés CPAM. Volkswagen Tiguan 7 places, disponible 7j/7 24h/24.",
       address: {
@@ -54,7 +54,7 @@ const jsonLd = {
         { "@type": "Airport", name: "Aéroport Lyon Saint-Exupéry", iataCode: "LYS" },
         { "@type": "TrainStation", name: "Gare d'Ambérieu-en-Bugey" },
       ],
-      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.9, reviewCount: 9, bestRating: 5, worstRating: 1 },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.6, reviewCount: 12, bestRating: 5, worstRating: 1 },
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
@@ -67,7 +67,7 @@ const jsonLd = {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
-        { "@type": "ListItem", position: 2, name: "Taxi Ambérieu-en-Bugey", item: "https://taxispm.fr/taxi-amberieu-en-bugey" },
+        { "@type": "ListItem", position: 2, name: "Taxi Ambérieu-en-Bugey", item: "https://taxispm.fr/taxi-amberieu-en-bugey/" },
       ],
     },
     {
@@ -132,8 +132,8 @@ export default function TaxiAmBerieuPage() {
           </p>
           <div className="flex items-center gap-2 mb-8">
             {[1,2,3,4,5].map((s) => <Star key={s} className="h-4 w-4 fill-black text-black" />)}
-            <span className="text-sm font-semibold ml-1">4,9/5</span>
-            <span className="text-sm text-[#888]">· 9 avis Google vérifiés</span>
+            <span className="text-sm font-semibold ml-1">4,6/5</span>
+            <span className="text-sm text-[#888]">· 12 avis Google vérifiés</span>
           </div>
           <div className="flex flex-wrap gap-3">
             <a href="tel:+33767751898" className="inline-flex items-center gap-2 rounded-full bg-black text-white px-6 py-3 text-sm font-semibold hover:bg-[#111] transition-colors">

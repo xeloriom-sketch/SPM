@@ -50,3 +50,17 @@ button, a { touch-action: manipulation; }
 }
 
 @media (max-width: 640px) { section { overflow-x: hidden; } }
+
+/* Économise une couche GPU sur mobile */
+@media (max-width: 640px) { .noise::after { display: none; } }
+
+/* Respect prefers-reduced-motion pour l'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

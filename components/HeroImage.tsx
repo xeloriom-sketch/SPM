@@ -14,6 +14,12 @@ export default function HeroImage({ src, alt = "" }: HeroImageProps) {
   const raf = useRef<number | null>(null);
 
   useEffect(() => {
+    // Touch/mobile devices have no mouse — skip rAF loop entirely to save CPU
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+    const el = imgWrapRef.current;
+    if (el) el.style.willChange = "transform";
+
     const onMove = (e: MouseEvent) => {
       const { innerWidth: W, innerHeight: H } = window;
       mouse.current = {
@@ -41,6 +47,7 @@ export default function HeroImage({ src, alt = "" }: HeroImageProps) {
     return () => {
       window.removeEventListener("mousemove", onMove);
       if (raf.current) cancelAnimationFrame(raf.current);
+      if (el) el.style.willChange = "auto";
     };
   }, [src]);
 
@@ -50,7 +57,7 @@ export default function HeroImage({ src, alt = "" }: HeroImageProps) {
       <div
         ref={imgWrapRef}
         className="absolute inset-0"
-        style={{ willChange: "transform" }}
+        style={{ transform: "scale(1.1)" }}
       >
         <Image
           src={src}

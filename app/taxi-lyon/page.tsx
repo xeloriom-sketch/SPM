@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, MapPin, Clock, CheckCircle, ArrowRight, Star } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi Lyon — SPM Taxi Ain & Isère | Pas Cher, 7 Places",
+  title: "Taxi Lyon — Pas Cher, 7 Places | Ain & Isère",
   description:
     "Taxi Lyon depuis l'Ain et l'Isère. Transferts aéroport Saint-Exupéry, gares, médical CPAM. Taxi lyonnais disponible 7j/7 24h/24. Tarif fixe, Tiguan 7 places. ☎ 07 67 75 18 98.",
   keywords: [
@@ -15,12 +15,12 @@ export const metadata: Metadata = {
     "chauffeur taxi lyon", "taxi privé lyon", "navette taxi lyon",
     "taxi lyon villebois", "taxi lyon tignieu", "taxi lyon ambérieu",
   ],
-  alternates: { canonical: "https://taxispm.fr/taxi-lyon" },
+  alternates: { canonical: "https://taxispm.fr/taxi-lyon/" },
   openGraph: {
     title: "Taxi Lyon — SPM Taxi | Ain & Isère · 7j/7 24h/24",
     description:
       "Taxi Lyon depuis l'Ain et l'Isère. Aéroport Saint-Exupéry, Part-Dieu, Perrache, transport médical CPAM. Volkswagen Tiguan 7 places. ☎ 07 67 75 18 98.",
-    url: "https://taxispm.fr/taxi-lyon",
+    url: "https://taxispm.fr/taxi-lyon/",
     type: "website",
     locale: "fr_FR",
     images: [
@@ -40,7 +40,7 @@ const jsonLd = {
       "@id": "https://taxispm.fr/#business",
       name: "SPM Taxi — Taxi Lyon depuis Ain & Isère",
       telephone: "+33767751898",
-      url: "https://taxispm.fr/taxi-lyon",
+      url: "https://taxispm.fr/taxi-lyon/",
       description:
         "SPM Taxi assure les transferts vers et depuis Lyon (aéroport Saint-Exupéry, gare Part-Dieu, gare Perrache) depuis l'Ain et l'Isère. Taxi conventionné CPAM. Volkswagen Tiguan 7 places.",
       address: {
@@ -59,7 +59,7 @@ const jsonLd = {
         { "@type": "TrainStation", name: "Gare Lyon Part-Dieu" },
         { "@type": "TrainStation", name: "Gare Lyon Perrache" },
       ],
-      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.9, reviewCount: 9, bestRating: 5, worstRating: 1 },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.6, reviewCount: 12, bestRating: 5, worstRating: 1 },
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
@@ -73,7 +73,7 @@ const jsonLd = {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
-        { "@type": "ListItem", position: 2, name: "Taxi Lyon", item: "https://taxispm.fr/taxi-lyon" },
+        { "@type": "ListItem", position: 2, name: "Taxi Lyon", item: "https://taxispm.fr/taxi-lyon/" },
       ],
     },
   ],
@@ -132,8 +132,8 @@ export default function TaxiLyonPage() {
             {[1,2,3,4,5].map((s) => (
               <Star key={s} className="h-4 w-4 fill-black text-black" />
             ))}
-            <span className="text-sm font-semibold ml-1">4,9/5</span>
-            <span className="text-sm text-[#888]">· 9 avis Google</span>
+            <span className="text-sm font-semibold ml-1">4,6/5</span>
+            <span className="text-sm text-[#888]">· 12 avis Google</span>
           </div>
           <div className="flex flex-wrap gap-3">
             <a

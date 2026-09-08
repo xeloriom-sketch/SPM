@@ -11,21 +11,27 @@ const SOCIAL_LINKS = {
 };
 
 const mainLinks = [
-  { label: "Accueil",    href: "/",          title: "SPM Taxi — Accueil" },
-  { label: "Services",   href: "/services",  title: "Services SPM Taxi" },
-  { label: "Tarifs",     href: "/tarifs",    title: "Tarifs SPM Taxi — Devis gratuit" },
-  { label: "À Propos",   href: "/a-propos",  title: "À propos de SPM Taxi" },
-  { label: "FAQ",        href: "/#faq",      title: "Questions fréquentes — SPM Taxi" },
-  { label: "Contact",    href: "/#contact",  title: "Contacter SPM Taxi" },
+  { label: "Accueil",    href: "/",             title: "SPM Taxi — Accueil" },
+  { label: "Services",   href: "/services/",    title: "Services SPM Taxi" },
+  { label: "Tarifs",     href: "/tarifs/",      title: "Tarifs SPM Taxi — Devis gratuit" },
+  { label: "À Propos",   href: "/a-propos/",    title: "À propos de SPM Taxi" },
+  { label: "FAQ",        href: "/#faq",         title: "Questions fréquentes — SPM Taxi" },
+  { label: "Contact",    href: "/#contact",     title: "Contacter SPM Taxi" },
 ];
 
 const serviceLinks = [
-  { label: "Transfert Aéroport Lyon", href: "/transfert-aeroport-lyon",    title: "Transfert taxi aéroport Lyon Saint-Exupéry" },
-  { label: "Taxi Conventionné CPAM",  href: "/taxi-conventionne-cpam",     title: "Taxi conventionné CPAM — Transport médical remboursé" },
-  { label: "Longue Distance",         href: "/taxi-longue-distance",       title: "Taxi longue distance France entière" },
-  { label: "Taxi avec Remorque",      href: "/taxi-remorque-ain",          title: "Taxi avec remorque et transport colis urgent" },
-  { label: "Taxi Tignieu-Jameyzieu",  href: "/taxi-tignieu-jameyzieu",     title: "Taxi à Tignieu-Jameyzieu — SPM Taxi" },
-  { label: "Taxi Lyon",               href: "/taxi-lyon",                  title: "Taxi Lyon depuis l'Ain et l'Isère — SPM Taxi" },
+  { label: "Transfert Aéroport Lyon", href: "/transfert-aeroport-lyon/",    title: "Transfert taxi aéroport Lyon Saint-Exupéry" },
+  { label: "Taxi Conventionné CPAM",  href: "/taxi-conventionne-cpam/",     title: "Taxi conventionné CPAM — Transport médical remboursé" },
+  { label: "Longue Distance",         href: "/taxi-longue-distance/",       title: "Taxi longue distance France entière" },
+  { label: "Taxi avec Remorque",      href: "/taxi-remorque-ain/",          title: "Taxi avec remorque et transport colis urgent" },
+  { label: "Taxi Tignieu-Jameyzieu",  href: "/taxi-tignieu-jameyzieu/",     title: "Taxi à Tignieu-Jameyzieu — SPM Taxi" },
+  { label: "Taxi Villebois",          href: "/taxi-villebois/",             title: "Taxi à Villebois Ain (01) — SPM Taxi, basé à Villebois" },
+  { label: "Taxi Bourgoin-Jallieu",   href: "/taxi-bourgoin-jallieu/",      title: "Taxi Bourgoin-Jallieu — Conventionné CPAM" },
+  { label: "Taxi La Tour-du-Pin",     href: "/taxi-la-tour-du-pin/",        title: "Taxi La Tour-du-Pin — Conventionné CPAM" },
+  { label: "Taxi Charvieu-Chavagneux",href: "/taxi-charvieu-chavagneux/",   title: "Taxi Charvieu-Chavagneux — Conventionné CPAM" },
+  { label: "Taxi Pont-de-Chéruy",    href: "/taxi-pont-de-cheruy/",        title: "Taxi Pont-de-Chéruy — Conventionné CPAM" },
+  { label: "Taxi Lagnieu",           href: "/taxi-lagnieu/",               title: "Taxi Lagnieu Ain 01 — Conventionné CPAM" },
+  { label: "Taxi Lyon",               href: "/taxi-lyon/",                  title: "Taxi Lyon depuis l'Ain et l'Isère — SPM Taxi" },
 ];
 
 export default function Footer() {
@@ -107,7 +113,7 @@ export default function Footer() {
             <a
               href="https://www.alhambra-web.com"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               title="Site créé par Alhambra Web"
               className="hover:text-white/60 transition-colors"
             >

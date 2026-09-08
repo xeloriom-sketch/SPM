@@ -176,6 +176,9 @@ export default function Contact() {
                       name: formData.get("name"),
                       service: formData.get("service"),
                       phone: formData.get("phone"),
+                      email: formData.get("email") || undefined,
+                      date: formData.get("date") || undefined,
+                      message: formData.get("message") || undefined,
                     }),
                   }).catch(() => {});
                 } catch (err) {
@@ -201,9 +204,9 @@ export default function Contact() {
 
               <div>
                 <label className="mb-1.5 block text-[10px] font-bold tracking-wider uppercase text-black/40" htmlFor="email">
-                  Email *
+                  Email <span className="normal-case font-normal text-black/25">(facultatif)</span>
                 </label>
-                <input id="email" name="email" type="email" required placeholder="jean.dupont@email.com" className={inputClass} />
+                <input id="email" name="email" type="email" placeholder="jean.dupont@email.com" className={inputClass} />
               </div>
 
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

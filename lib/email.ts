@@ -29,16 +29,16 @@ export async function sendContactNotification(data: EmailContactData) {
 
   const transporter = createTransport();
   const to = process.env.CONTACT_EMAIL ?? process.env.SMTP_USER;
-  const from = process.env.SMTP_FROM ?? `Taxi Tignieu <${process.env.SMTP_USER}>`;
+  const from = process.env.SMTP_FROM ?? `SPM Taxi <${process.env.SMTP_USER}>`;
 
   await transporter.sendMail({
     from,
     to,
-    subject: `Nouvelle demande de devis — ${data.service}`,
+    subject: `🚕 Nouveau client — ${data.name} (${data.service})`,
     html: `
       <div style="font-family:sans-serif;max-width:600px;margin:auto;background:#0a0a0a;color:#f5f5f5;padding:32px;border-radius:16px;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;">
-          <span style="font-size:22px;font-weight:800;color:#b6f000;">Taxi Tignieu</span>
+          <span style="font-size:22px;font-weight:800;color:#b6f000;">SPM Taxi</span>
         </div>
         <h2 style="color:#f5f5f5;margin:0 0 20px;">Nouvelle demande de devis</h2>
         <table style="width:100%;border-collapse:collapse;">
@@ -61,11 +61,11 @@ export async function sendContactNotification(data: EmailContactData) {
   await transporter.sendMail({
     from,
     to: data.email,
-    subject: "Votre demande a bien été reçue — Taxi Tignieu",
+    subject: "Votre demande a bien été reçue — SPM Taxi",
     html: `
       <div style="font-family:sans-serif;max-width:600px;margin:auto;background:#0a0a0a;color:#f5f5f5;padding:32px;border-radius:16px;">
         <div style="margin-bottom:24px;">
-          <span style="font-size:22px;font-weight:800;color:#b6f000;">Taxi Tignieu</span>
+          <span style="font-size:22px;font-weight:800;color:#b6f000;">SPM Taxi</span>
         </div>
         <h2 style="color:#f5f5f5;margin:0 0 12px;">Demande bien reçue !</h2>
         <p style="color:#8a8a8a;line-height:1.6;">Bonjour ${data.name},<br><br>
@@ -73,9 +73,9 @@ export async function sendContactNotification(data: EmailContactData) {
         <div style="margin:24px 0;padding:16px;background:#141414;border-radius:12px;border:1px solid #262626;">
           <p style="margin:0;font-size:13px;color:#8a8a8a;">Service demandé : <strong style="color:#b6f000;">${data.service}</strong></p>
         </div>
-        <p style="color:#8a8a8a;">En cas d'urgence, vous pouvez m'appeler directement au <strong style="color:#f5f5f5;">06 XX XX XX XX</strong>.</p>
+        <p style="color:#8a8a8a;">En cas d'urgence, appelez directement le <strong style="color:#f5f5f5;">07 67 75 18 98</strong>.</p>
         <div style="margin-top:28px;padding-top:20px;border-top:1px solid #262626;font-size:12px;color:#8a8a8a;">
-          Taxi Tignieu — Tignieu-Jameyzieu (Ain)
+          SPM Taxi — Villebois (Ain 01) · taxispm.fr
         </div>
       </div>
     `,

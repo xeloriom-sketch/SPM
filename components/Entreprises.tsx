@@ -76,11 +76,11 @@ export default function Entreprises() {
                 </div>
               </motion.a>
               <a
-                href="mailto:contact@spm-taxi.fr"
+                href="mailto:contact@taxispm.fr"
                 title="Envoyer un email à SPM Taxi"
                 className="inline-flex items-center gap-2 rounded-full border border-black/15 text-black/70 px-5 py-2 text-[11px] font-semibold hover:border-black/35 hover:text-black transition-all"
               >
-                contact@spm-taxi.fr
+                contact@taxispm.fr
               </a>
             </div>
           </motion.div>

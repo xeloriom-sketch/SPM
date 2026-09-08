@@ -14,7 +14,7 @@ const sections: Section[] = [
     desc: "Coordonnées affichées partout sur le site.",
     fields: [
       { key: "contact_phone",   label: "Téléphone",   placeholder: "07 67 75 18 98" },
-      { key: "contact_email",   label: "Email",        placeholder: "contact@spm-taxi.fr" },
+      { key: "contact_email",   label: "Email",        placeholder: "contact@taxispm.fr" },
       { key: "contact_address", label: "Adresse",      placeholder: "951 route des hauts fourneaux, 01150 Villebois" },
     ],
   },

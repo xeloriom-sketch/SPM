@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, CheckCircle, ArrowRight, Package } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi avec Remorque & Colis Urgent | SPM Taxi Ain (01)",
+  title: "Taxi avec Remorque & Colis Urgent | Ain (01)",
   description:
     "SPM Taxi dispose d'une attache-remorque homologuée sur Volkswagen Tiguan. Transport matériel lourd, colis urgents porte-à-porte, véhicule en panne, déménagement partiel. Ain, Lyon, Isère et France entière sur devis. ☎ 07 67 75 18 98.",
   keywords: [
@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     "livraison urgente 24h Ain", "taxi véhicule panne remorque Ain",
     "taxi remorque Tignieu Ain", "transport rapide colis Ain 01",
   ],
-  alternates: { canonical: "https://taxispm.fr/taxi-remorque-ain" },
+  alternates: { canonical: "https://taxispm.fr/taxi-remorque-ain/" },
   openGraph: {
     title: "Taxi avec Remorque & Colis Urgent — SPM Ain (01) | 24h/24 7j/7",
     description: "Remorque homologuée + livraison colis express porte-à-porte dans l'Ain, Lyon, Isère. Urgences acceptées 24h/24. SPM Taxi Villebois. 07 67 75 18 98.",
-    url: "https://taxispm.fr/taxi-remorque-ain",
+    url: "https://taxispm.fr/taxi-remorque-ain/",
     type: "website",
     locale: "fr_FR",
     images: [{ url: "/image/tiguan-front-quarter.webp", alt: "Taxi avec remorque colis urgent SPM Ain" }],

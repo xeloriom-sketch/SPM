@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, MapPin, Clock, CheckCircle, ArrowRight, Star } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi Montluel — SPM Taxi | Conventionné CPAM · Ain 01120",
+  title: "Taxi Montluel — Conventionné CPAM · Ain (01120)",
   description:
     "Taxi à Montluel (01120). Conventionné CPAM, aéroport Lyon Saint-Exupéry à 20 min, transport médical remboursé. Volkswagen Tiguan 7 places. 7j/7 24h/24. ☎ 07 67 75 18 98.",
   keywords: [
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "réserver taxi Montluel", "VTC Montluel", "taxi médical Montluel CPAM",
     "taxi Montluel Saint-Exupéry", "taxi 01120",
   ],
-  alternates: { canonical: "https://taxispm.fr/taxi-montluel" },
+  alternates: { canonical: "https://taxispm.fr/taxi-montluel/" },
   openGraph: {
     title: "Taxi Montluel — SPM Taxi | Ain (01120) · Conventionné CPAM",
     description: "Taxi à Montluel. CPAM, aéroport Lyon à 20 min, transport médical. Tiguan 7 places. 7j/7 24h/24. ☎ 07 67 75 18 98.",
-    url: "https://taxispm.fr/taxi-montluel",
+    url: "https://taxispm.fr/taxi-montluel/",
     type: "website",
     locale: "fr_FR",
     images: [{ url: "/image/tiguan-front-quarter.webp", alt: "Taxi Montluel — SPM Taxi Ain" }],
@@ -32,7 +32,7 @@ const jsonLd = {
       "@id": "https://taxispm.fr/#business",
       name: "SPM Taxi — Taxi Montluel",
       telephone: "+33767751898",
-      url: "https://taxispm.fr/taxi-montluel",
+      url: "https://taxispm.fr/taxi-montluel/",
       description:
         "SPM Taxi intervient à Montluel (01120) pour vos transferts vers l'aéroport Lyon Saint-Exupéry (20 min), Lyon Centre, et les transports médicaux conventionnés CPAM. Volkswagen Tiguan 7 places, disponible 7j/7 24h/24.",
       address: {
@@ -50,7 +50,7 @@ const jsonLd = {
         { "@type": "City", name: "Lyon" },
         { "@type": "Airport", name: "Aéroport Lyon Saint-Exupéry", iataCode: "LYS" },
       ],
-      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.9, reviewCount: 9, bestRating: 5, worstRating: 1 },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.6, reviewCount: 12, bestRating: 5, worstRating: 1 },
       openingHoursSpecification: [
         { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], opens: "00:00", closes: "23:59" },
       ],
@@ -59,7 +59,7 @@ const jsonLd = {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
-        { "@type": "ListItem", position: 2, name: "Taxi Montluel", item: "https://taxispm.fr/taxi-montluel" },
+        { "@type": "ListItem", position: 2, name: "Taxi Montluel", item: "https://taxispm.fr/taxi-montluel/" },
       ],
     },
     {
@@ -119,8 +119,8 @@ export default function TaxiMontluelPage() {
           </p>
           <div className="flex items-center gap-2 mb-8">
             {[1,2,3,4,5].map((s) => <Star key={s} className="h-4 w-4 fill-black text-black" />)}
-            <span className="text-sm font-semibold ml-1">4,9/5</span>
-            <span className="text-sm text-[#888]">· 9 avis Google vérifiés</span>
+            <span className="text-sm font-semibold ml-1">4,6/5</span>
+            <span className="text-sm text-[#888]">· 12 avis Google vérifiés</span>
           </div>
           <div className="flex flex-wrap gap-3">
             <a href="tel:+33767751898" className="inline-flex items-center gap-2 rounded-full bg-black text-white px-6 py-3 text-sm font-semibold hover:bg-[#111] transition-colors">

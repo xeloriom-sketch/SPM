@@ -8,7 +8,7 @@ export type Settings = Record<string, string>;
 export const defaults: Settings = {
   // ── Contact ──────────────────────────────────────────────────────────
   contact_phone:   "07 67 75 18 98",
-  contact_email:   "contact@spm-taxi.fr",
+  contact_email:   "contact@taxispm.fr",
   contact_address: "951 route des hauts fourneaux, 01150 Villebois",
 
   // ── Hero homepage ─────────────────────────────────────────────────────

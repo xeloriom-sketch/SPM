@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, MapPin, Clock, CheckCircle, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi Longue Distance France | SPM Taxi Ain — Tarif Fixe",
+  title: "Taxi Longue Distance France — Tarif Fixe",
   description:
     "Taxi SPM : déplacements longue distance partout en France depuis l'Ain, Lyon, Isère. Paris, Marseille, Bordeaux, Genève, Nice, Strasbourg. Volkswagen Tiguan 7 places. Tarif fixe sur devis gratuit. ☎ 07 67 75 18 98.",
   keywords: [
@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     "taxi Lyon Bordeaux Ain", "taxi Lyon Nice Ain",
     "taxi aller retour France Ain", "tarif fixe taxi longue distance Ain",
   ],
-  alternates: { canonical: "https://taxispm.fr/taxi-longue-distance" },
+  alternates: { canonical: "https://taxispm.fr/taxi-longue-distance/" },
   openGraph: {
     title: "Taxi Longue Distance France Entière — SPM Ain | Tarif Fixe Devis Gratuit",
     description: "Paris, Marseille, Genève, Bordeaux depuis l'Ain — tarif fixe sur devis. Volkswagen Tiguan 7 places, confort SUV. SPM Taxi Villebois (Ain 01). 07 67 75 18 98.",
-    url: "https://taxispm.fr/taxi-longue-distance",
+    url: "https://taxispm.fr/taxi-longue-distance/",
     type: "website",
     locale: "fr_FR",
     images: [{ url: "/image/tiguan-front-quarter.webp", alt: "Taxi longue distance France SPM Ain Villebois" }],

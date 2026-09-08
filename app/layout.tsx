@@ -19,21 +19,28 @@ export const metadata: Metadata = {
     "taxi Ain 01", "taxi conventionné Ain", "taxi Isère 38",
     "taxi conventionné CPAM Ain", "taxi SPM Villebois", "taxi 01150",
     "taxi 38230", "taxi Tignieu CPAM", "taxi Tignieu aéroport Lyon",
-    // Transport médical
+    // Transport médical — mots-clés concurrents (VSL, tiers payant)
     "transport médical CPAM Ain", "taxi médical conventionné", "taxi prescription médicale",
     "taxi chimiothérapie Ain", "taxi dialyse Ain", "transport sanitaire Ain",
+    "taxi VSL Ain", "taxi VSL Isère", "VSL conventionné Ain", "VSL conventionné Isère",
+    "tiers payant taxi Ain", "taxi zéro avance de frais", "taxi remboursé Assurance Maladie",
+    "transport prescription médicale Ain", "taxi radiothérapie Ain", "taxi hospitalisation Ain",
     // Aéroport & gare
     "transfert aéroport Lyon Saint-Exupéry Ain", "taxi aéroport Lyon depuis Ain",
     "taxi gare Lyon Part-Dieu Ain", "taxi gare Perrache Ain", "taxi gare TGV Ain",
-    "VTC Lyon aéroport Ain", "transfert aéroport Ain",
+    "VTC Lyon aéroport Ain", "transfert aéroport Ain", "taxi Genève-Cointrin Ain",
     // Lyon — mots-clés à fort volume
     "taxi Lyon", "taxis Lyon", "taxi lyonnais", "lyon taxi", "taxi Lyon pas cher",
     "taxi Lyon aéroport", "taxi Lyon conventionné", "taxi Lyon 7 places",
     "chauffeur taxi Lyon", "taxi Lyon depuis Ain", "taxi Lyon depuis Isère",
-    // Villes
+    // Villes couvertes — concurrents ciblent ces zones
     "taxi Ambérieu-en-Bugey", "taxi Bourg-en-Bresse", "taxi Meximieux", "taxi Montluel",
     "taxi Pérouges", "taxi Belley", "taxi Isère",
     "taxi Bourgoin-Jallieu", "taxi Grenoble", "taxi Genève depuis Ain",
+    "taxi La Tour-du-Pin", "taxi Morestel", "taxi Charvieu-Chavagneux",
+    "taxi Pont-de-Chéruy", "taxi L'Isle-d'Abeau", "taxi Crémieu",
+    "taxi Villars-les-Dombes", "taxi Saint-Jean-de-Bournay",
+    "taxi Nord-Isère", "taxi Est Lyonnais", "taxi Ain Isère",
     // Services spéciaux
     "taxi 7 places Ain", "Volkswagen Tiguan taxi", "taxi colis urgent Ain",
     "taxi remorque Ain", "taxi longue distance France", "taxi conventionné remboursé",
@@ -65,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SPM Taxi — Taxi Conventionné CPAM | Lyon · Ain · Isère",
     description:
-      "Taxi conventionné CPAM 4,9★ Google, Tiguan 7 places, disponible 7j/7. Transferts aéroport Lyon, transport médical CPAM, longue distance. ☎ 07 67 75 18 98.",
+      "Taxi conventionné CPAM 4,6★ Google (12 avis), Tiguan 7 places, disponible 7j/7. Transferts aéroport Lyon, transport médical CPAM, longue distance. ☎ 07 67 75 18 98.",
     images: ["/og-image.jpeg"],
   },
   robots: {
@@ -111,6 +118,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="shortcut icon" href="/favicon.svg" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         {/* manifest géré via metadata API pour permettre l'override par sous-layouts */}
+        {/* Préchargement LCP — image hero au-dessus du fold */}
+        <link rel="preload" as="image" href="/heroImage/hero-accueil.webp" fetchPriority="high" />
         {/* Préconnexion GA4 + Supabase */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
@@ -122,14 +131,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="ICBM" content="45.808, 5.452" />
         {/* Business info pour IA */}
         <meta name="business:contact_data:phone_number" content="+33767751898" />
-        <meta name="business:contact_data:email" content="contact@spm-taxi.fr" />
+        <meta name="business:contact_data:email" content="contact@taxispm.fr" />
         <meta name="business:contact_data:locality" content="Villebois" />
         <meta name="business:contact_data:region" content="Ain" />
         <meta name="business:contact_data:country_name" content="France" />
         {/* Classification */}
         <meta name="classification" content="Transport, Taxi, Véhicule de tourisme avec chauffeur" />
         <meta name="coverage" content="Lyon, Ain, Isère, France" />
-        <meta name="rating" content="4.9/5" />
+        <meta name="rating" content="4.6/5" />
         <meta name="revisit-after" content="7 days" />
         <meta name="language" content="French" />
       </head>

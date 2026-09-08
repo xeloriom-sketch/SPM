@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, MapPin, Clock, CheckCircle, ArrowRight, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi Tignieu-Jameyzieu — Conventionné CPAM | SPM Taxi Ain & Isère",
+  title: "Taxi Tignieu-Jameyzieu — Conventionné CPAM",
   description:
     "Taxi SPM à Tignieu-Jameyzieu (Isère 38) et Villebois (Ain 01). Conventionné CPAM, transport médical remboursé, aéroport Lyon Saint-Exupéry. Volkswagen Tiguan 7 places. 7j/7 24h/24. ☎ 07 67 75 18 98.",
   keywords: [
@@ -16,12 +16,12 @@ export const metadata: Metadata = {
     "taxi Crémieu depuis Tignieu", "taxi Bourgoin Tignieu",
     "chauffeur taxi Tignieu-Jameyzieu disponible",
   ],
-  alternates: { canonical: "https://taxispm.fr/taxi-tignieu-jameyzieu" },
+  alternates: { canonical: "https://taxispm.fr/taxi-tignieu-jameyzieu/" },
   openGraph: {
     title: "Taxi Tignieu-Jameyzieu — SPM Taxi | Conventionné CPAM · 7j/7 24h/24",
     description:
       "Votre taxi à Tignieu-Jameyzieu : conventionné CPAM, transfert aéroport Lyon, transport médical. Volkswagen Tiguan 7 places. Disponible 7j/7. ☎ 07 67 75 18 98.",
-    url: "https://taxispm.fr/taxi-tignieu-jameyzieu",
+    url: "https://taxispm.fr/taxi-tignieu-jameyzieu/",
     type: "website",
     locale: "fr_FR",
     images: [
@@ -72,7 +72,7 @@ const jsonLd = {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
-        { "@type": "ListItem", position: 2, name: "Taxi Tignieu-Jameyzieu", item: "https://taxispm.fr/taxi-tignieu-jameyzieu" },
+        { "@type": "ListItem", position: 2, name: "Taxi Tignieu-Jameyzieu", item: "https://taxispm.fr/taxi-tignieu-jameyzieu/" },
       ],
     },
   ],

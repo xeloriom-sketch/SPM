@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, Clock, MapPin, CheckCircle, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Transfert Aéroport Lyon Saint-Exupéry | SPM Taxi Ain",
+  title: "Transfert Aéroport Lyon Saint-Exupéry | Ain (01)",
   description:
     "Taxi SPM : transfert aéroport Lyon Saint-Exupéry (LYS) depuis l'Ain, Villebois, Ambérieu, Bourg-en-Bresse. À partir de 65 €. Suivi des vols en temps réel, aucun frais pour retard. Volkswagen Tiguan 7 places. 7j/7 24h/24. ☎ 07 67 75 18 98.",
   keywords: [
@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     "navette Lyon Saint-Exupéry Ain 01", "taxi privé aéroport Lyon Ain",
     "prix taxi aéroport Lyon Ain", "réserver taxi aéroport Lyon Ain",
   ],
-  alternates: { canonical: "https://taxispm.fr/transfert-aeroport-lyon" },
+  alternates: { canonical: "https://taxispm.fr/transfert-aeroport-lyon/" },
   openGraph: {
     title: "Transfert Aéroport Lyon Saint-Exupéry — SPM Taxi Ain | À partir de 65 €",
     description: "Taxi SPM : transfert Lyon Saint-Exupéry depuis l'Ain (Villebois, Ambérieu, Bourg-en-Bresse). À partir de 65 €. Suivi des vols en temps réel. 07 67 75 18 98.",
-    url: "https://taxispm.fr/transfert-aeroport-lyon",
+    url: "https://taxispm.fr/transfert-aeroport-lyon/",
     type: "website",
     locale: "fr_FR",
     images: [{ url: "/image/tiguan-front-quarter.webp", alt: "Taxi SPM transfert aéroport Lyon Saint-Exupéry Ain" }],
@@ -33,7 +33,7 @@ const jsonLd = {
       "@id": "https://taxispm.fr/#business",
       name: "SPM Taxi — Transfert Aéroport Lyon Saint-Exupéry",
       telephone: "+33767751898",
-      url: "https://taxispm.fr/transfert-aeroport-lyon",
+      url: "https://taxispm.fr/transfert-aeroport-lyon/",
       address: {
         "@type": "PostalAddress",
         streetAddress: "951 route des hauts fourneaux",
@@ -56,13 +56,13 @@ const jsonLd = {
           { "@type": "Offer", name: "Transfert gare Part-Dieu et Perrache", itemOffered: { "@type": "Service", name: "Taxi gare Lyon" } },
         ],
       },
-      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.9, reviewCount: 9, bestRating: 5, worstRating: 1 },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.6, reviewCount: 12, bestRating: 5, worstRating: 1 },
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
-        { "@type": "ListItem", position: 2, name: "Transfert Aéroport Lyon", item: "https://taxispm.fr/transfert-aeroport-lyon" },
+        { "@type": "ListItem", position: 2, name: "Transfert Aéroport Lyon", item: "https://taxispm.fr/transfert-aeroport-lyon/" },
       ],
     },
   ],

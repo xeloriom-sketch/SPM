@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Phone, MapPin, Clock, CheckCircle, ArrowRight, Star } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi Meximieux — SPM Taxi | Conventionné CPAM · Ain 01800",
+  title: "Taxi Meximieux — Conventionné CPAM · Ain (01800)",
   description:
     "Taxi à Meximieux (01800). Conventionné CPAM, aéroport Lyon Saint-Exupéry, transport médical remboursé, longue distance. Tiguan 7 places. 7j/7 24h/24. ☎ 07 67 75 18 98.",
   keywords: [
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     "réserver taxi Meximieux", "chauffeur Meximieux", "VTC Meximieux",
     "taxi Meximieux Saint-Exupéry", "taxi médical Meximieux CPAM",
   ],
-  alternates: { canonical: "https://taxispm.fr/taxi-meximieux" },
+  alternates: { canonical: "https://taxispm.fr/taxi-meximieux/" },
   openGraph: {
     title: "Taxi Meximieux — SPM Taxi | Ain (01800) · Conventionné CPAM",
     description: "Taxi à Meximieux. CPAM, aéroport Lyon, transport médical. Tiguan 7 places. 7j/7 24h/24. ☎ 07 67 75 18 98.",
-    url: "https://taxispm.fr/taxi-meximieux",
+    url: "https://taxispm.fr/taxi-meximieux/",
     type: "website",
     locale: "fr_FR",
     images: [{ url: "/image/tiguan-front-quarter.webp", alt: "Taxi Meximieux — SPM Taxi Ain" }],
@@ -32,7 +32,7 @@ const jsonLd = {
       "@id": "https://taxispm.fr/#business",
       name: "SPM Taxi — Taxi Meximieux",
       telephone: "+33767751898",
-      url: "https://taxispm.fr/taxi-meximieux",
+      url: "https://taxispm.fr/taxi-meximieux/",
       description:
         "SPM Taxi intervient à Meximieux (01800) pour vos transferts vers l'aéroport Lyon Saint-Exupéry, les gares, et les transports médicaux conventionnés CPAM. Volkswagen Tiguan 7 places, disponible 7j/7 24h/24.",
       address: {
@@ -50,7 +50,7 @@ const jsonLd = {
         { "@type": "City", name: "Lyon" },
         { "@type": "Airport", name: "Aéroport Lyon Saint-Exupéry", iataCode: "LYS" },
       ],
-      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.9, reviewCount: 9, bestRating: 5, worstRating: 1 },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.6, reviewCount: 12, bestRating: 5, worstRating: 1 },
       openingHoursSpecification: [
         { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], opens: "00:00", closes: "23:59" },
       ],
@@ -59,7 +59,7 @@ const jsonLd = {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
-        { "@type": "ListItem", position: 2, name: "Taxi Meximieux", item: "https://taxispm.fr/taxi-meximieux" },
+        { "@type": "ListItem", position: 2, name: "Taxi Meximieux", item: "https://taxispm.fr/taxi-meximieux/" },
       ],
     },
     {
@@ -118,8 +118,8 @@ export default function TaxiMeximieuxPage() {
           </p>
           <div className="flex items-center gap-2 mb-8">
             {[1,2,3,4,5].map((s) => <Star key={s} className="h-4 w-4 fill-black text-black" />)}
-            <span className="text-sm font-semibold ml-1">4,9/5</span>
-            <span className="text-sm text-[#888]">· 9 avis Google vérifiés</span>
+            <span className="text-sm font-semibold ml-1">4,6/5</span>
+            <span className="text-sm text-[#888]">· 12 avis Google vérifiés</span>
           </div>
           <div className="flex flex-wrap gap-3">
             <a href="tel:+33767751898" className="inline-flex items-center gap-2 rounded-full bg-black text-white px-6 py-3 text-sm font-semibold hover:bg-[#111] transition-colors">

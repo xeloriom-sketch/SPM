@@ -46,7 +46,7 @@ const jsonLd = {
           { "@type": "Offer", itemOffered: { "@type": "Service", name: "Longue distance France entière", description: "De Lyon à Paris, Marseille, Bordeaux, Genève. Sur devis, confort absolu." } },
         ],
       },
-      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.6, reviewCount: 12, bestRating: 5, worstRating: 1 },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "9", bestRating: "5", worstRating: "1" },
       openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], opens: "00:00", closes: "23:59" }],
     },
     {
@@ -192,7 +192,7 @@ export default function ServicesPage() {
             { icon: Shield, label: "Conventionné CPAM", desc: "Zéro avance de frais" },
             { icon: Clock, label: "7j/7 24h/24", desc: "Même les jours fériés" },
             { icon: Car, label: "7 places", desc: "Volkswagen Tiguan Allspace" },
-            { icon: CheckCircle, label: "4,6★ Google", desc: "12 avis vérifiés" },
+            { icon: CheckCircle, label: "4,9★ Google", desc: "9 avis vérifiés" },
           ].map(({ icon: Icon, label, desc }) => (
             <div key={label} className="bg-white rounded-2xl p-4 border border-black/[0.06] text-center">
               <Icon className="h-5 w-5 text-black mx-auto mb-2" />
@@ -283,6 +283,14 @@ export default function ServicesPage() {
           <div className="flex flex-wrap gap-3 justify-center">
             <a href="tel:+33767751898" className="inline-flex items-center gap-2 rounded-full bg-white text-black px-6 py-3 text-sm font-semibold hover:bg-white/90 transition-colors">
               <Phone className="h-4 w-4" />07 67 75 18 98
+            </a>
+            <a
+              href="https://wa.me/33767751898?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20taxi."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-6 py-3 text-sm font-semibold hover:bg-[#20bb5a] transition-colors"
+            >
+              WhatsApp
             </a>
             <a href="/#contact" className="inline-flex items-center gap-2 rounded-full border border-white/25 text-white px-6 py-3 text-sm font-semibold hover:border-white/50 transition-colors">
               Formulaire de contact<ArrowRight className="h-4 w-4" />

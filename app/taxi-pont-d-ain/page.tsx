@@ -3,31 +3,33 @@ import Link from "next/link";
 import { ArrowLeft, Phone, MapPin, Clock, CheckCircle, ArrowRight, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Taxi Tignieu-Jameyzieu — Conventionné CPAM",
+  title: "Taxi Pont-d'Ain — Conventionné CPAM | SPM Taxi",
   description:
-    "Taxi SPM à Tignieu-Jameyzieu (Isère 38) et Villebois (Ain 01). Conventionné CPAM, transport médical remboursé, aéroport Lyon Saint-Exupéry. Volkswagen Tiguan 7 places. 7j/7 24h/24. ☎ 07 67 75 18 98.",
+    "Taxi SPM à Pont-d'Ain (Ain 01160). Conventionné CPAM, transport médical remboursé vers Fleyriat et Lyon. Proche d'Ambérieu-en-Bugey. Volkswagen Tiguan 7 places. 7j/7 24h/24. ☎ 07 67 75 18 98.",
   keywords: [
-    "taxi Tignieu-Jameyzieu", "taxi Tignieu", "taxi Jameyzieu",
-    "taxi conventionné Tignieu-Jameyzieu", "taxi CPAM Tignieu",
-    "transport médical Tignieu-Jameyzieu", "taxi Tignieu aéroport Lyon",
-    "taxi Tignieu 38", "taxi Tignieu Isère", "taxi Tignieu 24h24",
-    "taxi Tignieu Ambérieu", "taxi Tignieu Montluel",
-    "réserver taxi Tignieu-Jameyzieu", "taxi SPM Tignieu",
-    "taxi Crémieu depuis Tignieu", "taxi Bourgoin Tignieu",
-    "chauffeur taxi Tignieu-Jameyzieu disponible",
+    "taxi Pont-d'Ain",
+    "taxi Pont d'Ain Ain 01",
+    "taxi conventionné Pont-d'Ain",
+    "taxi CPAM Pont-d'Ain",
+    "taxi Lyon depuis Pont-d'Ain",
+    "taxi hôpital Fleyriat Pont-d'Ain",
+    "taxi Pont-d'Ain 01160",
+    "transport médical Pont-d'Ain",
+    "taxi Ambérieu Pont-d'Ain",
+    "réserver taxi Pont-d'Ain",
   ],
-  alternates: { canonical: "https://taxispm.fr/taxi-tignieu-jameyzieu/" },
+  alternates: { canonical: "https://taxispm.fr/taxi-pont-d-ain/" },
   openGraph: {
-    title: "Taxi Tignieu-Jameyzieu — SPM Taxi | Conventionné CPAM · 7j/7 24h/24",
+    title: "Taxi Pont-d'Ain — SPM Taxi | Conventionné CPAM · 7j/7 24h/24",
     description:
-      "Votre taxi à Tignieu-Jameyzieu : conventionné CPAM, transfert aéroport Lyon, transport médical. Volkswagen Tiguan 7 places. Disponible 7j/7. ☎ 07 67 75 18 98.",
-    url: "https://taxispm.fr/taxi-tignieu-jameyzieu/",
+      "Votre taxi à Pont-d'Ain : conventionné CPAM, transport médical vers Fleyriat, transfert aéroport Lyon. Volkswagen Tiguan 7 places. Disponible 7j/7. ☎ 07 67 75 18 98.",
+    url: "https://taxispm.fr/taxi-pont-d-ain/",
     type: "website",
     locale: "fr_FR",
     images: [
       {
         url: "/image/tiguan-front-quarter.webp",
-        alt: "Taxi SPM Tignieu-Jameyzieu — Volkswagen Tiguan 7 places",
+        alt: "Taxi SPM Pont-d'Ain — Volkswagen Tiguan 7 places",
       },
     ],
   },
@@ -63,12 +65,11 @@ const jsonLd = {
         longitude: 5.219,
       },
       areaServed: [
-        { "@type": "City", name: "Tignieu-Jameyzieu", containedInPlace: { "@type": "AdministrativeArea", name: "Isère" } },
-        { "@type": "City", name: "Villebois", containedInPlace: { "@type": "AdministrativeArea", name: "Ain" } },
+        { "@type": "City", name: "Pont-d'Ain", containedInPlace: { "@type": "AdministrativeArea", name: "Ain" } },
         { "@type": "City", name: "Ambérieu-en-Bugey" },
-        { "@type": "City", name: "Montluel" },
-        { "@type": "City", name: "Meximieux" },
+        { "@type": "City", name: "Bourg-en-Bresse" },
         { "@type": "City", name: "Lyon" },
+        { "@type": "Hospital", name: "Hôpital de Fleyriat" },
         { "@type": "Airport", name: "Aéroport Lyon Saint-Exupéry", iataCode: "LYS" },
       ],
       openingHoursSpecification: [
@@ -84,7 +85,7 @@ const jsonLd = {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
-        { "@type": "ListItem", position: 2, name: "Taxi Tignieu-Jameyzieu", item: "https://taxispm.fr/taxi-tignieu-jameyzieu/" },
+        { "@type": "ListItem", position: 2, name: "Taxi Pont-d'Ain", item: "https://taxispm.fr/taxi-pont-d-ain/" },
       ],
     },
     {
@@ -92,23 +93,35 @@ const jsonLd = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "Combien coûte un taxi de Tignieu-Jameyzieu à l'aéroport de Lyon ?",
-          acceptedAnswer: { "@type": "Answer", text: "Depuis Tignieu-Jameyzieu, le transfert vers l'aéroport Lyon Saint-Exupéry est estimé à partir de 55 €. Le tarif est fixe et garanti, sans surprises. Demandez votre devis gratuit au 07 67 75 18 98." },
+          name: "Combien coûte un taxi de Pont-d'Ain à l'hôpital de Fleyriat ?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Depuis Pont-d'Ain, un taxi vers l'hôpital de Fleyriat (Bourg-en-Bresse) dure environ 30 minutes. Sur prescription médicale, ce trajet peut être pris en charge par la CPAM sans avance de frais. Renseignements au 07 67 75 18 98.",
+          },
         },
         {
           "@type": "Question",
-          name: "SPM Taxi dessert-il Tignieu-Jameyzieu la nuit et le week-end ?",
-          acceptedAnswer: { "@type": "Answer", text: "Oui, SPM Taxi est disponible 7j/7 et 24h/24, y compris la nuit, les week-ends et les jours fériés. Idéal pour les vols matinaux ou tardifs." },
+          name: "Le taxi est-il conventionné CPAM à Pont-d'Ain ?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Oui, SPM Taxi est agréé par l'Assurance Maladie. Vos transports médicaux vers Fleyriat, les hôpitaux d'Ambérieu ou de Lyon sont pris en charge sur prescription. Nous gérons toutes les démarches administratives.",
+          },
         },
         {
           "@type": "Question",
-          name: "Comment réserver un taxi à Tignieu-Jameyzieu ?",
-          acceptedAnswer: { "@type": "Answer", text: "Appelez directement le 07 67 75 18 98 ou utilisez le formulaire de contact sur le site. Réponse et confirmation sous 2h." },
+          name: "Comment aller de Pont-d'Ain à l'aéroport de Lyon en taxi ?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "SPM Taxi assure le transfert depuis Pont-d'Ain vers l'aéroport Lyon Saint-Exupéry en environ 55 minutes. Tarif fixe, suivi des vols en temps réel. Réservez au 07 67 75 18 98.",
+          },
         },
         {
           "@type": "Question",
-          name: "Le taxi est-il conventionné CPAM à Tignieu-Jameyzieu ?",
-          acceptedAnswer: { "@type": "Answer", text: "Oui, SPM Taxi est agréé par la CPAM pour les transports médicaux sur prescription médicale. Les trajets vers les hôpitaux, cliniques et centres de soins peuvent être pris en charge par l'Assurance Maladie." },
+          name: "SPM Taxi dessert-il Pont-d'Ain la nuit et le week-end ?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Oui, SPM Taxi est disponible 24h/24 et 7j/7, y compris les nuits, week-ends et jours fériés. Confirmation de réservation assurée sous 2h.",
+          },
         },
       ],
     },
@@ -119,17 +132,17 @@ const services = [
   {
     icon: Shield,
     title: "Transport médical CPAM",
-    desc: "Agréé par l'Assurance Maladie. Prise en charge de vos trajets vers les hôpitaux et centres médicaux sur prescription.",
+    desc: "Agréé par l'Assurance Maladie. Prise en charge vers l'hôpital de Fleyriat, les cliniques d'Ambérieu et les établissements lyonnais. Zéro avance de frais.",
   },
   {
     icon: MapPin,
     title: "Aéroport Lyon Saint-Exupéry",
-    desc: "Depuis Tignieu-Jameyzieu, comptez ~40 min. Suivi des vols en temps réel, pas de frais pour retard.",
+    desc: "Depuis Pont-d'Ain, comptez ~55 min jusqu'à l'aéroport. Suivi des vols en temps réel, pas de frais pour retard.",
   },
   {
     icon: Clock,
     title: "Disponible 7j/7 — 24h/24",
-    desc: "Y compris nuits, week-ends et jours fériés. Réservation et réponse sous 2h.",
+    desc: "Y compris nuits, week-ends et jours fériés. Réservation et confirmation sous 2h. Idéal pour rendez-vous médicaux matinaux.",
   },
   {
     icon: CheckCircle,
@@ -139,15 +152,15 @@ const services = [
 ];
 
 const destinations = [
-  { from: "Tignieu-Jameyzieu", to: "Aéroport Lyon Saint-Exupéry", time: "~40 min" },
-  { from: "Tignieu-Jameyzieu", to: "Ambérieu-en-Bugey", time: "~25 min" },
-  { from: "Tignieu-Jameyzieu", to: "Lyon Centre", time: "~35 min" },
-  { from: "Tignieu-Jameyzieu", to: "Montluel", time: "~15 min" },
-  { from: "Tignieu-Jameyzieu", to: "Bourg-en-Bresse", time: "~45 min" },
-  { from: "Tignieu-Jameyzieu", to: "Grenoble", time: "~1h10" },
+  { from: "Pont-d'Ain", to: "Ambérieu-en-Bugey", time: "~15 min" },
+  { from: "Pont-d'Ain", to: "Bourg-en-Bresse / Fleyriat", time: "~30 min" },
+  { from: "Pont-d'Ain", to: "Lyon Centre", time: "~1h" },
+  { from: "Pont-d'Ain", to: "Aéroport Lyon Saint-Exupéry", time: "~55 min" },
+  { from: "Pont-d'Ain", to: "Montluel", time: "~40 min" },
+  { from: "Pont-d'Ain", to: "Grenoble", time: "~1h30" },
 ];
 
-export default function TignieuPage() {
+export default function PontDAinPage() {
   return (
     <div className="min-h-screen bg-[#f8f9fa] font-sans">
       <script
@@ -166,16 +179,19 @@ export default function TignieuPage() {
 
         <div className="mb-16">
           <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-black/40 mb-4 block">
-            Taxi · Tignieu-Jameyzieu (38)
+            Taxi · Pont-d&apos;Ain (01160)
           </span>
           <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-black leading-tight mb-6">
             Taxi à<br />
-            <span className="text-black/30">Tignieu-Jameyzieu</span>
+            <span className="text-black/30">Pont-d&apos;Ain</span>
           </h1>
           <p className="text-base text-[#555] leading-relaxed max-w-2xl mb-8">
-            SPM Taxi intervient à Tignieu-Jameyzieu et dans tout le secteur Ain — Isère.
-            Taxi conventionné CPAM, transferts aéroport Lyon Saint-Exupéry, longue distance.
+            SPM Taxi intervient à Pont-d&apos;Ain et dans tout le secteur Bugey-Revermont (Ain 01160).
+            Proche d&apos;Ambérieu-en-Bugey (15 min), Pont-d&apos;Ain est un point de départ naturel
+            pour les transferts vers l&apos;hôpital de Fleyriat, les établissements lyonnais et
+            l&apos;aéroport. Taxi conventionné CPAM, fort trafic médical vers Fleyriat et Lyon.
             Volkswagen Tiguan Allspace 7 places. Disponible 7j/7, 24h/24.
+            Note Google : <strong>4,9/5</strong>.
           </p>
           <div className="flex flex-wrap gap-3">
             <a
@@ -184,6 +200,14 @@ export default function TignieuPage() {
             >
               <Phone className="h-4 w-4" />
               07 67 75 18 98
+            </a>
+            <a
+              href="https://wa.me/33767751898?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20taxi."
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-6 py-3 text-sm font-semibold hover:bg-[#1ebe5d] transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
             </a>
             <a
               href="/#contact"
@@ -195,10 +219,16 @@ export default function TignieuPage() {
           </div>
         </div>
 
+        {/* Badge CPAM */}
+        <div className="mb-12 inline-flex items-center gap-2 bg-white border border-black/[0.06] rounded-full px-5 py-2">
+          <Shield className="h-4 w-4 text-black" />
+          <span className="text-sm font-semibold text-black">Conventionné CPAM — Transport médical remboursé</span>
+        </div>
+
         {/* Services */}
         <section className="mb-16">
           <h2 className="text-2xl font-semibold tracking-tight text-black mb-8">
-            Nos services à Tignieu-Jameyzieu
+            Nos services à Pont-d&apos;Ain
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {services.map(({ icon: Icon, title, desc }) => (
@@ -214,7 +244,7 @@ export default function TignieuPage() {
         {/* Temps de trajet */}
         <section className="mb-16">
           <h2 className="text-2xl font-semibold tracking-tight text-black mb-8">
-            Temps de trajet depuis Tignieu-Jameyzieu
+            Temps de trajet depuis Pont-d&apos;Ain
           </h2>
           <div className="bg-white rounded-2xl border border-black/[0.06] overflow-hidden">
             {destinations.map((d, i) => (
@@ -233,6 +263,30 @@ export default function TignieuPage() {
           <p className="text-xs text-[#888] mt-3">Temps indicatifs hors trafic.</p>
         </section>
 
+        {/* Contenu SEO */}
+        <section className="mb-16 bg-white rounded-2xl p-8 border border-black/[0.06]">
+          <h2 className="text-xl font-semibold text-black mb-4">
+            Taxi vers l&apos;hôpital Fleyriat depuis Pont-d&apos;Ain
+          </h2>
+          <p className="text-sm text-[#555] leading-relaxed mb-4">
+            Pont-d&apos;Ain est une commune de l&apos;Ain (01160) située dans la vallée de l&apos;Ain, à
+            15 minutes d&apos;Ambérieu-en-Bugey et 30 minutes de Bourg-en-Bresse. Son accès à
+            l&apos;hôpital de Fleyriat en fait une zone à fort trafic médical : dialyse, chimiothérapie,
+            radiothérapie et consultations spécialisées.
+          </p>
+          <p className="text-sm text-[#555] leading-relaxed mb-4">
+            SPM Taxi est conventionné CPAM et prend en charge vos transports médicaux depuis
+            Pont-d&apos;Ain sur prescription médicale. Que vous vous rendiez à Fleyriat, à la clinique
+            Convert d&apos;Ambérieu ou aux hôpitaux lyonnais, nous gérons l&apos;intégralité des démarches
+            administratives pour une prise en charge sans avance de frais.
+          </p>
+          <p className="text-sm text-[#555] leading-relaxed">
+            Pour vos voyages d&apos;affaires ou vos transferts aéroport depuis Pont-d&apos;Ain, notre
+            Volkswagen Tiguan Allspace 7 places garantit un confort optimal. Tarifs fixes,
+            transparents, communiqués à l&apos;avance sur devis gratuit.
+          </p>
+        </section>
+
         {/* Liens services */}
         <section className="mb-16">
           <h2 className="text-2xl font-semibold tracking-tight text-black mb-8">
@@ -241,9 +295,9 @@ export default function TignieuPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { href: "/taxi-conventionne-cpam", label: "Transport médical CPAM", desc: "Zéro avance de frais, prise en charge Assurance Maladie" },
-              { href: "/transfert-aeroport-lyon", label: "Transfert aéroport Lyon", desc: "À partir de 65 € · suivi des vols en temps réel" },
+              { href: "/transfert-aeroport-lyon", label: "Transfert aéroport Lyon", desc: "Depuis Pont-d'Ain · suivi des vols en temps réel" },
+              { href: "/taxi-amberieu-en-bugey", label: "Taxi Ambérieu-en-Bugey", desc: "Zone la plus proche de Pont-d'Ain (15 min)" },
               { href: "/taxi-longue-distance", label: "Longue distance", desc: "Partout en France · tarif fixe sur devis" },
-              { href: "/taxi-remorque-ain", label: "Remorque & colis", desc: "Attache-remorque homologuée · livraison express" },
             ].map(({ href, label, desc }) => (
               <Link
                 key={href}
@@ -266,20 +320,20 @@ export default function TignieuPage() {
           <div className="space-y-4">
             {[
               {
-                q: "Combien coûte un taxi de Tignieu-Jameyzieu à l'aéroport de Lyon ?",
-                a: "Depuis Tignieu-Jameyzieu, le transfert vers l'aéroport Lyon Saint-Exupéry est estimé à partir de 55 €. Le tarif est fixe et garanti, sans surprises. Demandez votre devis gratuit au 07 67 75 18 98.",
+                q: "Combien coûte un taxi de Pont-d'Ain à l'hôpital de Fleyriat ?",
+                a: "Depuis Pont-d'Ain, un taxi vers l'hôpital de Fleyriat (Bourg-en-Bresse) dure environ 30 minutes. Sur prescription médicale, ce trajet peut être pris en charge intégralement par la CPAM. Renseignements et devis gratuit au 07 67 75 18 98.",
               },
               {
-                q: "SPM Taxi dessert-il Tignieu-Jameyzieu la nuit et le week-end ?",
-                a: "Oui, SPM Taxi est disponible 7j/7 et 24h/24, y compris la nuit, les week-ends et les jours fériés. Idéal pour les vols matinaux ou tardifs.",
+                q: "Le taxi est-il conventionné CPAM à Pont-d'Ain ?",
+                a: "Oui, SPM Taxi est agréé par l'Assurance Maladie pour les transports médicaux. Vos trajets vers Fleyriat, Ambérieu ou les hôpitaux lyonnais sont pris en charge sur prescription. Nous gérons toutes les démarches administratives.",
               },
               {
-                q: "Comment réserver un taxi à Tignieu-Jameyzieu ?",
-                a: "Appelez directement le 07 67 75 18 98 ou utilisez le formulaire de contact sur le site. Réponse et confirmation sous 2h.",
+                q: "Comment aller de Pont-d'Ain à l'aéroport de Lyon en taxi ?",
+                a: "SPM Taxi assure le transfert depuis Pont-d'Ain vers l'aéroport Lyon Saint-Exupéry en environ 55 minutes. Tarif fixe garanti, suivi des vols en temps réel, aucun frais supplémentaire en cas de retard. Réservez au 07 67 75 18 98.",
               },
               {
-                q: "Le taxi est-il conventionné CPAM à Tignieu-Jameyzieu ?",
-                a: "Oui, SPM Taxi est agréé par la CPAM pour les transports médicaux sur prescription médicale. Les trajets vers les hôpitaux, cliniques et centres de soins peuvent être pris en charge par l'Assurance Maladie.",
+                q: "SPM Taxi dessert-il Pont-d'Ain la nuit et le week-end ?",
+                a: "Oui, SPM Taxi est disponible 24h/24 et 7j/7 depuis Pont-d'Ain, y compris les nuits, week-ends et jours fériés. Parfait pour les dialyses matinales ou les vols tôt le matin. Confirmation de réservation sous 2h.",
               },
             ].map(({ q, a }) => (
               <div key={q} className="bg-white rounded-2xl p-6 border border-black/[0.06]">
@@ -291,9 +345,9 @@ export default function TignieuPage() {
         </section>
 
         <div className="bg-black text-white rounded-3xl p-10 text-center">
-          <h2 className="text-2xl font-semibold mb-3">Taxi à Tignieu-Jameyzieu — Réservez maintenant</h2>
-          <p className="text-white/50 text-sm mb-8">Conventionné CPAM · 7j/7 24h/24 · Devis gratuit</p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <h2 className="text-2xl font-semibold mb-3">Taxi à Pont-d&apos;Ain — Réservez maintenant</h2>
+          <p className="text-white/50 text-sm mb-8">Conventionné CPAM · Fleyriat 30 min · 7j/7 24h/24 · Note 4,9/5</p>
+          <div className="flex flex-wrap justify-center gap-3">
             <a
               href="tel:+33767751898"
               className="inline-flex items-center gap-2 rounded-full bg-white text-black px-6 py-3 text-sm font-semibold hover:bg-white/90 transition-colors"
@@ -303,9 +357,9 @@ export default function TignieuPage() {
             </a>
             <a
               href="https://wa.me/33767751898?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20taxi."
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-6 py-3 text-sm font-semibold hover:bg-[#1ebe5d] transition-colors"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-6 py-3 text-sm font-semibold hover:bg-[#20bb5a] transition-colors"
             >
               WhatsApp
             </a>

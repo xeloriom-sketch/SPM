@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Taxi Villebois — Conventionné CPAM · Basé à Villebois (Ain 01)",
     description:
-      "SPM Taxi basé à Villebois, Ain 01. Conventionné CPAM, aéroport Lyon, transport médical remboursé. Volkswagen Tiguan 7 places. Note 4,6/5. ☎ 07 67 75 18 98.",
+      "SPM Taxi basé à Villebois, Ain 01. Conventionné CPAM, aéroport Lyon, transport médical remboursé. Volkswagen Tiguan 7 places. Note 4,9/5. ☎ 07 67 75 18 98.",
     url: "https://taxispm.fr/taxi-villebois/",
     type: "website",
     locale: "fr_FR",
@@ -47,7 +47,7 @@ const jsonLd = {
       email: "contact@taxispm.fr",
       url: "https://taxispm.fr/taxi-villebois/",
       description:
-        "SPM Taxi est un taxi conventionné CPAM basé à Villebois (Ain 01150). Transport médical remboursé sur prescription, transferts aéroport Lyon Saint-Exupéry, longue distance. Volkswagen Tiguan Allspace 7 places. Note 4,6/5 Google. Disponible 7j/7, 24h/24.",
+        "SPM Taxi est un taxi conventionné CPAM basé à Villebois (Ain 01150). Transport médical remboursé sur prescription, transferts aéroport Lyon Saint-Exupéry, longue distance. Volkswagen Tiguan Allspace 7 places. Note 4,9/5 Google. Disponible 7j/7, 24h/24.",
       address: {
         "@type": "PostalAddress",
         streetAddress: "951 route des hauts fourneaux",
@@ -70,7 +70,7 @@ const jsonLd = {
         { "@type": "City", name: "Lyon" },
         { "@type": "Airport", name: "Aéroport Lyon Saint-Exupéry", iataCode: "LYS" },
       ],
-      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.6, reviewCount: 12, bestRating: 5, worstRating: 1 },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "9", bestRating: "5", worstRating: "1" },
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
@@ -101,7 +101,7 @@ const jsonLd = {
         {
           "@type": "Question",
           name: "Quelle est la note de SPM Taxi à Villebois ?",
-          acceptedAnswer: { "@type": "Answer", text: "SPM Taxi est noté 4,6/5 sur Google avec 9 avis vérifiés. Ponctualité, professionnalisme et confort sont les qualités les plus citées par les clients." },
+          acceptedAnswer: { "@type": "Answer", text: "SPM Taxi est noté 4,9/5 sur Google avec 9 avis vérifiés. Ponctualité, professionnalisme et confort sont les qualités les plus citées par les clients." },
         },
       ],
     },
@@ -183,8 +183,8 @@ export default function TaxiVilleboisPage() {
           </h1>
           <div className="flex items-center gap-2 mb-6">
             {[1,2,3,4,5].map(i => <Star key={i} className="h-4 w-4 fill-black text-black" />)}
-            <span className="text-sm font-semibold text-black ml-1">4,6/5</span>
-            <span className="text-sm text-black/40">· 12 avis Google vérifiés</span>
+            <span className="text-sm font-semibold text-black ml-1">4,9/5</span>
+            <span className="text-sm text-black/40">· 9 avis Google vérifiés</span>
           </div>
           <p className="text-base text-[#555] leading-relaxed max-w-2xl mb-4">
             SPM Taxi est votre taxi de proximité à Villebois (Ain 01150). Basé directement
@@ -327,7 +327,7 @@ export default function TaxiVilleboisPage() {
               },
               {
                 q: "Quelle est la note de SPM Taxi ?",
-                a: "SPM Taxi est noté 4,6/5 sur Google avec 9 avis clients vérifiés. Ponctualité, sérieux et confort sont les points forts régulièrement cités.",
+                a: "SPM Taxi est noté 4,9/5 sur Google avec 9 avis clients vérifiés. Ponctualité, sérieux et confort sont les points forts régulièrement cités.",
               },
             ].map(({ q, a }) => (
               <div key={q} className="bg-white rounded-2xl p-6 border border-black/[0.06]">
@@ -341,7 +341,7 @@ export default function TaxiVilleboisPage() {
         <div className="bg-black text-white rounded-3xl p-10 text-center">
           <h2 className="text-2xl font-semibold mb-2">Votre taxi à Villebois</h2>
           <p className="text-white/40 text-xs mb-2 tracking-wider uppercase">951 route des hauts fourneaux · 01150 Villebois</p>
-          <p className="text-white/50 text-sm mb-8">Note 4,6/5 · Conventionné CPAM · 7j/7 24h/24 · Devis gratuit sous 2h</p>
+          <p className="text-white/50 text-sm mb-8">Note 4,9/5 · Conventionné CPAM · 7j/7 24h/24 · Devis gratuit sous 2h</p>
           <div className="flex flex-wrap gap-3 justify-center">
             <a
               href="tel:+33767751898"
@@ -349,6 +349,14 @@ export default function TaxiVilleboisPage() {
             >
               <Phone className="h-4 w-4" />
               07 67 75 18 98
+            </a>
+            <a
+              href="https://wa.me/33767751898?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20taxi."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-6 py-3 text-sm font-semibold hover:bg-[#20bb5a] transition-colors"
+            >
+              WhatsApp
             </a>
             <a
               href="/#contact"

@@ -17,6 +17,7 @@ const Entreprises  = dynamic(() => import("@/components/Entreprises"));
 const PowerStation = dynamic(() => import("@/components/PowerStation"));
 const NewsUpdates  = dynamic(() => import("@/components/NewsUpdates"));
 const CommunityCTA = dynamic(() => import("@/components/CommunityCTA"));
+const GoogleReviews = dynamic(() => import("@/components/GoogleReviews"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
 const FAQ          = dynamic(() => import("@/components/FAQ"));
 const Contact      = dynamic(() => import("@/components/Contact"));
@@ -168,8 +169,8 @@ const jsonLd = {
       },
       aggregateRating: {
         "@type": "AggregateRating",
-        ratingValue: 4.6,
-        reviewCount: 12,
+        ratingValue: "4.9",
+        ratingCount: "9",
         bestRating: 5,
         worstRating: 1,
       },
@@ -266,13 +267,14 @@ export default function Home() {
       />
       <Loader />
       <Navbar />
-      <main className="w-full overflow-x-clip">
+      <main className="w-full overflow-x-hidden">
         <Hero />
         <Services />
         <HowItWorks />
         <CPAMGuide />
         <Vehicle />
         <WhyUs />
+        <GoogleReviews />
         <Coverage />
         <Entreprises />
         <PowerStation />

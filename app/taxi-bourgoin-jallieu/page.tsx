@@ -63,7 +63,7 @@ const jsonLd = {
         { "@type": "City", name: "Lyon" },
         { "@type": "Airport", name: "Aéroport Lyon Saint-Exupéry", iataCode: "LYS" },
       ],
-      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.6, reviewCount: 12, bestRating: 5, worstRating: 1 },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "9", bestRating: "5", worstRating: "1" },
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
@@ -319,6 +319,14 @@ export default function TaxiBourgoinJallieuPage() {
             >
               <Phone className="h-4 w-4" />
               07 67 75 18 98
+            </a>
+            <a
+              href="https://wa.me/33767751898?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20taxi."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-6 py-3 text-sm font-semibold hover:bg-[#20bb5a] transition-colors"
+            >
+              WhatsApp
             </a>
             <a
               href="/#contact"

@@ -59,7 +59,7 @@ const jsonLd = {
         { "@type": "TrainStation", name: "Gare Lyon Part-Dieu" },
         { "@type": "TrainStation", name: "Gare Lyon Perrache" },
       ],
-      aggregateRating: { "@type": "AggregateRating", ratingValue: 4.6, reviewCount: 12, bestRating: 5, worstRating: 1 },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "9", bestRating: "5", worstRating: "1" },
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
@@ -74,6 +74,36 @@ const jsonLd = {
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Accueil", item: "https://taxispm.fr" },
         { "@type": "ListItem", position: 2, name: "Taxi Lyon", item: "https://taxispm.fr/taxi-lyon/" },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Combien coûte un taxi de l'Ain à Lyon ?",
+          acceptedAnswer: { "@type": "Answer", text: "Depuis Villebois ou Ambérieu-en-Bugey, comptez à partir de 55 € vers Lyon Centre. Depuis Tignieu-Jameyzieu, le tarif démarre à 45 €. Depuis Bourg-en-Bresse, environ 75 €. Demandez votre devis exact et gratuit au 07 67 75 18 98." },
+        },
+        {
+          "@type": "Question",
+          name: "Comment trouver un taxi Lyon pas cher depuis l'Ain ?",
+          acceptedAnswer: { "@type": "Answer", text: "SPM Taxi propose des tarifs fixes sans surprise, moins chers que les VTC Lyon pour les longues distances. Le prix est établi avant le départ et ne change pas. Réservez à l'avance pour les meilleurs tarifs." },
+        },
+        {
+          "@type": "Question",
+          name: "Peut-on prendre un taxi Lyon conventionné CPAM ?",
+          acceptedAnswer: { "@type": "Answer", text: "Oui. SPM Taxi est agréé par l'Assurance Maladie pour les transports médicaux vers les hôpitaux et cliniques lyonnaises (Edouard Herriot, Croix-Rousse, Clinique du Parc, etc.) sur prescription médicale." },
+        },
+        {
+          "@type": "Question",
+          name: "SPM Taxi va-t-il chercher à l'aéroport de Lyon ?",
+          acceptedAnswer: { "@type": "Answer", text: "Oui. SPM Taxi assure les transferts depuis et vers l'aéroport Lyon Saint-Exupéry (LYS) avec suivi des vols en temps réel. Aucun frais pour les retards de vol." },
+        },
+        {
+          "@type": "Question",
+          name: "Le taxi Lyon est-il disponible la nuit et le week-end ?",
+          acceptedAnswer: { "@type": "Answer", text: "Oui, SPM Taxi est disponible 7j/7 et 24h/24, y compris la nuit, les week-ends et les jours fériés. Idéal pour les vols matinaux ou tardifs depuis Lyon Saint-Exupéry." },
+        },
       ],
     },
   ],
@@ -132,8 +162,8 @@ export default function TaxiLyonPage() {
             {[1,2,3,4,5].map((s) => (
               <Star key={s} className="h-4 w-4 fill-black text-black" />
             ))}
-            <span className="text-sm font-semibold ml-1">4,6/5</span>
-            <span className="text-sm text-[#888]">· 12 avis Google</span>
+            <span className="text-sm font-semibold ml-1">4,9/5</span>
+            <span className="text-sm text-[#888]">· 9 avis Google</span>
           </div>
           <div className="flex flex-wrap gap-3">
             <a
@@ -310,6 +340,14 @@ export default function TaxiLyonPage() {
             >
               <Phone className="h-4 w-4" />
               07 67 75 18 98
+            </a>
+            <a
+              href="https://wa.me/33767751898?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20taxi."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-6 py-3 text-sm font-semibold hover:bg-[#20bb5a] transition-colors"
+            >
+              WhatsApp
             </a>
             <a
               href="/#contact"

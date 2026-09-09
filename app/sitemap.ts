@@ -46,6 +46,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/taxi-vienne/`,               lastModified: "2026-09-08", changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/taxi-isle-d-abeau/`,         lastModified: "2026-09-08", changeFrequency: "monthly", priority: 0.8 },
 
+    // ── Pages SEO locales — nouvelles zones 2026-09 ──────────────────────
+    { url: `${BASE}/taxi-saint-andre-de-corcy/`, lastModified: "2026-09-09", changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/taxi-morestel/`,             lastModified: "2026-09-09", changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/taxi-meyzieu/`,              lastModified: "2026-09-09", changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/taxi-pont-d-ain/`,           lastModified: "2026-09-09", changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/taxi-beynost/`,              lastModified: "2026-09-09", changeFrequency: "monthly", priority: 0.8 },
+
     // ── Pages SEO grandes destinations & destinations médicales ──────────
     { url: `${BASE}/taxi-grenoble/`,              lastModified: "2026-09-09", changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/taxi-geneve/`,                lastModified: "2026-09-09", changeFrequency: "monthly", priority: 0.9 },

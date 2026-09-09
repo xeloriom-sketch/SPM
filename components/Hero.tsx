@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, Phone, ArrowRight } from "lucide-react";
+import { ChevronDown, Phone, ArrowRight, MessageCircle } from "lucide-react";
 import { sitePath } from "@/lib/site-path";
 import HeroImage from "@/components/HeroImage";
 import { useSettings } from "@/lib/settings-context";
@@ -60,6 +60,16 @@ export default function Hero() {
               >
                 <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
                 {s.contact_phone}
+              </a>
+              <a
+                href="https://wa.me/33767751898?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20taxi."
+                target="_blank"
+                rel="noopener noreferrer"
+                title="WhatsApp SPM Taxi"
+                className="inline-flex items-center gap-2.5 rounded-full bg-[#25D366] text-white pl-4 pr-5 py-2.5 text-[11px] font-semibold tracking-wide hover:bg-[#20bb5a] transition-colors"
+              >
+                <MessageCircle className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
+                WhatsApp
               </a>
               <a
                 href="#contact"

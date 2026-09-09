@@ -428,6 +428,15 @@ export default function TarifsContent() {
             >
               <Phone className="h-4 w-4" /> {s.contact_phone}
             </motion.a>
+            <motion.a
+              href="https://wa.me/33767751898?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20taxi."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-7 py-3 text-sm font-semibold hover:bg-[#20bb5a] transition-colors"
+              whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.95 }} transition={spring}
+            >
+              WhatsApp
+            </motion.a>
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.95 }} transition={spring}>
               <Link href="/#contact" className="inline-flex items-center gap-2 rounded-full border border-white/25 text-white px-7 py-3 text-sm font-semibold hover:border-white/55 transition-colors">
                 Formulaire en ligne

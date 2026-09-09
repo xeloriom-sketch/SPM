@@ -10,35 +10,50 @@ import json, time, base64, hmac, hashlib, urllib.request, urllib.parse, os, sys
 CREDENTIALS_FILE = os.path.join(os.path.dirname(__file__), "..", "spm-taxi-indexing-df03beff6128.json")
 
 URLS = [
+    # Pages principales
     "https://taxispm.fr/",
     "https://taxispm.fr/services/",
     "https://taxispm.fr/tarifs/",
     "https://taxispm.fr/a-propos/",
+    # Services spéciaux
     "https://taxispm.fr/taxi-conventionne-cpam/",
     "https://taxispm.fr/transfert-aeroport-lyon/",
     "https://taxispm.fr/taxi-longue-distance/",
     "https://taxispm.fr/taxi-remorque-ain/",
+    # Région
     "https://taxispm.fr/taxi-lyon/",
+    # Ain (01)
+    "https://taxispm.fr/taxi-villebois/",
+    "https://taxispm.fr/taxi-amberieu-en-bugey/",
+    "https://taxispm.fr/taxi-meximieux/",
+    "https://taxispm.fr/taxi-montluel/",
+    "https://taxispm.fr/taxi-lagnieu/",
+    "https://taxispm.fr/taxi-bourg-en-bresse/",
     "https://taxispm.fr/taxi-belley/",
     "https://taxispm.fr/taxi-oyonnax/",
     "https://taxispm.fr/taxi-miribel/",
     "https://taxispm.fr/taxi-villars-les-dombes/",
     "https://taxispm.fr/taxi-perouges/",
     "https://taxispm.fr/taxi-gex/",
+    "https://taxispm.fr/taxi-pont-d-ain/",
+    "https://taxispm.fr/taxi-beynost/",
+    "https://taxispm.fr/taxi-saint-andre-de-corcy/",
+    # Isère (38)
+    "https://taxispm.fr/taxi-tignieu-jameyzieu/",
+    "https://taxispm.fr/taxi-charvieu-chavagneux/",
+    "https://taxispm.fr/taxi-bourgoin-jallieu/",
+    "https://taxispm.fr/taxi-la-tour-du-pin/",
+    "https://taxispm.fr/taxi-pont-de-cheruy/",
+    "https://taxispm.fr/taxi-cremieu/",
     "https://taxispm.fr/taxi-vienne/",
     "https://taxispm.fr/taxi-isle-d-abeau/",
-    "https://taxispm.fr/taxi-amberieu-en-bugey/",
-    "https://taxispm.fr/taxi-bourg-en-bresse/",
-    "https://taxispm.fr/taxi-bourgoin-jallieu/",
-    "https://taxispm.fr/taxi-charvieu-chavagneux/",
-    "https://taxispm.fr/taxi-cremieu/",
-    "https://taxispm.fr/taxi-la-tour-du-pin/",
-    "https://taxispm.fr/taxi-lagnieu/",
-    "https://taxispm.fr/taxi-meximieux/",
-    "https://taxispm.fr/taxi-montluel/",
-    "https://taxispm.fr/taxi-pont-de-cheruy/",
-    "https://taxispm.fr/taxi-tignieu-jameyzieu/",
-    "https://taxispm.fr/taxi-villebois/",
+    "https://taxispm.fr/taxi-morestel/",
+    # Rhône (69)
+    "https://taxispm.fr/taxi-meyzieu/",
+    # Grandes destinations & médical
+    "https://taxispm.fr/taxi-grenoble/",
+    "https://taxispm.fr/taxi-geneve/",
+    "https://taxispm.fr/taxi-hauteville-lompnes/",
 ]
 
 def b64url(data):

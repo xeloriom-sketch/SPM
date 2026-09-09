@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import FloatingCallButton from "@/components/FloatingCallButton";
-import TrustBar from "@/components/TrustBar";
 import { SettingsProvider } from "@/lib/settings-context";
 
 export const metadata: Metadata = {
@@ -209,7 +208,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="language" content="French" />
       </head>
       <body className="bg-white text-[#080808] overflow-x-hidden noise antialiased">
-        <TrustBar />
         <SettingsProvider>
           {children}
           <FloatingCallButton />

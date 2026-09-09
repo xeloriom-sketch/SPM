@@ -16,12 +16,12 @@ export default function Hero() {
   const s = useSettings();
 
   return (
-    <div id="accueil" style={{ height: "100svh" }}>
-      <section
-        className="sticky top-0 relative w-full bg-black flex flex-col select-none"
-        style={{ height: "100svh" }}
-      >
-        <div className="absolute inset-0 z-0 overflow-hidden">
+    <section
+      id="accueil"
+      className="relative w-full bg-black flex flex-col select-none overflow-hidden"
+      style={{ height: "100dvh" }}
+    >
+        <div className="absolute inset-0 z-0">
           <HeroImage src={sitePath("/heroImage/hero-accueil.webp")} alt="SPM Taxi — Volkswagen Tiguan sur autoroute" />
         </div>
 
@@ -31,15 +31,6 @@ export default function Hero() {
           <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
         </div>
 
-        {/* Grain */}
-        <div
-          className="pointer-events-none absolute inset-0 z-[6] opacity-[0.032]"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-            backgroundSize: "160px",
-          }}
-        />
 
         {/* Content */}
         <div className="relative z-[10] w-full mt-auto">
@@ -50,10 +41,10 @@ export default function Hero() {
               style={{ fontSize: "clamp(2rem, 5.5vw, 5.2rem)" }}
             >
               <div className="overflow-hidden">
-                <span className="block hero-line1">{s.hero_line1}</span>
+                <span className="hero-line1">{s.hero_line1}</span>
               </div>
               <div className="overflow-hidden">
-                <span className="block hero-line2">{s.hero_line2}</span>
+                <span className="hero-line2">{s.hero_line2}</span>
               </div>
             </h1>
 
@@ -121,7 +112,6 @@ export default function Hero() {
             </div>
           </div>
         </div>
-      </section>
-    </div>
+    </section>
   );
 }

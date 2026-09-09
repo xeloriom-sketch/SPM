@@ -1,6 +1,5 @@
 "use client";
 import { useRef, useEffect } from "react";
-import Image from "next/image";
 
 interface HeroImageProps {
   src: string;
@@ -14,11 +13,11 @@ export default function HeroImage({ src, alt = "" }: HeroImageProps) {
   const raf = useRef<number | null>(null);
 
   useEffect(() => {
-    // Touch/mobile devices have no mouse — skip rAF loop entirely to save CPU
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
     const el = imgWrapRef.current;
-    if (el) el.style.willChange = "transform";
+    let rafId: number | null = null;
+    let timerId: ReturnType<typeof setTimeout>;
 
     const onMove = (e: MouseEvent) => {
       const { innerWidth: W, innerHeight: H } = window;
@@ -33,19 +32,24 @@ export default function HeroImage({ src, alt = "" }: HeroImageProps) {
       const MAX = 20;
       current.current.x += (mouse.current.x * MAX - current.current.x) * LERP;
       current.current.y += (mouse.current.y * MAX - current.current.y) * LERP;
-
       if (imgWrapRef.current) {
         imgWrapRef.current.style.transform =
           `scale(1.1) translate(${current.current.x}px, ${current.current.y}px)`;
       }
-      raf.current = requestAnimationFrame(tick);
+      rafId = requestAnimationFrame(tick);
+      raf.current = rafId;
     };
 
     window.addEventListener("mousemove", onMove, { passive: true });
-    raf.current = requestAnimationFrame(tick);
+    timerId = setTimeout(() => {
+      if (el) el.style.willChange = "transform";
+      rafId = requestAnimationFrame(tick);
+      raf.current = rafId;
+    }, 2500);
 
     return () => {
       window.removeEventListener("mousemove", onMove);
+      clearTimeout(timerId);
       if (raf.current) cancelAnimationFrame(raf.current);
       if (el) el.style.willChange = "auto";
     };
@@ -54,17 +58,17 @@ export default function HeroImage({ src, alt = "" }: HeroImageProps) {
   return (
     <>
       <div className="absolute inset-0 bg-black" />
-      <div
-        ref={imgWrapRef}
-        className="absolute inset-0"
-      >
-        <Image
+      <div ref={imgWrapRef} className="absolute inset-0">
+        {/* Plain img (pas Next/Image) — Next/Image avec hydration React bloque LCP sur Chrome 131 */}
+        <img
           src={src}
           alt={alt}
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
+          width={1344}
+          height={768}
+          fetchPriority="high"
+          decoding="async"
+          className="object-cover absolute inset-0 w-full h-full"
+          style={{ color: "transparent" }}
         />
       </div>
     </>

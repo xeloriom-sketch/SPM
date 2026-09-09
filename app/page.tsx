@@ -50,7 +50,7 @@ const jsonLd = {
         "Taxi Tignieu-Jameyzieu", "Taxi Tignieu", "SPM Taxi Tignieu",
       ],
       description:
-        "SPM Taxi est un taxi conventionné CPAM basé à Villebois dans l'Ain (01150). Chauffeur professionnel avec carte professionnelle de taxi, agrément CPAM et assurance responsabilité civile professionnelle. Volkswagen Tiguan Allspace 7 places. Note Google 4,6/5. Disponible 7j/7 24h/24 pour transferts aéroport Lyon Saint-Exupéry, transport médical conventionné CPAM remboursé, transport de colis urgent, déplacements avec remorque et longue distance partout en France.",
+        "SPM Taxi est un taxi conventionné CPAM basé à Villebois dans l'Ain (01150). Chauffeur professionnel avec carte professionnelle de taxi, agrément CPAM et assurance responsabilité civile professionnelle. Volkswagen Tiguan Allspace 7 places. Note Google 4,9/5 (9 avis). Disponible 7j/7 24h/24 pour transferts aéroport Lyon Saint-Exupéry, transport médical conventionné CPAM remboursé, transport de colis urgent, déplacements avec remorque et longue distance partout en France.",
       url: "https://taxispm.fr",
       telephone: "+33767751898",
       email: "contact@taxispm.fr",

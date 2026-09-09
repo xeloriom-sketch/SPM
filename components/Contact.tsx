@@ -2,9 +2,8 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Phone, Mail, MapPin, AlertCircle, ArrowRight, CheckCircle } from "lucide-react";
+import { Phone, Mail, MapPin, AlertCircle, ArrowRight, CheckCircle, MessageCircle } from "lucide-react";
 import SplitText from "@/components/ui/SplitText";
-import { getSupabase } from "@/lib/supabase-browser";
 import { spring, springFast, revealVariants, revealSubtle } from "@/lib/motion";
 import { useSettings } from "@/lib/settings-context";
 
@@ -27,6 +26,9 @@ export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
+  const waMsg = encodeURIComponent("Bonjour, je souhaite réserver un taxi. Pouvez-vous me rappeler ?");
+  const waPhone = s.contact_phone.replace(/[\s.-]/g, "").replace(/^0/, "");
+
   const infoCards = [
     {
       href: `tel:${s.contact_phone.replace(/[\s.-]/g, "")}`,
@@ -34,6 +36,14 @@ export default function Contact() {
       solid: true,
       title: "Appel direct",
       sub: `${s.contact_phone} — Disponible maintenant`,
+    },
+    {
+      href: `https://wa.me/33${waPhone}?text=${waMsg}`,
+      icon: MessageCircle,
+      solid: true,
+      green: true,
+      title: "WhatsApp",
+      sub: "Réponse rapide — 7j/7 24h/24",
     },
     {
       href: `mailto:${s.contact_email}`,
@@ -67,7 +77,7 @@ export default function Contact() {
 
           {/* Left: info cards */}
           <div className="flex flex-col gap-4">
-            {infoCards.map(({ href, icon: Icon, solid, title, sub }, i) => (
+            {infoCards.map(({ href, icon: Icon, solid, green, title, sub }, i) => (
               <motion.a
                 key={href}
                 href={href}
@@ -80,7 +90,7 @@ export default function Contact() {
                 whileTap={{ scale: 0.97 }}
                 transition={spring}
               >
-                <div className={`grid h-11 w-11 shrink-0 place-items-center rounded-full ${solid ? "bg-black" : "border border-black/10"}`}>
+                <div className={`grid h-11 w-11 shrink-0 place-items-center rounded-full ${solid ? (green ? "bg-[#25D366]" : "bg-black") : "border border-black/10"}`}>
                   <Icon className={`h-4 w-4 ${solid ? "text-white" : "text-black/50"}`} />
                 </div>
                 <div>
@@ -153,34 +163,24 @@ export default function Contact() {
                 setErrorMsg("");
                 try {
                   const formData = new FormData(e.currentTarget);
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  const { error } = await (getSupabase() as any).from("contact_messages").insert({
-                    name: formData.get("name") as string,
-                    phone: formData.get("phone") as string,
-                    email: formData.get("email") as string,
-                    service: formData.get("service") as string,
-                    date: (formData.get("date") as string) || null,
-                    message: (formData.get("message") as string) || null,
-                    read: false,
+                  const res = await fetch('/api/contact.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      name:    formData.get('name') as string,
+                      phone:   formData.get('phone') as string,
+                      email:   (formData.get('email') as string) || '',
+                      service: formData.get('service') as string,
+                      date:    (formData.get('date') as string) || '',
+                      message: (formData.get('message') as string) || '',
+                    }),
                   });
-                  if (error) throw new Error("Erreur lors de l'envoi.");
+                  if (!res.ok) {
+                    const body = await res.json().catch(() => ({}));
+                    throw new Error(body.error ?? "Erreur lors de l'envoi.");
+                  }
                   setStatus("success");
                   (e.target as HTMLFormElement).reset();
-                  fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/send-push`, {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                      "Authorization": `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-                    },
-                    body: JSON.stringify({
-                      name: formData.get("name"),
-                      service: formData.get("service"),
-                      phone: formData.get("phone"),
-                      email: formData.get("email") || undefined,
-                      date: formData.get("date") || undefined,
-                      message: formData.get("message") || undefined,
-                    }),
-                  }).catch(() => {});
                 } catch (err) {
                   setStatus("error");
                   setErrorMsg(err instanceof Error ? err.message : "Erreur lors de l'envoi.");

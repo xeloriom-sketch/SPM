@@ -139,7 +139,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SPM Taxi — Taxi Conventionné CPAM | Lyon · Ain · Isère",
     description:
-      "Taxi conventionné CPAM 4,6★ Google (12 avis), Tiguan 7 places, disponible 7j/7. Transferts aéroport Lyon, transport médical CPAM, longue distance. ☎ 07 67 75 18 98.",
+      "Taxi conventionné CPAM 4,9★ Google (9 avis), Tiguan 7 places, disponible 7j/7. Transferts aéroport Lyon, transport médical CPAM, longue distance. ☎ 07 67 75 18 98.",
     images: ["/og-image.jpeg"],
   },
   robots: {
@@ -203,7 +203,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Classification */}
         <meta name="classification" content="Transport, Taxi, Véhicule de tourisme avec chauffeur" />
         <meta name="coverage" content="Lyon, Ain, Isère, France" />
-        <meta name="rating" content="4.6/5" />
+        <meta name="rating" content="4.9/5" />
         <meta name="revisit-after" content="7 days" />
         <meta name="language" content="French" />
       </head>

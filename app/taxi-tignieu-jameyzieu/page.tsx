@@ -50,6 +50,18 @@ const jsonLd = {
         addressRegion: "Auvergne-Rhône-Alpes",
         addressCountry: "FR",
       },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        ratingCount: "9",
+        bestRating: "5",
+        worstRating: "1",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 45.747,
+        longitude: 5.219,
+      },
       areaServed: [
         { "@type": "City", name: "Tignieu-Jameyzieu", containedInPlace: { "@type": "AdministrativeArea", name: "Isère" } },
         { "@type": "City", name: "Villebois", containedInPlace: { "@type": "AdministrativeArea", name: "Ain" } },
